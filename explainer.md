@@ -5,7 +5,7 @@
 
 ## Introduction
 
-The service worker spec [0] uses a mechanism to match pages (as well as other clients, like workers) to a controlling service worker registration.  This mechanism is called the “scope” and it is used to prefix-match against the URL of the page.  Each service worker registration can only have a single scope.
+The service worker spec [[0]] uses a mechanism to match pages (as well as other clients, like workers) to a controlling service worker registration.  This mechanism is called the “scope” and it is used to prefix-match against the URL of the page.  Each service worker registration can only have a single scope.
 
 The current service worker scope system works well for many cases, but can be problematic for sites with multiple teams working independently.  One team may be responsible for one sub-path on the site while a different team is responsible for another sub-path.  If these separate parts of the site are completely disjoint, then each team can easily manage their service worker without risk of impacting the other team.
 
@@ -39,7 +39,7 @@ This explainer proposes to enhance the service worker scope mechanism to use a m
 
 This kind of control is in line with other products that map URLs to software logic.  Application servers, proxies, and client-side routing systems all offer control over how a URL is matched.  Service workers should offer the same capability.  See the references section for links to various URL routing systems for comparison.
 
-Note, the service worker spec had glob [1] matching long ago and it was removed [2].  At the time it was believed the exact match behavior was not necessary.  Over time, however, it has become clear that there are sites that are having trouble fully adopting service workers since they cannot control their root origin URL without impacting all their various products hosted on sub-paths.
+Note, the service worker spec had glob [[1]] matching long ago and it was removed [[2]].  At the time it was believed the exact match behavior was not necessary.  Over time, however, it has become clear that there are sites that are having trouble fully adopting service workers since they cannot control their root origin URL without impacting all their various products hosted on sub-paths.
 
 This explainer will also attempt to expose the pattern matching behavior as a separate primitive that sites can use independently in their script for other purposes; e.g. client-side routing logic, etc.
 
@@ -62,7 +62,7 @@ This explainer will also attempt to expose the pattern matching behavior as a se
 
 
 
-*   This effort will not change the handling of subresource requests once a page is already controlled by a service worker.  There are other efforts, such the declarative routing proposal [3], that are focused on subresources.
+*   This effort will not change the handling of subresource requests once a page is already controlled by a service worker.  There are other efforts, such the declarative routing proposal [[3]], that are focused on subresources.
 *   This effort will not support discrete lists of scope entries, such as multiple scopes for a single registration.  This could be a useful feature, but is orthogonal to the matching of a single scope entry.  It's excluded here to reduce complexity.
 
 
@@ -179,7 +179,7 @@ By default the service worker script URL is still required to live at or above t
 
 ## Web App Manifest
 
-The manifest spec also defines a scope [4].  While this scope definition is separate from the service worker scope, the manifest spec attempts to keep them in sync.
+The manifest spec also defines a scope [[4]].  While this scope definition is separate from the service worker scope, the manifest spec attempts to keep them in sync.
 
 Using a URLPattern in a manifest would look something like this:
 
@@ -225,7 +225,7 @@ The common case that comes up repeatedly is one team managing the root of the si
 
 ### Products With Overlapping Path Segment Names
 
-Similar to the previous scenario, it's also possible for products to be hosted on sub-paths that overlap at just one segment of the path.  A real example highlighted in issue 1272 [5]:
+Similar to the previous scenario, it's also possible for products to be hosted on sub-paths that overlap at just one segment of the path.  A real example highlighted in issue 1272 [[5]]:
 
 
 
@@ -370,7 +370,7 @@ To improve on this situation a more ergonomic API is also provided to match spec
 
 ### URLPattern Extensibility
 
-The URLPattern is exposed so that it can be used by sites in their client logic.  The currently proposed syntax, however, is not particularly useful for sites.  Libraries like regexparam [6] offer more expressive syntax options.  These are not considered here since they are not needed to support the service worker scope use cases, but we want to allow them to be added in the future.
+The URLPattern is exposed so that it can be used by sites in their client logic.  The currently proposed syntax, however, is not particularly useful for sites.  Libraries like regexparam [[6]] offer more expressive syntax options.  These are not considered here since they are not needed to support the service worker scope use cases, but we want to allow them to be added in the future.
 
 The main design choice that enables extensibility is the use of the options dictionary parameter passed to the URLPattern constructor.  It permits new fields to be added in the future with little compatibility risk.  In addition, we have tried to design the initial syntax to be consistent popular libraries so common syntax can be integrated with it in an ergonomic way.
 
@@ -378,7 +378,7 @@ Possible future additions include:
 
 
 
-*   A path parameter syntax similar to Ruby on Rails's `/:param/index.html` syntax. [7]  This would also involve adding a `URLPattern.match()` method that would return a dictionary of matched parameter values.  This would include applying the optional character to the parameter.
+*   A path parameter syntax similar to Ruby on Rails's `/:param/index.html` syntax. [[7]]  This would also involve adding a `URLPattern.match()` method that would return a dictionary of matched parameter values.  This would include applying the optional character to the parameter.
 *   Groupings such as `/*.(png|jpg)` to match either png or jpg files.  This would include applying the optional character to the groups.
 *   Pattern strings for components of the origin.  For example, specifying a wildcard pattern for the host.
 
@@ -447,7 +447,7 @@ From a privacy perspective this API does not expose any new bits of user informa
 
 ## Stakeholder Feedback / Opposition
 
-There is some existing spec discussion in issue 1272 [5].
+There is some existing spec discussion in issue 1272 [[5]].
 
 Multiple product teams at Google have requested better control over service worker scope matching.  In particular, the ability to restrict a service worker to a root URL has come up repeatedly.  There are also some products that would like to restrict the service worker to a particular URL query parameter.
 
@@ -482,11 +482,20 @@ Contributions and review provided by:
 
 References
 
-*   [0]: https://w3c.github.io/ServiceWorker/
-*   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
-*   [2]: https://github.com/w3c/ServiceWorker/issues/287
-*   [3]: https://github.com/w3c/ServiceWorker/issues/1373
-*   [4]: https://w3c.github.io/manifest/#scope-member
-*   [5]: https://github.com/w3c/ServiceWorker/issues/1272
-*   [6]: https://github.com/lukeed/regexparam
-*   [7]: https://edgeguides.rubyonrails.org/routing.html
+*   \[0]: https://w3c.github.io/ServiceWorker/
+*   \[1]: https://en.wikipedia.org/wiki/Glob_(programming)
+*   \[2]: https://github.com/w3c/ServiceWorker/issues/287
+*   \[3]: https://github.com/w3c/ServiceWorker/issues/1373
+*   \[4]: https://w3c.github.io/manifest/#scope-member
+*   \[5]: https://github.com/w3c/ServiceWorker/issues/1272
+*   \[6]: https://github.com/lukeed/regexparam
+*   \[7]: https://edgeguides.rubyonrails.org/routing.html
+
+[0]: https://w3c.github.io/ServiceWorker/
+[1]: https://en.wikipedia.org/wiki/Glob_(programming)
+[2]: https://github.com/w3c/ServiceWorker/issues/287
+[3]: https://github.com/w3c/ServiceWorker/issues/1373
+[4]: https://w3c.github.io/manifest/#scope-member
+[5]: https://github.com/w3c/ServiceWorker/issues/1272
+[6]: https://github.com/lukeed/regexparam
+[7]: https://edgeguides.rubyonrails.org/routing.html
