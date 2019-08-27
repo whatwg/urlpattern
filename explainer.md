@@ -25,14 +25,14 @@ Storage APIs are also often shared within an origin and that also comes with ris
 This explainer proposes to enhance the service worker scope mechanism to use a matching algorithm that gives the site more control.  Specifically, we propose to allow the site to specify a pattern-based match for the scope.  For example:
 
 
-```
+```javascript
     // Service worker controls `/foo` and `/foo/*`, but
     // does not control `/foobar`.
     navigator.serviceWorker.register(scriptURL, {
-    scope: new URLPattern({
-    	baseUrl: self.location,
-        path: '/foo/?*'
-    })
+        scope: new URLPattern({
+    	    baseUrl: self.location,
+            path: '/foo/?*'
+        })
     });
 ```
 
@@ -73,7 +73,7 @@ First, we propose to add a new API to expose URL pattern matching as a web-platf
 The API would roughly like this:
 
 
-```
+```javascript
     let pattern = new URLPattern({
     	baseUrl: self.origin,
     path: <pattern string>,
@@ -127,7 +127,7 @@ The URLPattern will also define a number of internal concepts that will be used 
 The URLPattern API would then be integrated with service workers like this:
 
 
-```
+```javascript
     let reg1 = await navigator.serviceWorker.register(scriptURL, {
     scope: new URLPattern({
     	baseUrl: self.origin,
@@ -146,7 +146,7 @@ The URLPattern API would then be integrated with service workers like this:
 Legacy scope strings would still be supported:
 
 
-```
+```javascript
     // Legacy API usage
     let reg2 = await navigator.serviceWorker.register(scriptURL, {
       scope: '/bar/baz'
@@ -184,7 +184,7 @@ The manifest spec also defines a scope [[4]].  While this scope definition is se
 Using a URLPattern in a manifest would look something like this:
 
 
-```
+```javascript
     {
     	"name": "FooApp",
     	"scope": "https://foo.com/app/",
@@ -209,7 +209,7 @@ Note, some platforms, like Android, have limitations on how apps can register to
 The common case that comes up repeatedly is one team managing the root of the site and a separate team managing a product on a sub-path.  Service workers should support a service worker at the root without impacting the team on the sub-path.
 
 
-```
+```javascript
     // Service worker controlling '/' exactly.
     navigator.serviceWorker.register('/root-sw.js', {
     	scope: new URLPattern({
@@ -235,7 +235,7 @@ Similar to the previous scenario, it's also possible for products to be hosted o
 To register a service worker for just the `/maps` product you would use the `/?` optional slash that also implies a path segment break:
 
 
-```
+```javascript
     // Service worker controlling /maps and everything under /maps/.
     // Does not control /mapsearch.
     navigator.serviceWorker.register('/maps/maps-sw.js', {
@@ -253,7 +253,7 @@ To register a service worker for just the `/maps` product you would use the `/?`
 We have at least one report of a product that is routed to via a search parameter.  This is supported via the search params feature:
 
 
-```
+```javascript
     navigator.serviceWorker.register('/param-sw.js', {
     	scope: new URLPattern({
     		baseUrl: self.location,
@@ -335,7 +335,7 @@ Both of these scopes will match the URL `/?foo=1&bar=2`.  In addition, they will
 URL query strings require special attention.  Their behavior in service worker scopes is a bit odd.  Consider these two scopes:
 
 
-```
+```javascript
     let scope1 = '/foo';
     let scope2 = '/foo?';
 ```
@@ -346,7 +346,7 @@ The first scope will match against both paths starting with `/foo` and all query
 This behavior is a bit odd and possibly not something we want to extend to URLPattern.  Therefore it's likely we will want to separate the query string matching pattern out into a different option.  For example, this could be the equivalent URLPattern syntax:
 
 
-```
+```javascript
     let scope1 = new URLPattern('/foo*', {
     	search: {
         value: '*'
