@@ -1,7 +1,6 @@
 # TAG Security & Privacy Questionnaire Answers #
 
 * **Author:** wanderview@google.com
-* **Last Updated:** August 30, 2019
 * **Questionnaire Source:** https://www.w3.org/TR/security-privacy-questionnaire/#questions
 
 ## Questions ##
