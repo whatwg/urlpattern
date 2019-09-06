@@ -57,6 +57,7 @@ This explainer will also attempt to expose the pattern matching behavior as a se
 *   This effort will provide a pattern matching platform primitive that can be used by generic javascript code.
     *   This includes providing a mechanism for the pattern matching to be extended in the future.
     *   This includes using a syntax familiar to developers working on modern web sites.
+*   This effort will support fast browser navigations (which depends on the complexity of the service worker scope matching algorithm).
 
 
 ## Non-Goals
