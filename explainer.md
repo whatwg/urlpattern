@@ -424,6 +424,11 @@ Another aspect of this idea is that if sites are sharing storage, then they shou
 
 Therefore the goal of this explainer is to make it safer to use service workers when multiple teams are sharing an origin.
 
+## Include / Exclude Lists
+
+One feature that is often suggested is to add separate lists of URLs to include or exclude in the scope matching algorithm.  This explainer purposely does not discuss this since it seems a subset of the multiple scopes case.  As mentioned in the non-goals section multiple scopes are orthogonal to how a single scope matches.  Nothing in this explainer should block adding multiple scopes in the future.
+
+Also, its worth noting that exclude lists are also somewhat possible today.  If you have a list of scope sub-paths you want to exclude you can explicitly register empty service workers on each one.  This is somewhat heavyweight since navigating to these sub-paths will still trigger an update check, but they will not incur the risks of applying a FetchEvent handler.  And of course, unless we address the issues discussed in this explainer these exclusion registrations will have eager prefix matching which may not be what the site wants.
 
 ## Privacy & Security Considerations
 
