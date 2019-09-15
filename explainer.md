@@ -451,6 +451,11 @@ There is some existing spec discussion in issue 1272 [[5]].
 
 Multiple product teams at Google have requested better control over service worker scope matching.  In particular, the ability to restrict a service worker to a root URL has come up repeatedly.  There are also some products that would like to restrict the service worker to a particular URL query parameter.
 
+We also have feedback from two large e-commerce sites based in the US.
+
+The first e-commerce site provided positive feedback stating the proposal "it is aligned to solve some of the problems that we are facing i.e., different teams maintaining and deploying various parts of a web app."
+
+The second e-commerce site indicated they view their entire site as a single product and would most likely not use the features proposed in this explainer.  They would like a single service worker instance.  They indicated multiples scopes and exclude lists would possibly be useful, though, to restrict the service worker to disjoint sections of their product URL space.
 
 ## References & Acknowledgements
 
