@@ -132,7 +132,7 @@ The URLPattern API would then be integrated with service workers like this:
     scope: new URLPattern({
     	baseUrl: self.origin,
         path: '/foo/?*',
-        search: '*',
+        search: { value: '*' },
         })
     });
     assert_true(reg1.scope instanceof URLPattern);
