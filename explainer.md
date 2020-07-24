@@ -25,14 +25,14 @@ This explainer proposes to enhance the service worker scope mechanism to use a m
 
 
 ```javascript
-    // Service worker controls `/foo` and `/foo/*`, but
-    // does not control `/foobar`.
-    navigator.serviceWorker.register(scriptURL, {
-        scope: new URLPattern({
-    	    baseUrl: self.location,
-            path: '/foo/?*'
-        })
-    });
+// Service worker controls `/foo` and `/foo/*`, but
+// does not control `/foobar`.
+navigator.serviceWorker.register(scriptURL, {
+    scope: new URLPattern({
+      baseURL: self.location,
+      path: '/foo/?*'
+    })
+});
 ```
 
 
@@ -74,20 +74,20 @@ The API would roughly like this:
 
 
 ```javascript
-    let pattern = new URLPattern({
-    	baseUrl: self.origin,
-    path: <pattern string>,
-    search: {
-        value: <pattern string>,
-        params: [{
-        	key: <pattern string>,
-        	value: <pattern string>
-        }]
-    });
+let pattern = new URLPattern({
+  baseURL: self.origin,
+  path: <pattern string>,
+  search: {
+    value: <pattern string>,
+    params: [{
+      key: <pattern string>,
+      value: <pattern string>
+    }]
+});
 
-    if (pattern.test(urlString)) {
-    	// do something
-    }
+if (pattern.test(urlString)) {
+  // do something
+}
 ```
 
 
@@ -106,7 +106,7 @@ In addition, there is a context-specific behavior:
 
 *   In a path pattern, the `/?` sequence would indicate a break between path segments.
 
-The scheme, host, port, username, and password components of the URLPattern are derived from the provided `baseUrl`.
+The scheme, host, port, username, and password components of the URLPattern are derived from the provided `baseURL`.
 
 The path pattern string may be relative, in which case it is resolved against the base URL.
 
@@ -128,18 +128,18 @@ The URLPattern API would then be integrated with service workers like this:
 
 
 ```javascript
-    let reg1 = await navigator.serviceWorker.register(scriptURL, {
-    scope: new URLPattern({
-    	baseUrl: self.origin,
-        path: '/foo/?*',
-        search: { value: '*' },
-        })
-    });
-    assert_true(reg1.scope instanceof URLPattern);
-    assert_true(reg1.scopePattern instanceof URLPattern);
+let reg1 = await navigator.serviceWorker.register(scriptURL, {
+  scope: new URLPattern({
+    baseURL: self.origin,
+    path: '/foo/?*',
+    search: { value: '*' },
+  })
+});
+assert_true(reg1.scope instanceof URLPattern);
+assert_true(reg1.scopePattern instanceof URLPattern);
 
-    let reg2 = await navigation.serviceWorker.get('/foo');
-    assert_equals(reg1, reg2);
+let reg2 = await navigation.serviceWorker.get('/foo');
+assert_equals(reg1, reg2);
 ```
 
 
@@ -147,12 +147,12 @@ Legacy scope strings would still be supported:
 
 
 ```javascript
-    // Legacy API usage
-    let reg2 = await navigator.serviceWorker.register(scriptURL, {
-      scope: '/bar/baz'
-    });
-    assert_equals('string', typeof reg2.scope);
-    assert_true(reg2.scopePattern instanceof URLPattern);
+// Legacy API usage
+let reg2 = await navigator.serviceWorker.register(scriptURL, {
+  scope: '/bar/baz'
+});
+assert_equals('string', typeof reg2.scope);
+assert_true(reg2.scopePattern instanceof URLPattern);
 ```
 
 
@@ -184,15 +184,15 @@ The manifest spec also defines a scope [[4]].  While this scope definition is se
 Using a URLPattern in a manifest would look something like this:
 
 
-```javascript
-    {
-    	"name": "FooApp",
-    	"scope": "https://foo.com/app/",
-    	"scopePattern": {
-    		"baseUrl": "https://foo.com/",
-    		"path": "/app/?*"
-    	}
-    }
+```json
+{
+  "name": "FooApp",
+  "scope": "https://foo.com/app/",
+  "scopePattern": {
+    "baseURL": "https://foo.com/",
+    "path": "/app/?*"
+  }
+}
 ```
 
 
@@ -210,15 +210,15 @@ The common case that comes up repeatedly is one team managing the root of the si
 
 
 ```javascript
-    // Service worker controlling '/' exactly.
-    navigator.serviceWorker.register('/root-sw.js', {
-    	scope: new URLPattern({
-    		baseUrl: self.location,
-    		path: '/'
-    	})
-    });
+// Service worker controlling '/' exactly.
+navigator.serviceWorker.register('/root-sw.js', {
+  scope: new URLPattern({
+    baseURL: self.location,
+    path: '/'
+  })
+});
 
-    // Product hosted at '/sub/path/product' is not controlled.
+// Product hosted at '/sub/path/product' is not controlled.
 ```
 
 
@@ -236,14 +236,14 @@ To register a service worker for just the `/maps` product you would use the `/?`
 
 
 ```javascript
-    // Service worker controlling /maps and everything under /maps/.
-    // Does not control /mapsearch.
-    navigator.serviceWorker.register('/maps/maps-sw.js', {
-    	scope: new URLPattern({
-    		baseUrl: self.location,
-    		path: '/maps/?*`
-    	})
-    });
+// Service worker controlling /maps and everything under /maps/.
+// Does not control /mapsearch.
+navigator.serviceWorker.register('/maps/maps-sw.js', {
+  scope: new URLPattern({
+    baseURL: self.location,
+    path: '/maps/?*`
+  })
+});
 ```
 
 
@@ -254,18 +254,18 @@ We have at least one report of a product that is routed to via a search paramete
 
 
 ```javascript
-    navigator.serviceWorker.register('/param-sw.js', {
-    	scope: new URLPattern({
-    		baseUrl: self.location,
-    		path: '/',
-    		search: {
-    			params: [{
-    				key: 'product',
-    				value: 'foo'
-    			}]
-            }
-    	});
-    });
+navigator.serviceWorker.register('/param-sw.js', {
+  scope: new URLPattern({
+    baseURL: self.location,
+    path: '/',
+    search: {
+      params: [{
+        key: 'product',
+        value: 'foo'
+      }]
+    }
+  });
+});
 ```
 
 
@@ -336,8 +336,8 @@ URL query strings require special attention.  Their behavior in service worker s
 
 
 ```javascript
-    let scope1 = '/foo';
-    let scope2 = '/foo?';
+let scope1 = '/foo';
+let scope2 = '/foo?';
 ```
 
 
@@ -347,17 +347,17 @@ This behavior is a bit odd and possibly not something we want to extend to URLPa
 
 
 ```javascript
-    let scope1 = new URLPattern('/foo*', {
-    	search: {
-        value: '*'
-        }
-    });
+let scope1 = new URLPattern('/foo*', {
+  search: {
+    value: '*'
+  }
+});
 
-    let scope2 = new URLPattern('/foo', {
-    	search: {
-        value: '\?*'
-        }
-    });
+let scope2 = new URLPattern('/foo', {
+  search: {
+    value: '\?*'
+  }
+});
 ```
 
 
