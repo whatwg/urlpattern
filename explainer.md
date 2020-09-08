@@ -316,7 +316,7 @@ An alternative to introducing URLPattern would be to instead use regular express
 * Regular expressions can be very complex, making it harder to reason about match performance.
 * Regular expression complexity would also make it difficult to implement service worker scope ordering and Service-Worker-Allowed behavior.
 
-For these reasons this explainer proposes the pattern approach instead.  We do, however, try to match the ergonomics of RegExp by mimicking its methods like test() and exec().
+For these reasons this explainer proposes the pattern approach instead.  We do, however, try to match the ergonomics of RegExp by mimicking its methods like `test()` and `exec()`.  It should also be possible to add a `toRegExp()` method that exposes an equivalent regular expression.  This would allow developers to use the URLPattern ergonomics while still easily integrating with existing software that uses regular expressions.
 
 ### Require Teams to Use Separate Origins
 
