@@ -1,6 +1,30 @@
 # Service Worker Scope Pattern Matching Explainer
 
-[TAG Review](https://github.com/w3ctag/design-reviews/issues/417)
+Table of Contents:
+
+* [Introduction](#introduction)
+* [Goals](#goals)
+* [Non-Goals](#non-goals)
+* [Web APIs](#web-apis)
+  * [URLPattern](#urlpattern)
+  * [Service Worker API](#service-worker-api)
+  * [Web App Manifest](#web-app-manifest)
+* [Key Scenarios](#key-scenarios)
+  * [Root URL Service Worker](#root-url-service-worker)
+  * [Product With Overlapping Path Segment Names](product-with-overlapping-path-segment-names)
+  * [JavaScript URL Routing](#javascript-url-routing)
+* [Detailed Design Decision](#detailed-design-decision)
+  * [Page Loading Performance](#page-loading-performance)
+  * [ServiceWorkerAllowed Behavior](#serviceworkerallowed-behavior)
+  * [Scope Match Ordering](#scope-match-ordering)
+* [Considered Alternatives](#considered-alternatives)
+  * [ServiceWorker-Only API Change without URLPattern](#serviceworker-only-api-change-without-urlpattern)
+  * [Alternate Pattern Syntax](#alternate-pattern-syntax)
+  * [Regular Expressions](#regular-expressions)
+  * [Require Teams to Use Separate Origins](#require-teams-to-use-separate-origins)
+* [Privacy & Security Considerations](#privacy--security-considerations)
+* [Stakeholder Feedback](#stakeholder-feedback)
+* [References & Acknowledgements](#references--acknowledgements)
 
 ## Introduction
 
@@ -65,8 +89,6 @@ The goal is to help create a holistic ecosystem where developers can use the sam
 
 ## Goals
 
-
-
 *   Allow teams to better map a controlling service worker to the subset of a site that it owns and maintains.  Specifically, we want to support the known use cases that have been encountered in the real world:
     *   A root URL service worker and products on a subpath.
     *   A product service worker where there is overlap at part of the path; e.g. products `/foo` and `/foobar`.
@@ -77,8 +99,6 @@ The goal is to help create a holistic ecosystem where developers can use the sam
 
 
 ## Non-Goals
-
-
 
 *   This effort will not change the handling of subresource requests once a page is already controlled by a service worker.  There are other efforts, such as the [declarative routing proposal](https://github.com/w3c/ServiceWorker/issues/1373), that are focused on subresources.
 *   This effort will not cover matching service worker scopes against specific URL search query parameters.  This appears to be a rare use case.  Also, since query parameters can be reordered in URLs it will likely require a different kind of matching compared to what is needed for the rest of the URL.
@@ -170,9 +190,10 @@ Service worker register() will reject if a scope URLPattern uses certain feature
 * No regular expressions besides `(.*)` which matches the `*` wildcard.
 * Variable components like wildcards can only be in trailing position.
 
-These restrictions meet the known use cases with a minimal risk of performance problems.
+These restrictions meet the known use cases with a minimal risk of [performance problems](#page-loading-performance).
 
-Service worker registrations will also be able to use URLPatternList as a scope.  If a registration has one or more entries in its scope list that matches a scope pattern from a different registration then an error will be thrown.  If the complete scope lists are identical, however, then it's treated as updating the existing registration.
+Service worker registrations will also be able to use URLPatternList as a scope.  This effectively provides an allow list of scope patterns to match against.  If a registration has one or more entries in its scope list that matches a scope pattern from a different registration then an error will be thrown.  If the complete scope lists are identical, however, then it's treated as updating the existing registration.
+
 Finally, there will be some limits on the number of patterns that can nest one another in a way that forces linear scanning in order to complete a match.  This should be rare in normal use cases, but necessary to prevent abuse.
 
 ## Web App Manifest
@@ -193,7 +214,6 @@ Using a URLPattern in a manifest would look something like this:
 }
 ```
 
-
 The pattern is specified in a new `scopePattern` json value.  Both the legacy `scope` value and the new `scopePattern` can be specified.  In that case, the `scopePattern` takes precedence.  This is done so the same manifest can be used with older browsers that don't support `scopePattern` yet and therefore fall back to `scope`.
 
 ## Key Scenarios
@@ -201,7 +221,6 @@ The pattern is specified in a new `scopePattern` json value.  Both the legacy `s
 ### Root URL Service Worker
 
 The common case that comes up repeatedly is one team managing the root of the site and a separate team managing a product on a sub-path.  Service workers should support a service worker at the root without impacting the team on the sub-path.
-
 
 ```javascript
 // Service worker controlling '/' exactly.
@@ -261,7 +280,6 @@ if (let result = apiPattern.exec(url)) {
 ```
 
 ## Detailed Design Decision
-
 
 ### Page Loading Performance
 
@@ -348,7 +366,7 @@ To mitigate the risk of zero-day security issues in scope pattern matching this 
 
 From a privacy perspective this API does not expose any new bits of user information entropy. it also does not create new opportunities to store data that could be used as a cookie.
 
-## Stakeholder Feedback / Opposition
+## Stakeholder Feedback
 
 There is some existing spec discussion in [issue 1272](https://github.com/w3c/ServiceWorker/issues/1272).
 
@@ -365,6 +383,8 @@ The second e-commerce site indicated they view their entire site as a single pro
 Note:  The service worker spec had [glob](https://en.wikipedia.org/wiki/Glob_(programming)) matching long ago and it was [removed](https://github.com/w3c/ServiceWorker/issues/287). At the time it was believed the exact match behavior was not necessary. Over time, however, it has become clear that there are sites that are having trouble fully adopting service workers since they cannot control their root origin URL without impacting all their various products hosted on sub-paths.
 
 Note: [RFC 6570](https://tools.ietf.org/html/rfc6570) describes a URI templates system that includes the ability to perform some matching against URLs.  The RFC, however, [suggests](https://tools.ietf.org/html/rfc6570#section-1.4) it is not a good fit for general URL matching.
+
+Note: [Early TAG Review](https://github.com/w3ctag/design-reviews/issues/417)
 
 Other routing systems for flexibility comparison:
 
