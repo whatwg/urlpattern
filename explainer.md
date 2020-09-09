@@ -416,4 +416,4 @@ Contributions and review provided by:
 * Jimmy Shen
 * Kinuko Yasuda
 
-Special thanks to Jake Archibald for the original idea to expose a URL matching primitive for use with service workers.
+Special thanks to Jake Archibald for the [original idea](https://twitter.com/jaffathecake/status/1082331913128497152) to expose a URL matching primitive for use with service workers.
