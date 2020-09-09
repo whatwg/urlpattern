@@ -364,6 +364,8 @@ To mitigate the risk of zero-day security issues in scope pattern matching this 
 1. Using a separate primitive web API supports parsing pattern strings immediately in the js context.  In most browsers this translates to parsing in an untrusted process.  The patterns can then be converted to a structured internal representation. These structured patterns can then be validated and sent to the trusted process for scope matching. The trusted process can be protected from operating on potentially invalid patterns.
 1. URLPatterns outside of service worker scopes will be exposed to greater parser risk due to supporting more complex patterns. They will operate, however, completely in untrusted sandboxed processes similar to other existing parsers; e.g. HTML.
 
+Currently service workers have a weak path-based security check to prevent a service worker script in one path location to control pages in a completely disjoint subpath.  The intention is to try to make things slightly more safe for sites that host separate user data on different subpaths.  This proposal maintains the same protections as discussed in the [ServiceWorkerAllowed section](#serviceworkerallowed-behavior).
+
 From a privacy perspective this API does not expose any new bits of user information entropy. it also does not create new opportunities to store data that could be used as a cookie.
 
 ## Stakeholder Feedback
