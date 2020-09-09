@@ -400,8 +400,11 @@ Other routing systems for flexibility comparison:
 
 Contributions and review provided by:
 
+* Łukasz Anforowicz
 * Kenji Baheux
+* L. David Baron
 * Ralph Chelala
+* Kenneth Rohde Christiansen
 * Victor Costan
 * Domenic Denicola
 * Matt Falkenhagen
