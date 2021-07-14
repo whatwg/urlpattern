@@ -1,0 +1,35 @@
+<pre class="metadata">
+Title: URLPattern API
+Shortname: urlpattern
+Repository: WICG/urlpattern
+Inline Github Issues: true
+Group: WICG
+Status: CG-DRAFT
+Level: 1
+URL: https://wicg.github.io/urlpattern/
+Boilerplate: omit conformance, omit feedback-header
+Editor: Ben Kelly, Google https://www.google.com/, wanderview@chromium.org
+Abstract: The URLPattern API provides a web platform primitive for matching URLs based on a convenient pattern syntax.
+!Participate: <a href="https://github.com/WICG/urlpattern">GitHub WICG/urlpattern</a> (<a href="https://github.com/WICG/urlpattern/issues/new">new issue</a>, <a href="https://github.com/WICG/urlpattern/issues?state=open">open issues</a>)
+!Commits: <a href="https://github.com/WICG/urlpattern/commits/master/spec.bs">GitHub spec.bs commits</a>
+Complain About: accidental-2119 yes, missing-example-ids yes
+Indent: 2
+Default Biblio Status: current
+Markup Shorthands: markdown yes
+</pre>
+
+<style>
+.selected-text-file-an-issue {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: smaller;
+  padding: 4px 10px;
+  z-index: 4;
+}
+</style>
+
+<script src="https://resources.whatwg.org/file-issue.js" async></script>
+
+TODO write some spec text!
