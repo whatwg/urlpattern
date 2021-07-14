@@ -28,8 +28,111 @@ Markup Shorthands: markdown yes
   padding: 4px 10px;
   z-index: 4;
 }
+
+dfn var {
+  font-style: italic;
+}
+
+table {
+  margin: 1em 0;
+}
+
+/* WHATWG-style <hr>s, instead of WICG-style. Specific selector is necessary to override WICG styles. */
+:not(.head) > :not(.head) + hr {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 3em 0;
+  height: auto;
+}
+:not(.head) > :not(.head) + hr::before {
+  content: none;
+}
+
+/* domintro from https://resources.whatwg.org/standard.css */
+.domintro {
+  position: relative;
+  color: green;
+  background: #DDFFDD;
+  margin: 2.5em 0 2em 0;
+  padding: 1.5em 1em 0.5em 2em;
+}
+
+.domintro dt, .domintro dt * {
+  color: black;
+  font-size: inherit;
+}
+.domintro dd {
+  margin: 0.5em 0 1em 2em; padding: 0;
+}
+.domintro dd p {
+  margin: 0.5em 0;
+}
+.domintro::before {
+  content: 'For web developers (non-normative)';
+  background: green;
+  color: white;
+  padding: 0.15em 0.25em;
+  font-style: normal;
+  position: absolute;
+  top: -0.8em;
+  left: -0.8em;
+}
 </style>
 
 <script src="https://resources.whatwg.org/file-issue.js" async></script>
 
-TODO write some spec text! (Test)
+<h2 id="global">The {{URLPattern}} class </h2>
+
+<xmp class="idl">
+typedef (USVString or URLPatternInit) URLPatternInput;
+
+[Exposed=(Window,Worker)]
+interface URLPattern {
+  constructor(URLPatternInput input, optional USVString baseURL);
+
+  boolean test(URLPatternInput input, optional USVString baseURL);
+
+  URLPatternResult? exec(URLPatternInput input, optional USVString baseURL);
+
+  readonly attribute USVString protocol;
+  readonly attribute USVString username;
+  readonly attribute USVString password;
+  readonly attribute USVString hostname;
+  readonly attribute USVString port;
+  readonly attribute USVString pathname;
+  readonly attribute USVString search;
+  readonly attribute USVString hash;
+};
+
+dictionary URLPatternInit {
+  USVString protocol;
+  USVString username;
+  USVString password;
+  USVString hostname;
+  USVString port;
+  USVString pathname;
+  USVString search;
+  USVString hash;
+  USVString baseURL;
+};
+
+dictionary URLPatternResult {
+  sequence<URLPatternInput> inputs;
+
+  URLPatternComponentResult protocol;
+  URLPatternComponentResult username;
+  URLPatternComponentResult password;
+  URLPatternComponentResult hostname;
+  URLPatternComponentResult port;
+  URLPatternComponentResult pathname;
+  URLPatternComponentResult search;
+  URLPatternComponentResult hash;
+};
+
+dictionary URLPatternComponentResult {
+  USVString input;
+  record<USVString, USVString> groups;
+};
+</xmp>
