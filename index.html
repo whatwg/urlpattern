@@ -665,7 +665,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#global"><span class="secno">1</span> <span class="content">The <code class="idl"><span>URLPattern</span></code> class </span></a>
+    <li><a href="#urlpattern-class"><span class="secno">1</span> <span class="content">The <code class="idl"><span>URLPattern</span></code> class </span></a>
+    <li><a href="#components"><span class="secno">2</span> <span class="content">Components</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -682,7 +683,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   </nav>
   <main>
 <script async src="https://resources.whatwg.org/file-issue.js"></script>
-   <h2 class="heading settled" data-level="1" id="global"><span class="secno">1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern">URLPattern</a></code> class </span><a class="self-link" href="#global"></a></h2>
+   <h2 class="heading settled" data-level="1" id="urlpattern-class"><span class="secno">1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern">URLPattern</a></code> class </span><a class="self-link" href="#urlpattern-class"></a></h2>
 <pre class="idl highlight def"><c- b>typedef</c-> (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit"><c- n>URLPatternInit</c-></a>) <dfn class="dfn-paneled idl-code" data-dfn-type="typedef" data-export id="typedefdef-urlpatterninput"><code><c- g>URLPatternInput</c-></code></dfn>;
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
@@ -693,14 +694,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
 
   <a data-link-type="idl-name" href="#dictdef-urlpatternresult" id="ref-for-dictdef-urlpatternresult"><c- n>URLPatternResult</c-></a>? <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="method" data-export data-lt="exec(input, baseURL)|exec(input)" id="dom-urlpattern-exec"><code><c- g>exec</c-></code><a class="self-link" href="#dom-urlpattern-exec"></a></dfn>(<a data-link-type="idl-name" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput②"><c- n>URLPatternInput</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/exec(input, baseURL), URLPattern/exec(input)" data-dfn-type="argument" data-export id="dom-urlpattern-exec-input-baseurl-input"><code><c- g>input</c-></code><a class="self-link" href="#dom-urlpattern-exec-input-baseurl-input"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString③"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/exec(input, baseURL), URLPattern/exec(input)" data-dfn-type="argument" data-export id="dom-urlpattern-exec-input-baseurl-baseurl"><code><c- g>baseURL</c-></code><a class="self-link" href="#dom-urlpattern-exec-input-baseurl-baseurl"></a></dfn>);
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString④"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-protocol"><code><c- g>protocol</c-></code><a class="self-link" href="#dom-urlpattern-protocol"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-username"><code><c- g>username</c-></code><a class="self-link" href="#dom-urlpattern-username"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑥"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-password"><code><c- g>password</c-></code><a class="self-link" href="#dom-urlpattern-password"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-hostname"><code><c- g>hostname</c-></code><a class="self-link" href="#dom-urlpattern-hostname"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑧"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-port"><code><c- g>port</c-></code><a class="self-link" href="#dom-urlpattern-port"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑨"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-pathname"><code><c- g>pathname</c-></code><a class="self-link" href="#dom-urlpattern-pathname"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①⓪"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-search"><code><c- g>search</c-></code><a class="self-link" href="#dom-urlpattern-search"></a></dfn>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①①"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export data-readonly data-type="USVString" id="dom-urlpattern-hash"><code><c- g>hash</c-></code><a class="self-link" href="#dom-urlpattern-hash"></a></dfn>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-protocol" id="ref-for-dom-urlpattern-protocol"><c- g>protocol</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑤"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-username" id="ref-for-dom-urlpattern-username"><c- g>username</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑥"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-password" id="ref-for-dom-urlpattern-password"><c- g>password</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-hostname" id="ref-for-dom-urlpattern-hostname"><c- g>hostname</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑧"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-port" id="ref-for-dom-urlpattern-port"><c- g>port</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑨"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-pathname" id="ref-for-dom-urlpattern-pathname"><c- g>pathname</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①⓪"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-search" id="ref-for-dom-urlpattern-search"><c- g>search</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①①"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-hash" id="ref-for-dom-urlpattern-hash"><c- g>hash</c-></a>;
 };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-urlpatterninit"><code><c- g>URLPatternInit</c-></code></dfn> {
@@ -733,12 +734,106 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <a data-link-type="dfn" href="https://heycam.github.io/webidl/#idl-record" id="ref-for-idl-record"><c- b>record</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②②"><c- b>USVString</c-></a>, <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②③"><c- b>USVString</c-></a>> <dfn class="idl-code" data-dfn-for="URLPatternComponentResult" data-dfn-type="dict-member" data-export data-type="record<USVString, USVString> " id="dom-urlpatterncomponentresult-groups"><code><c- g>groups</c-></code><a class="self-link" href="#dom-urlpatterncomponentresult-groups"></a></dfn>;
 };
 </pre>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-protocol-component">protocol component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern②">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-username-component">username component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component①">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern③">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-password-component">password component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component②">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern④">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-hostname-component">hostname component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component③">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑤">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-port-component">port component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component④">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑥">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-pathname-component">pathname component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component⑤">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑦">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-search-component">search component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component⑥">component</a>, initially null.</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑧">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-hash-component">hash component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component⑦">component</a>, initially null.</p>
+   <dl class="domintro non-normative">
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑨">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-protocol" id="ref-for-dom-urlpattern-protocol①">protocol</a></code></code> 
+    <dd>
+     <p>The normalized protocol pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⓪">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-username" id="ref-for-dom-urlpattern-username①">username</a></code></code> 
+    <dd>
+     <p>The normalized username pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①①">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-password" id="ref-for-dom-urlpattern-password①">password</a></code></code> 
+    <dd>
+     <p>The normalized password pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①②">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hostname" id="ref-for-dom-urlpattern-hostname①">hostname</a></code></code> 
+    <dd>
+     <p>The normalized hostname pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①③">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-port" id="ref-for-dom-urlpattern-port①">port</a></code></code> 
+    <dd>
+     <p>The normalized port pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①④">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-pathname" id="ref-for-dom-urlpattern-pathname①">pathname</a></code></code> 
+    <dd>
+     <p>The normalized pathname pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑤">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-search" id="ref-for-dom-urlpattern-search①">search</a></code></code> 
+    <dd>
+     <p>The normalized search pattern string. </p>
+    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑥">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hash" id="ref-for-dom-urlpattern-hash①">hash</a></code></code> 
+    <dd>
+     <p>The normalized hash pattern string. </p>
+   </dl>
+   <div class="algorithm" data-algorithm="protocol" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-protocol"><code>protocol</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component">protocol component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="username" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-username"><code>username</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="#urlpattern-username-component" id="ref-for-urlpattern-username-component">username component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string①">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="password" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-password"><code>password</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②">this</a>'s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component">password component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string②">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="hostname" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-hostname"><code>hostname</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this③">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component">hostname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string③">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="port" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-port"><code>port</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this④">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string④">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="pathname" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-pathname"><code>pathname</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑤">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="search" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-search"><code>search</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑥">pattern string</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="hash" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-hash"><code>hash</code></dfn> getter steps are: 
+    <ol>
+     <li data-md>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component">hash component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑦">pattern string</a>.</p>
+    </ol>
+   </div>
+   <h2 class="heading settled" data-level="2" id="components"><span class="secno">2. </span><span class="content">Components</span><a class="self-link" href="#components"></a></h2>
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑦">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> objects. </p>
+   <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑧">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-pattern-string">pattern string</dfn>, a string, initially null. </p>
   </main>
 <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#dom-urlpatterninit-baseurl">baseURL</a><span>, in §1</span>
+   <li><a href="#component">component</a><span>, in §2</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input, baseURL)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-exec">exec(input)</a><span>, in §1</span>
@@ -751,6 +846,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-hash">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-hash">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-hash-component">hash component</a><span>, in §1</span>
    <li>
     hostname
     <ul>
@@ -758,6 +854,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-hostname">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-hostname">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-hostname-component">hostname component</a><span>, in §1</span>
    <li><a href="#dom-urlpatterncomponentresult-input">input</a><span>, in §1</span>
    <li><a href="#dom-urlpatternresult-inputs">inputs</a><span>, in §1</span>
    <li>
@@ -767,6 +864,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-password">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-password">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-password-component">password component</a><span>, in §1</span>
    <li>
     pathname
     <ul>
@@ -774,6 +872,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-pathname">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-pathname">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-pathname-component">pathname component</a><span>, in §1</span>
+   <li><a href="#component-pattern-string">pattern string</a><span>, in §2</span>
    <li>
     port
     <ul>
@@ -781,6 +881,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-port">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-port">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-port-component">port component</a><span>, in §1</span>
    <li>
     protocol
     <ul>
@@ -788,6 +889,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-protocol">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-protocol">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-protocol-component">protocol component</a><span>, in §1</span>
    <li>
     search
     <ul>
@@ -795,6 +897,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-search">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-search">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-search-component">search component</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-test">test(input)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-test">test(input, baseURL)</a><span>, in §1</span>
    <li><a href="#urlpattern">URLPattern</a><span>, in §1</span>
@@ -811,6 +914,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatterninit-username">dict-member for URLPatternInit</a><span>, in §1</span>
      <li><a href="#dom-urlpatternresult-username">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
+   <li><a href="#urlpattern-username-component">username component</a><span>, in §1</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-Exposed">
    <a href="https://heycam.github.io/webidl/#Exposed">https://heycam.github.io/webidl/#Exposed</a><b>Referenced in:</b>
@@ -842,6 +946,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-idl-sequence">1. The URLPattern class </a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-this">
+   <a href="https://heycam.github.io/webidl/#this">https://heycam.github.io/webidl/#this</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-this">1. The URLPattern class </a> <a href="#ref-for-this①">(2)</a> <a href="#ref-for-this②">(3)</a> <a href="#ref-for-this③">(4)</a> <a href="#ref-for-this④">(5)</a> <a href="#ref-for-this⑤">(6)</a> <a href="#ref-for-this⑥">(7)</a> <a href="#ref-for-this⑦">(8)</a>
+   </ul>
+  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
@@ -852,6 +962,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><span class="dfn-paneled" id="term-for-idl-boolean">boolean</span>
      <li><span class="dfn-paneled" id="term-for-idl-record">record</span>
      <li><span class="dfn-paneled" id="term-for-idl-sequence">sequence</span>
+     <li><span class="dfn-paneled" id="term-for-this">this</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -871,14 +982,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
 
   <a data-link-type="idl-name" href="#dictdef-urlpatternresult"><c- n>URLPatternResult</c-></a>? <a href="#dom-urlpattern-exec"><code><c- g>exec</c-></code></a>(<a data-link-type="idl-name" href="#typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <a href="#dom-urlpattern-exec-input-baseurl-input"><code><c- g>input</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a href="#dom-urlpattern-exec-input-baseurl-baseurl"><code><c- g>baseURL</c-></code></a>);
 
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-protocol"><code><c- g>protocol</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-username"><code><c- g>username</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-password"><code><c- g>password</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-hostname"><code><c- g>hostname</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-port"><code><c- g>port</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-pathname"><code><c- g>pathname</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-search"><code><c- g>search</c-></code></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a data-readonly data-type="USVString" href="#dom-urlpattern-hash"><code><c- g>hash</c-></code></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-protocol"><c- g>protocol</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-username"><c- g>username</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-password"><c- g>password</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-hostname"><c- g>hostname</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-port"><c- g>port</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-pathname"><c- g>pathname</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-search"><c- g>search</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-urlpattern-hash"><c- g>hash</c-></a>;
 };
 
 <c- b>dictionary</c-> <a href="#dictdef-urlpatterninit"><code><c- g>URLPatternInit</c-></code></a> {
@@ -921,7 +1032,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="urlpattern">
    <b><a href="#urlpattern">#urlpattern</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a>
+    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a> <a href="#ref-for-urlpattern①">(2)</a> <a href="#ref-for-urlpattern②">(3)</a> <a href="#ref-for-urlpattern③">(4)</a> <a href="#ref-for-urlpattern④">(5)</a> <a href="#ref-for-urlpattern⑤">(6)</a> <a href="#ref-for-urlpattern⑥">(7)</a> <a href="#ref-for-urlpattern⑦">(8)</a> <a href="#ref-for-urlpattern⑧">(9)</a> <a href="#ref-for-urlpattern⑨">(10)</a> <a href="#ref-for-urlpattern①⓪">(11)</a> <a href="#ref-for-urlpattern①①">(12)</a> <a href="#ref-for-urlpattern①②">(13)</a> <a href="#ref-for-urlpattern①③">(14)</a> <a href="#ref-for-urlpattern①④">(15)</a> <a href="#ref-for-urlpattern①⑤">(16)</a> <a href="#ref-for-urlpattern①⑥">(17)</a>
+    <li><a href="#ref-for-urlpattern①⑦">2. Components</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatterninit">
@@ -940,6 +1052,115 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#dictdef-urlpatterncomponentresult">#dictdef-urlpatterncomponentresult</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-urlpatterncomponentresult">1. The URLPattern class </a> <a href="#ref-for-dictdef-urlpatterncomponentresult①">(2)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult②">(3)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult③">(4)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult④">(5)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult⑤">(6)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult⑥">(7)</a> <a href="#ref-for-dictdef-urlpatterncomponentresult⑦">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-protocol-component">
+   <b><a href="#urlpattern-protocol-component">#urlpattern-protocol-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-protocol-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-username-component">
+   <b><a href="#urlpattern-username-component">#urlpattern-username-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-username-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-password-component">
+   <b><a href="#urlpattern-password-component">#urlpattern-password-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-password-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-hostname-component">
+   <b><a href="#urlpattern-hostname-component">#urlpattern-hostname-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-hostname-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-port-component">
+   <b><a href="#urlpattern-port-component">#urlpattern-port-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-port-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-pathname-component">
+   <b><a href="#urlpattern-pathname-component">#urlpattern-pathname-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-pathname-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-search-component">
+   <b><a href="#urlpattern-search-component">#urlpattern-search-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-search-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="urlpattern-hash-component">
+   <b><a href="#urlpattern-hash-component">#urlpattern-hash-component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-urlpattern-hash-component">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-protocol">
+   <b><a href="#dom-urlpattern-protocol">#dom-urlpattern-protocol</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-protocol①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-username">
+   <b><a href="#dom-urlpattern-username">#dom-urlpattern-username</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-username">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-username①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-password">
+   <b><a href="#dom-urlpattern-password">#dom-urlpattern-password</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-password">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-password①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-hostname">
+   <b><a href="#dom-urlpattern-hostname">#dom-urlpattern-hostname</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-hostname">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-hostname①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-port">
+   <b><a href="#dom-urlpattern-port">#dom-urlpattern-port</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-port">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-port①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-pathname">
+   <b><a href="#dom-urlpattern-pathname">#dom-urlpattern-pathname</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-pathname">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-pathname①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-search">
+   <b><a href="#dom-urlpattern-search">#dom-urlpattern-search</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-search">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-search①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpattern-hash">
+   <b><a href="#dom-urlpattern-hash">#dom-urlpattern-hash</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpattern-hash">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-hash①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="component">
+   <b><a href="#component">#component</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-component">1. The URLPattern class </a> <a href="#ref-for-component①">(2)</a> <a href="#ref-for-component②">(3)</a> <a href="#ref-for-component③">(4)</a> <a href="#ref-for-component④">(5)</a> <a href="#ref-for-component⑤">(6)</a> <a href="#ref-for-component⑥">(7)</a> <a href="#ref-for-component⑦">(8)</a>
+    <li><a href="#ref-for-component⑧">2. Components</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="component-pattern-string">
+   <b><a href="#component-pattern-string">#component-pattern-string</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-component-pattern-string">1. The URLPattern class </a> <a href="#ref-for-component-pattern-string①">(2)</a> <a href="#ref-for-component-pattern-string②">(3)</a> <a href="#ref-for-component-pattern-string③">(4)</a> <a href="#ref-for-component-pattern-string④">(5)</a> <a href="#ref-for-component-pattern-string⑤">(6)</a> <a href="#ref-for-component-pattern-string⑥">(7)</a> <a href="#ref-for-component-pattern-string⑦">(8)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
