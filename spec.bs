@@ -83,7 +83,7 @@ table {
 
 <script src="https://resources.whatwg.org/file-issue.js" async></script>
 
-<h2 id="global">The {{URLPattern}} class </h2>
+<h2 id=urlpattern-class>The {{URLPattern}} class </h2>
 
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
@@ -136,3 +136,115 @@ dictionary URLPatternComponentResult {
   record<USVString, USVString> groups;
 };
 </xmp>
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], initially null.
+
+Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], initially null.
+
+<dl class="domintro non-normative">
+  <dt><code>{{URLPattern}} . {{URLPattern/protocol}}</code>
+  <dd>
+    <p>The normalized protocol pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/username}}</code>
+  <dd>
+    <p>The normalized username pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/password}}</code>
+  <dd>
+    <p>The normalized password pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/hostname}}</code>
+  <dd>
+    <p>The normalized hostname pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/port}}</code>
+  <dd>
+    <p>The normalized port pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/pathname}}</code>
+  <dd>
+    <p>The normalized pathname pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/search}}</code>
+  <dd>
+    <p>The normalized search pattern string.
+  </dd>
+
+  <dt><code>{{URLPattern}} . {{URLPattern/hash}}</code>
+  <dd>
+    <p>The normalized hash pattern string.
+  </dd>
+</dl>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">protocol</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/protocol component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">username</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/username component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">password</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/password component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">hostname</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/hostname component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">port</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/port component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">pathname</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/pathname component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">search</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/search component=]'s [=component/pattern string=].
+</div>
+
+<div algorithm>
+  The <dfn attribute for="URLPattern">hash</dfn> getter steps are:
+
+  1. Return [=this=]'s [=URLPattern/hash component=]'s [=component/pattern string=].
+</div>
+
+<h2 id=components>Components</h2>
+
+<p>A {{URLPattern}} is associated with multiple <dfn>component</dfn> objects.
+
+<p>A [=component=] has an associated <dfn for=component>pattern string</dfn>, a string, initially null.
