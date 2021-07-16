@@ -18,6 +18,21 @@ Default Biblio Status: current
 Markup Shorthands: markdown yes
 </pre>
 
+<pre class="link-defaults">
+spec:infra; type:dfn; text:list
+spec:webidl; type:dfn; text:record
+</pre>
+
+<pre class="anchors">
+spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
+  type: abstract-op
+    text: Get; url: #sec-get-o-p
+    text: RegExpBuiltinExec; url: #sec-regexpbuiltinexec
+    text: ToString; url: #sec-tostring
+  type: interface
+    text: RegExp; url: #sec-regexp-regular-expression-objects
+</pre>
+
 <style>
 .selected-text-file-an-issue {
   position: fixed;
@@ -243,8 +258,189 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Return [=this=]'s [=URLPattern/hash component=]'s [=component/pattern string=].
 </div>
 
+<div algorithm>
+  The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
+
+  1. Let |result| be the result of [=match=] given [=this=], |input|, and |baseURL| if given.
+  1. If |result| is null, return false.
+  1. Return true.
+</div>
+
+<div algorithm>
+  The <dfn method for="URLPattern">exec(|input|, |baseURL|)</dfn> method steps are:
+
+  1. Return the result of [=match=] given [=this=], |input|, and |baseURL| if given.
+</div>
+
+<div algorithm>
+  To perform a <dfn>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+
+  1. Let |protocol| be the empty string.
+  1. Let |username| be the empty string.
+  1. Let |password| be the empty string.
+  1. Let |hostname| be the empty string.
+  1. Let |port| be the empty string.
+  1. Let |pathname| be the empty string.
+  1. Let |search| be the empty string.
+  1. Let |hash| be the empty string.
+  1. Let |inputs| be an empty [=list=].
+  1. [=list/Append=] |input| to |inputs|.
+  1. If |input| is a {{URLPatternInit}} then:
+    1. If |baseURLString| was given, throw a {{TypeError}}.
+    1. Let |applyResult| be the result of [=process a URLPatternInit=] given |input|, "url", |protocol|, |username|, |password|, |hostname|, |port|, |pathname|, |search|, and |hash|. If this throws an exception, catch it, and return null.
+    1. Set |protocol| to |applyResult|["{{URLPatternInit/protocol}}"].
+    1. Set |username| to |applyResult|["{{URLPatternInit/username}}"].
+    1. Set |password| to |applyResult|["{{URLPatternInit/password}}"].
+    1. Set |hostname| to |applyResult|["{{URLPatternInit/hostname}}"].
+    1. Set |port| to |applyResult|["{{URLPatternInit/port}}"].
+    1. Set |pathname| to |applyResult|["{{URLPatternInit/pathname}}"].
+    1. Set |search| to |applyResult|["{{URLPatternInit/search}}"].
+    1. Set |hash| to |applyResult|["{{URLPatternInit/hash}}"].
+  1. Else:
+    1. Let |baseURL| be null.
+    1. If |baseURLString| was given, then:
+      1. Set |baseURL| to the result of [=URL parser|parsing=] |baseURLString|.
+      1. If |baseURL| is failure, return null.
+      1. [=list/Append=] |baseURL| to |inputs|.
+    1. Let |url| be the result of [=URL parser|parsing=] |input| given |baseURL|.
+    1. If |url| is failure, return null.
+    1. Set |protocol| to |url|'s [=url/scheme=].
+    1. Set |username| to |url|'s [=url/username=].
+    1. Set |password| to |url|'s [=url/password=].
+    1. Set |hostname| to |url|'s [=url/host=] or the empty string if the value is null.
+    1. Set |port| to |url|'s [=url/port=] or the empty string if the value is null.
+    1. Set |pathname| to |url|'s [=url/API pathname string=].
+    1. Set |search| to |url|'s [=url/query=] or the empty string if the value is null.
+    1. Set |hash| to |url|'s [=url/fragment=] or the empty string if the value is null.
+  1. Let |protocolExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/protocol component=]'s [=component/regular expression=], |protocol|).
+  1. Let |usernameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/username component=]'s [=component/regular expression=], |username|).
+  1. Let |passwordExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/password component=]'s [=component/regular expression=], |password|).
+  1. Let |hostnameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/hostname component=]'s [=component/regular expression=], |hostname|).
+  1. Let |portExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/port component=]'s [=component/regular expression=], |port|).
+  1. Let |pathnameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/pathname component=]'s [=component/regular expression=], |pathname|).
+  1. Let |searchExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/search component=]'s [=component/regular expression=], |search|).
+  1. Let |hashExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/hash component=]'s [=component/regular expression=], |hash|).
+  1. If |protocolExecResult|, |usernameExecResult|, |passwordExecResult|, |hostnameExecResult|, |portExecResult|, |pathnameExecResult|, |searchExecResult|, or |hashExecResult| are null then return null.
+  1. Let |result| be a new {{URLPatternResult}}.
+  1. Set |result|["{{URLPatternResult/inputs}}"] to |inputs|.
+  1. Set |result|["{{URLPatternResult/protocol}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/protocol component=], |protocol|, and |protocolExecResult|.
+  1. Set |result|["{{URLPatternResult/username}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/username component=], |username|, and |usernameExecResult|.
+  1. Set |result|["{{URLPatternResult/password}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/password component=], |password|, and |passwordExecResult|.
+  1. Set |result|["{{URLPatternResult/hostname}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/hostname component=], |hostname|, and |hostnameExecResult|.
+  1. Set |result|["{{URLPatternResult/port}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/port component=], |port|, and |portExecResult|.
+  1. Set |result|["{{URLPatternResult/pathname}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/pathname component=], |pathname|, and |pathnameExecResult|.
+  1. Set |result|["{{URLPatternResult/search}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/search component=], |search|, and |searchExecResult|.
+  1. Set |result|["{{URLPatternResult/hash}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URLPattern/hash component=], |hash|, and |hashExecResult|.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+  To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string |type|, a string |protocol|, a string |username|, a string |password|, a string |hostname|, a string |port|, a string |pathname|, a string |search|, and a string |hash|:
+
+  1. Let |result| be the result of creating a new {{URLPatternInit}}.
+  1. Set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
+  1. Set |result|["{{URLPatternInit/username}}"] to |username|.
+  1. Set |result|["{{URLPatternInit/password}}"] to |password|.
+  1. Set |result|["{{URLPatternInit/hostname}}"] to |hostname|.
+  1. Set |result|["{{URLPatternInit/port}}"] to |port|.
+  1. Set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
+  1. Set |result|["{{URLPatternInit/search}}"] to |search|.
+  1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
+  1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
+    1. Let |baseURL| be the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
+    1. If |baseURL| is failure, then throw a {{TypeError}}.
+    1. Set |result|["{{URLPatternInit/protocol}}"] to |baseURL|'s [=url/scheme=].
+    1. Set |result|["{{URLPatternInit/username}}"] to |baseURL|'s [=url/username=].
+    1. Set |result|["{{URLPatternInit/password}}"] to |baseURL|'s [=url/password=].
+    1. Set |result|["{{URLPatternInit/hostname}}"] to |baseURL|'s [=url/host=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/port}}"] to |baseURL|'s [=url/port=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/pathname}}"] to |baseURL|'s [=url/API pathname string=].
+    1. Set |result|["{{URLPatternInit/search}}"] to |baseURL|'s [=url/query=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/hash}}"] to |baseURL|'s [=url/fragment=] or the empty string if the value is null.
+  1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=canonicalize protocol=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
+  1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=canonicalize username=] given |init|["{{URLPatternInit/username}}"] and |type|.
+  1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=canonicalize password=] given |init|["{{URLPatternInit/password}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=canonicalize hostname=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=canonicalize port=] given |init|["{{URLPatternInit/port}}"] and |type|.
+  1. If |init|["{{URLPatternInit/pathname}}"] is not null then set |result|["{{URLPatternInit/pathname}}"] to the result of [=canonicalize pathname=] given |init|["{{URLPatternInit/pathname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=canonicalize search=] given |init|["{{URLPatternInit/search}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=canonicalize hash=] given |init|["{{URLPatternInit/hash}}"] and |type|.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+  To <dfn>create a component match result</dfn> given a [=component=] |component|, a string |input|, and an array representing the output of [$RegExpBuiltinExec$] |execResult|:
+
+  1. Let |result| be a new {{URLPatternComponentResult}}.
+  1. Set |result|["{{URLPatternComponentResult/input}}"] to |input|.
+  1. Let |groups| be a <code>[=record=]<{{USVString}}, {{USVString}}></code>.
+  1. Let |index| be 1.
+  1. While |index| is less than [$Get$](|execResult|, "`length`"):
+    1. Let |name| be |component|'s [=component/group name list=][|index| &minus; 1].
+    1. Let |value| be [$Get$](|execResult|, [$ToString$](|index|)).
+    1. Set |groups|[|name|] to |value|.
+  1. Set |result|["{{URLPatternComponentResult/groups}}"] to |groups|.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize protocol</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize username</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize password</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize hostname</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize port</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize pathname</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize search</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
+<div algorithm>
+  To <dfn>canonicalize hash</dfn> given a string |value| and a string |type|:
+
+  1. TODO |value| |type|
+</div algorithm>
+
 <h2 id=components>Components</h2>
 
-<p>A {{URLPattern}} is associated with multiple <dfn>component</dfn> objects.
+A {{URLPattern}} is associated with multiple <dfn>component</dfn> [=structs=].
 
-<p>A [=component=] has an associated <dfn for=component>pattern string</dfn>, a string, initially null.
+A [=component=] has an associated <dfn for=component>pattern string</dfn>, a string, initially null.
+
+A [=component=] has an associated <dfn for=component>regular expression</dfn>, a {{RegExp}}, initially null.
+
+A [=component=] has an associated <dfn for=component>group name list</dfn>, an array of strings, initially an empty array.
+
+<h2 id=patching>Patching</h2>
+
+This spec depends on factoring out the {{URL/pathname}} getter steps into a new exported algorithm, <dfn for=url>API pathname string</dfn>, that operates on a URL record.
