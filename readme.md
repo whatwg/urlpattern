@@ -2,7 +2,7 @@ This repository proposes creating a native web API to match URLs called URLPatte
 
 For more information:
 
-* The [URLPattern documentation](docs/urlpattern.md) describes the final API shape and provides a number of examples.
+* The [URLPattern documentation](mdn-drafts/QUICK-REFERENCE.md) describes the final API shape and provides a number of examples.
 * The [December 2020 update](202012-update.md) describes the API shape and implementation status at the time.
 * The [explainer](explainer.md) discusses the motivating use cases and early API ideas.
 * The [design document](https://docs.google.com/document/d/17L6b3zlTHtyxQvOAvbK55gQOi5rrJLERwjt_sKXpzqc/edit) goes into more detail, including webidl and how the API might be implemented in Chromium.  Some of this has changed during implementation.  See the [latest update](2012-update.md) for the most recent API shape.
