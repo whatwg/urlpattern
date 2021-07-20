@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-07-19">19 July 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-07-20">20 July 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1033,9 +1033,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname③">hostname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname④">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-hostname" id="ref-for-canonicalize-hostname">canonicalize hostname</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑤">hostname</a></code>"] and <var>type</var>.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port③">port</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port④">port</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-port" id="ref-for-canonicalize-port">canonicalize port</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑤">port</a></code>"] and <var>type</var>.</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port③">port</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port④">port</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-port" id="ref-for-canonicalize-port">canonicalize port</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑤">port</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑥">protocol</a></code>"], and <var>type</var>.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname③">pathname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname④">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-pathname" id="ref-for-canonicalize-pathname">canonicalize pathname</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname⑤">pathname</a></code>"] and <var>type</var>.</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname③">pathname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname④">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-pathname" id="ref-for-canonicalize-pathname">canonicalize pathname</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname⑤">pathname</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑦">protocol</a></code>"], and <var>type</var>.</p>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search③">search</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search④">search</a></code>"] to the result of <a data-link-type="dfn" href="#canonicalize-search" id="ref-for-canonicalize-search">canonicalize search</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑤">search</a></code>"] and <var>type</var>.</p>
      <li data-md>
@@ -1075,56 +1075,149 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-protocol">canonicalize protocol</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single trailing U+003A (:) removed, if any.</p>
+     <li data-md>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL record</a>.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser">basic URL parser</a> given <var>strippedValue</var> followed by "<code>://dummy.test</code>", with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url">url</a></i>.</p>
+      <p class="note" role="note">Note, <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override">state override</a> is not used here because it enforces restrictions that are only appropriate for the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-protocol" id="ref-for-dom-url-protocol">protocol</a></code> setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize username">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-username">canonicalize username</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>value</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①">URL record</a>.</p>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://url.spec.whatwg.org/#set-the-username" id="ref-for-set-the-username">Set the username</a> given <var>dummyURL</var> and <var>value</var>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-username" id="ref-for-concept-url-username②">username</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize password">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-password">canonicalize password</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>value</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url②">URL record</a>.</p>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://url.spec.whatwg.org/#set-the-password" id="ref-for-set-the-password">Set the password</a> given <var>dummyURL</var> and <var>value</var>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-password" id="ref-for-concept-url-password②">password</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize hostname">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-hostname">canonicalize hostname</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>value</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url③">URL record</a>.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url①">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#hostname-state" id="ref-for-hostname-state">hostname state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override①">state override</a></i>.</p>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror③">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host②">host</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize port">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-port">canonicalize port</dfn> given a string <var>value</var> and a string <var>type</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-port">canonicalize port</dfn> given a string <var>portValue</var>, a string <var>protocolValue</var>, and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>portValue</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url④">URL record</a>.</p>
+     <li data-md>
+      <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme③">scheme</a> to <var>protocolValue</var>.</p>
+      <p class="note" role="note">Note, we set the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑤">URL record</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a> in order for the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser②">basic URL parser</a> to properly recognize and normalize default port values.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser③">basic URL parser</a> given <var>portValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url②">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#port-state" id="ref-for-port-state">port state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override②">state override</a></i>.</p>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror④">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port②">port</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize pathname">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-pathname">canonicalize pathname</dfn> given a string <var>value</var> and a string <var>type</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-pathname">canonicalize pathname</dfn> given a string <var>pathnameValue</var>, a string <var>protocolValue</var>, and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>pathnameValue</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑥">URL record</a>.</p>
+     <li data-md>
+      <p>If <var>protocolValue</var> is null or the empty string, then set <var>protocolValue</var> to "<code>https</code>".</p>
+     <li data-md>
+      <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme⑤">scheme</a> to <var>protocolValue</var>.</p>
+      <p class="note" role="note">Note, we set the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑦">URL record</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme⑥">scheme</a> in order to check if it <a data-link-type="dfn" href="https://url.spec.whatwg.org/#is-special" id="ref-for-is-special">is special</a>.  If <var>protocolValue</var> is missing we purposely default the URL to being special by using "<code>https</code>" for the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme⑦">scheme</a>.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be null.</p>
+     <li data-md>
+      <p>If <var>dummyURL</var> <a data-link-type="dfn" href="https://url.spec.whatwg.org/#is-special" id="ref-for-is-special①">is special</a>, then:</p>
+      <ol>
+       <li data-md>
+        <p>Set <var>parseResult</var> to the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser④">basic URL parser</a> given <var>pathnameValue</var> with <var>dummyURL</var> as <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url③">url</a> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#path-start-state" id="ref-for-path-start-state">path start state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override③">state override</a></i>.</p>
+      </ol>
+     <li data-md>
+      <p>Else:</p>
+      <ol>
+       <li data-md>
+        <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path" id="ref-for-concept-url-path">path</a>[0] to empty string.</p>
+       <li data-md>
+        <p>Set <var>parseResult</var> to the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑤">URL parsing</a> given <var>pathnameValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url④">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state" id="ref-for-cannot-be-a-base-url-path-state">cannot be a base URL path state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override④">state override</a></i>.</p>
+      </ol>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string②">API pathname string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize search">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-search">canonicalize search</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+003F (?) removed, if any.</p>
+     <li data-md>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑧">URL record</a>.</p>
+     <li data-md>
+      <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query②">query</a> to the empty string.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑥">basic URL parser</a> given <var>strippedValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑤">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#query-state" id="ref-for-query-state">query state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑤">state override</a></i>.</p>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑥">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query③">query</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize hash">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-hash">canonicalize hash</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>TODO <var>value</var> <var>type</var></p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+0023 (#) removed, if any.</p>
+     <li data-md>
+      <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
+     <li data-md>
+      <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑨">URL record</a>.</p>
+     <li data-md>
+      <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment②">fragment</a> to the empty string.</p>
+     <li data-md>
+      <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑦">basic URL parser</a> given <var>strippedValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑥">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#fragment-state" id="ref-for-fragment-state">fragment state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑥">state override</a></i>.</p>
+     <li data-md>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
+     <li data-md>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment③">fragment</a>.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="2" id="components"><span class="secno">2. </span><span class="content">Components</span><a class="self-link" href="#components"></a></h2>
@@ -1279,22 +1372,64 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-struct">2. Components</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-basic-url-parser">
+   <a href="https://url.spec.whatwg.org/#concept-basic-url-parser">https://url.spec.whatwg.org/#concept-basic-url-parser</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-basic-url-parser">1. The URLPattern class </a> <a href="#ref-for-concept-basic-url-parser①">(2)</a> <a href="#ref-for-concept-basic-url-parser②">(3)</a> <a href="#ref-for-concept-basic-url-parser③">(4)</a> <a href="#ref-for-concept-basic-url-parser④">(5)</a> <a href="#ref-for-concept-basic-url-parser⑤">(6)</a> <a href="#ref-for-concept-basic-url-parser⑥">(7)</a> <a href="#ref-for-concept-basic-url-parser⑦">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-cannot-be-a-base-url-path-state">
+   <a href="https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state">https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-cannot-be-a-base-url-path-state">1. The URLPattern class </a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-fragment">
    <a href="https://url.spec.whatwg.org/#concept-url-fragment">https://url.spec.whatwg.org/#concept-url-fragment</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-fragment">1. The URLPattern class </a> <a href="#ref-for-concept-url-fragment①">(2)</a>
+    <li><a href="#ref-for-concept-url-fragment">1. The URLPattern class </a> <a href="#ref-for-concept-url-fragment①">(2)</a> <a href="#ref-for-concept-url-fragment②">(3)</a> <a href="#ref-for-concept-url-fragment③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-fragment-state">
+   <a href="https://url.spec.whatwg.org/#fragment-state">https://url.spec.whatwg.org/#fragment-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-fragment-state">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-host">
    <a href="https://url.spec.whatwg.org/#concept-url-host">https://url.spec.whatwg.org/#concept-url-host</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-host">1. The URLPattern class </a> <a href="#ref-for-concept-url-host①">(2)</a>
+    <li><a href="#ref-for-concept-url-host">1. The URLPattern class </a> <a href="#ref-for-concept-url-host①">(2)</a> <a href="#ref-for-concept-url-host②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-hostname-state">
+   <a href="https://url.spec.whatwg.org/#hostname-state">https://url.spec.whatwg.org/#hostname-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-hostname-state">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-is-special">
+   <a href="https://url.spec.whatwg.org/#is-special">https://url.spec.whatwg.org/#is-special</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-special">1. The URLPattern class </a> <a href="#ref-for-is-special①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-password">
    <a href="https://url.spec.whatwg.org/#concept-url-password">https://url.spec.whatwg.org/#concept-url-password</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-password">1. The URLPattern class </a> <a href="#ref-for-concept-url-password①">(2)</a>
+    <li><a href="#ref-for-concept-url-password">1. The URLPattern class </a> <a href="#ref-for-concept-url-password①">(2)</a> <a href="#ref-for-concept-url-password②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-url-path">
+   <a href="https://url.spec.whatwg.org/#concept-url-path">https://url.spec.whatwg.org/#concept-url-path</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-url-path">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-path-start-state">
+   <a href="https://url.spec.whatwg.org/#path-start-state">https://url.spec.whatwg.org/#path-start-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-path-start-state">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-url-pathname">
@@ -1306,19 +1441,61 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-concept-url-port">
    <a href="https://url.spec.whatwg.org/#concept-url-port">https://url.spec.whatwg.org/#concept-url-port</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-port">1. The URLPattern class </a> <a href="#ref-for-concept-url-port①">(2)</a>
+    <li><a href="#ref-for-concept-url-port">1. The URLPattern class </a> <a href="#ref-for-concept-url-port①">(2)</a> <a href="#ref-for-concept-url-port②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-port-state">
+   <a href="https://url.spec.whatwg.org/#port-state">https://url.spec.whatwg.org/#port-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-port-state">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-url-protocol">
+   <a href="https://url.spec.whatwg.org/#dom-url-protocol">https://url.spec.whatwg.org/#dom-url-protocol</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-url-protocol">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-query">
    <a href="https://url.spec.whatwg.org/#concept-url-query">https://url.spec.whatwg.org/#concept-url-query</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-query">1. The URLPattern class </a> <a href="#ref-for-concept-url-query①">(2)</a>
+    <li><a href="#ref-for-concept-url-query">1. The URLPattern class </a> <a href="#ref-for-concept-url-query①">(2)</a> <a href="#ref-for-concept-url-query②">(3)</a> <a href="#ref-for-concept-url-query③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-query-state">
+   <a href="https://url.spec.whatwg.org/#query-state">https://url.spec.whatwg.org/#query-state</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-query-state">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-scheme">
    <a href="https://url.spec.whatwg.org/#concept-url-scheme">https://url.spec.whatwg.org/#concept-url-scheme</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-scheme">1. The URLPattern class </a> <a href="#ref-for-concept-url-scheme①">(2)</a>
+    <li><a href="#ref-for-concept-url-scheme">1. The URLPattern class </a> <a href="#ref-for-concept-url-scheme①">(2)</a> <a href="#ref-for-concept-url-scheme②">(3)</a> <a href="#ref-for-concept-url-scheme③">(4)</a> <a href="#ref-for-concept-url-scheme④">(5)</a> <a href="#ref-for-concept-url-scheme⑤">(6)</a> <a href="#ref-for-concept-url-scheme⑥">(7)</a> <a href="#ref-for-concept-url-scheme⑦">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-set-the-password">
+   <a href="https://url.spec.whatwg.org/#set-the-password">https://url.spec.whatwg.org/#set-the-password</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-set-the-password">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-set-the-username">
+   <a href="https://url.spec.whatwg.org/#set-the-username">https://url.spec.whatwg.org/#set-the-username</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-set-the-username">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-basic-url-parser-state-override">
+   <a href="https://url.spec.whatwg.org/#basic-url-parser-state-override">https://url.spec.whatwg.org/#basic-url-parser-state-override</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-basic-url-parser-state-override">1. The URLPattern class </a> <a href="#ref-for-basic-url-parser-state-override①">(2)</a> <a href="#ref-for-basic-url-parser-state-override②">(3)</a> <a href="#ref-for-basic-url-parser-state-override③">(4)</a> <a href="#ref-for-basic-url-parser-state-override④">(5)</a> <a href="#ref-for-basic-url-parser-state-override⑤">(6)</a> <a href="#ref-for-basic-url-parser-state-override⑥">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-basic-url-parser-url">
+   <a href="https://url.spec.whatwg.org/#basic-url-parser-url">https://url.spec.whatwg.org/#basic-url-parser-url</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-basic-url-parser-url">1. The URLPattern class </a> <a href="#ref-for-basic-url-parser-url①">(2)</a> <a href="#ref-for-basic-url-parser-url②">(3)</a> <a href="#ref-for-basic-url-parser-url③">(4)</a> <a href="#ref-for-basic-url-parser-url④">(5)</a> <a href="#ref-for-basic-url-parser-url⑤">(6)</a> <a href="#ref-for-basic-url-parser-url⑥">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-parser">
@@ -1327,10 +1504,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-concept-url-parser">1. The URLPattern class </a> <a href="#ref-for-concept-url-parser①">(2)</a> <a href="#ref-for-concept-url-parser②">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-url">
+   <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-url">1. The URLPattern class </a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a> <a href="#ref-for-concept-url③">(4)</a> <a href="#ref-for-concept-url④">(5)</a> <a href="#ref-for-concept-url⑤">(6)</a> <a href="#ref-for-concept-url⑥">(7)</a> <a href="#ref-for-concept-url⑦">(8)</a> <a href="#ref-for-concept-url⑧">(9)</a> <a href="#ref-for-concept-url⑨">(10)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-username">
    <a href="https://url.spec.whatwg.org/#concept-url-username">https://url.spec.whatwg.org/#concept-url-username</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-username">1. The URLPattern class </a> <a href="#ref-for-concept-url-username①">(2)</a>
+    <li><a href="#ref-for-concept-url-username">1. The URLPattern class </a> <a href="#ref-for-concept-url-username①">(2)</a> <a href="#ref-for-concept-url-username②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-Exposed">
@@ -1342,7 +1525,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-exceptiondef-typeerror">
    <a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">https://heycam.github.io/webidl/#exceptiondef-typeerror</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a> <a href="#ref-for-exceptiondef-typeerror①">(2)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a> <a href="#ref-for-exceptiondef-typeerror①">(2)</a> <a href="#ref-for-exceptiondef-typeerror②">(3)</a> <a href="#ref-for-exceptiondef-typeerror③">(4)</a> <a href="#ref-for-exceptiondef-typeerror④">(5)</a> <a href="#ref-for-exceptiondef-typeerror⑤">(6)</a> <a href="#ref-for-exceptiondef-typeerror⑥">(7)</a> <a href="#ref-for-exceptiondef-typeerror⑦">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
@@ -1395,14 +1578,29 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-concept-basic-url-parser">basic url parser</span>
+     <li><span class="dfn-paneled" id="term-for-cannot-be-a-base-url-path-state">cannot be a base url path state</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-fragment">fragment</span>
+     <li><span class="dfn-paneled" id="term-for-fragment-state">fragment state</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-host">host</span>
+     <li><span class="dfn-paneled" id="term-for-hostname-state">hostname state</span>
+     <li><span class="dfn-paneled" id="term-for-is-special">is special</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-password">password</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-path">path</span>
+     <li><span class="dfn-paneled" id="term-for-path-start-state">path start state</span>
      <li><span class="dfn-paneled" id="term-for-dom-url-pathname">pathname</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-port">port</span>
+     <li><span class="dfn-paneled" id="term-for-port-state">port state</span>
+     <li><span class="dfn-paneled" id="term-for-dom-url-protocol">protocol</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-query">query</span>
+     <li><span class="dfn-paneled" id="term-for-query-state">query state</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-scheme">scheme</span>
+     <li><span class="dfn-paneled" id="term-for-set-the-password">set the password</span>
+     <li><span class="dfn-paneled" id="term-for-set-the-username">set the username</span>
+     <li><span class="dfn-paneled" id="term-for-basic-url-parser-state-override">state override</span>
+     <li><span class="dfn-paneled" id="term-for-basic-url-parser-url">url</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-parser">url parser</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url">url record</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-username">username</span>
     </ul>
    <li>
@@ -1503,7 +1701,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpatterninit-protocol">
    <b><a href="#dom-urlpatterninit-protocol">#dom-urlpatterninit-protocol</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpatterninit-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-protocol①">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol②">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol③">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol④">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(6)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-protocol①">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol②">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol③">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol④">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(6)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑥">(7)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑦">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpatterninit-username">
@@ -1834,7 +2032,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="url-api-pathname-string">
    <b><a href="#url-api-pathname-string">#url-api-pathname-string</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-url-api-pathname-string">1. The URLPattern class </a> <a href="#ref-for-url-api-pathname-string①">(2)</a>
+    <li><a href="#ref-for-url-api-pathname-string">1. The URLPattern class </a> <a href="#ref-for-url-api-pathname-string①">(2)</a> <a href="#ref-for-url-api-pathname-string②">(3)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
