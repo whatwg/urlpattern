@@ -30,6 +30,9 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: Get; url: #sec-get-o-p
     text: RegExpBuiltinExec; url: #sec-regexpbuiltinexec
     text: ToString; url: #sec-tostring
+  type: dfn
+    text: IdentifierPart; url: #prod-IdentifierPart
+    text: IdentifierStart; url: #prod-IdentifierStart
   type: interface
     text: RegExp; url: #sec-regexp-regular-expression-objects
 spec: url; urlPrefix: https://url.spec.whatwg.org/
@@ -396,7 +399,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   To <dfn>canonicalize protocol</dfn> given a string |value| and a string |type|:
 
-  1. Let |strippedValue| be the given |value| with a single trailing U+003A (:) removed, if any.
+  1. Let |strippedValue| be the given |value| with a single trailing U+003A (`:`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |strippedValue| followed by "`://dummy.test`", with |dummyURL| as <i>[=basic URL parser/url=]</i>.
@@ -466,7 +469,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   To <dfn>canonicalize search</dfn> given a string |value| and a string |type|:
 
-  1. Let |strippedValue| be the given |value| with a single leading U+003F (?) removed, if any.
+  1. Let |strippedValue| be the given |value| with a single leading U+003F (`?`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/query=] to the empty string.
@@ -478,7 +481,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   To <dfn>canonicalize hash</dfn> given a string |value| and a string |type|:
 
-  1. Let |strippedValue| be the given |value| with a single leading U+0023 (#) removed, if any.
+  1. Let |strippedValue| be the given |value| with a single leading U+0023 (`#`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/fragment=] to the empty string.
@@ -491,12 +494,235 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 
 A {{URLPattern}} is associated with multiple <dfn>component</dfn> [=structs=].
 
-A [=component=] has an associated <dfn for=component>pattern string</dfn>, a string, initially null.
+A [=component=] has an associated <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=], initially null.
 
 A [=component=] has an associated <dfn for=component>regular expression</dfn>, a {{RegExp}}, initially null.
 
 A [=component=] has an associated <dfn for=component>group name list</dfn>, an array of strings, initially an empty array.
 
+<h2 id=patterns>Patterns</h2>
+
+A <dfn>pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn for="pattern string">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular [path-to-regexp](https://github.com/pillarjs/path-to-regexp) JavaScript library.
+
+<h3 id=parsing-patterns>Parsing Patterns</h3>
+
+<h4 id=tokens>Tokens</h4>
+
+A <dfn>token list</dfn> is a [=list=] containing zero or more [=token=] [=structs=].
+
+A <dfn>token</dfn> is a [=struct=] representing a single lexical token within a [=/pattern string=].
+
+A [=token=] has an associated <dfn for=token>type</dfn>, a string, initially "<a for=token/type>`invalid-char`</a>".  It must be one of the following:
+
+<dl>
+  <dt>"<dfn for=token/type>`open`</dfn>"</dt>
+  <dd>The [=token=] represents a U+007B (`{`) code point.
+  <dt>"<dfn for=token/type>`close`</dfn>"</dt>
+  <dd>The [=token=] represents a U+007D (`}`) code point.
+  <dt>"<dfn for=token/type>`regexp`</dfn>"</dt>
+  <dd>The [=token=] represents a string of the form "`(<regular expression>)`".  The regular expression is required to consist of only ASCII code points.
+  <dt>"<dfn for=token/type>`name`</dfn>"</dt>
+  <dd>The [=token=] represents a string of the form "`:<name>`".  The name value is restricted to code points that are consistent with JavaScript identifiers.
+  <dt>"<dfn for=token/type>`char`</dfn>"</dt>
+  <dd>The [=token=] represents a valid pattern code point without any special syntactical meaning.
+  <dt>"<dfn for=token/type>`escaped-char`</dfn>"</dt>
+  <dd>The [=token=] represents a code point escaped using a backslash like "`\<char>`".
+  <dt>"<dfn for=token/type>`other-modifier`</dfn>"</dt>
+  <dd>The [=token=] represents a matching group modifier that is either the U+003F (`?`) or U+002B (`+`) code points.
+  <dt>"<dfn for=token/type>`asterisk`</dfn>"</dt>
+  <dd>The [=token=] represents a U+002A (`*`) code point that can be either a wildcard matching group or a matching group modifier.
+  <dt>"<dfn for=token/type>`end`</dfn>"</dt>
+  <dd>The [=token=] represents the end of the [=/pattern string=].
+  <dt>"<dfn for=token/type>`invalid-char`</dfn>"</dt>
+  <dd>The [=token=] represents a code point that is invalid in the pattern.  This could be because of the code point value itself or due to its location within the pattern relative to other syntactic elements.
+</dl>
+
+A [=token=] has an associated <dfn for=token>index</dfn>, a number, initially 0.  It is the position of the first code point in the [=/pattern string=] represented by the [=token=].
+
+A [=token=] has an associated <dfn for=token>value</dfn>, a string, initially the empty string.  It contains the code points from the [=/pattern string=] represented by the [=token=].
+
+<h4 id=tokenizing>Tokenizing</h4>
+
+A <dfn>tokenize policy</dfn> is a string that must be either "<dfn for="tokenize policy">`strict`</dfn>" or "<dfn for="tokenize policy">`lenient`</dfn>".
+
+A <dfn>tokenizer</dfn> is a [=struct=].
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>input</dfn>, a [=/pattern string=], initially the empty string.
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>policy</dfn>, a [=tokenize policy=], initially "<a for="tokenize policy">`strict`</a>".
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>token list</dfn>, a [=/token list=], initially an empty [=list=].
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>index</dfn>, a number, initially 0.
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>next index</dfn>, a number, initially 0.
+
+A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode code point, initially null.
+
+<div algorithm>
+  To <dfn>get the next code point</dfn> for a given [=tokenizer=] |tokenizer|:
+
+  1. Set |tokenizer|'s [=tokenizer/code point=] to the Unicode code point in |tokenizer|'s [=tokenizer/input=] at the position indicated by |tokenizer|'s [=tokenizer/next index=].
+  1. Increment |tokenizer|'s [=tokenizer/next index=] by 1.
+</div>
+
+<div algorithm>
+  To <dfn>seek and get the next code point</dfn> for a given [=tokenizer=] |tokenizer| and number |index|:
+
+  1. Set |tokenizer|'s [=tokenizer/next index=] to |index|.
+  1. Run [=get the next code point=] given |tokenizer|.
+</div>
+
+<div algorithm>
+  To <dfn>add a token</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, number |value position|, and number |value length|:
+
+  1. Let |token| be a new [=token=].
+  1. Set |token|'s [=token/type=] to |type|.
+  1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
+  1. Set |token|'s [=token/value=] to the substring within |tokenizer|'s [=tokenizer/input=] starting at |value position| with |value length|.
+  1. Set |tokenizer|'s [=token/index=] to |next position|.
+</div>
+
+<div algorthm>
+  To <dfn>add a token with default length</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, and number |value position|:
+
+  1. Let |computed length| be |next position| &minus; |value position|.
+  1. Run [=add a token=] given |tokenizer|, |type|, |next position|, |value position|, and |computed length|.
+</div>
+
+<div algorithm>
+  To <dfn>add a token with default position and length</dfn> for a given [=tokenizer=] |tokenizer| and [=token/type=] |type|:
+
+  1. Run [=add a token with default length=] given |tokenizer|, |type|, |tokenizer|'s [=tokenizer/next index=], and |tokenizer|'s [=tokenizer/index=].
+</div>
+
+<div algorithm>
+  To <dfn>process a tokenizing error</dfn> for a given [=tokenizer=] |tokenizer|, a number |next position|, and a number |value position|:
+
+  1. If |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`strict`</a>", then throw a {{TypeError}}.
+  1. [=Assert=]: |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`lenient`</a>".
+  1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`invalid-char`</a>", |next position|, and |value position|.
+</div>
+
+<div algorithm>
+  To perform <dfn>is a valid name code point</dfn> given a Unicode |code point| and a boolean |first|:
+
+  1. If |first| is true return the result of checking if |code point| is contained in the [=IdentifierStart=] set of code points.
+  1. Else return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
+</div>
+
+<div algorithm>
+  To determine if a Unicode |code point| <dfn>is ASCII</dfn>:
+
+  1. If |code point| is between U+0000 and U+007F inclusive, then return true.
+  1. Otherwise return false.
+</div>
+
+<div algorithm>
+  To <dfn export>tokenize</dfn> a given string |input| and [=tokenize policy=] |policy|:
+
+  1. Let |tokenizer| be a new [=tokenizer=].
+  1. Set |tokenizer|'s [=tokenizer/input=] to |input|.
+  1. Set |tokenizer|'s [=tokenizer/policy=] to |policy|.
+  1. While |tokenizer|'s [=tokenizer/index=] is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+    1. Run [=get the next code point=] given |tokenizer|.
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+002A (`*`):
+      1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`asterisk`</a>".
+      1. [=Continue=].
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+002B (`+`) or U+003F (`?`):
+      1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`other-modifier`</a>".
+      1. [=Continue=].
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+005C (<code>\</code>):
+      1. If |tokenizer|'s [=tokenizer/index=] is equal to |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+        1. Run [=process a tokenizing error=] given |tokenizer|, |tokenizer|'s [=tokenizer/next index=], and |tokenizer|'s [=tokenizer/index=].
+        1. [=Continue=].
+      1. Let |escaped index| be |tokenizer|'s [=tokenizer/next index=].
+      1. Run [=get the next code point=] given |tokenizer|.
+      1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`escaped-char`</a>", |tokenizer|'s [=tokenizer/next index=], and |escaped index|.
+      1. [=Continue=].
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+007B (`{`):
+      1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`open`</a>".
+      1. [=Continue=].
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+007D (`}`):
+      1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`close`</a>".
+      1. [=Continue=].
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+003A (`:`):
+      1. Let |name position| be |tokenizer|'s [=tokenizer/next index=].
+      1. Let |name start| be |name position|.
+      1. While |name position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+        1. Run [=seek and get the next code point=] given |tokenizer| and |name position|.
+        1. Let |first code point| be true if |name position| equals |name start| and false otherwise.
+        1. Let |valid code point| be the result of running [=is a valid name code point=] given |tokenizer|'s [=tokenizer/code point=] and |first code point|.
+        1. If |valid code point| is false [=break=].
+        1. Set |name position| to |tokenizer|'s [=tokenizer/next index=].
+      1. If |name position| is less than or equal to |name start|:
+        1. Run [=process a tokenizing error=] given |tokenizer|, |name start|, and |tokenizer|'s [=tokenizer/index=].
+        1. [=Continue=].
+      1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`name`</a>", |name position|, and |name start|.
+    1. If |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
+      1. Let |depth| be 1.
+      1. Let |regexp position| be |tokenizer|'s [=tokenizer/next index=].
+      1. Let |regexp start| be |regexp position|.
+      1. Let |error| be false.
+      1. While |regexp position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+        1. Run [=seek and get the next code point=] given |tokenizer| and |regexp position|.
+        1. If the result of running [=is ASCII=] given |tokenizer|'s [=tokenizer/code point=] is false:
+          1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+          1. Set |error| to true.
+          1. [=Break=].
+        1. If |regexp position| equals |regexp start| and |tokenizer|'s [=tokenizer/code point=] is U+003F (`?`):
+          1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+          1. Set |error| to true.
+          1. [=Break=].
+        1. If |tokenizer|'s [=tokenizer/code point=] is U+005C (<code>\</code>):
+          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+            1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+            1. Set |error| to true.
+            1. [=Break=]
+          1. Run [=get the next code point=] given |tokenizer|.
+          1. If the result of running [=is ASCII=] given |tokenizer|'s [=tokenizer/code point=] is false:
+            1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+            1. Set |error| to true.
+            1. [=Break=].
+          1. Set |regexp position| to |tokenizer|'s [=tokenizer/next index=].
+          1. [=Continue=].
+        1. If |tokenizer|'s [=tokenizer/code point=] is U+0029 (`)`):
+          1. Decrement |depth| by 1.
+          1. If |depth| is 0:
+            1. Set |regexp position| to |tokenizer|'s [=tokenizer/next index=].
+            1. [=Break=].
+        1. Else if |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
+          1. Increment |depth| by 1.
+          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+            1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+            1. Set |error| to true.
+            1. [=Break=]
+          1. Let |temporary position| be |tokenizer|'s [=tokenizer/next index=].
+          1. Run [=get the next code point=] given |tokenizer|.
+          1. If |tokenizer|'s [=tokenizer/code point=] is not U+003F (`?`):
+            1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+            1. Set |error| to true.
+            1. [=Break=].
+          1. Set |tokenizer|'s [=tokenizer/next index=] to |temporary position|.
+        1. Set |regexp position| to |tokenizer|'s [=tokenizer/next index=].
+      1. If |error| is true [=continue=].
+      1. If |depth| is not zero:
+        1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+        1. [=Continue=].
+      1. Let |regexp length| be |regexp position| &minus; |regexp start| &minus; 1.
+      1. If |regexp length| is zero:
+        1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
+        1. [=Continue=].
+      1. Run [=add a token=] given |tokenizer|, "<a for=token/type>`regexp`</a>", |regexp position|, |regexp start|, and |regexp length|.
+    1. Run [=add a token=] given |tokenizer| and "<a for=token/type>`char`</a>".
+  1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`end`</a>", |tokenizer|'s [=tokenizer/index=], and |tokenizer|'s [=tokenizer/index=].
+  1. Return |tokenizer|'s [=tokenizer/token list=].
+</div>
+
+<h3 id=converting-part-lists-to-regular-expressions>Converting Part Lists to Regular Expressions</h3>
+
+<h3 id=converting-part-lists-to-pattern-strings>Converting Part Lists to Pattern Strings</h3>
+
 <h2 id=patching>Patching</h2>
 
-This spec depends on factoring out the {{URL/pathname}} getter steps into a new exported algorithm, <dfn for=url>API pathname string</dfn>, that operates on a URL record.
+This spec depends on factoring out the {{URL/pathname}} getter steps into a new exported algorithm, <dfn for=url>API pathname string</dfn>, that operates on a [=URL record=].
