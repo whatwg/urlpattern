@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-07-20">20 July 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-07-22">22 July 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -678,7 +678,19 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ol class="toc" role="directory">
     <li><a href="#urlpattern-class"><span class="secno">1</span> <span class="content">The <code class="idl"><span>URLPattern</span></code> class </span></a>
     <li><a href="#components"><span class="secno">2</span> <span class="content">Components</span></a>
-    <li><a href="#patching"><span class="secno">3</span> <span class="content">Patching</span></a>
+    <li>
+     <a href="#patterns"><span class="secno">3</span> <span class="content">Patterns</span></a>
+     <ol class="toc">
+      <li>
+       <a href="#parsing-patterns"><span class="secno">3.1</span> <span class="content">Parsing Patterns</span></a>
+       <ol class="toc">
+        <li><a href="#tokens"><span class="secno">3.1.1</span> <span class="content">Tokens</span></a>
+        <li><a href="#tokenizing"><span class="secno">3.1.2</span> <span class="content">Tokenizing</span></a>
+       </ol>
+      <li><a href="#converting-part-lists-to-regular-expressions"><span class="secno">3.2</span> <span class="content">Converting Part Lists to Regular Expressions</span></a>
+      <li><a href="#converting-part-lists-to-pattern-strings"><span class="secno">3.3</span> <span class="content">Converting Part Lists to Pattern Strings</span></a>
+     </ol>
+    <li><a href="#patching"><span class="secno">4</span> <span class="content">Patching</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -1075,7 +1087,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-protocol">canonicalize protocol</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single trailing U+003A (:) removed, if any.</p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single trailing U+003A (<code>:</code>) removed, if any.</p>
      <li data-md>
       <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
      <li data-md>
@@ -1186,7 +1198,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-search">canonicalize search</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+003F (?) removed, if any.</p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+003F (<code>?</code>) removed, if any.</p>
      <li data-md>
       <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
      <li data-md>
@@ -1205,7 +1217,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-hash">canonicalize hash</dfn> given a string <var>value</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
-      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+0023 (#) removed, if any.</p>
+      <p>Let <var>strippedValue</var> be the given <var>value</var> with a single leading U+0023 (<code>#</code>) removed, if any.</p>
      <li data-md>
       <p>If <var>type</var> is "<code>pattern</code>" then return <var>strippedValue</var>.</p>
      <li data-md>
@@ -1222,17 +1234,386 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h2 class="heading settled" data-level="2" id="components"><span class="secno">2. </span><span class="content">Components</span><a class="self-link" href="#components"></a></h2>
    <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑧">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct">structs</a>.</p>
-   <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑨">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-pattern-string">pattern string</dfn>, a string, initially null.</p>
+   <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑨">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-pattern-string">pattern string</dfn>, a <a data-link-type="dfn" href="#pattern-string-well-formed" id="ref-for-pattern-string-well-formed">well formed</a> <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string">pattern string</a>, initially null.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component①⓪">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-regular-expression">regular expression</dfn>, a <code class="idl"><a data-link-type="idl" href="https://tc39.es/ecma262/#sec-regexp-regular-expression-objects" id="ref-for-sec-regexp-regular-expression-objects">RegExp</a></code>, initially null.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component①①">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-group-name-list">group name list</dfn>, an array of strings, initially an empty array.</p>
-   <h2 class="heading settled" data-level="3" id="patching"><span class="secno">3. </span><span class="content">Patching</span><a class="self-link" href="#patching"></a></h2>
-   <p>This spec depends on factoring out the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-pathname" id="ref-for-dom-url-pathname">pathname</a></code> getter steps into a new exported algorithm, <dfn class="dfn-paneled" data-dfn-for="url" data-dfn-type="dfn" data-noexport id="url-api-pathname-string">API pathname string</dfn>, that operates on a URL record.</p>
+   <h2 class="heading settled" data-level="3" id="patterns"><span class="secno">3. </span><span class="content">Patterns</span><a class="self-link" href="#patterns"></a></h2>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pattern-string">pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn class="dfn-paneled" data-dfn-for="pattern string" data-dfn-type="dfn" data-noexport id="pattern-string-well-formed">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> JavaScript library.</p>
+   <h3 class="heading settled" data-level="3.1" id="parsing-patterns"><span class="secno">3.1. </span><span class="content">Parsing Patterns</span><a class="self-link" href="#parsing-patterns"></a></h3>
+   <h4 class="heading settled" data-level="3.1.1" id="tokens"><span class="secno">3.1.1. </span><span class="content">Tokens</span><a class="self-link" href="#tokens"></a></h4>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token-list">token list</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list①">list</a> containing zero or more <a data-link-type="dfn" href="#token" id="ref-for-token">token</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct①">structs</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token">token</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct②">struct</a> representing a single lexical token within a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①">pattern string</a>.</p>
+   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-type">type</dfn>, a string, initially "<a data-link-type="dfn" href="#token-type-invalid-char" id="ref-for-token-type-invalid-char"><code>invalid-char</code></a>".  It must be one of the following:</p>
+   <dl>
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-open"><code>open</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token②">token</a> represents a U+007B (<code>{</code>) code point. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-close"><code>close</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token③">token</a> represents a U+007D (<code>}</code>) code point. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-regexp"><code>regexp</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token④">token</a> represents a string of the form "<code>(&lt;regular expression>)</code>".  The regular expression is required to consist of only ASCII code points. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-name"><code>name</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token⑤">token</a> represents a string of the form "<code>:&lt;name></code>".  The name value is restricted to code points that are consistent with JavaScript identifiers. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-char"><code>char</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token⑥">token</a> represents a valid pattern code point without any special syntactical meaning. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-escaped-char"><code>escaped-char</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token⑦">token</a> represents a code point escaped using a backslash like "<code>\&lt;char></code>". 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-other-modifier"><code>other-modifier</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token⑧">token</a> represents a matching group modifier that is either the U+003F (<code>?</code>) or U+002B (<code>+</code>) code points. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-asterisk"><code>asterisk</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token⑨">token</a> represents a U+002A (<code>*</code>) code point that can be either a wildcard matching group or a matching group modifier. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-end"><code>end</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①⓪">token</a> represents the end of the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string②">pattern string</a>. 
+    <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-invalid-char"><code>invalid-char</code></dfn>"
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①①">token</a> represents a code point that is invalid in the pattern.  This could be because of the code point value itself or due to its location within the pattern relative to other syntactic elements. 
+   </dl>
+   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①②">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-index">index</dfn>, a number, initially 0.  It is the position of the first code point in the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string③">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①③">token</a>.</p>
+   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①④">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-value">value</dfn>, a string, initially the empty string.  It contains the code points from the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string④">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①⑤">token</a>.</p>
+   <h4 class="heading settled" data-level="3.1.2" id="tokenizing"><span class="secno">3.1.2. </span><span class="content">Tokenizing</span><a class="self-link" href="#tokenizing"></a></h4>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tokenize-policy">tokenize policy</dfn> is a string that must be either "<dfn class="dfn-paneled" data-dfn-for="tokenize policy" data-dfn-type="dfn" data-noexport id="tokenize-policy-strict"><code>strict</code></dfn>" or "<dfn class="dfn-paneled" data-dfn-for="tokenize policy" data-dfn-type="dfn" data-noexport id="tokenize-policy-lenient"><code>lenient</code></dfn>".</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tokenizer">tokenizer</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct③">struct</a>.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-input">input</dfn>, a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑤">pattern string</a>, initially the empty string.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-policy">policy</dfn>, a <a data-link-type="dfn" href="#tokenize-policy" id="ref-for-tokenize-policy">tokenize policy</a>, initially "<a data-link-type="dfn" href="#tokenize-policy-strict" id="ref-for-tokenize-policy-strict"><code>strict</code></a>".</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer②">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list②">list</a>.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer③">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-index">index</dfn>, a number, initially 0.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer④">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-next-index">next index</dfn>, a number, initially 0.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑤">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-code-point">code point</dfn>, a Unicode code point, initially null.</p>
+   <div class="algorithm" data-algorithm="get the next code point">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-the-next-code-point">get the next code point</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑥">tokenizer</a> <var>tokenizer</var>: 
+    <ol>
+     <li data-md>
+      <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point">code point</a> to the Unicode code point in <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input">input</a> at the position indicated by <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index">next index</a>.</p>
+     <li data-md>
+      <p>Increment <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①">next index</a> by 1.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="seek and get the next code point">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="seek-and-get-the-next-code-point">seek and get the next code point</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑦">tokenizer</a> <var>tokenizer</var> and number <var>index</var>: 
+    <ol>
+     <li data-md>
+      <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index②">next index</a> to <var>index</var>.</p>
+     <li data-md>
+      <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point">get the next code point</a> given <var>tokenizer</var>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="add a token">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="add-a-token">add a token</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑧">tokenizer</a> <var>tokenizer</var>, <a data-link-type="dfn" href="#token-type" id="ref-for-token-type">type</a> <var>type</var>, number <var>next position</var>, number <var>value position</var>, and number <var>value length</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>token</var> be a new <a data-link-type="dfn" href="#token" id="ref-for-token①⑥">token</a>.</p>
+     <li data-md>
+      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type①">type</a> to <var>type</var>.</p>
+     <li data-md>
+      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index">index</a> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index">index</a>.</p>
+     <li data-md>
+      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value">value</a> to the substring within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input①">input</a> starting at <var>value position</var> with <var>value length</var>.</p>
+     <li data-md>
+      <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> to <var>next position</var>.</p>
+    </ol>
+   </div>
+   <div algorthm>
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="add-a-token-with-default-length">add a token with default length</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑨">tokenizer</a> <var>tokenizer</var>, <a data-link-type="dfn" href="#token-type" id="ref-for-token-type②">type</a> <var>type</var>, number <var>next position</var>, and number <var>value position</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>computed length</var> be <var>next position</var> − <var>value position</var>.</p>
+     <li data-md>
+      <p>Run <a data-link-type="dfn" href="#add-a-token" id="ref-for-add-a-token">add a token</a> given <var>tokenizer</var>, <var>type</var>, <var>next position</var>, <var>value position</var>, and <var>computed length</var>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="add a token with default position and length">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="add-a-token-with-default-position-and-length">add a token with default position and length</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①⓪">tokenizer</a> <var>tokenizer</var> and <a data-link-type="dfn" href="#token-type" id="ref-for-token-type③">type</a> <var>type</var>: 
+    <ol>
+     <li data-md>
+      <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length">add a token with default length</a> given <var>tokenizer</var>, <var>type</var>, <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index③">next index</a>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①">index</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="process a tokenizing error">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="process-a-tokenizing-error">process a tokenizing error</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①①">tokenizer</a> <var>tokenizer</var>, a number <var>next position</var>, and a number <var>value position</var>: 
+    <ol>
+     <li data-md>
+      <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy">policy</a> is "<a data-link-type="dfn" href="#tokenize-policy-strict" id="ref-for-tokenize-policy-strict①"><code>strict</code></a>", then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>.</p>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert">Assert</a>: <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy①">policy</a> is "<a data-link-type="dfn" href="#tokenize-policy-lenient" id="ref-for-tokenize-policy-lenient"><code>lenient</code></a>".</p>
+     <li data-md>
+      <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length①">add a token with default length</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-invalid-char" id="ref-for-token-type-invalid-char①"><code>invalid-char</code></a>", <var>next position</var>, and <var>value position</var>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="is a valid name code point">
+     To perform <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-valid-name-code-point">is a valid name code point</dfn> given a Unicode <var>code point</var> and a boolean <var>first</var>: 
+    <ol>
+     <li data-md>
+      <p>If <var>first</var> is true return the result of checking if <var>code point</var> is contained in the <a data-link-type="dfn" href="https://tc39.es/ecma262/#prod-IdentifierStart" id="ref-for-prod-IdentifierStart">IdentifierStart</a> set of code points.</p>
+     <li data-md>
+      <p>Else return the result of checking if <var>code point</var> is contained in the <a data-link-type="dfn" href="https://tc39.es/ecma262/#prod-IdentifierPart" id="ref-for-prod-IdentifierPart">IdentifierPart</a> set of code points.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="is ASCII">
+     To determine if a Unicode <var>code point</var> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-ascii">is ASCII</dfn>: 
+    <ol>
+     <li data-md>
+      <p>If <var>code point</var> is between U+0000 and U+007F inclusive, then return true.</p>
+     <li data-md>
+      <p>Otherwise return false.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="tokenize">
+     To <dfn data-dfn-type="dfn" data-export id="tokenize">tokenize<a class="self-link" href="#tokenize"></a></dfn> a given string <var>input</var> and <a data-link-type="dfn" href="#tokenize-policy" id="ref-for-tokenize-policy①">tokenize policy</a> <var>policy</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>tokenizer</var> be a new <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①②">tokenizer</a>.</p>
+     <li data-md>
+      <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input②">input</a> to <var>input</var>.</p>
+     <li data-md>
+      <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy②">policy</a> to <var>policy</var>.</p>
+     <li data-md>
+      <p>While <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index②">index</a> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input③">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length">length</a>:</p>
+      <ol>
+       <li data-md>
+        <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point①">get the next code point</a> given <var>tokenizer</var>.</p>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①">code point</a> is U+002A (<code>*</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-position-and-length" id="ref-for-add-a-token-with-default-position-and-length">add a token with default position and length</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-asterisk" id="ref-for-token-type-asterisk"><code>asterisk</code></a>".</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point②">code point</a> is U+002B (<code>+</code>) or U+003F (<code>?</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-position-and-length" id="ref-for-add-a-token-with-default-position-and-length①">add a token with default position and length</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-other-modifier" id="ref-for-token-type-other-modifier"><code>other-modifier</code></a>".</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point③">code point</a> is U+005C (<code>\</code>):</p>
+        <ol>
+         <li data-md>
+          <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index③">index</a> is equal to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input④">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length①">length</a> − 1:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error">process a tokenizing error</a> given <var>tokenizer</var>, <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index④">next index</a>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index④">index</a>.</p>
+           <li data-md>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②">Continue</a>.</p>
+          </ol>
+         <li data-md>
+          <p>Let <var>escaped index</var> be <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑤">next index</a>.</p>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point②">get the next code point</a> given <var>tokenizer</var>.</p>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length②">add a token with default length</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-escaped-char" id="ref-for-token-type-escaped-char"><code>escaped-char</code></a>", <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑥">next index</a>, and <var>escaped index</var>.</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue③">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point④">code point</a> is U+007B (<code>{</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-position-and-length" id="ref-for-add-a-token-with-default-position-and-length②">add a token with default position and length</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-open" id="ref-for-token-type-open"><code>open</code></a>".</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue④">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑤">code point</a> is U+007D (<code>}</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-position-and-length" id="ref-for-add-a-token-with-default-position-and-length③">add a token with default position and length</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-close" id="ref-for-token-type-close"><code>close</code></a>".</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue⑤">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑥">code point</a> is U+003A (<code>:</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Let <var>name position</var> be <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑦">next index</a>.</p>
+         <li data-md>
+          <p>Let <var>name start</var> be <var>name position</var>.</p>
+         <li data-md>
+          <p>While <var>name position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑤">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length②">length</a>:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#seek-and-get-the-next-code-point" id="ref-for-seek-and-get-the-next-code-point">seek and get the next code point</a> given <var>tokenizer</var> and <var>name position</var>.</p>
+           <li data-md>
+            <p>Let <var>first code point</var> be true if <var>name position</var> equals <var>name start</var> and false otherwise.</p>
+           <li data-md>
+            <p>Let <var>valid code point</var> be the result of running <a data-link-type="dfn" href="#is-a-valid-name-code-point" id="ref-for-is-a-valid-name-code-point">is a valid name code point</a> given <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑦">code point</a> and <var>first code point</var>.</p>
+           <li data-md>
+            <p>If <var>valid code point</var> is false <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break">break</a>.</p>
+           <li data-md>
+            <p>Set <var>name position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑧">next index</a>.</p>
+          </ol>
+         <li data-md>
+          <p>If <var>name position</var> is less than or equal to <var>name start</var>:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error①">process a tokenizing error</a> given <var>tokenizer</var>, <var>name start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑤">index</a>.</p>
+           <li data-md>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue⑥">Continue</a>.</p>
+          </ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length③">add a token with default length</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-name" id="ref-for-token-type-name"><code>name</code></a>", <var>name position</var>, and <var>name start</var>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑧">code point</a> is U+0028 (<code>(</code>):</p>
+        <ol>
+         <li data-md>
+          <p>Let <var>depth</var> be 1.</p>
+         <li data-md>
+          <p>Let <var>regexp position</var> be <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑨">next index</a>.</p>
+         <li data-md>
+          <p>Let <var>regexp start</var> be <var>regexp position</var>.</p>
+         <li data-md>
+          <p>Let <var>error</var> be false.</p>
+         <li data-md>
+          <p>While <var>regexp position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑥">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length③">length</a>:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#seek-and-get-the-next-code-point" id="ref-for-seek-and-get-the-next-code-point①">seek and get the next code point</a> given <var>tokenizer</var> and <var>regexp position</var>.</p>
+           <li data-md>
+            <p>If the result of running <a data-link-type="dfn" href="#is-ascii" id="ref-for-is-ascii">is ASCII</a> given <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑨">code point</a> is false:</p>
+            <ol>
+             <li data-md>
+              <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error②">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑥">index</a>.</p>
+             <li data-md>
+              <p>Set <var>error</var> to true.</p>
+             <li data-md>
+              <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break①">Break</a>.</p>
+            </ol>
+           <li data-md>
+            <p>If <var>regexp position</var> equals <var>regexp start</var> and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①⓪">code point</a> is U+003F (<code>?</code>):</p>
+            <ol>
+             <li data-md>
+              <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error③">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑦">index</a>.</p>
+             <li data-md>
+              <p>Set <var>error</var> to true.</p>
+             <li data-md>
+              <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break②">Break</a>.</p>
+            </ol>
+           <li data-md>
+            <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①①">code point</a> is U+005C (<code>\</code>):</p>
+            <ol>
+             <li data-md>
+              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑦">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length④">length</a> − 1:</p>
+              <ol>
+               <li data-md>
+                <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error④">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑧">index</a>.</p>
+               <li data-md>
+                <p>Set <var>error</var> to true.</p>
+               <li data-md>
+                <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break③">Break</a></p>
+              </ol>
+             <li data-md>
+              <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point③">get the next code point</a> given <var>tokenizer</var>.</p>
+             <li data-md>
+              <p>If the result of running <a data-link-type="dfn" href="#is-ascii" id="ref-for-is-ascii①">is ASCII</a> given <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①②">code point</a> is false:</p>
+              <ol>
+               <li data-md>
+                <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑤">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑨">index</a>.</p>
+               <li data-md>
+                <p>Set <var>error</var> to true.</p>
+               <li data-md>
+                <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break④">Break</a>.</p>
+              </ol>
+             <li data-md>
+              <p>Set <var>regexp position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①⓪">next index</a>.</p>
+             <li data-md>
+              <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue⑦">Continue</a>.</p>
+            </ol>
+           <li data-md>
+            <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①③">code point</a> is U+0029 (<code>)</code>):</p>
+            <ol>
+             <li data-md>
+              <p>Decrement <var>depth</var> by 1.</p>
+             <li data-md>
+              <p>If <var>depth</var> is 0:</p>
+              <ol>
+               <li data-md>
+                <p>Set <var>regexp position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①①">next index</a>.</p>
+               <li data-md>
+                <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break⑤">Break</a>.</p>
+              </ol>
+            </ol>
+           <li data-md>
+            <p>Else if <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①④">code point</a> is U+0028 (<code>(</code>):</p>
+            <ol>
+             <li data-md>
+              <p>Increment <var>depth</var> by 1.</p>
+             <li data-md>
+              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-length" id="ref-for-string-length⑤">length</a> − 1:</p>
+              <ol>
+               <li data-md>
+                <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑥">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①⓪">index</a>.</p>
+               <li data-md>
+                <p>Set <var>error</var> to true.</p>
+               <li data-md>
+                <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break⑥">Break</a></p>
+              </ol>
+             <li data-md>
+              <p>Let <var>temporary position</var> be <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①②">next index</a>.</p>
+             <li data-md>
+              <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point④">get the next code point</a> given <var>tokenizer</var>.</p>
+             <li data-md>
+              <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①⑤">code point</a> is not U+003F (<code>?</code>):</p>
+              <ol>
+               <li data-md>
+                <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑦">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①①">index</a>.</p>
+               <li data-md>
+                <p>Set <var>error</var> to true.</p>
+               <li data-md>
+                <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-break" id="ref-for-iteration-break⑦">Break</a>.</p>
+              </ol>
+             <li data-md>
+              <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①③">next index</a> to <var>temporary position</var>.</p>
+            </ol>
+           <li data-md>
+            <p>Set <var>regexp position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①④">next index</a>.</p>
+          </ol>
+         <li data-md>
+          <p>If <var>error</var> is true <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue⑧">continue</a>.</p>
+         <li data-md>
+          <p>If <var>depth</var> is not zero:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑧">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①②">index</a>.</p>
+           <li data-md>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue⑨">Continue</a>.</p>
+          </ol>
+         <li data-md>
+          <p>Let <var>regexp length</var> be <var>regexp position</var> − <var>regexp start</var> − 1.</p>
+         <li data-md>
+          <p>If <var>regexp length</var> is zero:</p>
+          <ol>
+           <li data-md>
+            <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑨">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①③">index</a>.</p>
+           <li data-md>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⓪">Continue</a>.</p>
+          </ol>
+         <li data-md>
+          <p>Run <a data-link-type="dfn" href="#add-a-token" id="ref-for-add-a-token①">add a token</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-regexp" id="ref-for-token-type-regexp"><code>regexp</code></a>", <var>regexp position</var>, <var>regexp start</var>, and <var>regexp length</var>.</p>
+        </ol>
+       <li data-md>
+        <p>Run <a data-link-type="dfn" href="#add-a-token" id="ref-for-add-a-token②">add a token</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-char" id="ref-for-token-type-char"><code>char</code></a>".</p>
+      </ol>
+     <li data-md>
+      <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length④">add a token with default length</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-end" id="ref-for-token-type-end"><code>end</code></a>", <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①④">index</a>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①⑤">index</a>.</p>
+     <li data-md>
+      <p>Return <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-token-list" id="ref-for-tokenizer-token-list">token list</a>.</p>
+    </ol>
+   </div>
+   <h3 class="heading settled" data-level="3.2" id="converting-part-lists-to-regular-expressions"><span class="secno">3.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
+   <h3 class="heading settled" data-level="3.3" id="converting-part-lists-to-pattern-strings"><span class="secno">3.3. </span><span class="content">Converting Part Lists to Pattern Strings</span><a class="self-link" href="#converting-part-lists-to-pattern-strings"></a></h3>
+   <h2 class="heading settled" data-level="4" id="patching"><span class="secno">4. </span><span class="content">Patching</span><a class="self-link" href="#patching"></a></h2>
+   <p>This spec depends on factoring out the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-pathname" id="ref-for-dom-url-pathname">pathname</a></code> getter steps into a new exported algorithm, <dfn class="dfn-paneled" data-dfn-for="url" data-dfn-type="dfn" data-noexport id="url-api-pathname-string">API pathname string</dfn>, that operates on a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①⓪">URL record</a>.</p>
   </main>
 <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#url-api-pathname-string">API pathname string</a><span>, in §3</span>
+   <li><a href="#add-a-token">add a token</a><span>, in §3.1.2</span>
+   <li><a href="#add-a-token-with-default-length">add a token with default length</a><span>, in §3.1.2</span>
+   <li><a href="#add-a-token-with-default-position-and-length">add a token with default position and length</a><span>, in §3.1.2</span>
+   <li><a href="#url-api-pathname-string">API pathname string</a><span>, in §4</span>
+   <li><a href="#token-type-asterisk">asterisk</a><span>, in §3.1.1</span>
    <li><a href="#dom-urlpatterninit-baseurl">baseURL</a><span>, in §1</span>
    <li><a href="#canonicalize-hash">canonicalize hash</a><span>, in §1</span>
    <li><a href="#canonicalize-hostname">canonicalize hostname</a><span>, in §1</span>
@@ -1242,12 +1623,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#canonicalize-protocol">canonicalize protocol</a><span>, in §1</span>
    <li><a href="#canonicalize-search">canonicalize search</a><span>, in §1</span>
    <li><a href="#canonicalize-username">canonicalize username</a><span>, in §1</span>
+   <li><a href="#token-type-char">char</a><span>, in §3.1.1</span>
+   <li><a href="#token-type-close">close</a><span>, in §3.1.1</span>
+   <li><a href="#tokenizer-code-point">code point</a><span>, in §3.1.2</span>
    <li><a href="#component">component</a><span>, in §2</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input, baseURL)</a><span>, in §1</span>
    <li><a href="#create-a-component-match-result">create a component match result</a><span>, in §1</span>
+   <li><a href="#token-type-end">end</a><span>, in §3.1.1</span>
+   <li><a href="#token-type-escaped-char">escaped-char</a><span>, in §3.1.1</span>
    <li><a href="#dom-urlpattern-exec">exec(input)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-exec">exec(input, baseURL)</a><span>, in §1</span>
+   <li><a href="#get-the-next-code-point">get the next code point</a><span>, in §3.1.2</span>
    <li><a href="#component-group-name-list">group name list</a><span>, in §2</span>
    <li><a href="#dom-urlpatterncomponentresult-groups">groups</a><span>, in §1</span>
    <li>
@@ -1266,9 +1653,28 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-hostname">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-hostname-component">hostname component</a><span>, in §1</span>
-   <li><a href="#dom-urlpatterncomponentresult-input">input</a><span>, in §1</span>
+   <li>
+    index
+    <ul>
+     <li><a href="#token-index">dfn for token</a><span>, in §3.1.1</span>
+     <li><a href="#tokenizer-index">dfn for tokenizer</a><span>, in §3.1.2</span>
+    </ul>
+   <li>
+    input
+    <ul>
+     <li><a href="#tokenizer-input">dfn for tokenizer</a><span>, in §3.1.2</span>
+     <li><a href="#dom-urlpatterncomponentresult-input">dict-member for URLPatternComponentResult</a><span>, in §1</span>
+    </ul>
    <li><a href="#dom-urlpatternresult-inputs">inputs</a><span>, in §1</span>
+   <li><a href="#token-type-invalid-char">invalid-char</a><span>, in §3.1.1</span>
+   <li><a href="#is-ascii">is ASCII</a><span>, in §3.1.2</span>
+   <li><a href="#is-a-valid-name-code-point">is a valid name code point</a><span>, in §3.1.2</span>
+   <li><a href="#tokenize-policy-lenient">lenient</a><span>, in §3.1.2</span>
    <li><a href="#match">match</a><span>, in §1</span>
+   <li><a href="#token-type-name">name</a><span>, in §3.1.1</span>
+   <li><a href="#tokenizer-next-index">next index</a><span>, in §3.1.2</span>
+   <li><a href="#token-type-open">open</a><span>, in §3.1.1</span>
+   <li><a href="#token-type-other-modifier">other-modifier</a><span>, in §3.1.1</span>
    <li>
     password
     <ul>
@@ -1285,7 +1691,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-pathname">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-pathname-component">pathname component</a><span>, in §1</span>
-   <li><a href="#component-pattern-string">pattern string</a><span>, in §2</span>
+   <li>
+    pattern string
+    <ul>
+     <li><a href="#pattern-string">definition of</a><span>, in §3</span>
+     <li><a href="#component-pattern-string">dfn for component</a><span>, in §2</span>
+    </ul>
+   <li><a href="#tokenizer-policy">policy</a><span>, in §3.1.2</span>
    <li>
     port
     <ul>
@@ -1294,6 +1706,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-port">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-port-component">port component</a><span>, in §1</span>
+   <li><a href="#process-a-tokenizing-error">process a tokenizing error</a><span>, in §3.1.2</span>
    <li><a href="#process-a-urlpatterninit">process a URLPatternInit</a><span>, in §1</span>
    <li>
     protocol
@@ -1303,6 +1716,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-protocol">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-protocol-component">protocol component</a><span>, in §1</span>
+   <li><a href="#token-type-regexp">regexp</a><span>, in §3.1.1</span>
    <li><a href="#component-regular-expression">regular expression</a><span>, in §2</span>
    <li>
     search
@@ -1312,8 +1726,21 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-search">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-search-component">search component</a><span>, in §1</span>
+   <li><a href="#seek-and-get-the-next-code-point">seek and get the next code point</a><span>, in §3.1.2</span>
+   <li><a href="#tokenize-policy-strict">strict</a><span>, in §3.1.2</span>
    <li><a href="#dom-urlpattern-test">test(input)</a><span>, in §1</span>
    <li><a href="#dom-urlpattern-test">test(input, baseURL)</a><span>, in §1</span>
+   <li><a href="#token">token</a><span>, in §3.1.1</span>
+   <li><a href="#tokenize">tokenize</a><span>, in §3.1.2</span>
+   <li><a href="#tokenize-policy">tokenize policy</a><span>, in §3.1.2</span>
+   <li><a href="#tokenizer">tokenizer</a><span>, in §3.1.2</span>
+   <li>
+    token list
+    <ul>
+     <li><a href="#token-list">definition of</a><span>, in §3.1.1</span>
+     <li><a href="#tokenizer-token-list">dfn for tokenizer</a><span>, in §3.1.2</span>
+    </ul>
+   <li><a href="#token-type">type</a><span>, in §3.1.1</span>
    <li><a href="#urlpattern">URLPattern</a><span>, in §1</span>
    <li><a href="#dictdef-urlpatterncomponentresult">URLPatternComponentResult</a><span>, in §1</span>
    <li><a href="#dictdef-urlpatterninit">URLPatternInit</a><span>, in §1</span>
@@ -1329,6 +1756,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-username">dict-member for URLPatternResult</a><span>, in §1</span>
     </ul>
    <li><a href="#urlpattern-username-component">username component</a><span>, in §1</span>
+   <li><a href="#token-value">value</a><span>, in §3.1.1</span>
+   <li><a href="#pattern-string-well-formed">well formed</a><span>, in §3</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-sec-get-o-p">
    <a href="https://tc39.es/ecma262/#sec-get-o-p">https://tc39.es/ecma262/#sec-get-o-p</a><b>Referenced in:</b>
@@ -1354,22 +1783,62 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-sec-tostring">1. The URLPattern class </a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-prod-IdentifierPart">
+   <a href="https://tc39.es/ecma262/#prod-IdentifierPart">https://tc39.es/ecma262/#prod-IdentifierPart</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-prod-IdentifierPart">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-prod-IdentifierStart">
+   <a href="https://tc39.es/ecma262/#prod-IdentifierStart">https://tc39.es/ecma262/#prod-IdentifierStart</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-prod-IdentifierStart">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-list-append">
    <a href="https://infra.spec.whatwg.org/#list-append">https://infra.spec.whatwg.org/#list-append</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-list-append">1. The URLPattern class </a> <a href="#ref-for-list-append①">(2)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-assert">
+   <a href="https://infra.spec.whatwg.org/#assert">https://infra.spec.whatwg.org/#assert</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-assert">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-iteration-break">
+   <a href="https://infra.spec.whatwg.org/#iteration-break">https://infra.spec.whatwg.org/#iteration-break</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-iteration-break">3.1.2. Tokenizing</a> <a href="#ref-for-iteration-break①">(2)</a> <a href="#ref-for-iteration-break②">(3)</a> <a href="#ref-for-iteration-break③">(4)</a> <a href="#ref-for-iteration-break④">(5)</a> <a href="#ref-for-iteration-break⑤">(6)</a> <a href="#ref-for-iteration-break⑥">(7)</a> <a href="#ref-for-iteration-break⑦">(8)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-iteration-continue">
+   <a href="https://infra.spec.whatwg.org/#iteration-continue">https://infra.spec.whatwg.org/#iteration-continue</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-iteration-continue">3.1.2. Tokenizing</a> <a href="#ref-for-iteration-continue①">(2)</a> <a href="#ref-for-iteration-continue②">(3)</a> <a href="#ref-for-iteration-continue③">(4)</a> <a href="#ref-for-iteration-continue④">(5)</a> <a href="#ref-for-iteration-continue⑤">(6)</a> <a href="#ref-for-iteration-continue⑥">(7)</a> <a href="#ref-for-iteration-continue⑦">(8)</a> <a href="#ref-for-iteration-continue⑧">(9)</a> <a href="#ref-for-iteration-continue⑨">(10)</a> <a href="#ref-for-iteration-continue①⓪">(11)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-string-length">
+   <a href="https://infra.spec.whatwg.org/#string-length">https://infra.spec.whatwg.org/#string-length</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-string-length">3.1.2. Tokenizing</a> <a href="#ref-for-string-length①">(2)</a> <a href="#ref-for-string-length②">(3)</a> <a href="#ref-for-string-length③">(4)</a> <a href="#ref-for-string-length④">(5)</a> <a href="#ref-for-string-length⑤">(6)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-list">
    <a href="https://infra.spec.whatwg.org/#list">https://infra.spec.whatwg.org/#list</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-list">1. The URLPattern class </a>
+    <li><a href="#ref-for-list①">3.1.1. Tokens</a>
+    <li><a href="#ref-for-list②">3.1.2. Tokenizing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-struct">
    <a href="https://infra.spec.whatwg.org/#struct">https://infra.spec.whatwg.org/#struct</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-struct">2. Components</a>
+    <li><a href="#ref-for-struct①">3.1.1. Tokens</a> <a href="#ref-for-struct②">(2)</a>
+    <li><a href="#ref-for-struct③">3.1.2. Tokenizing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-basic-url-parser">
@@ -1435,7 +1904,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-dom-url-pathname">
    <a href="https://url.spec.whatwg.org/#dom-url-pathname">https://url.spec.whatwg.org/#dom-url-pathname</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-url-pathname">3. Patching</a>
+    <li><a href="#ref-for-dom-url-pathname">4. Patching</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-port">
@@ -1508,6 +1977,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-url">1. The URLPattern class </a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a> <a href="#ref-for-concept-url③">(4)</a> <a href="#ref-for-concept-url④">(5)</a> <a href="#ref-for-concept-url⑤">(6)</a> <a href="#ref-for-concept-url⑥">(7)</a> <a href="#ref-for-concept-url⑦">(8)</a> <a href="#ref-for-concept-url⑧">(9)</a> <a href="#ref-for-concept-url⑨">(10)</a>
+    <li><a href="#ref-for-concept-url①⓪">4. Patching</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-username">
@@ -1526,6 +1996,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">https://heycam.github.io/webidl/#exceptiondef-typeerror</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a> <a href="#ref-for-exceptiondef-typeerror①">(2)</a> <a href="#ref-for-exceptiondef-typeerror②">(3)</a> <a href="#ref-for-exceptiondef-typeerror③">(4)</a> <a href="#ref-for-exceptiondef-typeerror④">(5)</a> <a href="#ref-for-exceptiondef-typeerror⑤">(6)</a> <a href="#ref-for-exceptiondef-typeerror⑥">(7)</a> <a href="#ref-for-exceptiondef-typeerror⑦">(8)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror⑧">3.1.2. Tokenizing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
@@ -1567,11 +2038,17 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><span class="dfn-paneled" id="term-for-sec-regexp-regular-expression-objects">RegExp</span>
      <li><span class="dfn-paneled" id="term-for-sec-regexpbuiltinexec">RegExpBuiltinExec</span>
      <li><span class="dfn-paneled" id="term-for-sec-tostring">ToString</span>
+     <li><span class="dfn-paneled" id="term-for-prod-IdentifierPart">identifierpart</span>
+     <li><span class="dfn-paneled" id="term-for-prod-IdentifierStart">identifierstart</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-list-append">append</span>
+     <li><span class="dfn-paneled" id="term-for-assert">assert</span>
+     <li><span class="dfn-paneled" id="term-for-iteration-break">break</span>
+     <li><span class="dfn-paneled" id="term-for-iteration-continue">continue</span>
+     <li><span class="dfn-paneled" id="term-for-string-length">length</span>
      <li><span class="dfn-paneled" id="term-for-list">list</span>
      <li><span class="dfn-paneled" id="term-for-struct">struct</span>
     </ul>
@@ -2027,6 +2504,220 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#component-group-name-list">#component-group-name-list</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-component-group-name-list">1. The URLPattern class </a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="pattern-string">
+   <b><a href="#pattern-string">#pattern-string</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pattern-string">2. Components</a>
+    <li><a href="#ref-for-pattern-string①">3.1.1. Tokens</a> <a href="#ref-for-pattern-string②">(2)</a> <a href="#ref-for-pattern-string③">(3)</a> <a href="#ref-for-pattern-string④">(4)</a>
+    <li><a href="#ref-for-pattern-string⑤">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="pattern-string-well-formed">
+   <b><a href="#pattern-string-well-formed">#pattern-string-well-formed</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pattern-string-well-formed">2. Components</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-list">
+   <b><a href="#token-list">#token-list</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-list">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token">
+   <b><a href="#token">#token</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token">3.1.1. Tokens</a> <a href="#ref-for-token①">(2)</a> <a href="#ref-for-token②">(3)</a> <a href="#ref-for-token③">(4)</a> <a href="#ref-for-token④">(5)</a> <a href="#ref-for-token⑤">(6)</a> <a href="#ref-for-token⑥">(7)</a> <a href="#ref-for-token⑦">(8)</a> <a href="#ref-for-token⑧">(9)</a> <a href="#ref-for-token⑨">(10)</a> <a href="#ref-for-token①⓪">(11)</a> <a href="#ref-for-token①①">(12)</a> <a href="#ref-for-token①②">(13)</a> <a href="#ref-for-token①③">(14)</a> <a href="#ref-for-token①④">(15)</a> <a href="#ref-for-token①⑤">(16)</a>
+    <li><a href="#ref-for-token①⑥">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type">
+   <b><a href="#token-type">#token-type</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type">3.1.2. Tokenizing</a> <a href="#ref-for-token-type①">(2)</a> <a href="#ref-for-token-type②">(3)</a> <a href="#ref-for-token-type③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-open">
+   <b><a href="#token-type-open">#token-type-open</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-open">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-close">
+   <b><a href="#token-type-close">#token-type-close</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-close">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-regexp">
+   <b><a href="#token-type-regexp">#token-type-regexp</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-regexp">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-name">
+   <b><a href="#token-type-name">#token-type-name</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-name">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-char">
+   <b><a href="#token-type-char">#token-type-char</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-char">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-escaped-char">
+   <b><a href="#token-type-escaped-char">#token-type-escaped-char</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-escaped-char">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-other-modifier">
+   <b><a href="#token-type-other-modifier">#token-type-other-modifier</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-other-modifier">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-asterisk">
+   <b><a href="#token-type-asterisk">#token-type-asterisk</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-asterisk">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-end">
+   <b><a href="#token-type-end">#token-type-end</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-end">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-type-invalid-char">
+   <b><a href="#token-type-invalid-char">#token-type-invalid-char</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-type-invalid-char">3.1.1. Tokens</a>
+    <li><a href="#ref-for-token-type-invalid-char①">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-index">
+   <b><a href="#token-index">#token-index</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-index">3.1.2. Tokenizing</a> <a href="#ref-for-token-index①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="token-value">
+   <b><a href="#token-value">#token-value</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-token-value">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenize-policy">
+   <b><a href="#tokenize-policy">#tokenize-policy</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenize-policy">3.1.2. Tokenizing</a> <a href="#ref-for-tokenize-policy①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenize-policy-strict">
+   <b><a href="#tokenize-policy-strict">#tokenize-policy-strict</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenize-policy-strict">3.1.2. Tokenizing</a> <a href="#ref-for-tokenize-policy-strict①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenize-policy-lenient">
+   <b><a href="#tokenize-policy-lenient">#tokenize-policy-lenient</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenize-policy-lenient">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer">
+   <b><a href="#tokenizer">#tokenizer</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer①">(2)</a> <a href="#ref-for-tokenizer②">(3)</a> <a href="#ref-for-tokenizer③">(4)</a> <a href="#ref-for-tokenizer④">(5)</a> <a href="#ref-for-tokenizer⑤">(6)</a> <a href="#ref-for-tokenizer⑥">(7)</a> <a href="#ref-for-tokenizer⑦">(8)</a> <a href="#ref-for-tokenizer⑧">(9)</a> <a href="#ref-for-tokenizer⑨">(10)</a> <a href="#ref-for-tokenizer①⓪">(11)</a> <a href="#ref-for-tokenizer①①">(12)</a> <a href="#ref-for-tokenizer①②">(13)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-input">
+   <b><a href="#tokenizer-input">#tokenizer-input</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-input">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-input①">(2)</a> <a href="#ref-for-tokenizer-input②">(3)</a> <a href="#ref-for-tokenizer-input③">(4)</a> <a href="#ref-for-tokenizer-input④">(5)</a> <a href="#ref-for-tokenizer-input⑤">(6)</a> <a href="#ref-for-tokenizer-input⑥">(7)</a> <a href="#ref-for-tokenizer-input⑦">(8)</a> <a href="#ref-for-tokenizer-input⑧">(9)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-policy">
+   <b><a href="#tokenizer-policy">#tokenizer-policy</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-policy">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-policy①">(2)</a> <a href="#ref-for-tokenizer-policy②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-token-list">
+   <b><a href="#tokenizer-token-list">#tokenizer-token-list</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-token-list">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-index">
+   <b><a href="#tokenizer-index">#tokenizer-index</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-index">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-index①">(2)</a> <a href="#ref-for-tokenizer-index②">(3)</a> <a href="#ref-for-tokenizer-index③">(4)</a> <a href="#ref-for-tokenizer-index④">(5)</a> <a href="#ref-for-tokenizer-index⑤">(6)</a> <a href="#ref-for-tokenizer-index⑥">(7)</a> <a href="#ref-for-tokenizer-index⑦">(8)</a> <a href="#ref-for-tokenizer-index⑧">(9)</a> <a href="#ref-for-tokenizer-index⑨">(10)</a> <a href="#ref-for-tokenizer-index①⓪">(11)</a> <a href="#ref-for-tokenizer-index①①">(12)</a> <a href="#ref-for-tokenizer-index①②">(13)</a> <a href="#ref-for-tokenizer-index①③">(14)</a> <a href="#ref-for-tokenizer-index①④">(15)</a> <a href="#ref-for-tokenizer-index①⑤">(16)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-next-index">
+   <b><a href="#tokenizer-next-index">#tokenizer-next-index</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-next-index">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-next-index①">(2)</a> <a href="#ref-for-tokenizer-next-index②">(3)</a> <a href="#ref-for-tokenizer-next-index③">(4)</a> <a href="#ref-for-tokenizer-next-index④">(5)</a> <a href="#ref-for-tokenizer-next-index⑤">(6)</a> <a href="#ref-for-tokenizer-next-index⑥">(7)</a> <a href="#ref-for-tokenizer-next-index⑦">(8)</a> <a href="#ref-for-tokenizer-next-index⑧">(9)</a> <a href="#ref-for-tokenizer-next-index⑨">(10)</a> <a href="#ref-for-tokenizer-next-index①⓪">(11)</a> <a href="#ref-for-tokenizer-next-index①①">(12)</a> <a href="#ref-for-tokenizer-next-index①②">(13)</a> <a href="#ref-for-tokenizer-next-index①③">(14)</a> <a href="#ref-for-tokenizer-next-index①④">(15)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="tokenizer-code-point">
+   <b><a href="#tokenizer-code-point">#tokenizer-code-point</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-tokenizer-code-point">3.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-code-point①">(2)</a> <a href="#ref-for-tokenizer-code-point②">(3)</a> <a href="#ref-for-tokenizer-code-point③">(4)</a> <a href="#ref-for-tokenizer-code-point④">(5)</a> <a href="#ref-for-tokenizer-code-point⑤">(6)</a> <a href="#ref-for-tokenizer-code-point⑥">(7)</a> <a href="#ref-for-tokenizer-code-point⑦">(8)</a> <a href="#ref-for-tokenizer-code-point⑧">(9)</a> <a href="#ref-for-tokenizer-code-point⑨">(10)</a> <a href="#ref-for-tokenizer-code-point①⓪">(11)</a> <a href="#ref-for-tokenizer-code-point①①">(12)</a> <a href="#ref-for-tokenizer-code-point①②">(13)</a> <a href="#ref-for-tokenizer-code-point①③">(14)</a> <a href="#ref-for-tokenizer-code-point①④">(15)</a> <a href="#ref-for-tokenizer-code-point①⑤">(16)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="get-the-next-code-point">
+   <b><a href="#get-the-next-code-point">#get-the-next-code-point</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-get-the-next-code-point">3.1.2. Tokenizing</a> <a href="#ref-for-get-the-next-code-point①">(2)</a> <a href="#ref-for-get-the-next-code-point②">(3)</a> <a href="#ref-for-get-the-next-code-point③">(4)</a> <a href="#ref-for-get-the-next-code-point④">(5)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="seek-and-get-the-next-code-point">
+   <b><a href="#seek-and-get-the-next-code-point">#seek-and-get-the-next-code-point</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-seek-and-get-the-next-code-point">3.1.2. Tokenizing</a> <a href="#ref-for-seek-and-get-the-next-code-point①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="add-a-token">
+   <b><a href="#add-a-token">#add-a-token</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-add-a-token">3.1.2. Tokenizing</a> <a href="#ref-for-add-a-token①">(2)</a> <a href="#ref-for-add-a-token②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="add-a-token-with-default-length">
+   <b><a href="#add-a-token-with-default-length">#add-a-token-with-default-length</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-add-a-token-with-default-length">3.1.2. Tokenizing</a> <a href="#ref-for-add-a-token-with-default-length①">(2)</a> <a href="#ref-for-add-a-token-with-default-length②">(3)</a> <a href="#ref-for-add-a-token-with-default-length③">(4)</a> <a href="#ref-for-add-a-token-with-default-length④">(5)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="add-a-token-with-default-position-and-length">
+   <b><a href="#add-a-token-with-default-position-and-length">#add-a-token-with-default-position-and-length</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-add-a-token-with-default-position-and-length">3.1.2. Tokenizing</a> <a href="#ref-for-add-a-token-with-default-position-and-length①">(2)</a> <a href="#ref-for-add-a-token-with-default-position-and-length②">(3)</a> <a href="#ref-for-add-a-token-with-default-position-and-length③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="process-a-tokenizing-error">
+   <b><a href="#process-a-tokenizing-error">#process-a-tokenizing-error</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-process-a-tokenizing-error">3.1.2. Tokenizing</a> <a href="#ref-for-process-a-tokenizing-error①">(2)</a> <a href="#ref-for-process-a-tokenizing-error②">(3)</a> <a href="#ref-for-process-a-tokenizing-error③">(4)</a> <a href="#ref-for-process-a-tokenizing-error④">(5)</a> <a href="#ref-for-process-a-tokenizing-error⑤">(6)</a> <a href="#ref-for-process-a-tokenizing-error⑥">(7)</a> <a href="#ref-for-process-a-tokenizing-error⑦">(8)</a> <a href="#ref-for-process-a-tokenizing-error⑧">(9)</a> <a href="#ref-for-process-a-tokenizing-error⑨">(10)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="is-a-valid-name-code-point">
+   <b><a href="#is-a-valid-name-code-point">#is-a-valid-name-code-point</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-a-valid-name-code-point">3.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="is-ascii">
+   <b><a href="#is-ascii">#is-ascii</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-ascii">3.1.2. Tokenizing</a> <a href="#ref-for-is-ascii①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="url-api-pathname-string">
