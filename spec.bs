@@ -560,66 +560,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>next index</dfn>, a number,
 A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode code point, initially null.
 
 <div algorithm>
-  To <dfn>get the next code point</dfn> for a given [=tokenizer=] |tokenizer|:
-
-  1. Set |tokenizer|'s [=tokenizer/code point=] to the Unicode code point in |tokenizer|'s [=tokenizer/input=] at the position indicated by |tokenizer|'s [=tokenizer/next index=].
-  1. Increment |tokenizer|'s [=tokenizer/next index=] by 1.
-</div>
-
-<div algorithm>
-  To <dfn>seek and get the next code point</dfn> for a given [=tokenizer=] |tokenizer| and number |index|:
-
-  1. Set |tokenizer|'s [=tokenizer/next index=] to |index|.
-  1. Run [=get the next code point=] given |tokenizer|.
-</div>
-
-<div algorithm>
-  To <dfn>add a token</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, number |value position|, and number |value length|:
-
-  1. Let |token| be a new [=token=].
-  1. Set |token|'s [=token/type=] to |type|.
-  1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
-  1. Set |token|'s [=token/value=] to the substring within |tokenizer|'s [=tokenizer/input=] starting at |value position| with |value length|.
-  1. Set |tokenizer|'s [=token/index=] to |next position|.
-</div>
-
-<div algorthm>
-  To <dfn>add a token with default length</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, and number |value position|:
-
-  1. Let |computed length| be |next position| &minus; |value position|.
-  1. Run [=add a token=] given |tokenizer|, |type|, |next position|, |value position|, and |computed length|.
-</div>
-
-<div algorithm>
-  To <dfn>add a token with default position and length</dfn> for a given [=tokenizer=] |tokenizer| and [=token/type=] |type|:
-
-  1. Run [=add a token with default length=] given |tokenizer|, |type|, |tokenizer|'s [=tokenizer/next index=], and |tokenizer|'s [=tokenizer/index=].
-</div>
-
-<div algorithm>
-  To <dfn>process a tokenizing error</dfn> for a given [=tokenizer=] |tokenizer|, a number |next position|, and a number |value position|:
-
-  1. If |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`strict`</a>", then throw a {{TypeError}}.
-  1. [=Assert=]: |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`lenient`</a>".
-  1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`invalid-char`</a>", |next position|, and |value position|.
-</div>
-
-<div algorithm>
-  To perform <dfn>is a valid name code point</dfn> given a Unicode |code point| and a boolean |first|:
-
-  1. If |first| is true return the result of checking if |code point| is contained in the [=IdentifierStart=] set of code points.
-  1. Else return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
-</div>
-
-<div algorithm>
-  To determine if a Unicode |code point| <dfn>is ASCII</dfn>:
-
-  1. If |code point| is between U+0000 and U+007F inclusive, then return true.
-  1. Otherwise return false.
-</div>
-
-<div algorithm>
-  To <dfn export>tokenize</dfn> a given string |input| and [=tokenize policy=] |policy|:
+  To <dfn>tokenize</dfn> a given string |input| and [=tokenize policy=] |policy|:
 
   1. Let |tokenizer| be a new [=tokenizer=].
   1. Set |tokenizer|'s [=tokenizer/input=] to |input|.
@@ -719,7 +660,338 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Return |tokenizer|'s [=tokenizer/token list=].
 </div>
 
+<div algorithm>
+  To <dfn>get the next code point</dfn> for a given [=tokenizer=] |tokenizer|:
+
+  1. Set |tokenizer|'s [=tokenizer/code point=] to the Unicode code point in |tokenizer|'s [=tokenizer/input=] at the position indicated by |tokenizer|'s [=tokenizer/next index=].
+  1. Increment |tokenizer|'s [=tokenizer/next index=] by 1.
+</div>
+
+<div algorithm>
+  To <dfn>seek and get the next code point</dfn> for a given [=tokenizer=] |tokenizer| and number |index|:
+
+  1. Set |tokenizer|'s [=tokenizer/next index=] to |index|.
+  1. Run [=get the next code point=] given |tokenizer|.
+</div>
+
+<div algorithm>
+  To <dfn>add a token</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, number |value position|, and number |value length|:
+
+  1. Let |token| be a new [=token=].
+  1. Set |token|'s [=token/type=] to |type|.
+  1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
+  1. Set |token|'s [=token/value=] to the substring within |tokenizer|'s [=tokenizer/input=] starting at |value position| with |value length|.
+  1. Set |tokenizer|'s [=token/index=] to |next position|.
+</div>
+
+<div algorthm>
+  To <dfn>add a token with default length</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, and number |value position|:
+
+  1. Let |computed length| be |next position| &minus; |value position|.
+  1. Run [=add a token=] given |tokenizer|, |type|, |next position|, |value position|, and |computed length|.
+</div>
+
+<div algorithm>
+  To <dfn>add a token with default position and length</dfn> for a given [=tokenizer=] |tokenizer| and [=token/type=] |type|:
+
+  1. Run [=add a token with default length=] given |tokenizer|, |type|, |tokenizer|'s [=tokenizer/next index=], and |tokenizer|'s [=tokenizer/index=].
+</div>
+
+<div algorithm>
+  To <dfn>process a tokenizing error</dfn> for a given [=tokenizer=] |tokenizer|, a number |next position|, and a number |value position|:
+
+  1. If |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`strict`</a>", then throw a {{TypeError}}.
+  1. [=Assert=]: |tokenizer|'s [=tokenizer/policy=] is "<a for="tokenize policy">`lenient`</a>".
+  1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`invalid-char`</a>", |next position|, and |value position|.
+</div>
+
+<div algorithm>
+  To perform <dfn>is a valid name code point</dfn> given a Unicode |code point| and a boolean |first|:
+
+  1. If |first| is true return the result of checking if |code point| is contained in the [=IdentifierStart=] set of code points.
+  1. Else return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
+</div>
+
+<div algorithm>
+  To determine if a Unicode |code point| <dfn>is ASCII</dfn>:
+
+  1. If |code point| is between U+0000 and U+007F inclusive, then return true.
+  1. Otherwise return false.
+</div>
+
+<h4 id=parts>Parts</h4>
+
+A <dfn>part list</dfn> is a [=list=] of zero or more [=parts=].
+
+A <dfn>part</dfn> is a [=struct=] representing one piece of a parser [=/pattern string=].  It can contain at most one matching group, a fixed text prefix, a fixed text suffix, and a modifier.  It can contain as little as a single fixed text string or a single matching group.
+
+A [=part=] has an associated <dfn export for=part>type</dfn>, a string, which must be set upon creation.  It must be one of the following:
+
+<dl>
+  <dt>"<dfn for=part/type>`fixed-text`</dfn>"</dt>
+  <dd>The [=part=] represents a simple fixed text string.</dd>
+  <dt>"<dfn for=part/type>`regexp`</dfn>"</dt>
+  <dd>The [=part=] represents a matching group with a custom regular expression.</dd>
+  <dt>"<dfn for=part/type>`segment-wildcard`</dfn>"</dt>
+  <dd>The [=part=] represents a matching group that matches code points up to the next separator code point. This is typically used for a named group like "`:foo`" that does not have a custom regular expression.</dd>
+  <dt>"<dfn for=part/type>`full-wildcard`</dfn>"</dt>
+  <dd>The [=part=] represents a matching group that greedily matches all code points.  This is typically used for the "`*`" wildcard matching group.</dd>
+</dl>
+
+A [=part=] has an associated <dfn for=part>value</dfn>, a string, which must be set upon creation.
+
+A [=part=] has an associated <dfn for=part>modifier</dfn> a string, which must be set upon creation.  It must be one of the following:
+
+<dl>
+  <dt>"<dfn for=part/modifier>`none`</dfn>"</dt>
+  <dd>The [=part=] does not have a [=part/modifier=].</dd>
+  <dt>"<dfn for=part/modifier>`optional`</dfn>"</dt>
+  <dd>The [=part=] has an optional [=part/modifier=] indicated by the U+003F (`?`) code point.</dd>
+  <dt>"<dfn for=part/modifier>`zero-or-more`</dfn>"</dt>
+  <dd>The [=part=] has a "zero or more" [=part/modifier=] indicated by the U+002A (`*`) code point.</dd>
+  <dt>"<dfn for=part/modifier>`one-or-more`</dfn>"</dt>
+  <dd>The [=part=] has a "one or more" [=part/modifier=] indicated by the U+002B (`+`) code point.</dd>
+</dl>
+
+A [=part=] has an associated <dfn for=part>name</dfn>, a string, initially the empty string.
+
+A [=part=] has an associated <dfn for=part>prefix</dfn>, a string, initially the empty string.
+
+A [=part=] has an associated <dfn for=part>suffix</dfn>, a string, initially the empty string.
+
+<h4 id=options-header>Options</h4>
+
+An <dfn>options</dfn> [=struct=] contains different settings that control how [=/pattern string=] behaves.  These options originally come from [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like [path-to-regexp](https://github.com/pillarjs/path-to-regexp) where `sensitive`, `strict`, `start`, and `end` are always set to true.
+
+An [=/options=] has an associated <dfn for=options>delimiter code point</dfn>, a string, which must be set upon creation.  It must contain one [=ASCII code point=] or the empty string.  This code point is treated as a segment separator and is used for determining how far a `:foo` named group should match by default.  For example, if the [=options/delimiter code point=] is "`/`" then "`/:foo`" will match "`/bar`", but not "`/bar/baz`".  If the [=options/delimiter code point=] is the empty string then the example pattern would match both strings.
+
+An [=/options=] has an associated <dfn for=options>prefix code point</dfn>, a string, which must be set upon creation.  It must contain one [=ASCII code point=] or the empty string.  The code point is treated as an automatic prefix if found immediately preceding a match group.  This matters when a match group is modified to be optional or repeating.  For example, if [=options/prefix code point=] is "`/`" then "`/foo/:bar?/baz`" will treat the "`/`" before "`:bar`" as a prefix that becomes optional along with the named group.  So in this example the pattern would match "`/foo/baz`".
+
+<h4 id=parsing>Parsing</h4>
+
+<div algorithm>
+An <dfn>encoding callback</dfn> is an abstract algorithm that takes a given string |input|.  The |input| will be a simple text piece of a [=/pattern string=].  An implementing algorithm will validate and encode the |input|.  It must return the encoded string or throw an exception.
+</div>
+
+A <dfn>pattern parser</dfn> is a [=struct=].
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">token list</dfn>, a [=/token list=], initially an empty [=list=].
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">encoding callback</dfn>, a [=/encoding callback=], that must be set upon creation.
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">segment wildcard regexp</dfn>, a string, that must be set upon creation.
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">part list</dfn>, a [=/part list=], initially an empty [=list=].
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">pending fixed value</dfn>, a string, initially the empty string.
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">index</dfn>, a number, initially 0.
+
+A [=pattern parser=] has an associated <dfn for="pattern parser">next numeric name</dfn>, a number, initially 0.
+
+<div algorithm>
+To <dfn export>parse a pattern</dfn> given a [=/pattern string=] |input|, [=/options=] |options|, and [=/encoding callback=] |encoding callback|:
+
+  1. Let |parser| be a new [=pattern parser=] whose [=pattern parser/encoding callback=] is |encoding callback| and [=pattern parser/segment wildcard regexp=] is the result of running [=generate a segment wildcard regexp=] given |options|.
+  1. Set |parser|'s [=pattern parser/token list=] to the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`strict`</a>".
+  1. While |parser|'s [=pattern parser/index=] is less than |parser|'s [=pattern parser/token list=]'s [=list/size=]:
+    <div class="note">
+     <p>This first section is looking for the sequence: `<prefix char><name><regexp><modifier>`.  There could be zero to all of these tokens.
+      <dl class="example" id="parse-example-1">
+        <dt>"`/:foo(bar)?`"</dt>
+        <dd>All four [=tokens=].</dd>
+        <dt>"`/`"</dt>
+        <dd>One "<a for=token/type>`char`</a>" [=token=].
+        <dt>"`:foo`"</dt>
+        <dd>One "<a for=token/type>`name`</a>" [=token=].
+        <dt>"`(bar)`"</dt>
+        <dd>One "<a for=token/type>`regexp`</a>" [=token=].
+        <dt>"`/:foo`"</dt>
+        <dd>"<a for=token/type>`char`</a>" and "<a for=token/type>`name`</a>" [=tokens=].
+        <dt>"`/(bar)`"</dt>
+        <dd>"<a for=token/type>`char`</a>" and "<a for=token/type>`regexp`</a>" [=tokens=].
+        <dt>"`/:foo?`"</dt>
+        <dd>"<a for=token/type>`char`</a>", "<a for=token/type>`name`</a>", and "<a for=token/type>`other-modifier`</a>" [=tokens=].
+        <dt>"`/(bar)?`"</dt>
+        <dd>"<a for=token/type>`char`</a>", "<a for=token/type>`regexp`</a>", and "<a for=token/type>`other-modifier`</a>" [=tokens=].
+      </dl>
+    </div>
+    1. Let |char token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`char`</a>".
+    1. Let |name token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`name`</a>".
+    1. Let |regexp or wildcard token| be the result of running [=try to consume a regexp or wildcard token=] given |parser| and |name token|.
+    1. If |name token| is not null or |regexp or wildcard token| is not null:
+      <p class=note>If there is a matching group, we need to add the [=part=] immediately.
+      1. Let |prefix| be the empty string.
+      1. If |char token| is not null then set |prefix| to |char token|'s [=token/value=].
+      1. If |prefix| is not the empty string and not |options|'s [=options/prefix code point=]:
+        1. Append |prefix| to the end of |parser|'s [=pattern parser/pending fixed value=].
+        1. Set |prefix| to the empty string.
+      1. Run [=maybe add a part from the pending fixed value=] given |parser|.
+      1. Let |modifier token| be the result of running [=try to consume a modifier token=] given |parser|.
+      1. Run [=add a part=] given |parser|, |prefix|, |name token|, |regexp or wildcard token|, the empty string, and |modifier token|.
+      1. [=Continue=].
+    1. Let |fixed token| be |char token|.
+      <p class=note>If there was no matching group, then we need to buffer any fixed text.  We want to collect as much text as possible before adding it as a "<a for=part/type>`fixed-text`</a>" [=part=].
+    1. If |fixed token| is null, then set |fixed token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`escaped-char`</a>".
+    1. If |fixed token| is not null:
+      1. Append |fixed token|'s [=token/value=] to |parser|'s [=pattern parser/pending fixed value=].
+      1. [=Continue=].
+    1. Let |open token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`open`</a>".
+      <div class=note>
+        <p class=allow-2119>Next we look for the sequence `<open><char prefix><name><regexp><char suffix><close><modifier>`.  The open and close are required, but the other tokens are optional.
+        <dl class=example id=parsing-example-2>
+          <dt>"`{a:foo(bar)b}?`"</dt>
+          <dd>All [=tokens=] are present.
+          <dt>"`{:foo}?`"</dt>
+          <dd>"<a for=token/type>`open`</a>", "<a for=token/type>`name`</a>", "<a for=token/type>`close`</a>", and "<a for=token/type>`other-modifier`</a>" [=tokens=].</dd>
+          <dt>"`{(bar)}?`"</dt>
+          <dd>"<a for=token/type>`open`</a>", "<a for=token/type>`regexp`</a>", "<a for=token/type>`close`</a>", and "<a for=token/type>`other-modifier`</a>" [=tokens=].</dd>
+          <dt>"`{ab}?`"</dt>
+          <dd>"<a for=token/type>`open`</a>", "<a for=token/type>`char`</a>", "<a for=token/type>`close`</a>", and "<a for=token/type>`other-modifier`</a>" [=tokens=].</dd>
+        </dl>
+      </div>
+    1. If |open token| is not null:
+      1. Set |prefix| be the result of running [=consume text=] given |parser|.
+      1. Set |name token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`name`</a>".
+      1. Set |regexp or wildcard token| to the result of running [=try to consume a regexp or wildcard token=] given |parser| and |name token|.
+      1. Let |suffix| be the result of running [=consume text=] given |parser|.
+      1. Run [=consume a required token=] given |parser| and "<a for=token/type>`close`</a>".
+      1. Set |modifier token| to the result of running [=try to consume a modifier token=] given |parser|.
+      1. Run [=add a part=] given |parser|, |prefix|, |name token|, |regexp or wildcard token|, |suffix|, and |modifier token|.
+    1. Run [=maybe add a part from the pending fixed value=] given |parser|.
+    1. Run [=consume a required token=] given |parser| and "<a for=token/type>`end`</a>".
+  1. Return |parser|'s [=pattern parser/part list=].
+</div>
+
+The <dfn>full wildcard regexp value</dfn> is the string "`.*`".
+
+<div algorithm>
+To <dfn>generate a segment wildcard regexp</dfn> given an [=/options=] |options|:
+
+  1. Let |result| be "`[^`".
+  1. Append the result of running [=escape a regexp string=] given |options|'s [=options/delimiter code point=] to the end of |result|.
+  1. Append "`]+?`" to the end of |result|.
+  1. Return |result|.
+</div algorithm>
+
+<div algorithm>
+To <dfn>try to consume a token</dfn> given a [=pattern parser=] |parser| and [=token/type=] |type|:
+
+  1. [=Assert=]: |parser|'s [=pattern parser/index=] is less than |parser|'s [=pattern parser/token list=] [=list/size=].
+  1. Let |next token| be |parser|'s [=pattern parser/token list=][|parser|'s [=pattern parser/index=]].
+  1. If |next token|'s [=token/type=] is not |type| return null.
+  1. Increment |parser|'s [=pattern parser/index=] by 1.
+  1. Return |next token|.
+</div>
+
+<div algorithm>
+To <dfn>try to consume a modifier token</dfn> given a [=pattern parser=] |parser|:
+
+  1. Let |token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`other-modifier`</a>".
+  1. If |token| is not null, then return |token|.
+  1. Set |token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`asterisk`</a>".
+  1. Return |token|.
+</div>
+
+<div algorithm>
+To <dfn>try to consume a regexp or wildcard token</dfn> given a [=pattern parser=] |parser| and [=token=] |name token|:
+
+  1. Let |token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`regexp`</a>".
+  1. If |name token| is null and |token| is null, then set |token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`asterisk`</a>".
+  1. Return |token|.
+</div>
+
+<div algorithm>
+To <dfn>consume a required token</dfn> given a [=pattern parser=] |parser| and [=token/type=] |type|:
+
+  1. Let |result| be the result of running [=try to consume a token=] given |parser| and |type|.
+  1. If |result| is null, then throw a {{TypeError}}.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+To <dfn>consume text</dfn> given a [=pattern parser=] |parser|:
+
+  1. Let |result| be the empty string.
+  1. While true:
+    1. Let |token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`char`</a>".
+    1. If |token| is null, then set |token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`escaped-char`</a>".
+    1. If |token| is null, then [=break=].
+    1. Append |token|'s [=token/value=] to the end of |result|.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+To <dfn>maybe add a part from the pending fixed value</dfn> given a [=pattern parser=] |parser|:
+
+  1. If |parser|'s [=pattern parser/pending fixed value=] is the empty string, then return.
+  1. Let |encoded value| be the result of running |parser|'s [=pattern parser/encoding callback=] given |parser|'s [=pattern parser/pending fixed value=].
+  1. Set |parser|'s [=pattern parser/pending fixed value=] to the empty string.
+  1. Let |part| be a new [=part=] whose [=part/type=] is "<a for=part/type>`fixed-text`</a>", [=part/value=] is |encoded value|, and [=part/modifier=] is "<a for=part/modifier>`none`</a>".
+  1. [=list/Append=] |part| to |parser|'s [=pattern parser/part list=].
+</div>
+
+<div algorithm>
+To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|, a [=token=] |name token|, a [=token=] |regexp or wildcard token|, a string |suffix|, and a [=token=] |modifier token|:
+
+  1. Let |modifier| be "<a for=part/modifier>`none`</a>".
+  1. If |modifier token| is not null:
+    1. If |modifier token|'s [=token/value=] is "`?`" then set |modifier| to "<a for=part/modifier>`optional`</a>".
+    1. Else if |modifier token|'s [=token/value=] is "`*`" then set |modifier| to "<a for=part/modifier>`zero-or-more`</a>".
+    1. Else if |modifier token|'s [=token/value=] is "`+`" then set |modifier| to "<a for=part/modifier>`one-or-more`</a>".
+  1. If |name token| is null and |regexp or wildcard token| is null and |modifier| is "<a for=part/modifier>`none`</a>":
+    <p class=note>This was a "`{foo}`" grouping.  We add this to the [=pattern parser/pending fixed value=] so that it will be combined with any previous or subsequent text.</p>
+    1. Append |prefix| to the end of |parser|'s [=pattern parser/pending fixed value=].
+    1. Return.
+  1. Run [=maybe add a part from the pending fixed value=] given |parser|.
+  1. If |name token| is null and |regexp or wildcard token| is null:
+    <p class=note>This was a "`{foo}?`" grouping.  The modifier means we cannot combine it with other text.  Therefore we add it as a [=part=] immediately.</p>
+    1. [=Assert=]: |suffix| is the empty string.
+    1. If |prefix| is the empty string, then return.
+    1. Let |encoded value| be the result of running |parser|'s [=pattern parser/encoding callback=] given |prefix|.
+    1. Let |part| be a new [=part=] whose [=part/type=] is "<a for=part/type>`fixed-text`</a>", [=part/value=] is |encoded value|, and [=part/modifier=] is |modifier|.
+    1. [=list/Append=] |part| to |parser|'s [=pattern parser/part list=].
+    1. Return.
+  1. Let |regexp value| be the empty string.
+    <p class=note>Next, we convert the |regexp or wildcard token| into a regular expression.
+  1. If |regexp or wildcard token| is null, then set |regexp value| to |parser|'s [=pattern parser/segment wildcard regexp=].
+  1. Else if |regexp or wildcard token|'s [=token/type=] is "<a for=token/type>`asterisk`</a>", then set |regexp value| to the [=full wildcard regexp value=].
+  1. Else set |regexp value| to |regexp or wildcard token|'s [=token/value=].
+  1. Let |type| be "<a for=part/type>`regexp`</a>".
+    <p class=note>Next, we convert |regexp value| into a [=part=] [=part/type=].  We make sure to go to a regular expression first so that an equivalent "<a for=token/type>`regexp`</a>" [=token=] will be treated the same as a "<a for=token/type>`name`</a>" or "<a for=token/type>`asterisk`</a>" [=token=].</p>
+  1. If |regexp value| is |parser|'s [=pattern parser/segment wildcard regexp=]:
+    1. Set |type| to "<a for=part/type>`segment-wildcard`</a>".
+    1. Set |regexp value| to the empty string.
+  1. Else if |regexp value| is the [=full wildcard regexp value=]:
+    1. Set |type| to "<a for=part/type>`full-wildcard`</a>".
+    1. Set |regexp value| to the empty string.
+  1. Let |name| be the empty string.
+    <p class=note>Next, we determine the [=part=] [=part/name=].  This can be explicitly provided by a "<a for=token/type>`name`</a>" [=token=] or be automatically assigned.</a>
+  1. If |name token| is not null, then set |name| to |name token|'s [=token/value=].
+  1. Else if |regexp or wildcard token| is not null:
+    1. Set |name| to |parser|'s [=pattern parser/next numeric name=].
+    1. Increment |parser|'s [=pattern parser/next numeric name=] by 1.
+  1. Let |encoded prefix| be the result of running |parser|'s [=pattern parser/encoding callback=] given |prefix|.
+    <p class=note>Finally, we encode the fixed text values and create the [=part=].
+  1. Let |encoded suffix| be the result of running |parser|'s [=pattern parser/encoding callback=] given |suffix|.
+  1. Let |part| be a new [=part=] whose [=part/type=] is |type|, [=part/value=] is |regexp value|, [=part/modifier=] is |modifier|, [=part/name=] is |name|, [=part/prefix=] is |encoded prefix|, and [=part/suffix=] is |encoded suffix|.
+  1. [=list/Append=] |part| to |parser|'s [=pattern parser/part list=].
+</div>
+
 <h3 id=converting-part-lists-to-regular-expressions>Converting Part Lists to Regular Expressions</h3>
+
+<div algorithm>
+To <dfn>escape a regexp string</dfn> given a string |input|:
+
+  1. [=Assert=]: |input| is an [=ASCII string=].
+  1. Let |result| be the empty string.
+  1. Let |index| be 0.
+  1. While |index| is less than |input|'s [=string/length=]:
+    1. Let |c| be |input|[|index|].
+    1. If |c| is one of "`.`", "`+`", "`*`", "`?`", "`^`", "`$`", "`{`", "`}`", "`(`", "`)`", "`[`", "`]`", "`|`", "`/`", or "<code>\</code>", then append "<code>\</code>" to the end of |result|.
+    1. Append |c| to the end of |result|.
+  1. Return |result|.
+</div algorithm>
 
 <h3 id=converting-part-lists-to-pattern-strings>Converting Part Lists to Pattern Strings</h3>
 
