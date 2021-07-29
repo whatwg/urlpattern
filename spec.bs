@@ -981,6 +981,77 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
 <h3 id=converting-part-lists-to-regular-expressions>Converting Part Lists to Regular Expressions</h3>
 
 <div algorithm>
+To <dfn export>generate a regular expression and name list</dfn> from a given [=/part list=] |part list| and [=/options=] |options|:
+
+  1. Let |result| be "`^`".
+  1. Let |name list| be a new [=list=].
+  1. [=list/For each=] |part| of |part list|:
+    1. If |part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>":
+      1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>", then append the result of running [=escape a regexp string=] given |part|'s [=part/value=] to the end of |result|.
+      1. Else:
+        <div class=note>
+        <p>A "<a for=part/type>`fixed-text`</a>" |part| with a modifier uses a non capturing group.  It uses the following form.
+        <p>`(?:<fixed text>)<modifier>`
+        </div>
+        1. Append "`(?:`" to the end of |result|.
+        1. Append the result of running [=escape a regexp string=] given |part|'s [=part/value=] to the end of |result|.
+        1. Append "`)`" to the end of |result|.
+        1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+      1. [=Continue=].
+    1. [=Assert=]: |part|'s [=part/name=] is not the empty string and is not null.
+    1. [=list/Append=] |part|'s [=part/name=] to |name list|.
+      <p class=note>We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with [path-to-regexp](https://github.com/pillarjs/path-to-regexp) which has indicated its unlikely to switch to using named capture groups.
+    1. Let |regexp value| be |part|'s [=part/value=].
+    1. If |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", then set |regexp value| to the result of running [=generate a segment wildcard regexp=] give |options|.
+    1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
+    1. If |part|'s [=part/prefix=] is the empty string and |part|'s [=part/suffix=] is the empty string:
+      <div class=note>
+      <p>If there is no [=part/prefix=] or [=part/suffix=] then we generate a simple capturing group.  It uses the following form.
+      <p>`(<regexp value>)<modifier>`
+      </div>
+      1. Append "`(`" to the end of |result|.
+      1. Append |regexp value| to the end of |result|.
+      1. Append "`)`" to the end of |result|.
+      1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+      1. [=Continue=].
+    1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" or "<a for=part/modifier>`optional`</a>":
+      <div class=note>
+      <p>This section handles non-repeating parts with a [=part/prefix=] and/or [=part/suffix=].  There is an inner capturing group that contains the primary |regexp value|.  The inner group is then combined with the [=part/prefix=] and/or [=part/suffix=] in an outer non-capturing group.  Finally the modifier is applied.  The resulting form is as follows.
+      <p>`(?:<prefix>(<regexp value>)<suffix>)<modifier>`
+      </div>
+      1. Append "`(?:`" to the end of |result|.
+      1. Append the result of running [=escape a regexp string=] given |part|'s [=part/prefix=] to the end of |result|.
+      1. Append "`(`" to the end of |result|.
+      1. Append |regexp value| to the end of |result|.
+      1. Append "`)`" to the end of |result|.
+      1. Append the result of running [=escape a regexp string=] given |part|'s [=part/suffix=] to the end of |result|.
+      1. Append "`)`" to the end of |result|.
+      1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+      1. [=Continue=].
+    1. [=Assert=]: |part|'s [=part/modifier=] is "<a for=part/modifier>`zero-or-more`</a>" or "<a for=part/modifier>`one-or-more`</a>".
+    1. [=Assert=]: |part|'s [=part/prefix=] is not the empty string or |part|'s [=part/suffix=] is not the empty string.
+      <div class=note>
+      <p class=allow-2119>Repeating parts with a [=part/prefix=] and/or [=part/suffix=] are dramatically more complicated.  We want to exclude the initial [=part/prefix=] and the final [=part/suffix=], but include them between any repeated elements.  To achieve this we provide a separate initial expression that excludes the [=part/prefix=].  Then the expression is duplicated with the [=part/prefix=]/[=part/suffix=] values included in an optional repeating element.  If zero values are permitted then a final optional modifier may be appended.  The resulting form is as follows.
+      <p>`(?:<prefix>((?:<regexp value>)(?:<suffix><prefix>(?:<regexp value>))*)<suffix>)?`
+      </div>
+    1. Append "`(?:`" to the end of |result|.
+    1. Append the result of running [=escape a regexp string=] given |part|'s [=part/prefix=] to the end of |result|.
+    1. Append "`((?:`" to the end of |result|.
+    1. Append |regexp value| to the end of |result|.
+    1. Append "`)(?:`" to the end of |result|.
+    1. Append the result of running [=escape a regexp string=] given |part|'s [=part/suffix=] to the end of |result|.
+    1. Append the result of running [=escape a regexp string=] given |part|'s [=part/prefix=] to the end of |result|.
+    1. Append "`(?:`" to the end of |result|.
+    1. Append |regexp value| to the end of |result|.
+    1. Append "`))*)`" to the end of |result|.
+    1. Append the result of running [=escape a regexp string=] given |part|'s [=part/suffix=] to the end of |result|.
+    1. Append "`)`" to the end of |result|.
+    1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`zero-or-more`</a>" then append "`?`" to the end of |result|.
+  1. Append "`$`" to the end of |result|.
+  1. Return (|result|, |name list|).
+</div>
+
+<div algorithm>
 To <dfn>escape a regexp string</dfn> given a string |input|:
 
   1. [=Assert=]: |input| is an [=ASCII string=].
