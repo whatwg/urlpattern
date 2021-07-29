@@ -1961,11 +1961,141 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <h3 class="heading settled" data-level="3.2" id="converting-part-lists-to-regular-expressions"><span class="secno">3.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
+   <div class="algorithm" data-algorithm="generate a regular expression and name list">
+     To <dfn data-dfn-type="dfn" data-export id="generate-a-regular-expression-and-name-list">generate a regular expression and name list<a class="self-link" href="#generate-a-regular-expression-and-name-list"></a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options④">options</a> <var>options</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>result</var> be "<code>^</code>".</p>
+     <li data-md>
+      <p>Let <var>name list</var> be a new <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑥">list</a>.</p>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate">For each</a> <var>part</var> of <var>part list</var>:</p>
+      <ol>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type④">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text③"><code>fixed-text</code></a>":</p>
+        <ol>
+         <li data-md>
+          <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑦">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none③"><code>none</code></a>", then append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string①">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value③">value</a> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Else:</p>
+          <div class="note" role="note">
+           <p>A "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text④"><code>fixed-text</code></a>" <var>part</var> with a modifier uses a non capturing group.  It uses the following form. </p>
+           <p><code>(?:&lt;fixed text>)&lt;modifier></code> </p>
+          </div>
+          <ol>
+           <li data-md>
+            <p>Append "<code>(?:</code>" to the end of <var>result</var>.</p>
+           <li data-md>
+            <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string②">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value④">value</a> to the end of <var>result</var>.</p>
+           <li data-md>
+            <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
+           <li data-md>
+            <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string">convert a modifier to a string</a> give <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑧">modifier</a> to the end of <var>result</var>.</p>
+          </ol>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①③">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert③">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name②">name</a> is not the empty string and is not null.</p>
+       <li data-md>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑤">Append</a> <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> to <var>name list</var>.</p>
+        <p class="note" role="note">We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> which has indicated its unlikely to switch to using named capture groups. </p>
+       <li data-md>
+        <p>Let <var>regexp value</var> be <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑤">value</a>.</p>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑤">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard①"><code>segment-wildcard</code></a>", then set <var>regexp value</var> to the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp①">generate a segment wildcard regexp</a> give <var>options</var>.</p>
+       <li data-md>
+        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑥">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard①"><code>full-wildcard</code></a>", then set <var>regexp value</var> to <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value②">full wildcard regexp value</a>.</p>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①">prefix</a> is the empty string and <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①">suffix</a> is the empty string:</p>
+        <div class="note" role="note">
+         <p>If there is no <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix②">prefix</a> or <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix②">suffix</a> then we generate a simple capturing group.  It uses the following form. </p>
+         <p><code>(&lt;regexp value>)&lt;modifier></code> </p>
+        </div>
+        <ol>
+         <li data-md>
+          <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append <var>regexp value</var> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string①">convert a modifier to a string</a> give <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑨">modifier</a> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①④">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⓪">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none④"><code>none</code></a>" or "<a data-link-type="dfn" href="#part-modifier-optional" id="ref-for-part-modifier-optional①"><code>optional</code></a>":</p>
+        <div class="note" role="note">
+         <p>This section handles non-repeating parts with a <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix③">prefix</a> and/or <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix③">suffix</a>.  There is an inner capturing group that contains the primary <var>regexp value</var>.  The inner group is then combined with the <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix④">prefix</a> and/or <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix④">suffix</a> in an outer non-capturing group.  Finally the modifier is applied.  The resulting form is as follows. </p>
+         <p><code>(?:&lt;prefix>(&lt;regexp value>)&lt;suffix>)&lt;modifier></code> </p>
+        </div>
+        <ol>
+         <li data-md>
+          <p>Append "<code>(?:</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string③">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix⑤">prefix</a> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append <var>regexp value</var> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string④">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix⑤">suffix</a> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
+         <li data-md>
+          <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string②">convert a modifier to a string</a> give <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①①">modifier</a> to the end of <var>result</var>.</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑤">Continue</a>.</p>
+        </ol>
+       <li data-md>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert④">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①②">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more①"><code>zero-or-more</code></a>" or "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more①"><code>one-or-more</code></a>".</p>
+       <li data-md>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑤">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix⑥">prefix</a> is not the empty string or <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix⑥">suffix</a> is not the empty string.</p>
+        <div class="note" role="note">
+         <p class="allow-2119">Repeating parts with a <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix⑦">prefix</a> and/or <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix⑦">suffix</a> are dramatically more complicated.  We want to exclude the initial <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix⑧">prefix</a> and the final <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix⑧">suffix</a>, but include them between any repeated elements.  To achieve this we provide a separate initial expression that excludes the <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix⑨">prefix</a>.  Then the expression is duplicated with the <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⓪">prefix</a>/<a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix⑨">suffix</a> values included in an optional repeating element.  If zero values are permitted then a final optional modifier may be appended.  The resulting form is as follows. </p>
+         <p><code>(?:&lt;prefix>((?:&lt;regexp value>)(?:&lt;suffix>&lt;prefix>(?:&lt;regexp value>))*)&lt;suffix>)?</code> </p>
+        </div>
+       <li data-md>
+        <p>Append "<code>(?:</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string⑤">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①①">prefix</a> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append "<code>((?:</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append <var>regexp value</var> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append "<code>)(?:</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string⑥">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①⓪">suffix</a> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string⑦">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①②">prefix</a> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append "<code>(?:</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append <var>regexp value</var> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append "<code>))*)</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string⑧">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①①">suffix</a> to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①③">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more②"><code>zero-or-more</code></a>" then append "<code>?</code>" to the end of <var>result</var>.</p>
+      </ol>
+     <li data-md>
+      <p>Append "<code>$</code>" to the end of <var>result</var>.</p>
+     <li data-md>
+      <p>Return (<var>result</var>, <var>name list</var>).</p>
+    </ol>
+   </div>
    <div class="algorithm" data-algorithm="escape a regexp string">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="escape-a-regexp-string">escape a regexp string</dfn> given a string <var>input</var>: 
     <ol>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert③">Assert</a>: <var>input</var> is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-string" id="ref-for-ascii-string">ASCII string</a>.</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑥">Assert</a>: <var>input</var> is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-string" id="ref-for-ascii-string">ASCII string</a>.</p>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
      <li data-md>
@@ -1986,79 +2116,79 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="3.3" id="converting-part-lists-to-pattern-strings"><span class="secno">3.3. </span><span class="content">Converting Part Lists to Pattern Strings</span><a class="self-link" href="#converting-part-lists-to-pattern-strings"></a></h3>
    <div class="algorithm" data-algorithm="generate a pattern string">
-     To <dfn data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①⓪">pattern string</a><a class="self-link" href="#generate-a-pattern-string"></a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options④">options</a> <var>options</var>: 
+     To <dfn data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①⓪">pattern string</a><a class="self-link" href="#generate-a-pattern-string"></a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list②">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑤">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate">For each</a> <var>part</var> of <var>part list</var>:</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate①">For each</a> <var>part</var> of <var>part list</var>:</p>
       <ol>
        <li data-md>
-        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type④">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text③"><code>fixed-text</code></a>" then:</p>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑦">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑤"><code>fixed-text</code></a>" then:</p>
         <ol>
          <li data-md>
-          <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑦">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none③"><code>none</code></a>" then:</p>
+          <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①④">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑤"><code>none</code></a>" then:</p>
           <ol>
            <li data-md>
-            <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value③">value</a> to the end of <var>result</var>.</p>
+            <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑥">value</a> to the end of <var>result</var>.</p>
            <li data-md>
-            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①③">Continue</a>.</p>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑥">Continue</a>.</p>
           </ol>
          <li data-md>
           <p>Append "<code>{</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string①">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value④">value</a> to the end of <var>result</var>.</p>
+          <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string①">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑦">value</a> to the end of <var>result</var>.</p>
          <li data-md>
           <p>Append "<code>}</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑧">modifier</a> to the end of <var>result</var>.</p>
+          <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string③">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑤">modifier</a> to the end of <var>result</var>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①④">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑦">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Let <var>needs grouping</var> be true if at least one of the following are true, otherwise let it be false:</p>
         <ul>
-         <li><var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①">suffix</a> is not the empty string.
-         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①">prefix</a> is not the empty string and is not <var>options</var>’s <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point②">prefix code point</a>. 
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①②">suffix</a> is not the empty string.
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①③">prefix</a> is not the empty string and is not <var>options</var>’s <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point②">prefix code point</a>. 
         </ul>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert④">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name②">name</a> is not the empty string or null.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑦">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name④">name</a> is not the empty string or null.</p>
        <li data-md>
-        <p>Let <var>custom name</var> be true if <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a>[0] is not an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-digit" id="ref-for-ascii-digit">ASCII digit</a>.</p>
+        <p>Let <var>custom name</var> be true if <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑤">name</a>[0] is not an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-digit" id="ref-for-ascii-digit">ASCII digit</a>.</p>
        <li data-md>
         <p>If <var>needs grouping</var> is true, then append "<code>{</code>" to the end of <var>result</var>.</p>
        <li data-md>
-        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix②">prefix</a> to the end of <var>result</var>.</p>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①④">prefix</a> to the end of <var>result</var>.</p>
        <li data-md>
         <p>If <var>custom name</var> is true:</p>
         <ol>
          <li data-md>
           <p>Append "<code>:</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name④">name</a> to the end of <var>result</var>.</p>
+          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑥">name</a> to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑤">type</a> is "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp①"><code>regexp</code></a>" then:</p>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑧">type</a> is "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp①"><code>regexp</code></a>" then:</p>
         <ol>
          <li data-md>
           <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑤">value</a> to the end of <var>result</var>.</p>
+          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑧">value</a> to the end of <var>result</var>.</p>
          <li data-md>
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑥">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard①"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
+        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑨">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard②"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
         <ol>
          <li data-md>
           <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp①">generate a segment wildcard regexp</a> given <var>options</var> to the end of <var>result</var>.</p>
+          <p>Append the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp②">generate a segment wildcard regexp</a> given <var>options</var> to the end of <var>result</var>.</p>
          <li data-md>
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑦">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard①"><code>full-wildcard</code></a>":</p>
+        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①⓪">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard②"><code>full-wildcard</code></a>":</p>
         <ol>
          <li data-md>
           <p>If <var>custom name</var> is true:</p>
@@ -2066,7 +2196,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
            <li data-md>
-            <p>Append <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value②">full wildcard regexp value</a> to the end of <var>result</var>.</p>
+            <p>Append <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value③">full wildcard regexp value</a> to the end of <var>result</var>.</p>
            <li data-md>
             <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
           </ol>
@@ -2074,11 +2204,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>Else append "<code>*</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string③">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix②">suffix</a> to the end of <var>result</var>.</p>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string③">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①③">suffix</a> to the end of <var>result</var>.</p>
        <li data-md>
         <p>If <var>needs grouping</var> is true, then append "<code>}</code>" to the end of <var>result</var>.</p>
        <li data-md>
-        <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string①">convert a modifier to a string</a> give <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑨">modifier</a> to the end of <var>result</var>.</p>
+        <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string④">convert a modifier to a string</a> give <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑥">modifier</a> to the end of <var>result</var>.</p>
       </ol>
      <li data-md>
       <p>Return <var>result</var>.</p>
@@ -2088,7 +2218,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="escape-a-pattern-string">escape a pattern string</dfn> given a string <var>input</var>: 
     <ol>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑤">Assert</a>: <var>input</var> is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-string" id="ref-for-ascii-string①">ASCII string</a>.</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑧">Assert</a>: <var>input</var> is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-string" id="ref-for-ascii-string①">ASCII string</a>.</p>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
      <li data-md>
@@ -2108,14 +2238,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="convert a modifier to a string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="convert-a-modifier-to-a-string">convert a modifier to a string</dfn> given a <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⓪">modifier</a> <var>modifier</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="convert-a-modifier-to-a-string">convert a modifier to a string</dfn> given a <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑦">modifier</a> <var>modifier</var>: 
     <ol>
      <li data-md>
-      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more①"><code>zero-or-more</code></a>", then return "<code>*</code>".</p>
+      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more③"><code>zero-or-more</code></a>", then return "<code>*</code>".</p>
      <li data-md>
-      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-optional" id="ref-for-part-modifier-optional①"><code>optional</code></a>", then return "<code>?</code>".</p>
+      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-optional" id="ref-for-part-modifier-optional②"><code>optional</code></a>", then return "<code>?</code>".</p>
      <li data-md>
-      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more①"><code>one-or-more</code></a>", then return "<code>+</code>".</p>
+      <p>If <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more②"><code>one-or-more</code></a>", then return "<code>+</code>".</p>
      <li data-md>
       <p>Return the empty string.</p>
     </ol>
@@ -2169,6 +2299,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#part-type-full-wildcard">full-wildcard</a><span>, in § 3.1.3</span>
    <li><a href="#full-wildcard-regexp-value">full wildcard regexp value</a><span>, in § 3.1.5</span>
    <li><a href="#generate-a-pattern-string">generate a pattern string</a><span>, in § 3.3</span>
+   <li><a href="#generate-a-regular-expression-and-name-list">generate a regular expression and name list</a><span>, in § 3.2</span>
    <li><a href="#generate-a-segment-wildcard-regexp">generate a segment wildcard regexp</a><span>, in § 3.1.5</span>
    <li><a href="#get-the-next-code-point">get the next code point</a><span>, in § 3.1.2</span>
    <li><a href="#component-group-name-list">group name list</a><span>, in § 2</span>
@@ -2384,6 +2515,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-list-append">1. The URLPattern class </a> <a href="#ref-for-list-append①">(2)</a>
     <li><a href="#ref-for-list-append②">3.1.5. Parsing</a> <a href="#ref-for-list-append③">(2)</a> <a href="#ref-for-list-append④">(3)</a>
+    <li><a href="#ref-for-list-append⑤">3.2. Converting Part Lists to Regular Expressions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-ascii-code-point">
@@ -2410,8 +2542,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-assert">3.1.2. Tokenizing</a>
     <li><a href="#ref-for-assert①">3.1.5. Parsing</a> <a href="#ref-for-assert②">(2)</a>
-    <li><a href="#ref-for-assert③">3.2. Converting Part Lists to Regular Expressions</a>
-    <li><a href="#ref-for-assert④">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-assert⑤">(2)</a>
+    <li><a href="#ref-for-assert③">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-assert④">(2)</a> <a href="#ref-for-assert⑤">(3)</a> <a href="#ref-for-assert⑥">(4)</a>
+    <li><a href="#ref-for-assert⑦">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-assert⑧">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-iteration-break">
@@ -2426,13 +2558,15 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-iteration-continue">3.1.2. Tokenizing</a> <a href="#ref-for-iteration-continue①">(2)</a> <a href="#ref-for-iteration-continue②">(3)</a> <a href="#ref-for-iteration-continue③">(4)</a> <a href="#ref-for-iteration-continue④">(5)</a> <a href="#ref-for-iteration-continue⑤">(6)</a> <a href="#ref-for-iteration-continue⑥">(7)</a> <a href="#ref-for-iteration-continue⑦">(8)</a> <a href="#ref-for-iteration-continue⑧">(9)</a> <a href="#ref-for-iteration-continue⑨">(10)</a> <a href="#ref-for-iteration-continue①⓪">(11)</a>
     <li><a href="#ref-for-iteration-continue①①">3.1.5. Parsing</a> <a href="#ref-for-iteration-continue①②">(2)</a>
-    <li><a href="#ref-for-iteration-continue①③">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-iteration-continue①④">(2)</a>
+    <li><a href="#ref-for-iteration-continue①③">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-iteration-continue①④">(2)</a> <a href="#ref-for-iteration-continue①⑤">(3)</a>
+    <li><a href="#ref-for-iteration-continue①⑥">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-iteration-continue①⑦">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-list-iterate">
    <a href="https://infra.spec.whatwg.org/#list-iterate">https://infra.spec.whatwg.org/#list-iterate</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-list-iterate">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-list-iterate">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-list-iterate①">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-length">
@@ -2451,6 +2585,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-list②">3.1.2. Tokenizing</a>
     <li><a href="#ref-for-list③">3.1.3. Parts</a>
     <li><a href="#ref-for-list④">3.1.5. Parsing</a> <a href="#ref-for-list⑤">(2)</a>
+    <li><a href="#ref-for-list⑥">3.2. Converting Part Lists to Regular Expressions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-list-size">
@@ -3383,7 +3518,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#part-list">#part-list</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-list">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-list①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-list①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-list②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part">
@@ -3397,14 +3533,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#part-type">#part-type</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-type">3.1.5. Parsing</a> <a href="#ref-for-part-type①">(2)</a> <a href="#ref-for-part-type②">(3)</a> <a href="#ref-for-part-type③">(4)</a>
-    <li><a href="#ref-for-part-type④">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type⑤">(2)</a> <a href="#ref-for-part-type⑥">(3)</a> <a href="#ref-for-part-type⑦">(4)</a>
+    <li><a href="#ref-for-part-type④">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-type⑤">(2)</a> <a href="#ref-for-part-type⑥">(3)</a>
+    <li><a href="#ref-for-part-type⑦">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type⑧">(2)</a> <a href="#ref-for-part-type⑨">(3)</a> <a href="#ref-for-part-type①⓪">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-type-fixed-text">
    <b><a href="#part-type-fixed-text">#part-type-fixed-text</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-type-fixed-text">3.1.5. Parsing</a> <a href="#ref-for-part-type-fixed-text①">(2)</a> <a href="#ref-for-part-type-fixed-text②">(3)</a>
-    <li><a href="#ref-for-part-type-fixed-text③">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-type-fixed-text③">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-type-fixed-text④">(2)</a>
+    <li><a href="#ref-for-part-type-fixed-text⑤">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-type-regexp">
@@ -3418,21 +3556,24 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#part-type-segment-wildcard">#part-type-segment-wildcard</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-type-segment-wildcard">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-type-segment-wildcard①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-type-segment-wildcard①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-type-segment-wildcard②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-type-full-wildcard">
    <b><a href="#part-type-full-wildcard">#part-type-full-wildcard</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-type-full-wildcard">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-type-full-wildcard①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-type-full-wildcard①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-type-full-wildcard②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-value">
    <b><a href="#part-value">#part-value</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-value">3.1.5. Parsing</a> <a href="#ref-for-part-value①">(2)</a> <a href="#ref-for-part-value②">(3)</a>
-    <li><a href="#ref-for-part-value③">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-value④">(2)</a> <a href="#ref-for-part-value⑤">(3)</a>
+    <li><a href="#ref-for-part-value③">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-value④">(2)</a> <a href="#ref-for-part-value⑤">(3)</a>
+    <li><a href="#ref-for-part-value⑥">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-value⑦">(2)</a> <a href="#ref-for-part-value⑧">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier">
@@ -3440,56 +3581,64 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-modifier">3.1.3. Parts</a> <a href="#ref-for-part-modifier①">(2)</a> <a href="#ref-for-part-modifier②">(3)</a> <a href="#ref-for-part-modifier③">(4)</a>
     <li><a href="#ref-for-part-modifier④">3.1.5. Parsing</a> <a href="#ref-for-part-modifier⑤">(2)</a> <a href="#ref-for-part-modifier⑥">(3)</a>
-    <li><a href="#ref-for-part-modifier⑦">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-modifier⑧">(2)</a> <a href="#ref-for-part-modifier⑨">(3)</a> <a href="#ref-for-part-modifier①⓪">(4)</a>
+    <li><a href="#ref-for-part-modifier⑦">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-modifier⑧">(2)</a> <a href="#ref-for-part-modifier⑨">(3)</a> <a href="#ref-for-part-modifier①⓪">(4)</a> <a href="#ref-for-part-modifier①①">(5)</a> <a href="#ref-for-part-modifier①②">(6)</a> <a href="#ref-for-part-modifier①③">(7)</a>
+    <li><a href="#ref-for-part-modifier①④">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-modifier①⑤">(2)</a> <a href="#ref-for-part-modifier①⑥">(3)</a> <a href="#ref-for-part-modifier①⑦">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier-none">
    <b><a href="#part-modifier-none">#part-modifier-none</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-modifier-none">3.1.5. Parsing</a> <a href="#ref-for-part-modifier-none①">(2)</a> <a href="#ref-for-part-modifier-none②">(3)</a>
-    <li><a href="#ref-for-part-modifier-none③">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-modifier-none③">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-modifier-none④">(2)</a>
+    <li><a href="#ref-for-part-modifier-none⑤">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier-optional">
    <b><a href="#part-modifier-optional">#part-modifier-optional</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-modifier-optional">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-modifier-optional①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-modifier-optional①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-modifier-optional②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier-zero-or-more">
    <b><a href="#part-modifier-zero-or-more">#part-modifier-zero-or-more</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-modifier-zero-or-more">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-modifier-zero-or-more①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-modifier-zero-or-more①">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-modifier-zero-or-more②">(2)</a>
+    <li><a href="#ref-for-part-modifier-zero-or-more③">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier-one-or-more">
    <b><a href="#part-modifier-one-or-more">#part-modifier-one-or-more</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-modifier-one-or-more">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-modifier-one-or-more①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-modifier-one-or-more①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-modifier-one-or-more②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-name">
    <b><a href="#part-name">#part-name</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-name">3.1.5. Parsing</a> <a href="#ref-for-part-name①">(2)</a>
-    <li><a href="#ref-for-part-name②">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-name③">(2)</a> <a href="#ref-for-part-name④">(3)</a>
+    <li><a href="#ref-for-part-name②">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-name③">(2)</a>
+    <li><a href="#ref-for-part-name④">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-name⑤">(2)</a> <a href="#ref-for-part-name⑥">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-prefix">
    <b><a href="#part-prefix">#part-prefix</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-prefix">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-prefix①">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix②">(2)</a>
+    <li><a href="#ref-for-part-prefix①">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-prefix②">(2)</a> <a href="#ref-for-part-prefix③">(3)</a> <a href="#ref-for-part-prefix④">(4)</a> <a href="#ref-for-part-prefix⑤">(5)</a> <a href="#ref-for-part-prefix⑥">(6)</a> <a href="#ref-for-part-prefix⑦">(7)</a> <a href="#ref-for-part-prefix⑧">(8)</a> <a href="#ref-for-part-prefix⑨">(9)</a> <a href="#ref-for-part-prefix①⓪">(10)</a> <a href="#ref-for-part-prefix①①">(11)</a> <a href="#ref-for-part-prefix①②">(12)</a>
+    <li><a href="#ref-for-part-prefix①③">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix①④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-suffix">
    <b><a href="#part-suffix">#part-suffix</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-part-suffix">3.1.5. Parsing</a>
-    <li><a href="#ref-for-part-suffix①">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-suffix②">(2)</a>
+    <li><a href="#ref-for-part-suffix①">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-suffix②">(2)</a> <a href="#ref-for-part-suffix③">(3)</a> <a href="#ref-for-part-suffix④">(4)</a> <a href="#ref-for-part-suffix⑤">(5)</a> <a href="#ref-for-part-suffix⑥">(6)</a> <a href="#ref-for-part-suffix⑦">(7)</a> <a href="#ref-for-part-suffix⑧">(8)</a> <a href="#ref-for-part-suffix⑨">(9)</a> <a href="#ref-for-part-suffix①⓪">(10)</a> <a href="#ref-for-part-suffix①①">(11)</a>
+    <li><a href="#ref-for-part-suffix①②">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-suffix①③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="options">
@@ -3497,7 +3646,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-options">3.1.4. Options</a> <a href="#ref-for-options①">(2)</a>
     <li><a href="#ref-for-options②">3.1.5. Parsing</a> <a href="#ref-for-options③">(2)</a>
-    <li><a href="#ref-for-options④">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-options④">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-options⑤">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="options-delimiter-code-point">
@@ -3573,14 +3723,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#full-wildcard-regexp-value">#full-wildcard-regexp-value</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-full-wildcard-regexp-value">3.1.5. Parsing</a> <a href="#ref-for-full-wildcard-regexp-value①">(2)</a>
-    <li><a href="#ref-for-full-wildcard-regexp-value②">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-full-wildcard-regexp-value②">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-full-wildcard-regexp-value③">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="generate-a-segment-wildcard-regexp">
    <b><a href="#generate-a-segment-wildcard-regexp">#generate-a-segment-wildcard-regexp</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-generate-a-segment-wildcard-regexp">3.1.5. Parsing</a>
-    <li><a href="#ref-for-generate-a-segment-wildcard-regexp①">3.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-generate-a-segment-wildcard-regexp①">3.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-generate-a-segment-wildcard-regexp②">3.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="try-to-consume-a-token">
@@ -3629,6 +3781,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#escape-a-regexp-string">#escape-a-regexp-string</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-escape-a-regexp-string">3.1.5. Parsing</a>
+    <li><a href="#ref-for-escape-a-regexp-string①">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-escape-a-regexp-string②">(2)</a> <a href="#ref-for-escape-a-regexp-string③">(3)</a> <a href="#ref-for-escape-a-regexp-string④">(4)</a> <a href="#ref-for-escape-a-regexp-string⑤">(5)</a> <a href="#ref-for-escape-a-regexp-string⑥">(6)</a> <a href="#ref-for-escape-a-regexp-string⑦">(7)</a> <a href="#ref-for-escape-a-regexp-string⑧">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="escape-a-pattern-string">
@@ -3640,7 +3793,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="convert-a-modifier-to-a-string">
    <b><a href="#convert-a-modifier-to-a-string">#convert-a-modifier-to-a-string</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-convert-a-modifier-to-a-string">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-convert-a-modifier-to-a-string①">(2)</a>
+    <li><a href="#ref-for-convert-a-modifier-to-a-string">3.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-convert-a-modifier-to-a-string①">(2)</a> <a href="#ref-for-convert-a-modifier-to-a-string②">(3)</a>
+    <li><a href="#ref-for-convert-a-modifier-to-a-string③">3.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-convert-a-modifier-to-a-string④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="url-api-pathname-string">
