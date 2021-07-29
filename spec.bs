@@ -11,7 +11,7 @@ Boilerplate: omit conformance, omit feedback-header
 Editor: Ben Kelly, Google https://www.google.com/, wanderview@chromium.org
 Abstract: The URLPattern API provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 !Participate: <a href="https://github.com/WICG/urlpattern">GitHub WICG/urlpattern</a> (<a href="https://github.com/WICG/urlpattern/issues/new">new issue</a>, <a href="https://github.com/WICG/urlpattern/issues?state=open">open issues</a>)
-!Commits: <a href="https://github.com/WICG/urlpattern/commits/master/spec.bs">GitHub spec.bs commits</a>
+!Commits: <a href="https://github.com/WICG/urlpattern/commits/main/spec.bs">GitHub spec.bs commits</a>
 Complain About: accidental-2119 yes, missing-example-ids yes
 Indent: 2
 Default Biblio Status: current
@@ -285,6 +285,16 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Return the result of [=match=] given [=this=], |input|, and |baseURL| if given.
 </div>
 
+<h3 id=urlpattern-internals>Internals</h3>
+
+A {{URLPattern}} is associated with multiple <dfn>component</dfn> [=structs=].
+
+A [=component=] has an associated <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=] or null, initially null.
+
+A [=component=] has an associated <dfn for=component>regular expression</dfn>, a {{RegExp}} or null, initially null.
+
+A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=list=] of strings, initially an empty [=list=].
+
 <div algorithm>
   To perform a <dfn>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
@@ -348,40 +358,6 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 </div>
 
 <div algorithm>
-  To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string |type|, a string |protocol|, a string |username|, a string |password|, a string |hostname|, a string |port|, a string |pathname|, a string |search|, and a string |hash|:
-
-  1. Let |result| be the result of creating a new {{URLPatternInit}}.
-  1. Set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
-  1. Set |result|["{{URLPatternInit/username}}"] to |username|.
-  1. Set |result|["{{URLPatternInit/password}}"] to |password|.
-  1. Set |result|["{{URLPatternInit/hostname}}"] to |hostname|.
-  1. Set |result|["{{URLPatternInit/port}}"] to |port|.
-  1. Set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
-  1. Set |result|["{{URLPatternInit/search}}"] to |search|.
-  1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
-  1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
-    1. Let |baseURL| be the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
-    1. If |baseURL| is failure, then throw a {{TypeError}}.
-    1. Set |result|["{{URLPatternInit/protocol}}"] to |baseURL|'s [=url/scheme=].
-    1. Set |result|["{{URLPatternInit/username}}"] to |baseURL|'s [=url/username=].
-    1. Set |result|["{{URLPatternInit/password}}"] to |baseURL|'s [=url/password=].
-    1. Set |result|["{{URLPatternInit/hostname}}"] to |baseURL|'s [=url/host=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/port}}"] to |baseURL|'s [=url/port=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/pathname}}"] to |baseURL|'s [=url/API pathname string=].
-    1. Set |result|["{{URLPatternInit/search}}"] to |baseURL|'s [=url/query=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/hash}}"] to |baseURL|'s [=url/fragment=] or the empty string if the value is null.
-  1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=canonicalize protocol=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
-  1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=canonicalize username=] given |init|["{{URLPatternInit/username}}"] and |type|.
-  1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=canonicalize password=] given |init|["{{URLPatternInit/password}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=canonicalize hostname=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
-  1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=canonicalize port=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/pathname}}"] is not null then set |result|["{{URLPatternInit/pathname}}"] to the result of [=canonicalize pathname=] given |init|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=canonicalize search=] given |init|["{{URLPatternInit/search}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=canonicalize hash=] given |init|["{{URLPatternInit/hash}}"] and |type|.
-  1. Return |result|.
-</div>
-
-<div algorithm>
   To <dfn>create a component match result</dfn> given a [=component=] |component|, a string |input|, and an array representing the output of [$RegExpBuiltinExec$] |execResult|:
 
   1. Let |result| be a new {{URLPatternComponentResult}}.
@@ -395,110 +371,6 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Set |result|["{{URLPatternComponentResult/groups}}"] to |groups|.
   1. Return |result|.
 </div>
-
-<div algorithm>
-  To <dfn>canonicalize protocol</dfn> given a string |value| and a string |type|:
-
-  1. Let |strippedValue| be the given |value| with a single trailing U+003A (`:`) removed, if any.
-  1. If |type| is "`pattern`" then return |strippedValue|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. Let |parseResult| be the result of running the [=basic URL parser=] given |strippedValue| followed by "`://dummy.test`", with |dummyURL| as <i>[=basic URL parser/url=]</i>.
-     <p class="note">Note, [=basic URL parser/state override=] is not used here because it enforces restrictions that are only appropriate for the {{URL/protocol}} setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/scheme=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize username</dfn> given a string |value| and a string |type|:
-
-  1. If |type| is "`pattern`" then return |value|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. [=Set the username=] given |dummyURL| and |value|.
-  1. Return |dummyURL|'s [=url/username=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize password</dfn> given a string |value| and a string |type|:
-
-  1. If |type| is "`pattern`" then return |value|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. [=Set the password=] given |dummyURL| and |value|.
-  1. Return |dummyURL|'s [=url/password=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize hostname</dfn> given a string |value| and a string |type|:
-
-  1. If |type| is "`pattern`" then return |value|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/host=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize port</dfn> given a string |portValue|, a string |protocolValue|, and a string |type|:
-
-  1. If |type| is "`pattern`" then return |portValue|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. Set |dummyURL|'s [=url/scheme=] to |protocolValue|.
-     <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to properly recognize and normalize default port values.</p>
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |portValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=port state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/port=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize pathname</dfn> given a string |pathnameValue|, a string |protocolValue|, and a string |type|:
-
-  1. If |type| is "`pattern`" then return |pathnameValue|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. If |protocolValue| is null or the empty string, then set |protocolValue| to "`https`".
-  1. Set |dummyURL|'s [=url/scheme=] to |protocolValue|.
-     <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order to check if it [=is special=].  If |protocolValue| is missing we purposely default the URL to being special by using "`https`" for the [=url/scheme=].</p>
-  1. Let |parseResult| be null.
-  1. If |dummyURL| [=is special=], then:
-    1. Set |parseResult| to the result of running [=basic URL parser=] given |pathnameValue| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
-  1. Else:
-    1. Set |dummyURL|'s [=url/path=][0] to empty string.
-    1. Set |parseResult| to the result of running [=basic URL parser|URL parsing=] given |pathnameValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=cannot be a base URL path state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/API pathname string=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize search</dfn> given a string |value| and a string |type|:
-
-  1. Let |strippedValue| be the given |value| with a single leading U+003F (`?`) removed, if any.
-  1. If |type| is "`pattern`" then return |strippedValue|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. Set |dummyURL|'s [=url/query=] to the empty string.
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |strippedValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=query state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/query=].
-</div algorithm>
-
-<div algorithm>
-  To <dfn>canonicalize hash</dfn> given a string |value| and a string |type|:
-
-  1. Let |strippedValue| be the given |value| with a single leading U+0023 (`#`) removed, if any.
-  1. If |type| is "`pattern`" then return |strippedValue|.
-  1. Let |dummyURL| be a new [=URL record=].
-  1. Set |dummyURL|'s [=url/fragment=] to the empty string.
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |strippedValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=fragment state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/fragment=].
-</div algorithm>
-
-<h2 id=components>Components</h2>
-
-A {{URLPattern}} is associated with multiple <dfn>component</dfn> [=structs=].
-
-A [=component=] has an associated <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=], initially null.
-
-A [=component=] has an associated <dfn for=component>regular expression</dfn>, a {{RegExp}}, initially null.
-
-A [=component=] has an associated <dfn for=component>group name list</dfn>, an array of strings, initially an empty array.
 
 <h2 id=patterns>Patterns</h2>
 
@@ -790,7 +662,7 @@ A [=pattern parser=] has an associated <dfn for="pattern parser">index</dfn>, a 
 A [=pattern parser=] has an associated <dfn for="pattern parser">next numeric name</dfn>, a number, initially 0.
 
 <div algorithm>
-To <dfn export>parse a pattern</dfn> given a [=/pattern string=] |input|, [=/options=] |options|, and [=/encoding callback=] |encoding callback|:
+To <dfn export>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/options=] |options|, and [=/encoding callback=] |encoding callback|:
 
   1. Let |parser| be a new [=pattern parser=] whose [=pattern parser/encoding callback=] is |encoding callback| and [=pattern parser/segment wildcard regexp=] is the result of running [=generate a segment wildcard regexp=] given |options|.
   1. Set |parser|'s [=pattern parser/token list=] to the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`strict`</a>".
@@ -1133,6 +1005,195 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |modifier| is "<a for=part/modifier>`one-or-more`</a>", then return "`+`".
   1. Return the empty string.
 </div>
+
+<h2 id=canon>Canonicalization</h2>
+
+<h3 id=canon-encoding-callbacks>Encoding Callbacks</h3>
+
+<div algorithm>
+  To <dfn>canonicalize a protocol</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| followed by "`://dummy.test`", with |dummyURL| as <i>[=basic URL parser/url=]</i>.
+     <p class="note">Note, [=basic URL parser/state override=] is not used here because it enforces restrictions that are only appropriate for the {{URL/protocol}} setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/scheme=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a username</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. [=Set the username=] given |dummyURL| and |value|.
+  1. Return |dummyURL|'s [=url/username=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a password</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. [=Set the password=] given |dummyURL| and |value|.
+  1. Return |dummyURL|'s [=url/password=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a hostname</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/host=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a port</dfn> given a string |portValue| and string |protocolValue|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Set |dummyURL|'s [=url/scheme=] to |protocolValue|.
+     <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to properly recognize and normalize default port values.</p>
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |portValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=port state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/port=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a standard pathname</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/API pathname string=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a cannot-be-a-base-URL pathname</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Set |dummyURL|'s [=url/path=][0] to empty string.
+  1. Let |parseResult| be the result of running [=basic URL parser|URL parsing=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=cannot be a base URL path state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/API pathname string=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a search</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Set |dummyURL|'s [=url/query=] to the empty string.
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=query state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/query=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a hash</dfn> given a string |value|:
+
+  1. Let |dummyURL| be a new [=URL record=].
+  1. Set |dummyURL|'s [=url/fragment=] to the empty string.
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=fragment state=] as <i>[=basic URL parser/state override=]</i>.
+  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Return |dummyURL|'s [=url/fragment=].
+</div>
+
+<h3 id=canon-processing-for-init>{{URLPatternInit}} Processing</h3>
+
+<div algorithm>
+  To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string or null |type|, a string or null |protocol|, a string or null |username|, a string or null |password|, a string or null |hostname|, a string or null |port|, a string or null |pathname|, a string or null |search|, and a string or null |hash|:
+
+  1. Let |result| be the result of creating a new {{URLPatternInit}}.
+  1. Set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
+  1. Set |result|["{{URLPatternInit/username}}"] to |username|.
+  1. Set |result|["{{URLPatternInit/password}}"] to |password|.
+  1. Set |result|["{{URLPatternInit/hostname}}"] to |hostname|.
+  1. Set |result|["{{URLPatternInit/port}}"] to |port|.
+  1. Set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
+  1. Set |result|["{{URLPatternInit/search}}"] to |search|.
+  1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
+  1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
+    1. Let |baseURL| be the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
+    1. If |baseURL| is failure, then throw a {{TypeError}}.
+    1. Set |result|["{{URLPatternInit/protocol}}"] to |baseURL|'s [=url/scheme=].
+    1. Set |result|["{{URLPatternInit/username}}"] to |baseURL|'s [=url/username=].
+    1. Set |result|["{{URLPatternInit/password}}"] to |baseURL|'s [=url/password=].
+    1. Set |result|["{{URLPatternInit/hostname}}"] to |baseURL|'s [=url/host=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/port}}"] to |baseURL|'s [=url/port=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/pathname}}"] to |baseURL|'s [=url/API pathname string=].
+    1. Set |result|["{{URLPatternInit/search}}"] to |baseURL|'s [=url/query=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/hash}}"] to |baseURL|'s [=url/fragment=] or the empty string if the value is null.
+  1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
+  1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
+  1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. If |init|["{{URLPatternInit/pathname}}"] is not null then set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |init|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
+  1. Return |result|.
+</div>
+
+<div algorithm>
+  To <dfn>process protocol for init</dfn> given a string |value| and a string |type|:
+
+  1. Let |strippedValue| be the given |value| with a single trailing U+003A (`:`) removed, if any.
+  1. If |type| is "`pattern`" then return |strippedValue|.
+  1. Return the result of running [=canonicalize a protocol=] given |strippedValue|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process username for init</dfn> given a string |value| and a string |type|:
+
+  1. If |type| is "`pattern`" then return |value|.
+  1. Return the result of running [=canonicalize a username=] given |value|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process password for init</dfn> given a string |value| and a string |type|:
+
+  1. If |type| is "`pattern`" then return |value|.
+  1. Return the result of running [=canonicalize a password=] given |value|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process hostname for init</dfn> given a string |value| and a string |type|:
+
+  1. If |type| is "`pattern`" then return |value|.
+  1. Return the result of running [=canonicalize a hostname=] given |value|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process port for init</dfn> given a string |portValue|, a string |protocolValue|, and a string |type|:
+
+  1. If |type| is "`pattern`" then return |portValue|.
+  1. Return the result of running [=canonicalize a port=] given |portValue| and |protocolValue|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process pathname for init</dfn> given a string |pathnameValue|, a string |protocolValue|, and a string |type|:
+
+  1. If |type| is "`pattern`" then return |pathnameValue|.
+  1. Let |dummyURL| be a new [=URL record=].
+  1. If |protocolValue| is null or the empty string, then set |protocolValue| to "`https`".
+  1. Set |dummyURL|'s [=url/scheme=] to |protocolValue|.
+     <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order to check if it [=is special=].  If |protocolValue| is missing we purposely default the URL to being special by using "`https`" for the [=url/scheme=].</p>
+  1. If |dummyURL| [=is special=], then return the result of running [=canonicalize a standard pathname=] given |pathnameValue|.
+  1. Else return the result of running [=canonicalize a cannot-be-a-base-URL pathname=] given |pathnameValue|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process search for init</dfn> given a string |value| and a string |type|:
+
+  1. Let |strippedValue| be the given |value| with a single leading U+003F (`?`) removed, if any.
+  1. If |type| is "`pattern`" then return |strippedValue|.
+  1. Return the result of running [=canonicalize a search=] given |strippedValue|.
+</div algorithm>
+
+<div algorithm>
+  To <dfn>process hash for init</dfn> given a string |value| and a string |type|:
+
+  1. Let |strippedValue| be the given |value| with a single leading U+0023 (`#`) removed, if any.
+  1. If |type| is "`pattern`" then return |strippedValue|.
+  1. Return the result of running [=canonicalize a hash=] given |strippedValue|.
+</div algorithm>
 
 <h2 id=patching>Patching</h2>
 
