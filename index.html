@@ -1350,6 +1350,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value">value</a> to the substring within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a> starting at <var>value position</var> with <var>value length</var>.</p>
      <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append②">Append</a> <var>token</var> to the back of <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-token-list" id="ref-for-tokenizer-token-list①">token list</a>.</p>
+     <li data-md>
       <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> to <var>next position</var>.</p>
     </ol>
    </div>
@@ -1657,7 +1659,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>part</var> be a new <a data-link-type="dfn" href="#part" id="ref-for-part①⑦">part</a> whose <a data-link-type="dfn" href="#part-type" id="ref-for-part-type">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text①"><code>fixed-text</code></a>", <a data-link-type="dfn" href="#part-value" id="ref-for-part-value">value</a> is <var>encoded value</var>, and <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier④">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none"><code>none</code></a>".</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append②">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list①">part list</a>.</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append③">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list①">part list</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="add a part">
@@ -1699,7 +1701,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Let <var>part</var> be a new <a data-link-type="dfn" href="#part" id="ref-for-part①⑨">part</a> whose <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text②"><code>fixed-text</code></a>", <a data-link-type="dfn" href="#part-value" id="ref-for-part-value①">value</a> is <var>encoded value</var>, and <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑤">modifier</a> is <var>modifier</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append③">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list②">part list</a>.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append④">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list②">part list</a>.</p>
        <li data-md>
         <p>Return.</p>
       </ol>
@@ -1752,7 +1754,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>part</var> be a new <a data-link-type="dfn" href="#part" id="ref-for-part②③">part</a> whose <a data-link-type="dfn" href="#part-type" id="ref-for-part-type③">type</a> is <var>type</var>, <a data-link-type="dfn" href="#part-value" id="ref-for-part-value②">value</a> is <var>regexp value</var>, <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑥">modifier</a> is <var>modifier</var>, <a data-link-type="dfn" href="#part-name" id="ref-for-part-name①">name</a> is <var>name</var>, <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix">prefix</a> is <var>encoded prefix</var>, and <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix">suffix</a> is <var>encoded suffix</var>.</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append④">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list③">part list</a>.</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑤">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list③">part list</a>.</p>
     </ol>
    </div>
    <h3 class="heading settled" data-level="2.2" id="converting-part-lists-to-regular-expressions"><span class="secno">2.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
@@ -1793,7 +1795,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert③">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name②">name</a> is not the empty string and is not null.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑤">Append</a> <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> to <var>name list</var>.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑥">Append</a> <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> to <var>name list</var>.</p>
         <p class="note" role="note">We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> which has indicated its unlikely to switch to using named capture groups. </p>
        <li data-md>
         <p>Let <var>regexp value</var> be <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑤">value</a>.</p>
@@ -2596,8 +2598,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://infra.spec.whatwg.org/#list-append">https://infra.spec.whatwg.org/#list-append</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-list-append">1.1. Internals</a> <a href="#ref-for-list-append①">(2)</a>
-    <li><a href="#ref-for-list-append②">2.1.5. Parsing</a> <a href="#ref-for-list-append③">(2)</a> <a href="#ref-for-list-append④">(3)</a>
-    <li><a href="#ref-for-list-append⑤">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-list-append②">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-list-append③">2.1.5. Parsing</a> <a href="#ref-for-list-append④">(2)</a> <a href="#ref-for-list-append⑤">(3)</a>
+    <li><a href="#ref-for-list-append⑥">2.2. Converting Part Lists to Regular Expressions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-ascii-code-point">
@@ -3508,7 +3511,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="tokenizer-token-list">
    <b><a href="#tokenizer-token-list">#tokenizer-token-list</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-tokenizer-token-list">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-tokenizer-token-list">2.1.2. Tokenizing</a> <a href="#ref-for-tokenizer-token-list①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="tokenizer-index">
