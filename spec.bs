@@ -553,6 +553,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Set |token|'s [=token/type=] to |type|.
   1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
   1. Set |token|'s [=token/value=] to the substring within |tokenizer|'s [=tokenizer/input=] starting at |value position| with |value length|.
+  1. [=list/Append=] |token| to the back of |tokenizer|'s [=tokenizer/token list=].
   1. Set |tokenizer|'s [=token/index=] to |next position|.
 </div>
 
