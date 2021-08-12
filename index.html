@@ -940,6 +940,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Let (<var>regular expression string</var>, <var>name list</var>) be the result of running <a data-link-type="dfn" href="#generate-a-regular-expression-and-name-list" id="ref-for-generate-a-regular-expression-and-name-list">generate a regular expression and name list</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
       <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, "<code>u</code>").  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>.</p>
+      <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
      <li data-md>
       <p>Let <var>pattern string</var> be the result of running <a data-link-type="dfn" href="#generate-a-pattern-string" id="ref-for-generate-a-pattern-string">generate a pattern string</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
@@ -1574,7 +1575,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>protocol string</var> be the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string①">make a component string</a> given <var>parser</var>.</p>
      <li data-md>
-      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
+      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
      <li data-md>
       <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var>, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url②">should treat as a standard URL</a> to true.</p>
     </ol>
@@ -1983,7 +1984,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list②">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑥">list</a>.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser①">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-encoding-callback">encoding callback</dfn>, a <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback①">encoding callback</a>, that must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser②">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-segment-wildcard-regexp">segment wildcard regexp</dfn>, a string, that must be set upon creation.</p>
-   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser③">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-part-list">part list</dfn>, a <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑦">list</a>.</p>
+   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser③">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-part-list">part list</dfn>, a <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑦">list</a>.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser④">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-pending-fixed-value">pending fixed value</dfn>, a string, initially the empty string.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑤">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-index">index</dfn>, a number, initially 0.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑥">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-next-numeric-name">next numeric name</dfn>, a number, initially 0.</p>
@@ -2303,7 +2304,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="2.2" id="converting-part-lists-to-regular-expressions"><span class="secno">2.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
    <div class="algorithm" data-algorithm="generate a regular expression and name list">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-regular-expression-and-name-list">generate a regular expression and name list</dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑧">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-regular-expression-and-name-list">generate a regular expression and name list</dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list②">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑧">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be "<code>^</code>".</p>
@@ -2459,7 +2460,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="2.3" id="converting-part-lists-to-pattern-strings"><span class="secno">2.3. </span><span class="content">Converting Part Lists to Pattern Strings</span><a class="self-link" href="#converting-part-lists-to-pattern-strings"></a></h3>
    <div class="algorithm" data-algorithm="generate a pattern string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list②">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list③">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
@@ -3996,7 +3997,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#compile-a-component">#compile-a-component</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-compile-a-component">1. The URLPattern class </a> <a href="#ref-for-compile-a-component①">(2)</a> <a href="#ref-for-compile-a-component②">(3)</a> <a href="#ref-for-compile-a-component③">(4)</a> <a href="#ref-for-compile-a-component④">(5)</a> <a href="#ref-for-compile-a-component⑤">(6)</a> <a href="#ref-for-compile-a-component⑥">(7)</a> <a href="#ref-for-compile-a-component⑦">(8)</a> <a href="#ref-for-compile-a-component⑧">(9)</a>
-    <li><a href="#ref-for-compile-a-component⑨">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-compile-a-component⑨">1.1. Internals</a>
+    <li><a href="#ref-for-compile-a-component①⓪">1.2. Constructor String Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="match">
@@ -4531,9 +4533,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="part-list">
    <b><a href="#part-list">#part-list</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-part-list">2.1.5. Parsing</a>
-    <li><a href="#ref-for-part-list①">2.2. Converting Part Lists to Regular Expressions</a>
-    <li><a href="#ref-for-part-list②">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-part-list">1.1. Internals</a>
+    <li><a href="#ref-for-part-list①">2.1.5. Parsing</a>
+    <li><a href="#ref-for-part-list②">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-part-list③">2.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part">
