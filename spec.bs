@@ -188,32 +188,38 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <dl class="domintro non-normative">
   <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL)|URLPattern}}(|input|)</code></dt>
   <dd>
-    Constructs a new URLPattern object.  The |input| is an object containing separate patterns for each URL component; e.g. hostname, pathname, etc.  Missing components will default to a wildcard pattern.  In addition, |input| can contain a baseURL property that provides static text patterns for any missing components.
+    Constructs a new {{URLPattern}} object.  The |input| is an object containing separate patterns for each URL component; e.g. hostname, pathname, etc.  Missing components will default to a wildcard pattern.  In addition, |input| can contain a {{URLPatternInit/baseURL}} property that provides static text patterns for any missing components.
   </dd>
 
-  <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL)|URLPattern}}(|input|, |baseURL|)</code></dt>
+  <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL)|URLPattern}}(|patternString|, |baseURL|)</code></dt>
   <dd>
-    Constructs a new URLPattern object.  The |input| is a URL string containing pattern syntax for one or more components.  If |baseURL| is provided, then |input| can be relative.  This constructor will always set at least an empty string value and does not default any components to wildcard patterns.
+    Constructs a new {{URLPattern}} object.  |patternString| is a URL string containing pattern syntax for one or more components.  If |baseURL| is provided, then |patternString| can be relative.  This constructor will always set at least an empty string value and does not default any components to wildcard patterns.
   </dd>
 
   <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|input|)</code></dt>
   <dd>
-    Tests if |urlPattern| matches the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a baseURL property that provides values for any missing components.  If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
+    Tests if |urlPattern| matches the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a {{URLPatternInit/baseURL}} property that provides values for any missing components.  If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
   </dd>
 
-  <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|input|, |baseURL|)</code></dt>
+  <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|url|, |baseURL|)</code></dt>
   <dd>
-    Tests if |urlPattern| matches the given arguments.  The |input| is a URL string.  If |baseURL| is provided, then |input| can be relative.  If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
+    Tests if |urlPattern| matches the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |url| can be relative.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
   </dd>
 
   <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|input|)</code></dt>
   <dd>
-    Executes the |urlPattern| against the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a baseURL property that provides values for any missing components.  If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.group.id`.  If |urlPattern| does not match the |input|, then |result| is null.
+    Executes the |urlPattern| against the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a baseURL property that provides values for any missing components.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
-  <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|input|, |baseURL|)</code></dt>
+  <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|url|, |baseURL|)</code></dt>
   <dd>
-    Executes the |urlPattern| against the given arguments.  The |input| is a URL string.  If |baseURL| is provided, then |input| can be relative..  If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.group.id`.  If |urlPattern| does not match the |input|, then |result| is null.
+    Executes the |urlPattern| against the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |input| can be relative.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
   <dt><code>|urlPattern|.{{URLPattern/protocol}}</code></dt>
