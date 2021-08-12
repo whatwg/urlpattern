@@ -186,44 +186,80 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>search componen
 Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
 
 <dl class="domintro non-normative">
-  <dt><code>{{URLPattern}} . {{URLPattern/protocol}}</code>
+  <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL)|URLPattern}}(|input|)</code></dt>
   <dd>
-    <p>The normalized protocol pattern string.
+    Constructs a new {{URLPattern}} object.  The |input| is an object containing separate patterns for each URL component; e.g. hostname, pathname, etc.  Missing components will default to a wildcard pattern.  In addition, |input| can contain a {{URLPatternInit/baseURL}} property that provides static text patterns for any missing components.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/username}}</code>
+  <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL)|URLPattern}}(|patternString|, |baseURL|)</code></dt>
   <dd>
-    <p>The normalized username pattern string.
+    Constructs a new {{URLPattern}} object.  |patternString| is a URL string containing pattern syntax for one or more components.  If |baseURL| is provided, then |patternString| can be relative.  This constructor will always set at least an empty string value and does not default any components to wildcard patterns.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/password}}</code>
+  <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|input|)</code></dt>
   <dd>
-    <p>The normalized password pattern string.
+    Tests if |urlPattern| matches the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a {{URLPatternInit/baseURL}} property that provides values for any missing components.  If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/hostname}}</code>
+  <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|url|, |baseURL|)</code></dt>
   <dd>
-    <p>The normalized hostname pattern string.
+    Tests if |urlPattern| matches the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |url| can be relative.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/port}}</code>
+  <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|input|)</code></dt>
   <dd>
-    <p>The normalized port pattern string.
+    Executes the |urlPattern| against the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a baseURL property that provides values for any missing components.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/pathname}}</code>
+  <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|url|, |baseURL|)</code></dt>
   <dd>
-    <p>The normalized pathname pattern string.
+    Executes the |urlPattern| against the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |input| can be relative.
+    
+    If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/search}}</code>
+  <dt><code>|urlPattern|.{{URLPattern/protocol}}</code></dt>
   <dd>
-    <p>The normalized search pattern string.
+    <p>Returns |urlPattern|'s normalized protocol pattern string.
   </dd>
 
-  <dt><code>{{URLPattern}} . {{URLPattern/hash}}</code>
+  <dt><code>|urlPattern|.{{URLPattern/username}}</code></dt>
   <dd>
-    <p>The normalized hash pattern string.
+    <p>Returns |urlPattern|'s normalized username pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/password}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized password pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/hostname}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized hostname pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/port}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized port pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/pathname}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized pathname pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/search}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized search pattern string.
+  </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/hash}}</code></dt>
+  <dd>
+    <p>Returns |urlPattern|'s normalized hash pattern string.
   </dd>
 </dl>
 
