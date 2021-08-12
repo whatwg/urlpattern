@@ -323,7 +323,7 @@ A [=component=] has an associated <dfn for=component>regular expression</dfn>, a
 A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=list=] of strings, which must be set upon creation.
 
 <div algorithm>
-  To <dfn>compile a component</dfn> given a string |input|, [=/options=] |options|, and [=/encoding callback=] |encoding callback|:
+  To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
 
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
