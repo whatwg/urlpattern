@@ -10,6 +10,7 @@ URL: https://wicg.github.io/urlpattern/
 Boilerplate: omit conformance, omit feedback-header
 Editor: Ben Kelly, Google https://www.google.com/, wanderview@chromium.org
 Abstract: The URLPattern API provides a web platform primitive for matching URLs based on a convenient pattern syntax.
+Status Text: This proposal will hopefully move into the WHATWG URL workstream in the future.
 !Participate: <a href="https://github.com/WICG/urlpattern">GitHub WICG/urlpattern</a> (<a href="https://github.com/WICG/urlpattern/issues/new">new issue</a>, <a href="https://github.com/WICG/urlpattern/issues?state=open">open issues</a>)
 !Commits: <a href="https://github.com/WICG/urlpattern/commits/main/spec.bs">GitHub spec.bs commits</a>
 Complain About: accidental-2119 yes, missing-example-ids yes
