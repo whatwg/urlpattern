@@ -692,7 +692,7 @@ To run <dfn>is a pathname start</dfn> given a [=constructor string parser=] |par
 <div algorithm>
 To run <dfn>is a search prefix</dfn> given a [=constructor string parser=] |parser|:
 
-  1. If result of running [=is a non-special pattern char=] given |parser|'s [=constructor string parser/token index=] and "`?`" is true, then return true.
+  1. If result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=] and "`?`" is true, then return true.
   1. If |parser|'s [=constructor string parser/token list=][=constructor string parser/token index=]'s [=token/value=] is not "`?`", then return false.
   1. Let |previous index| be |parser|'s [=constructor string parser/token index=] &minus; 1.
   1. If |previous index| is less than 0, then return true.
@@ -710,7 +710,7 @@ To run <dfn>is a search prefix</dfn> given a [=constructor string parser=] |pars
 <div algorithm>
 To run <dfn>is a hash prefix</dfn> given a [=constructor string parser=] |parser|:
 
-  1. Return the result of running [=is a non-special pattern char=] given |parser|'s [=constructor string parser/token index=] and "`#`".
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=] and "`#`".
 </div>
 
 <div algorithm>
