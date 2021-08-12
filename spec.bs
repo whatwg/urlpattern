@@ -427,10 +427,321 @@ The <dfn>standard pathname options</dfn> is an [=options=] [=struct=] with [=opt
 
 <h3 id=constructor-string-parsing>Constructor String Parsing</h3>
 
+A <dfn export>constructor string parser</dfn> is a [=struct=].
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">input</dfn>, a string, which must be set upon creation.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">token list</dfn>, a [=/token list=], which must be set upon creation.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">result</dfn>, a {{URLPatternInit}}, initially set to a new {{URLPatternInit}}.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">component start</dfn>, a number, initially set to 0.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">token index</dfn>, a number, initially set to 0.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">token increment</dfn>, a number, initially set to 1.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">group depth</dfn>, a number, initially set to 0.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">should treat as a standard URL</dfn>, a boolean, initially set to false.
+
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">state</dfn>, a string, initially set to "<a for="constructor string parser/state">`init`</a>".  It must be one of the following:
+
+<ul>
+  <li>"<dfn for="constructor string parser/state">`init`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`protocol`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`authority`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`username`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`password`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`hostname`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`port`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`pathname`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`search`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`hash`</dfn>"</li>
+  <li>"<dfn export for="constructor string parser/state">`done`</dfn>"</li>
+</ul>
+
+<div class=note>
+  <p>The URLPattern constructor string algorithm is very similar to the [=basic URL parser=] algorithm, but some differences prevent us from using that algorithm directly.
+  <p>First, the URLPattern constructor string parser operates on [=tokens=] generated using the "`lenient`" [=tokenize policy=].  In constrast, [=basic URL parser=] operates code points.  Operating on [=tokens=] allows the URLPattern constructor string parser to more easily distinguish between code points that are significant pattern syntax and code points that might be a URL component separator.  For example, it makes it trivial to handle named groups like "`:hmm`" in "`https://a.c:hmm.example.com:8080`" without getting confused with the port number.
+  <p>Second, the URLPattern constructor string parser needs to avoid applying URL canonicalization to all code points like [=basic URL parser=] does.  Instead we perform canonicalization on only parts of the pattern string we know are safe later when compiling each component pattern string.
+  <p class=allow-2119>Finally, the URLPattern constructor string parser does not handle some parts of the [=basic URL parser=] state machine.  For example, it does not treat backslashes specially as they would all be treated as pattern characters and would require excessive escaping.  In addition, this parser may not handle some more esoteric parts of the URL parsing algorithm like file URLs with a hostname.  The goal with this parser was to handle the most common URLs while allowing any niche case to be handled instead via the {{URLPatternInit}} constructor.
+</div>
+
 <div algorithm>
 To <dfn>parse a constructor string</dfn> given a string |input|:
 
-  1. TODO |input|
+  1. Let |parser| be a new [=constructor string parser=] whose [=constructor string parser/input=] is |input| and [=constructor string parser/token list=] is the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`lenient`</a>".
+    <div class=note>
+      <p>When constructing a pattern using a {{URLPatternInit}} like `new URLPattern({ pathname: 'foo' })` any missing components will be defaulted to wildcards.  In the constructor string case, however, all components are precisely defined as either empty string or a longer value.  This is due to there being no way to simply "leave out" a component when writing a URL.
+      <p>To implement this we initialize components in |parser|'s [=constructor string parser/result=] with empty string in advance.
+      <p>We can't, however, do this immediately.  We want to allow the `baseURL` to provide information for relative URLs, so we only want to set the default empty string values for components following the first component in the relative URL.  We therefore wait to set the default component values until after we exit the "<a for="constructor string parser/state">`init`</a>" [=constructor string parser/state=].
+    </div>
+  1. [=While=] |parser|'s [=constructor string parser/token index=] is less than |parser|'s [=constructor string parser/token list=] [=list/size=]:
+    1. Set |parser|'s [=constructor string parser/token increment=] to 1.
+      <p class="note allow-2119">On every iteration of the parse loop the |parser|'s [=constructor string parser/token index=] will be incremented by its [=constructor string parser/token increment=] value.  Typically this means incrementing by 1, but at certain times it is set to zero.  The [=constructor string parser/token increment=] is then always reset back to 1 at the top of the loop.
+    1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`end`</a>" then:
+      1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`init`</a>":
+        <div class=note>
+          <p class=allow-2119>If we reached the end of the string in the "<a for="constructor string parser/state">`init`</a>" [=constructor string parser/state=], then we failed to find a protocol terminator and this must be a relative URLPattern constructor string.
+        </div>
+        1. Run [=rewind=] given |parser|.
+          <p class=note>We next determine at which component the relative pattern begins.  Relative pathnames are most common, but URLs and URLPattern constructor strings can begin with the search or hash components as well.
+        1. If the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>" and 1.
+        1. Else if the result of running [=is a search prefix=] given |parser| is true:
+          1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>" and 1.
+          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
+        1. Else:
+          1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>" and 0.
+          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/search}}"] to the empty string.
+          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
+        1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+        1. [=Continue=].
+      1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`authority`</a>":
+        <p class=note>If we reached the end of the string in the "<a for="constructor string parser/state">`authority`</a>" [=constructor string parser/state=], then we failed to find an "`@`".  Therefore there is no username or password.
+        1. Run [=rewind and set state=] given |parser|, and "<a for="constructor string parser/state">`hostname`</a>".
+        1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+        1. [=Continue=].
+      1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`done`</a>" and 0.
+      1. [=Break=].
+    1. If the result of running [=is a group open=] given |parser| is true:
+      <div class=note>
+        <p>We ignore all code points within "`{ ... }`" pattern groupings.  It would not make sense to allow a URL component boundary to lie within a grouping; e.g. "`https://example.c{om/fo}o`".  While not supported within [=well formed=] [=/pattern strings=], we handle nested groupings here to avoid parser confusion.
+        <p>It is not necessary to perform this logic for regexp or named groups since those values are collapsed into individual [=tokens=] by the [=tokenize=] algorithm.
+      </div>
+      1. Increment |parser|'s [=constructor string parser/group depth=] by 1.
+      1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+      1. [=Continue=].
+    1. If |parser|'s [=constructor string parser/group depth=] is greater than 0:
+      1. If the result of running [=is a group close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/group depth=] by 1.
+      1. Else:
+        1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+        1. [=Continue=].
+    1. Switch on |parser|'s [=constructor string parser/state=] and run the associated steps:
+      <dl class=switch>
+        <dt>"<a for="constructor string parser/state">`init`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a protocol suffix=] given |parser| is true:
+            <p class="note allow-2119">We found a protocol suffix, so this must be an absolute URLPattern constructor string.  Therefore initialize all component to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/username}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/password}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] to the empty string.
+            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hash}}"] to the empty string.
+            1. Run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`protocol`</a>".
+        </dd>
+        <dt>"<a for="constructor string parser/state">`protocol`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a protocol suffix=] given |parser| is true:
+            1. Run [=compute should treat as a standard URL=] given |parser|.
+              <p class="note allow-2119">We must eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then we treat the URLPattern constructor string as a "standard URL".  The determines if the pathname defaults to a "`/`" and also whether we should look for the username, password, hostname, and port components.  Authority slashes may also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component.
+            1. If |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
+            1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
+            1. Let |skip| be 1.
+            1. If the result of running [=next is authority slashes=] given |parser|:
+              1. Set |next state| to "<a for="constructor string parser/state">`authority`</a>".
+              1. Set |skip| to 3.
+            1. Else if |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
+            1. Run [=change state=] given |parser|, |next state|, and |skip|.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`authority`</a>"</dt>
+        <dd>
+          1. If the result of running [=is an identity terminator=] given |parser| is true, then run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`username`</a>".
+          1. Else if any of the following are true:
+            <ul>
+              <li>the result of running [=is a pathname start=] given |parser|;</li>
+              <li>the result of running [=is a search prefix=] given |parser|; or</li>
+              <li>the result of running [=is a hash prefix=] given |parser|,</li>
+            </ul>
+            <p>then run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`hostname`</a>".
+        </dd>
+        <dt>"<a for="constructor string parser/state">`username`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a password prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`password`</a>", and 1.
+          1. Else if the result of running [=is an identity terminator=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hostname`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`password`</a>"</dt>
+        <dd>
+          1. If the result of running [=is an identity terminator=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hostname`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`hostname`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a port prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
+          1. Else if the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
+          1. Else if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
+          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`port`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
+          1. Else if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
+          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`pathname`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
+          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`search`</a>"</dt>
+        <dd>
+          1. If the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`hash`</a>"</dt>
+        <dd>
+          1. Do nothing.
+        </dd>
+        <dt>"<a for="constructor string parser/state">`done`</a>"</dt>
+        <dd>
+          1. [=Assert=]: This step is never reached.
+        </dd>
+      </dl>
+    1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+  1. Return |parser|'s [=constructor string parser/result=].
+</div>
+
+<div algorithm>
+To <dfn>change state</dfn> given a [=constructor string parser=] |parser|, a [=constructor string parser/state=] |state|, and a number |skip|:
+
+  1. If |state| is not "<a for="constructor string parser/state">`init`</a>", not "<a for="constructor string parser/state">`authority`</a>", and not "<a for="constructor string parser/state">`done`</a>", then set |parser|'s [=constructor string parser/result=][|state|] to the result of running [=make a component string=] given |parser|.
+  1. Set |parser|'s [=constructor string parser/state=] to |state|.
+  1. Set |parser|'s [=constructor string parser/component start=] to |parser|'s [=constructor string parser/token index=] + |skip|.
+  1. Increment |parser|'s [=constructor string parser/token index=] by |skip|.
+  1. Set |parser|'s [=constructor string parser/token increment=] to 0.
+</div>
+
+<div algorithm>
+To <dfn>rewind</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Set |parser|'s [=constructor string parser/token index=] to |parser|'s [=constructor string parser/component start=].
+  1. Set |parser|'s [=constructor string parser/token increment=] to 0.
+</div>
+
+<div algorithm>
+To <dfn>rewind and set state</dfn> given a [=constructor string parser=] |parser| and a [=constructor string parser/state=] |state|:
+
+  1. Run [=rewind=] given |parser|.
+  1. Set |parser|'s [=constructor string parser/state=] to |state|.
+</div>
+
+<div algorithm>
+To <dfn>get a safe token</dfn> given a [=constructor string parser=] |parser| and a number |index|:
+
+  1. If |index| is less than |parser|'s [=constructor string parser/token list=]'s [=list/size=], then return |parser|'s [=constructor string parser/token list=][|index|].
+  1. [=Assert=]: |parser|'s [=constructor string parser/token list=]'s [=list/size=] is greater than or equal to 1.
+  1. Let |last index| be |parser|'s [=constructor string parser/token list=]'s [=list/size=] &minus; 1.
+  1. Let |token| be |parser|'s [=constructor string parser/token list=][|last index|].
+  1. [=Assert=]: |token|'s [=token/type=] is "<a for=token/type>`end`</a>".
+  1. Return |token|.
+</div>
+
+<div algorithm>
+To run <dfn>is a non-special pattern char</dfn> given a [=constructor string parser=] |parser|, a number |index|, and a string |value|:
+
+  1. Let |token| be the result of running [=get a safe token=] given |parser| and |index|.
+  1. If |token|'s [=token/value=] is not |value|, then return false.
+  1. If any of the following are true:
+    <ul>
+      <li>|token|'s [=token/type=] is "<a for=token/type>`char`</a>";
+      <li>|token|'s [=token/type=] is "<a for=token/type>`escaped-char`</a>"; or
+      <li>|token|'s [=token/type=] is "<a for=token/type>`invalid-char`</a>",
+    </ul>
+    <p>then return true.
+  1. Return false.
+</div>
+
+<div algorithm>
+To run <dfn>is a protocol suffix</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`:`".
+</div>
+
+<div algorithm>
+To run <dfn>next is authority slashes</dfn> given a [=constructor string parser=] |parser|:
+
+  1. If the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=] + 1, and "`/`" is false, then return false.
+  1. If the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=] + 2, and "`/`" is false, then return false.
+  1. Return true.
+</div>
+
+<div algorithm>
+To run <dfn>is an identity terminator</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`@`".
+</div>
+
+<div algorithm>
+To run <dfn>is a password prefix</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`:`".
+</div>
+
+<div algorithm>
+To run <dfn>is a port prefix</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`:`".
+</div>
+
+<div algorithm>
+To run <dfn>is a pathname start</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`/`".
+</div>
+
+<div algorithm>
+To run <dfn>is a search prefix</dfn> given a [=constructor string parser=] |parser|:
+
+  1. If result of running [=is a non-special pattern char=] given |parser|'s [=constructor string parser/token index=] and "`?`" is true, then return true.
+  1. If |parser|'s [=constructor string parser/token list=][=constructor string parser/token index=]'s [=token/value=] is not "`?`", then return false.
+  1. Let |previous index| be |parser|'s [=constructor string parser/token index=] &minus; 1.
+  1. If |previous index| is less than 0, then return true.
+  1. Let |previous token| be the result of running [=get a safe token=] given |parser| and |previous index|.
+  1. If any of the following are true, then return false:
+    <ul>
+      <li>|previous token|'s [=token/type=] is "<a for=token/type>`name`</a>".</li>
+      <li>|previous token|'s [=token/type=] is "<a for=token/type>`regexp`</a>".</li>
+      <li>|previous token|'s [=token/type=] is "<a for=token/type>`close`</a>".</li>
+      <li>|previous token|'s [=token/type=] is "<a for=token/type>`asterisk`</a>".</li>
+    </ul>
+  1. Return true.
+</div>
+
+<div algorithm>
+To run <dfn>is a hash prefix</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|'s [=constructor string parser/token index=] and "`#`".
+</div>
+
+<div algorithm>
+To run <dfn>is a group open</dfn> given a [=constructor string parser=] |parser|:
+  1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`open`</a>", then return true.
+  1. Else return false.
+</div>
+
+<div algorithm>
+To run <dfn>is a group close</dfn> given a [=constructor string parser=] |parser|:
+  1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`close`</a>", then return true.
+  1. Else return false.
+</div>
+
+<div algorithm>
+To run <dfn>make a component string</dfn> given a [=constructor string parser=] |parser|:
+
+  1. [=Assert=]: |parser|'s [=constructor string parser/token index=] is less than |parser|'s [=constructor string parser/token list=]'s [=list/size=].
+  1. Let |token| be |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]].
+  1. Let |component start token| be the result of running [=get a safe token=] given |parser| and |parser|'s [=constructor string parser/component start=].
+  1. Let |component start input index| be |component start token|'s [=token/index=].
+  1. Let |new length| be |token|'s [=token/index=] &minus; |component start input index|.
+  1. Return the substring within |parser|'s [=constructor string parser/input=] starting at |component start input index| with |new length|.
+</div>
+
+<div algorithm>
+To <dfn>compute should treat as a standard URL</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Let |protocol string| be the result of running [=make a component string=] given |parser|.
+  1. Let |protocol component| be the result of [=compiling a component=] given |protocol string|, [=canonicalize a protocol=], and [=default options=].
+  1. If the result of running [=protocol component matches a special scheme=] given |protocol component|, then set |parser|'s [=constructor string parser/should treat as a standard URL=] to true.
 </div>
 
 <h2 id=patterns>Patterns</h2>
@@ -498,7 +809,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Let |tokenizer| be a new [=tokenizer=].
   1. Set |tokenizer|'s [=tokenizer/input=] to |input|.
   1. Set |tokenizer|'s [=tokenizer/policy=] to |policy|.
-  1. While |tokenizer|'s [=tokenizer/index=] is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+  1. While |tokenizer|'s [=tokenizer/index=] is less than |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=]:
     1. Run [=get the next code point=] given |tokenizer|.
     1. If |tokenizer|'s [=tokenizer/code point=] is U+002A (`*`):
       1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`asterisk`</a>".
@@ -507,7 +818,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
       1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`other-modifier`</a>".
       1. [=Continue=].
     1. If |tokenizer|'s [=tokenizer/code point=] is U+005C (<code>\</code>):
-      1. If |tokenizer|'s [=tokenizer/index=] is equal to |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+      1. If |tokenizer|'s [=tokenizer/index=] is equal to |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=] &minus; 1:
         1. Run [=process a tokenizing error=] given |tokenizer|, |tokenizer|'s [=tokenizer/next index=], and |tokenizer|'s [=tokenizer/index=].
         1. [=Continue=].
       1. Let |escaped index| be |tokenizer|'s [=tokenizer/next index=].
@@ -523,7 +834,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
     1. If |tokenizer|'s [=tokenizer/code point=] is U+003A (`:`):
       1. Let |name position| be |tokenizer|'s [=tokenizer/next index=].
       1. Let |name start| be |name position|.
-      1. While |name position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+      1. While |name position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=]:
         1. Run [=seek and get the next code point=] given |tokenizer| and |name position|.
         1. Let |first code point| be true if |name position| equals |name start| and false otherwise.
         1. Let |valid code point| be the result of running [=is a valid name code point=] given |tokenizer|'s [=tokenizer/code point=] and |first code point|.
@@ -538,7 +849,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
       1. Let |regexp position| be |tokenizer|'s [=tokenizer/next index=].
       1. Let |regexp start| be |regexp position|.
       1. Let |error| be false.
-      1. While |regexp position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/length=]:
+      1. While |regexp position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=]:
         1. Run [=seek and get the next code point=] given |tokenizer| and |regexp position|.
         1. If the result of running [=is ASCII=] given |tokenizer|'s [=tokenizer/code point=] is false:
           1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
@@ -549,7 +860,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
           1. Set |error| to true.
           1. [=Break=].
         1. If |tokenizer|'s [=tokenizer/code point=] is U+005C (<code>\</code>):
-          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=] &minus; 1:
             1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
             1. Set |error| to true.
             1. [=Break=]
@@ -567,7 +878,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
             1. [=Break=].
         1. Else if |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
           1. Increment |depth| by 1.
-          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/length=] &minus; 1:
+          1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=] &minus; 1:
             1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
             1. Set |error| to true.
             1. [=Break=]
