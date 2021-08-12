@@ -1304,6 +1304,7 @@ To <dfn>escape a regexp string</dfn> given a string |input|:
   1. Let |index| be 0.
   1. While |index| is less than |input|'s [=string/length=]:
     1. Let |c| be |input|[|index|].
+    1. Increment |index| by 1.
     1. If |c| is one of "`.`", "`+`", "`*`", "`?`", "`^`", "`$`", "`{`", "`}`", "`(`", "`)`", "`[`", "`]`", "`|`", "`/`", or "<code>\</code>", then append "<code>\</code>" to the end of |result|.
     1. Append |c| to the end of |result|.
   1. Return |result|.
