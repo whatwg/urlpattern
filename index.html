@@ -781,30 +781,48 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑦">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-search-component">search component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component⑥">component</a>, which must be set upon creation.</p>
    <p>Each <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑧">URLPattern</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="URLPattern" data-dfn-type="dfn" data-noexport id="urlpattern-hash-component">hash component</dfn>, a <a data-link-type="dfn" href="#component" id="ref-for-component⑦">component</a>, which must be set upon creation.</p>
    <dl class="domintro non-normative">
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑨">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-protocol" id="ref-for-dom-urlpattern-protocol①">protocol</a></code></code> 
+    <dt><code><var>urlPattern</var> = new <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern①">URLPattern</a></code>(<var>input</var>)</code>
+    <dd> Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑨">URLPattern</a></code> object.  The <var>input</var> is an object containing separate patterns for each URL component; e.g. hostname, pathname, etc.  Missing components will default to a wildcard pattern.  In addition, <var>input</var> can contain a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl">baseURL</a></code> property that provides static text patterns for any missing components. 
+    <dt><code><var>urlPattern</var> = new <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern②">URLPattern</a></code>(<var>patternString</var>, <var>baseURL</var>)</code>
+    <dd> Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⓪">URLPattern</a></code> object. <var>patternString</var> is a URL string containing pattern syntax for one or more components.  If <var>baseURL</var> is provided, then <var>patternString</var> can be relative.  This constructor will always set at least an empty string value and does not default any components to wildcard patterns. 
+    <dt><code><var>matches</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-test" id="ref-for-dom-urlpattern-test①">test</a></code>(<var>input</var>)</code>
+    <dd> Tests if <var>urlPattern</var> matches the given arguments.  The <var>input</var> is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, <var>input</var> can contain a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl①">baseURL</a></code> property that provides values for any missing components.  If <var>urlPattern</var> matches the <var>input</var> on a component-by-component basis then true is returned.  Otherwise, false is returned. 
+    <dt><code><var>matches</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-test" id="ref-for-dom-urlpattern-test②">test</a></code>(<var>url</var>, <var>baseURL</var>)</code>
     <dd>
-     <p>The normalized protocol pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⓪">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-username" id="ref-for-dom-urlpattern-username①">username</a></code></code> 
+      Tests if <var>urlPattern</var> matches the given arguments. <var>url</var> is a URL string.  If <var>baseURL</var> is provided, then <var>url</var> can be relative. 
+     <p>If <var>urlPattern</var> matches the <var>input</var> on a component-by-component basis then true is returned.  Otherwise, false is returned.</p>
+    <dt><code><var>result</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-exec" id="ref-for-dom-urlpattern-exec①">exec</a></code>(<var>input</var>)</code>
     <dd>
-     <p>The normalized username pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①①">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-password" id="ref-for-dom-urlpattern-password①">password</a></code></code> 
+      Executes the <var>urlPattern</var> against the given arguments.  The <var>input</var> is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, <var>input</var> can contain a baseURL property that provides values for any missing components. 
+     <p>If <var>urlPattern</var> matches the <var>input</var> on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the <var>result</var> object; e.g. <code>matches.pathname.groups.id</code>.  If <var>urlPattern</var> does not match the <var>input</var>, then <var>result</var> is null.</p>
+    <dt><code><var>result</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-exec" id="ref-for-dom-urlpattern-exec②">exec</a></code>(<var>url</var>, <var>baseURL</var>)</code>
     <dd>
-     <p>The normalized password pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①②">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hostname" id="ref-for-dom-urlpattern-hostname①">hostname</a></code></code> 
+      Executes the <var>urlPattern</var> against the given arguments. <var>url</var> is a URL string.  If <var>baseURL</var> is provided, then <var>input</var> can be relative. 
+     <p>If <var>urlPattern</var> matches the <var>input</var> on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the <var>result</var> object; e.g. <code>matches.pathname.groups.id</code>.  If <var>urlPattern</var> does not match the <var>input</var>, then <var>result</var> is null.</p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-protocol" id="ref-for-dom-urlpattern-protocol①">protocol</a></code></code>
     <dd>
-     <p>The normalized hostname pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①③">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-port" id="ref-for-dom-urlpattern-port①">port</a></code></code> 
+     <p>Returns <var>urlPattern</var>’s normalized protocol pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-username" id="ref-for-dom-urlpattern-username①">username</a></code></code>
     <dd>
-     <p>The normalized port pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①④">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-pathname" id="ref-for-dom-urlpattern-pathname①">pathname</a></code></code> 
+     <p>Returns <var>urlPattern</var>’s normalized username pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-password" id="ref-for-dom-urlpattern-password①">password</a></code></code>
     <dd>
-     <p>The normalized pathname pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑤">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-search" id="ref-for-dom-urlpattern-search①">search</a></code></code> 
+     <p>Returns <var>urlPattern</var>’s normalized password pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hostname" id="ref-for-dom-urlpattern-hostname①">hostname</a></code></code>
     <dd>
-     <p>The normalized search pattern string. </p>
-    <dt><code><code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑥">URLPattern</a></code> . <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hash" id="ref-for-dom-urlpattern-hash①">hash</a></code></code> 
+     <p>Returns <var>urlPattern</var>’s normalized hostname pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-port" id="ref-for-dom-urlpattern-port①">port</a></code></code>
     <dd>
-     <p>The normalized hash pattern string. </p>
+     <p>Returns <var>urlPattern</var>’s normalized port pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-pathname" id="ref-for-dom-urlpattern-pathname①">pathname</a></code></code>
+    <dd>
+     <p>Returns <var>urlPattern</var>’s normalized pathname pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-search" id="ref-for-dom-urlpattern-search①">search</a></code></code>
+    <dd>
+     <p>Returns <var>urlPattern</var>’s normalized search pattern string. </p>
+    <dt><code><var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hash" id="ref-for-dom-urlpattern-hash①">hash</a></code></code>
+    <dd>
+     <p>Returns <var>urlPattern</var>’s normalized hash pattern string. </p>
    </dl>
    <div class="algorithm" data-algorithm="URLPattern(input, baseURL)" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="constructor" data-export data-lt="URLPattern(input, baseURL)|constructor(input, baseURL)|URLPattern(input)|constructor(input)" id="dom-urlpattern-urlpattern"><code>new URLPattern(<var>input</var>, <var>baseURL</var>)</code></dfn> constructor steps are: 
@@ -817,7 +835,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>init</var> to the result of running <a data-link-type="dfn" href="#parse-a-constructor-string" id="ref-for-parse-a-constructor-string">parse a constructor string</a> given <var>input</var>.</p>
        <li data-md>
-        <p>Set <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl">baseURL</a></code>"] to <var>baseURL</var>.</p>
+        <p>Set <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl②">baseURL</a></code>"] to <var>baseURL</var>.</p>
       </ol>
      <li data-md>
       <p>Else:</p>
@@ -928,7 +946,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <h3 class="heading settled" data-level="1.1" id="urlpattern-internals"><span class="secno">1.1. </span><span class="content">Internals</span><a class="self-link" href="#urlpattern-internals"></a></h3>
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑦">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct">structs</a>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①①">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct">structs</a>.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑧">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-pattern-string">pattern string</dfn>, a <a data-link-type="dfn" href="#pattern-string-well-formed" id="ref-for-pattern-string-well-formed">well formed</a> <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string">pattern string</a>, which must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑨">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-regular-expression">regular expression</dfn>, a <code class="idl"><a data-link-type="idl" href="https://tc39.es/ecma262/#sec-regexp-regular-expression-objects" id="ref-for-sec-regexp-regular-expression-objects">RegExp</a></code>, which must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component①⓪">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-group-name-list">group name list</dfn>, a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list">list</a> of strings, which must be set upon creation.</p>
@@ -949,7 +967,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="match">
-     To perform a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="match">match</dfn> given a <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⑧">URLPattern</a></code> <var>urlpattern</var>, a <code class="idl"><a data-link-type="idl" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput④">URLPatternInput</a></code> <var>input</var>, and an optional string <var>baseURLString</var>: 
+     To perform a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="match">match</dfn> given a <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①②">URLPattern</a></code> <var>urlpattern</var>, a <code class="idl"><a data-link-type="idl" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput④">URLPatternInput</a></code> <var>input</var>, and an optional string <var>baseURLString</var>: 
     <ol>
      <li data-md>
       <p>Let <var>protocol</var> be the empty string.</p>
@@ -2745,10 +2763,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash③">hash</a></code>"] to <var>hash</var>.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl①">baseURL</a></code>"] is not null:</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl③">baseURL</a></code>"] is not null:</p>
       <ol>
        <li data-md>
-        <p>Let <var>baseURL</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl②">baseURL</a></code>"].</p>
+        <p>Let <var>baseURL</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"].</p>
        <li data-md>
         <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
        <li data-md>
@@ -3673,8 +3691,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="urlpattern">
    <b><a href="#urlpattern">#urlpattern</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a> <a href="#ref-for-urlpattern①">(2)</a> <a href="#ref-for-urlpattern②">(3)</a> <a href="#ref-for-urlpattern③">(4)</a> <a href="#ref-for-urlpattern④">(5)</a> <a href="#ref-for-urlpattern⑤">(6)</a> <a href="#ref-for-urlpattern⑥">(7)</a> <a href="#ref-for-urlpattern⑦">(8)</a> <a href="#ref-for-urlpattern⑧">(9)</a> <a href="#ref-for-urlpattern⑨">(10)</a> <a href="#ref-for-urlpattern①⓪">(11)</a> <a href="#ref-for-urlpattern①①">(12)</a> <a href="#ref-for-urlpattern①②">(13)</a> <a href="#ref-for-urlpattern①③">(14)</a> <a href="#ref-for-urlpattern①④">(15)</a> <a href="#ref-for-urlpattern①⑤">(16)</a> <a href="#ref-for-urlpattern①⑥">(17)</a>
-    <li><a href="#ref-for-urlpattern①⑦">1.1. Internals</a> <a href="#ref-for-urlpattern①⑧">(2)</a>
+    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a> <a href="#ref-for-urlpattern①">(2)</a> <a href="#ref-for-urlpattern②">(3)</a> <a href="#ref-for-urlpattern③">(4)</a> <a href="#ref-for-urlpattern④">(5)</a> <a href="#ref-for-urlpattern⑤">(6)</a> <a href="#ref-for-urlpattern⑥">(7)</a> <a href="#ref-for-urlpattern⑦">(8)</a> <a href="#ref-for-urlpattern⑧">(9)</a> <a href="#ref-for-urlpattern⑨">(10)</a> <a href="#ref-for-urlpattern①⓪">(11)</a>
+    <li><a href="#ref-for-urlpattern①①">1.1. Internals</a> <a href="#ref-for-urlpattern①②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatterninit">
@@ -3760,8 +3778,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpatterninit-baseurl">
    <b><a href="#dom-urlpatterninit-baseurl">#dom-urlpatterninit-baseurl</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpatterninit-baseurl">1. The URLPattern class </a>
-    <li><a href="#ref-for-dom-urlpatterninit-baseurl①">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-baseurl②">(2)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-baseurl">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-baseurl①">(2)</a> <a href="#ref-for-dom-urlpatterninit-baseurl②">(3)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-baseurl③">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-baseurl④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatternresult">
@@ -3903,7 +3921,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpattern-urlpattern">
    <b><a href="#dom-urlpattern-urlpattern">#dom-urlpattern-urlpattern</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpattern-urlpattern">1. The URLPattern class </a>
+    <li><a href="#ref-for-dom-urlpattern-urlpattern">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-urlpattern①">(2)</a> <a href="#ref-for-dom-urlpattern-urlpattern②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpattern-protocol">
@@ -3959,13 +3977,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpattern-test">
    <b><a href="#dom-urlpattern-test">#dom-urlpattern-test</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpattern-test">1. The URLPattern class </a>
+    <li><a href="#ref-for-dom-urlpattern-test">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-test①">(2)</a> <a href="#ref-for-dom-urlpattern-test②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpattern-exec">
    <b><a href="#dom-urlpattern-exec">#dom-urlpattern-exec</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpattern-exec">1. The URLPattern class </a>
+    <li><a href="#ref-for-dom-urlpattern-exec">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-exec①">(2)</a> <a href="#ref-for-dom-urlpattern-exec②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="component">
