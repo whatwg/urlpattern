@@ -328,7 +328,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, "`u`").  If this throws an exception, catch it, and throw a {{TypeError}}.
-    <p class="note allow-2119">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in [=compile a component=] algorithm so an error can be thrown if they are invalid.
+    <p class="note allow-2119">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
   1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, and [=component/group name list=] is |name list|.
 </div>
