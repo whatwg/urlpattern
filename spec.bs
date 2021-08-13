@@ -204,21 +204,21 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   <dt><code>|matches| = |urlPattern|.{{URLPattern/test(input, baseURL)|test}}(|url|, |baseURL|)</code></dt>
   <dd>
     Tests if |urlPattern| matches the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |url| can be relative.
-    
+
     If |urlPattern| matches the |input| on a component-by-component basis then true is returned.  Otherwise, false is returned.
   </dd>
 
   <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|input|)</code></dt>
   <dd>
     Executes the |urlPattern| against the given arguments.  The |input| is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, |input| can contain a baseURL property that provides values for any missing components.
-    
+
     If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
   <dt><code>|result| = |urlPattern|.{{URLPattern/exec(input, baseURL)|exec}}(|url|, |baseURL|)</code></dt>
   <dd>
     Executes the |urlPattern| against the given arguments.  |url| is a URL string.  If |baseURL| is provided, then |input| can be relative.
-    
+
     If |urlPattern| matches the |input| on a component-by-component basis then an object is returned containing the results.  Matched group values are contained in per-component group objects within the |result| object; e.g. `matches.pathname.groups.id`.  If |urlPattern| does not match the |input|, then |result| is null.
   </dd>
 
@@ -1343,7 +1343,25 @@ To <dfn>escape a regexp string</dfn> given a string |input|:
   1. While |index| is less than |input|'s [=string/length=]:
     1. Let |c| be |input|[|index|].
     1. Increment |index| by 1.
-    1. If |c| is one of "`.`", "`+`", "`*`", "`?`", "`^`", "`$`", "`{`", "`}`", "`(`", "`)`", "`[`", "`]`", "`|`", "`/`", or "<code>\</code>", then append "<code>\</code>" to the end of |result|.
+    1. If |c| is one of:
+      <ul>
+        <li>U+002E (`.`);</li>
+        <li>U+002B (`+`);</li>
+        <li>U+002A (`*`);</li>
+        <li>U+003F (`?`);</li>
+        <li>U+005E (`^`);</li>
+        <li>U+0024 (`$`);</li>
+        <li>U+007B (`{`);</li>
+        <li>U+007D (`}`);</li>
+        <li>U+0028 (`(`);</li>
+        <li>U+0029 (`)`);</li>
+        <li>U+005B (`[`);</li>
+        <li>U+005D (`]`);</li>
+        <li>U+007C (`|`);</li>
+        <li>U+002F (`/`); or</li>
+        <li>U+005C (<code>\</code>),</li>
+      </ul>
+      <p>then append "<code>\</code>" to the end of |result|.
     1. Append |c| to the end of |result|.
   1. Return |result|.
 </div algorithm>
@@ -1405,7 +1423,19 @@ To <dfn>escape a pattern string</dfn> given a string |input|:
   1. While |index| is less than |input|'s [=string/length=]:
     1. Let |c| be |input|[|index|].
     1. Increment |index| by 1.
-    1. If |c| is one of "`+`", "`*`", "`?`", "`:`", "`{`", "`}`", "`(`", "`)`", or "<code>\</code>", then append "<code>\</code>" to the end of |result|.
+    1. If |c| is one of:
+      <ul>
+        <li>U+002B (`+`);</li>
+        <li>U+002A (`*`);</li>
+        <li>U+003F (`?`);</li>
+        <li>U+003A (`:`);</li>
+        <li>U+007B (`{`);</li>
+        <li>U+007D (`}`);</li>
+        <li>U+0028 (`(`);</li>
+        <li>U+0029 (`)`); or</li>
+        <li>U+005C (<code>\</code>),</li>
+      </ul>
+      <p>then append U+005C (<code>\</code>) to the end of |result|.
     1. Append |c| to the end of |result|.
   1. Return |result|.
 </div>
