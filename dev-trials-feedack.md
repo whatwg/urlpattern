@@ -14,7 +14,7 @@ The [Ready for Trial](https://groups.google.com/a/chromium.org/g/blink-dev/c/Wit
 *   Boosted with a [twitter thread](https://twitter.com/jeffposnick/status/1418245808563101701).
 *   Ran a survey against a panel of web developers.
 
-This post captures the feedback we have received to date regarding the URLPattern API.  Additional feedback is still welcome, of course.
+This post captures the feedback we have received to date regarding the URLPattern API.  [Additional feedback](https://github.com/WICG/urlpattern/issues/new) is still welcome, of course.
 
 In general feedback has been positive.  The following sections provide some more detail.
 
