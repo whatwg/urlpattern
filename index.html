@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-08-12">12 August 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-08-13">13 August 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2469,7 +2469,25 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Increment <var>index</var> by 1.</p>
        <li data-md>
-        <p>If <var>c</var> is one of "<code>.</code>", "<code>+</code>", "<code>*</code>", "<code>?</code>", "<code>^</code>", "<code>$</code>", "<code>{</code>", "<code>}</code>", "<code>(</code>", "<code>)</code>", "<code>[</code>", "<code>]</code>", "<code>|</code>", "<code>/</code>", or "<code>\</code>", then append "<code>\</code>" to the end of <var>result</var>.</p>
+        <p>If <var>c</var> is one of:</p>
+        <ul>
+         <li>U+002E (<code>.</code>);
+         <li>U+002B (<code>+</code>);
+         <li>U+002A (<code>*</code>);
+         <li>U+003F (<code>?</code>);
+         <li>U+005E (<code>^</code>);
+         <li>U+0024 (<code>$</code>);
+         <li>U+007B (<code>{</code>);
+         <li>U+007D (<code>}</code>);
+         <li>U+0028 (<code>(</code>);
+         <li>U+0029 (<code>)</code>);
+         <li>U+005B (<code>[</code>);
+         <li>U+005D (<code>]</code>);
+         <li>U+007C (<code>|</code>);
+         <li>U+002F (<code>/</code>); or
+         <li>U+005C (<code>\</code>),
+        </ul>
+        <p>then append "<code>\</code>" to the end of <var>result</var>. </p>
        <li data-md>
         <p>Append <var>c</var> to the end of <var>result</var>.</p>
       </ol>
@@ -2594,7 +2612,19 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Increment <var>index</var> by 1.</p>
        <li data-md>
-        <p>If <var>c</var> is one of "<code>+</code>", "<code>*</code>", "<code>?</code>", "<code>:</code>", "<code>{</code>", "<code>}</code>", "<code>(</code>", "<code>)</code>", or "<code>\</code>", then append "<code>\</code>" to the end of <var>result</var>.</p>
+        <p>If <var>c</var> is one of:</p>
+        <ul>
+         <li>U+002B (<code>+</code>);
+         <li>U+002A (<code>*</code>);
+         <li>U+003F (<code>?</code>);
+         <li>U+003A (<code>:</code>);
+         <li>U+007B (<code>{</code>);
+         <li>U+007D (<code>}</code>);
+         <li>U+0028 (<code>(</code>);
+         <li>U+0029 (<code>)</code>); or
+         <li>U+005C (<code>\</code>),
+        </ul>
+        <p>then append U+005C (<code>\</code>) to the end of <var>result</var>. </p>
        <li data-md>
         <p>Append <var>c</var> to the end of <var>result</var>.</p>
       </ol>
