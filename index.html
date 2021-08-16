@@ -1309,7 +1309,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
              <li data-md>
               <p>Let <var>skip</var> be 1.</p>
              <li data-md>
-              <p>If the result of running <a data-link-type="dfn" href="#next-is-authority-slashes" id="ref-for-next-is-authority-slashes">next is authority slashes</a> given <var>parser</var>:</p>
+              <p>If the result of running <a data-link-type="dfn" href="#next-is-authority-slashes" id="ref-for-next-is-authority-slashes">next is authority slashes</a> given <var>parser</var> is true:</p>
               <ol>
                <li data-md>
                 <p>Set <var>next state</var> to "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority②"><code>authority</code></a>".</p>
@@ -1596,7 +1596,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var>, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url②">should treat as a standard URL</a> to true.</p>
+      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url②">should treat as a standard URL</a> to true.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="2" id="patterns"><span class="secno">2. </span><span class="content">Patterns</span><a class="self-link" href="#patterns"></a></h2>
