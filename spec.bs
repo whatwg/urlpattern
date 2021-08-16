@@ -770,8 +770,7 @@ To run <dfn>make a component string</dfn> given a [=constructor string parser=] 
   1. Let |token| be |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]].
   1. Let |component start token| be the result of running [=get a safe token=] given |parser| and |parser|'s [=constructor string parser/component start=].
   1. Let |component start input index| be |component start token|'s [=token/index=].
-  1. Let |new length| be |token|'s [=token/index=] &minus; |component start input index|.
-  1. Return the substring within |parser|'s [=constructor string parser/input=] starting at |component start input index| with |new length|.
+  1. Return the [=code point substring by indices|code point substring=] from indices |component start input index| to |token|'s [=token/index=] inclusive within |parser|'s [=constructor string parser/input=].
 </div>
 
 <div algorithm>
@@ -962,7 +961,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Let |token| be a new [=token=].
   1. Set |token|'s [=token/type=] to |type|.
   1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
-  1. Set |token|'s [=token/value=] to the substring within |tokenizer|'s [=tokenizer/input=] starting at |value position| with |value length|.
+  1. Set |token|'s [=token/value=] to the [=code point substring=] from index |value position| with length |value length| within |tokenizer|'s [=tokenizer/input=].
   1. [=list/Append=] |token| to the back of |tokenizer|'s [=tokenizer/token list=].
   1. Set |tokenizer|'s [=token/index=] to |next position|.
 </div>
