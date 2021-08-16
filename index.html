@@ -1583,9 +1583,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>component start input index</var> be <var>component start token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index">index</a>.</p>
      <li data-md>
-      <p>Let <var>new length</var> be <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> − <var>component start input index</var>.</p>
-     <li data-md>
-      <p>Return the substring within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a> starting at <var>component start input index</var> with <var>new length</var>.</p>
+      <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices">code point substring</a> from indices <var>component start input index</var> to <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> inclusive within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="compute should treat as a standard URL">
@@ -1912,7 +1910,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index②">index</a> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①④">index</a>.</p>
      <li data-md>
-      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value②">value</a> to the substring within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a> starting at <var>value position</var> with <var>value length</var>.</p>
+      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value②">value</a> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring">code point substring</a> from index <var>value position</var> with length <var>value length</var> within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append②">Append</a> <var>token</var> to the back of <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-token-list" id="ref-for-tokenizer-token-list①">token list</a>.</p>
      <li data-md>
@@ -3288,6 +3286,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-string-code-point-length">2.1.2. Tokenizing</a> <a href="#ref-for-string-code-point-length①">(2)</a> <a href="#ref-for-string-code-point-length②">(3)</a> <a href="#ref-for-string-code-point-length③">(4)</a> <a href="#ref-for-string-code-point-length④">(5)</a> <a href="#ref-for-string-code-point-length⑤">(6)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-code-point-substring">
+   <a href="https://infra.spec.whatwg.org/#code-point-substring">https://infra.spec.whatwg.org/#code-point-substring</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-code-point-substring">2.1.2. Tokenizing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-code-point-substring-by-indices">
+   <a href="https://infra.spec.whatwg.org/#code-point-substring-by-indices">https://infra.spec.whatwg.org/#code-point-substring-by-indices</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-code-point-substring-by-indices">1.2. Constructor String Parsing</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-iteration-continue">
    <a href="https://infra.spec.whatwg.org/#iteration-continue">https://infra.spec.whatwg.org/#iteration-continue</a><b>Referenced in:</b>
    <ul>
@@ -3597,6 +3607,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><span class="dfn-paneled" id="term-for-assert">assert</span>
      <li><span class="dfn-paneled" id="term-for-iteration-break">break</span>
      <li><span class="dfn-paneled" id="term-for-string-code-point-length">code point length</span>
+     <li><span class="dfn-paneled" id="term-for-code-point-substring">code point substring</span>
+     <li><span class="dfn-paneled" id="term-for-code-point-substring-by-indices">code point substring by indices</span>
      <li><span class="dfn-paneled" id="term-for-iteration-continue">continue</span>
      <li><span class="dfn-paneled" id="term-for-list-iterate">for each</span>
      <li><span class="dfn-paneled" id="term-for-string-length">length</span>
