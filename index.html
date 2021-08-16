@@ -2697,19 +2697,19 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize a port">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-port">canonicalize a port</dfn> given a string <var>portValue</var> and string <var>protocolValue</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-port">canonicalize a port</dfn> given a string <var>portValue</var> and optionally a string <var>protocolValue</var>: 
     <ol>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url④">URL record</a>.</p>
      <li data-md>
-      <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a> to <var>protocolValue</var>.</p>
-      <p class="note" role="note">Note, we set the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑤">URL record</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme③">scheme</a> in order for the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑥">basic URL parser</a> to properly recognize and normalize default port values.</p>
+      <p>If <var>protocolValue</var> was given, then set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a> to <var>protocolValue</var>.</p>
+      <p class="note" role="note">Note, we set the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑤">URL record</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme③">scheme</a> in order for the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑥">basic URL parser</a> to recognize and normalize default port values.</p>
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑦">basic URL parser</a> given <var>portValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url②">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#port-state" id="ref-for-port-state">port state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override②">state override</a></i>.</p>
      <li data-md>
       <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
      <li data-md>
-      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a>.</p>
+      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a> or empty string if it is null.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize a standard pathname">
