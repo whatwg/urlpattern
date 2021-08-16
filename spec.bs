@@ -1279,13 +1279,13 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
         1. Append "`(?:`" to the end of |result|.
         1. Append the result of running [=escape a regexp string=] given |part|'s [=part/value=] to the end of |result|.
         1. Append "`)`" to the end of |result|.
-        1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+        1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
       1. [=Continue=].
     1. [=Assert=]: |part|'s [=part/name=] is not the empty string.
     1. [=list/Append=] |part|'s [=part/name=] to |name list|.
       <p class=note>We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with [path-to-regexp](https://github.com/pillarjs/path-to-regexp) which has indicated its unlikely to switch to using named capture groups.
     1. Let |regexp value| be |part|'s [=part/value=].
-    1. If |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", then set |regexp value| to the result of running [=generate a segment wildcard regexp=] give |options|.
+    1. If |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", then set |regexp value| to the result of running [=generate a segment wildcard regexp=] given |options|.
     1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
     1. If |part|'s [=part/prefix=] is the empty string and |part|'s [=part/suffix=] is the empty string:
       <div class=note>
@@ -1295,7 +1295,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
       1. Append "`(`" to the end of |result|.
       1. Append |regexp value| to the end of |result|.
       1. Append "`)`" to the end of |result|.
-      1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+      1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
       1. [=Continue=].
     1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" or "<a for=part/modifier>`optional`</a>":
       <div class=note>
@@ -1309,7 +1309,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
       1. Append "`)`" to the end of |result|.
       1. Append the result of running [=escape a regexp string=] given |part|'s [=part/suffix=] to the end of |result|.
       1. Append "`)`" to the end of |result|.
-      1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+      1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
       1. [=Continue=].
     1. [=Assert=]: |part|'s [=part/modifier=] is "<a for=part/modifier>`zero-or-more`</a>" or "<a for=part/modifier>`one-or-more`</a>".
     1. [=Assert=]: |part|'s [=part/prefix=] is not the empty string or |part|'s [=part/suffix=] is not the empty string.
@@ -1410,7 +1410,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Else append "`*`" to the end of |result|.
     1. Append the result of running [=escape a pattern string=] given |part|'s [=part/suffix=] to the end of |result|.
     1. If |needs grouping| is true, then append "`}`" to the end of |result|.
-    1. Append the result of running [=convert a modifier to a string=] give |part|'s [=part/modifier=] to the end of |result|.
+    1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
   1. Return |result|.
 </div>
 
