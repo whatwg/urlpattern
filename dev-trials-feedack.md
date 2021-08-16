@@ -5,7 +5,7 @@ Last updated: August 13, 2021
 
 ## Overview
 
-The [Ready for Trial](https://groups.google.com/a/chromium.org/g/blink-dev/c/WitVII_BzyU/m/mI8lZY4NAgAJ) announcement was sent for the URLPattern on July 22.  To help spread awareness of the information and help developers try the API, we also did the following:
+The [Ready for Trial](https://groups.google.com/a/chromium.org/g/blink-dev/c/WitVII_BzyU/m/mI8lZY4NAgAJ) announcement was sent for URLPattern on July 22.  To help spread awareness of the information and help developers try the API, we also did the following:
 
 
 
