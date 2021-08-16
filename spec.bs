@@ -578,7 +578,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
             1. If |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
-            1. If the result of running [=next is authority slashes=] given |parser|:
+            1. If the result of running [=next is authority slashes=] given |parser| is true:
               1. Set |next state| to "<a for="constructor string parser/state">`authority`</a>".
               1. Set |skip| to 3.
             1. Else if |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
@@ -779,7 +779,7 @@ To <dfn>compute should treat as a standard URL</dfn> given a [=constructor strin
 
   1. Let |protocol string| be the result of running [=make a component string=] given |parser|.
   1. Let |protocol component| be the result of [=compiling a component=] given |protocol string|, [=canonicalize a protocol=], and [=default options=].
-  1. If the result of running [=protocol component matches a special scheme=] given |protocol component|, then set |parser|'s [=constructor string parser/should treat as a standard URL=] to true.
+  1. If the result of running [=protocol component matches a special scheme=] given |protocol component| is true, then set |parser|'s [=constructor string parser/should treat as a standard URL=] to true.
 </div>
 
 <h2 id=patterns>Patterns</h2>
