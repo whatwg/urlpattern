@@ -644,8 +644,8 @@ To <dfn>change state</dfn> given a [=constructor string parser=] |parser|, a [=c
 
   1. If |state| is not "<a for="constructor string parser/state">`init`</a>", not "<a for="constructor string parser/state">`authority`</a>", and not "<a for="constructor string parser/state">`done`</a>", then set |parser|'s [=constructor string parser/result=][|state|] to the result of running [=make a component string=] given |parser|.
   1. Set |parser|'s [=constructor string parser/state=] to |state|.
-  1. Set |parser|'s [=constructor string parser/component start=] to |parser|'s [=constructor string parser/token index=] + |skip|.
   1. Increment |parser|'s [=constructor string parser/token index=] by |skip|.
+  1. Set |parser|'s [=constructor string parser/component start=] to |parser|'s [=constructor string parser/token index=].
   1. Set |parser|'s [=constructor string parser/token increment=] to 0.
 </div>
 
