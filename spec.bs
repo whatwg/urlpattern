@@ -1253,11 +1253,20 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
   1. Else if |regexp or wildcard token| is not null:
     1. Set |name| to |parser|'s [=pattern parser/next numeric name=].
     1. Increment |parser|'s [=pattern parser/next numeric name=] by 1.
+  1. If the result of running [=is a duplicate name=] given |parser| and |name| is true, then throw a {{TypeError}}.
   1. Let |encoded prefix| be the result of running |parser|'s [=pattern parser/encoding callback=] given |prefix|.
     <p class=note>Finally, we encode the fixed text values and create the [=part=].
   1. Let |encoded suffix| be the result of running |parser|'s [=pattern parser/encoding callback=] given |suffix|.
   1. Let |part| be a new [=part=] whose [=part/type=] is |type|, [=part/value=] is |regexp value|, [=part/modifier=] is |modifier|, [=part/name=] is |name|, [=part/prefix=] is |encoded prefix|, and [=part/suffix=] is |encoded suffix|.
   1. [=list/Append=] |part| to |parser|'s [=pattern parser/part list=].
+</div>
+
+<div algorithm>
+To determine if a value <dfn>is a duplicate name</dfn> given a [=pattern parser=] |parser| and a string |name|:
+
+  1. [=list/For each=] |part| of |parser|'s [=pattern parser/part list=]:
+    1. If |part|'s [=part/name=] is |name|, then return true.
+  1. Return false.
 </div>
 
 <h3 id=converting-part-lists-to-regular-expressions>Converting Part Lists to Regular Expressions</h3>
