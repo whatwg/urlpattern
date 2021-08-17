@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-08-16">16 August 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-08-17">17 August 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2309,6 +2309,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Increment <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-next-numeric-name" id="ref-for-pattern-parser-next-numeric-name①">next numeric name</a> by 1.</p>
       </ol>
      <li data-md>
+      <p>If the result of running <a data-link-type="dfn" href="#is-a-duplicate-name" id="ref-for-is-a-duplicate-name">is a duplicate name</a> given <var>parser</var> and <var>name</var> is true, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a></code>.</p>
+     <li data-md>
       <p>Let <var>encoded prefix</var> be the result of running <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-encoding-callback" id="ref-for-pattern-parser-encoding-callback③">encoding callback</a> given <var>prefix</var>.</p>
       <p class="note" role="note">Finally, we encode the fixed text values and create the <a data-link-type="dfn" href="#part" id="ref-for-part②②">part</a>. </p>
      <li data-md>
@@ -2317,6 +2319,19 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Let <var>part</var> be a new <a data-link-type="dfn" href="#part" id="ref-for-part②③">part</a> whose <a data-link-type="dfn" href="#part-type" id="ref-for-part-type③">type</a> is <var>type</var>, <a data-link-type="dfn" href="#part-value" id="ref-for-part-value②">value</a> is <var>regexp value</var>, <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑥">modifier</a> is <var>modifier</var>, <a data-link-type="dfn" href="#part-name" id="ref-for-part-name①">name</a> is <var>name</var>, <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix">prefix</a> is <var>encoded prefix</var>, and <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix">suffix</a> is <var>encoded suffix</var>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑤">Append</a> <var>part</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list③">part list</a>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="is a duplicate name">
+     To determine if a value <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-duplicate-name">is a duplicate name</dfn> given a <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser①⑤">pattern parser</a> <var>parser</var> and a string <var>name</var>: 
+    <ol>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate①">For each</a> <var>part</var> of <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-part-list" id="ref-for-pattern-parser-part-list④">part list</a>:</p>
+      <ol>
+       <li data-md>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name②">name</a> is <var>name</var>, then return true.</p>
+      </ol>
+     <li data-md>
+      <p>Return false.</p>
     </ol>
    </div>
    <h3 class="heading settled" data-level="2.2" id="converting-part-lists-to-regular-expressions"><span class="secno">2.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
@@ -2328,7 +2343,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>name list</var> be a new <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑧">list</a>.</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate①">For each</a> <var>part</var> of <var>part list</var>:</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate②">For each</a> <var>part</var> of <var>part list</var>:</p>
       <ol>
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type④">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text③"><code>fixed-text</code></a>":</p>
@@ -2355,9 +2370,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑦">Continue</a>.</p>
         </ol>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑧">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name②">name</a> is not the empty string.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑧">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> is not the empty string.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑥">Append</a> <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> to <var>name list</var>.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑥">Append</a> <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name④">name</a> to <var>name list</var>.</p>
         <p class="note" role="note">We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> which has indicated its unlikely to switch to using named capture groups. </p>
        <li data-md>
         <p>Let <var>regexp value</var> be <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑤">value</a>.</p>
@@ -2500,7 +2515,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate②">For each</a> <var>part</var> of <var>part list</var>:</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate③">For each</a> <var>part</var> of <var>part list</var>:</p>
       <ol>
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑦">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑤"><code>fixed-text</code></a>" then:</p>
@@ -2531,9 +2546,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①③">prefix</a> is not the empty string and is not <var>options</var>’s <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point⑤">prefix code point</a>. 
         </ul>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert①②">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name④">name</a> is not the empty string or null.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert①②">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑤">name</a> is not the empty string or null.</p>
        <li data-md>
-        <p>Let <var>custom name</var> be true if <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑤">name</a>[0] is not an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-digit" id="ref-for-ascii-digit">ASCII digit</a>.</p>
+        <p>Let <var>custom name</var> be true if <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑥">name</a>[0] is not an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-digit" id="ref-for-ascii-digit">ASCII digit</a>.</p>
        <li data-md>
         <p>If <var>needs grouping</var> is true, then append "<code>{</code>" to the end of <var>result</var>.</p>
        <li data-md>
@@ -2544,7 +2559,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Append "<code>:</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑥">name</a> to the end of <var>result</var>.</p>
+          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑦">name</a> to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑧">type</a> is "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp①"><code>regexp</code></a>" then:</p>
@@ -2654,7 +2669,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser④">basic URL parser</a> given <var>value</var> followed by "<code>://dummy.test</code>", with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url">url</a></i>.</p>
       <p class="note" role="note">Note, <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override">state override</a> is not used here because it enforces restrictions that are only appropriate for the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-protocol" id="ref-for-dom-url-protocol">protocol</a></code> setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑥">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme①">scheme</a>.</p>
     </ol>
@@ -2689,7 +2704,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑤">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url①">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#hostname-state" id="ref-for-hostname-state">hostname state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override①">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑥">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host①">host</a>.</p>
     </ol>
@@ -2705,7 +2720,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑦">basic URL parser</a> given <var>portValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url②">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#port-state" id="ref-for-port-state">port state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override②">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a> or empty string if it is null.</p>
     </ol>
@@ -2718,7 +2733,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑧">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url③">url</a> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#path-start-state" id="ref-for-path-start-state">path start state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override③">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string①">API pathname string</a>.</p>
     </ol>
@@ -2733,7 +2748,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑨">URL parsing</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url④">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state" id="ref-for-cannot-be-a-base-url-path-state">cannot be a base URL path state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override④">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string②">API pathname string</a>.</p>
     </ol>
@@ -2748,7 +2763,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①⓪">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑤">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#query-state" id="ref-for-query-state">query state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑤">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query②">query</a>.</p>
     </ol>
@@ -2763,7 +2778,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①①">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑥">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#fragment-state" id="ref-for-fragment-state">fragment state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑥">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment②">fragment</a>.</p>
     </ol>
@@ -2796,7 +2811,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Let <var>baseURL</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"].</p>
        <li data-md>
-        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
+        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①③">TypeError</a></code>.</p>
        <li data-md>
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol④">protocol</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a>.</p>
        <li data-md>
@@ -3015,6 +3030,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ul>
    <li><a href="#dom-urlpatternresult-inputs">inputs</a><span>, in § 1</span>
    <li><a href="#token-type-invalid-char">invalid-char</a><span>, in § 2.1.1</span>
+   <li><a href="#is-a-duplicate-name">is a duplicate name</a><span>, in § 2.1.5</span>
    <li><a href="#is-a-group-close">is a group close</a><span>, in § 1.2</span>
    <li><a href="#is-a-group-open">is a group open</a><span>, in § 1.2</span>
    <li><a href="#is-a-hash-prefix">is a hash prefix</a><span>, in § 1.2</span>
@@ -3312,8 +3328,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://infra.spec.whatwg.org/#list-iterate">https://infra.spec.whatwg.org/#list-iterate</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-list-iterate">1.1. Internals</a>
-    <li><a href="#ref-for-list-iterate①">2.2. Converting Part Lists to Regular Expressions</a>
-    <li><a href="#ref-for-list-iterate②">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-list-iterate①">2.1.5. Parsing</a>
+    <li><a href="#ref-for-list-iterate②">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-list-iterate③">2.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-length">
@@ -3547,9 +3564,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a>
     <li><a href="#ref-for-exceptiondef-typeerror①">1.1. Internals</a> <a href="#ref-for-exceptiondef-typeerror②">(2)</a>
     <li><a href="#ref-for-exceptiondef-typeerror③">2.1.2. Tokenizing</a>
-    <li><a href="#ref-for-exceptiondef-typeerror④">2.1.5. Parsing</a>
-    <li><a href="#ref-for-exceptiondef-typeerror⑤">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑥">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑦">(3)</a> <a href="#ref-for-exceptiondef-typeerror⑧">(4)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(5)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(6)</a> <a href="#ref-for-exceptiondef-typeerror①①">(7)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror①②">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-exceptiondef-typeerror④">2.1.5. Parsing</a> <a href="#ref-for-exceptiondef-typeerror⑤">(2)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror⑥">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑦">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑧">(3)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(4)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(5)</a> <a href="#ref-for-exceptiondef-typeerror①①">(6)</a> <a href="#ref-for-exceptiondef-typeerror①②">(7)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror①③">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
@@ -4698,9 +4715,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="part-name">
    <b><a href="#part-name">#part-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-part-name">2.1.5. Parsing</a> <a href="#ref-for-part-name①">(2)</a>
-    <li><a href="#ref-for-part-name②">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-name③">(2)</a>
-    <li><a href="#ref-for-part-name④">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-name⑤">(2)</a> <a href="#ref-for-part-name⑥">(3)</a>
+    <li><a href="#ref-for-part-name">2.1.5. Parsing</a> <a href="#ref-for-part-name①">(2)</a> <a href="#ref-for-part-name②">(3)</a>
+    <li><a href="#ref-for-part-name③">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-name④">(2)</a>
+    <li><a href="#ref-for-part-name⑤">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-name⑥">(2)</a> <a href="#ref-for-part-name⑦">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-prefix">
@@ -4756,7 +4773,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="pattern-parser">
    <b><a href="#pattern-parser">#pattern-parser</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-pattern-parser">2.1.5. Parsing</a> <a href="#ref-for-pattern-parser①">(2)</a> <a href="#ref-for-pattern-parser②">(3)</a> <a href="#ref-for-pattern-parser③">(4)</a> <a href="#ref-for-pattern-parser④">(5)</a> <a href="#ref-for-pattern-parser⑤">(6)</a> <a href="#ref-for-pattern-parser⑥">(7)</a> <a href="#ref-for-pattern-parser⑦">(8)</a> <a href="#ref-for-pattern-parser⑧">(9)</a> <a href="#ref-for-pattern-parser⑨">(10)</a> <a href="#ref-for-pattern-parser①⓪">(11)</a> <a href="#ref-for-pattern-parser①①">(12)</a> <a href="#ref-for-pattern-parser①②">(13)</a> <a href="#ref-for-pattern-parser①③">(14)</a> <a href="#ref-for-pattern-parser①④">(15)</a>
+    <li><a href="#ref-for-pattern-parser">2.1.5. Parsing</a> <a href="#ref-for-pattern-parser①">(2)</a> <a href="#ref-for-pattern-parser②">(3)</a> <a href="#ref-for-pattern-parser③">(4)</a> <a href="#ref-for-pattern-parser④">(5)</a> <a href="#ref-for-pattern-parser⑤">(6)</a> <a href="#ref-for-pattern-parser⑥">(7)</a> <a href="#ref-for-pattern-parser⑦">(8)</a> <a href="#ref-for-pattern-parser⑧">(9)</a> <a href="#ref-for-pattern-parser⑨">(10)</a> <a href="#ref-for-pattern-parser①⓪">(11)</a> <a href="#ref-for-pattern-parser①①">(12)</a> <a href="#ref-for-pattern-parser①②">(13)</a> <a href="#ref-for-pattern-parser①③">(14)</a> <a href="#ref-for-pattern-parser①④">(15)</a> <a href="#ref-for-pattern-parser①⑤">(16)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="pattern-parser-token-list">
@@ -4780,7 +4797,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="pattern-parser-part-list">
    <b><a href="#pattern-parser-part-list">#pattern-parser-part-list</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-pattern-parser-part-list">2.1.5. Parsing</a> <a href="#ref-for-pattern-parser-part-list①">(2)</a> <a href="#ref-for-pattern-parser-part-list②">(3)</a> <a href="#ref-for-pattern-parser-part-list③">(4)</a>
+    <li><a href="#ref-for-pattern-parser-part-list">2.1.5. Parsing</a> <a href="#ref-for-pattern-parser-part-list①">(2)</a> <a href="#ref-for-pattern-parser-part-list②">(3)</a> <a href="#ref-for-pattern-parser-part-list③">(4)</a> <a href="#ref-for-pattern-parser-part-list④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="pattern-parser-pending-fixed-value">
@@ -4863,6 +4880,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#add-a-part">#add-a-part</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-add-a-part">2.1.5. Parsing</a> <a href="#ref-for-add-a-part①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="is-a-duplicate-name">
+   <b><a href="#is-a-duplicate-name">#is-a-duplicate-name</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-a-duplicate-name">2.1.5. Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="generate-a-regular-expression-and-name-list">
