@@ -57,3 +57,7 @@ In regards to the RTL issue, however, so far we have decided to proceed with `:f
 In addition, URLPattern API integrates these names into the result returned to javascript.  Javascript is a left-to-right language.  For example, javascript identifiers allow different code points in the left-hand "first" position compared to the rest of the identifier.  Since we want to integrate well with javascript it seems difficult to fully support an RTL name.
 
 Further, there has been no follow-up from the original reporter or anyone else indicating that this is a problem or what an acceptable solution might look like.  We have also requested a w3c i18n review, but received no feedback.  Therefore, barring additional feedback, we plan to proceed with `:foo` names.
+
+## Additional Articles
+
+* https://css-tricks.com/native-javascript-routing/
