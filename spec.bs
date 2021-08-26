@@ -117,6 +117,8 @@ table {
 
 <h2 id=urlpattern-class>The {{URLPattern}} class </h2>
 
+Test
+
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
 
