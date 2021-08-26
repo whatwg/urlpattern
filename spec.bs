@@ -1297,13 +1297,21 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
     1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
     1. If |part|'s [=part/prefix=] is the empty string and |part|'s [=part/suffix=] is the empty string:
       <div class=note>
-      <p>If there is no [=part/prefix=] or [=part/suffix=] then we generate a simple capturing group.  It uses the following form.
-      <p>`(<regexp value>)<modifier>`
+      <p>If there is no [=part/prefix=] or [=part/suffix=] then generation depends on the modifier.  If there is no modifier, it uses the following simple form:
+      <p>`(<regexp value>)`
+      <p>If there is a modifier, however, we will use the more complex form:
+      <p>`((?:<regexp value>)<modifier>)`
       </div>
-      1. Append "`(`" to the end of |result|.
-      1. Append |regexp value| to the end of |result|.
-      1. Append "`)`" to the end of |result|.
-      1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
+      1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>", then:
+        1. Append "`(`" to the end of |result|.
+        1. Append |regexp value| to the end of |result|.
+        1. Append "`)`" to the end of |result|.
+      1. Else:
+        1. Append "`((?:`" to the end of |result|.
+        1. Append |regexp value| to the end of |result|.
+        1. Append "`)`" to the end of |result|.
+        1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
+        1. Append "`)`" to the end of |result|.
       1. [=Continue=].
     1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" or "<a for=part/modifier>`optional`</a>":
       <div class=note>
