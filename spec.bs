@@ -39,6 +39,7 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: RegExp; url: #sec-regexp-regular-expression-objects
 spec: url; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
+    text: cannot be a base URL flag; url: #url-cannot-be-a-base-url-flag
     text: cannot be a base URL path state; url: #cannot-be-a-base-url-path-state
     text: default port; url: #default-port
     text: fragment state; url: #fragment-state
@@ -1557,7 +1558,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <h3 id=canon-processing-for-init>{{URLPatternInit}} Processing</h3>
 
 <div algorithm>
-  To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string or null |type|, a string or null |protocol|, a string or null |username|, a string or null |password|, a string or null |hostname|, a string or null |port|, a string or null |pathname|, a string or null |search|, and a string or null |hash|:
+  To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string |type|, a string or null |protocol|, a string or null |username|, a string or null |password|, a string or null |hostname|, a string or null |port|, a string or null |pathname|, a string or null |search|, and a string or null |hash|:
 
   1. Let |result| be the result of creating a new {{URLPatternInit}}.
   1. Set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
@@ -1568,8 +1569,9 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
   1. Set |result|["{{URLPatternInit/search}}"] to |search|.
   1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
+  1. Let |baseURL| be null.
   1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
-    1. Let |baseURL| be the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
+    1. Set |baseURL| to the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
     1. If |baseURL| is failure, then throw a {{TypeError}}.
     1. Set |result|["{{URLPatternInit/protocol}}"] to |baseURL|'s [=url/scheme=].
     1. Set |result|["{{URLPatternInit/username}}"] to |baseURL|'s [=url/username=].
@@ -1584,10 +1586,36 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
   1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
   1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/pathname}}"] is not null then set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |init|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. If |init|["{{URLPatternInit/pathname}}"] is not null:
+    1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
+    1. If the following are all true:
+      <ul>
+        <li>|baseURL| is not null;</li>
+        <li>|baseURL|'s [=cannot be a base URL flag=] is false; and</li>
+        <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
+      </ul>
+      <p>then:
+      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
+      1. If |slash index| is not null:
+        1. Let |new pathname| be the [=code point substring by indices|code point substring=] from indices 0 to |slash index| inclusive within |baseURL|'s [=url/API pathname string=].
+        1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
+        1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
+    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
   1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
   1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
   1. Return |result|.
+</div>
+
+<div algorithm>
+  To run <dfn>is an absolute pathname</dfn> given a [=/pattern string=] |input| and a string |type|:
+
+  1. If |input| is the empty string, then return false.
+  1. If |input|[0] is U+002F (`/`), then return true.
+  1. If |type| is "`url`", then return false.
+  1. If |input|'s [=string/code point length=] is less than 2, then return false.
+  1. If |input|[0] is U+005C (<code>\</code>) and |input|[1] is U+002F (`/`), then return true.
+  1. If |input|[0] is U+007B (`{`) and |input|[1] is U+002F (`/`), then return true.
+  1. Return false.
 </div>
 
 <div algorithm>
