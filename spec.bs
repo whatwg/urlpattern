@@ -1595,11 +1595,11 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
         <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
       </ol>
       <p>then:
-      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=] or null if there are no instances of the code point.
+      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=code points=], or null if there are no instances of the code point.
       1. If |slash index| is not null:
         1. Let |new pathname| be the [=code point substring by indices|code point substring=] from indices 0 to |slash index| inclusive within |baseURL|'s [=url/API pathname string=].
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
-        1. Set |result|["{{URLPatternInit/pathname}}" to |new pathname|.
+        1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
     1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
   1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
   1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
