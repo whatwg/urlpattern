@@ -1589,13 +1589,13 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/pathname}}"] is not null:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
     1. If the following are all true:
-      <ol>
+      <ul>
         <li>|baseURL| is not null;</li>
         <li>|baseURL|'s [=cannot be a base URL flag=] is false; and</li>
         <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
-      </ol>
+      </ul>
       <p>then:
-      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=code points=], or null if there are no instances of the code point.
+      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
       1. If |slash index| is not null:
         1. Let |new pathname| be the [=code point substring by indices|code point substring=] from indices 0 to |slash index| inclusive within |baseURL|'s [=url/API pathname string=].
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
