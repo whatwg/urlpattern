@@ -482,6 +482,8 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
 
 A [=constructor string parser=] has an associated <dfn export for="constructor string parser">group depth</dfn>, a number, initially set to 0.
 
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">hostname IPv6 bracket depth</dfn>, a number, initially set to 0.
+
 A [=constructor string parser=] has an associated <dfn export for="constructor string parser">protocol matches a special scheme flag</dfn>, a boolean, initially set to false.
 
 A [=constructor string parser=] has an associated <dfn export for="constructor string parser">state</dfn>, a string, initially set to "<a for="constructor string parser/state">`init`</a>".  It must be one of the following:
@@ -607,7 +609,9 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         </dd>
         <dt>"<a for="constructor string parser/state">`hostname`</a>"</dt>
         <dd>
-          1. If the result of running [=is a port prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
+          1. If the the result of running [=is an IPv6 open=] given |parser| is true, then increment |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
+          1. Else if the the result of running [=is an IPv6 close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
+          1. Else if the result of running [=is a port prefix=] given |parser| is true and |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] is zero, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
           1. Else if the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
           1. Else if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
           1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
@@ -762,6 +766,18 @@ To run <dfn>is a group open</dfn> given a [=constructor string parser=] |parser|
 To run <dfn>is a group close</dfn> given a [=constructor string parser=] |parser|:
   1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`close`</a>", then return true.
   1. Else return false.
+</div>
+
+<div algorithm>
+To run <dfn>is an IPv6 open</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`[`".
+</div>
+
+<div algorithm>
+To run <dfn>is an IPv6 close</dfn> given a [=constructor string parser=] |parser|:
+
+  1. Return the result of running [=is a non-special pattern char=] given |parser|, |parser|'s [=constructor string parser/token index=], and "`]`".
 </div>
 
 <div algorithm>
