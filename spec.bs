@@ -282,7 +282,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Set [=this=]'s [=URLPattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
   1. Set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set [=this=]'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
-  1. If the result of running [=protocol component matches a special scheme=] given [=this=]'s [=URLPattern/protocol component=] is true, then set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a standard pathname=], and [=standard pathname options=].
+  1. If the result of running [=protocol component matches a special scheme=] given [=this=]'s [=URLPattern/protocol component=] is true, then set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and [=pathname options=].
   1. Else set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a cannot-be-a-base-URL pathname=], and [=default options=]
   1. Set [=this=]'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and [=default options=].
   1. Set [=this=]'s [=URLPattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and [=default options=].
@@ -452,7 +452,7 @@ The <dfn>default options</dfn> is an [=options=] [=struct=] with [=options/delim
 
 The <dfn>hostname options</dfn> is an [=options=] [=struct=] with [=options/delimiter code point=] set "`.`" and [=options/prefix code point=] set to the empty string.
 
-The <dfn>standard pathname options</dfn> is an [=options=] [=struct=] with [=options/delimiter code point=] set "`/`" and [=options/prefix code point=] set to "`/`".
+The <dfn>pathname options</dfn> is an [=options=] [=struct=] with [=options/delimiter code point=] set "`/`" and [=options/prefix code point=] set to "`/`".
 
 <div algorithm>
   To determine if a <dfn>protocol component matches a special scheme</dfn> given a [=component=] |protocol component|:
@@ -482,7 +482,7 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
 
 A [=constructor string parser=] has an associated <dfn export for="constructor string parser">group depth</dfn>, a number, initially set to 0.
 
-A [=constructor string parser=] has an associated <dfn export for="constructor string parser">should treat as a standard URL</dfn>, a boolean, initially set to false.
+A [=constructor string parser=] has an associated <dfn export for="constructor string parser">protocol matches a special scheme flag</dfn>, a boolean, initially set to false.
 
 A [=constructor string parser=] has an associated <dfn export for="constructor string parser">state</dfn>, a string, initially set to "<a for="constructor string parser/state">`init`</a>".  It must be one of the following:
 
@@ -574,15 +574,15 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dt>"<a for="constructor string parser/state">`protocol`</a>"</dt>
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
-            1. Run [=compute should treat as a standard URL=] given |parser|.
-              <p class="note allow-2119">We must eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then we treat the URLPattern constructor string as a "standard URL".  The determines if the pathname defaults to a "`/`" and also whether we should look for the username, password, hostname, and port components.  Authority slashes may also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component.
-            1. If |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
+            1. Run [=compute protocol matches a special scheme flag=] given |parser|.
+              <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component.
+            1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
             1. If the result of running [=next is authority slashes=] given |parser| is true:
               1. Set |next state| to "<a for="constructor string parser/state">`authority`</a>".
               1. Set |skip| to 3.
-            1. Else if |parser|'s [=constructor string parser/should treat as a standard URL=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
+            1. Else if |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
             1. Run [=change state=] given |parser|, |next state|, and |skip|.
         </dd>
         <dt>"<a for="constructor string parser/state">`authority`</a>"</dt>
@@ -775,11 +775,11 @@ To run <dfn>make a component string</dfn> given a [=constructor string parser=] 
 </div>
 
 <div algorithm>
-To <dfn>compute should treat as a standard URL</dfn> given a [=constructor string parser=] |parser|:
+To <dfn>compute protocol matches a special scheme flag</dfn> given a [=constructor string parser=] |parser|:
 
   1. Let |protocol string| be the result of running [=make a component string=] given |parser|.
   1. Let |protocol component| be the result of [=compiling a component=] given |protocol string|, [=canonicalize a protocol=], and [=default options=].
-  1. If the result of running [=protocol component matches a special scheme=] given |protocol component| is true, then set |parser|'s [=constructor string parser/should treat as a standard URL=] to true.
+  1. If the result of running [=protocol component matches a special scheme=] given |protocol component| is true, then set |parser|'s [=constructor string parser/protocol matches a special scheme flag=] to true.
 </div>
 
 <h2 id=patterns>Patterns</h2>
@@ -1518,7 +1518,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 </div>
 
 <div algorithm>
-  To <dfn>canonicalize a standard pathname</dfn> given a string |value|:
+  To <dfn>canonicalize a pathname</dfn> given a string |value|:
 
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
@@ -1659,7 +1659,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   To <dfn>process pathname for init</dfn> given a string |pathnameValue|, a string |protocolValue|, and a string |type|:
 
   1. If |type| is "`pattern`" then return |pathnameValue|.
-  1. If |protocolValue| is a [=special scheme=], then return the result of running [=canonicalize a standard pathname=] given |pathnameValue|.
+  1. If |protocolValue| is a [=special scheme=], then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
   1. Else return the result of running [=canonicalize a cannot-be-a-base-URL pathname=] given |pathnameValue|.
 </div algorithm>
 
