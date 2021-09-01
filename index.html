@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-08-31">31 August 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-09-01">1 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -862,7 +862,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this④">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component④">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port②">port</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-port" id="ref-for-canonicalize-a-port">canonicalize a port</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options③">default options</a>.</p>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-standard-pathname" id="ref-for-canonicalize-a-standard-pathname">canonicalize a standard pathname</a>, and <a data-link-type="dfn" href="#standard-pathname-options" id="ref-for-standard-pathname-options">standard pathname options</a>.</p>
+      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <a data-link-type="dfn" href="#pathname-options" id="ref-for-pathname-options">pathname options</a>.</p>
      <li data-md>
       <p>Else set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-cannot-be-a-base-url-pathname" id="ref-for-canonicalize-a-cannot-be-a-base-url-pathname">canonicalize a cannot-be-a-base-URL pathname</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options④">default options</a></p>
      <li data-md>
@@ -1120,7 +1120,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="default-options">default options</dfn> is an <a data-link-type="dfn" href="#options" id="ref-for-options①">options</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct①">struct</a> with <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point">delimiter code point</a> set to the empty string and <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point">prefix code point</a> set to the empty string.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="hostname-options">hostname options</dfn> is an <a data-link-type="dfn" href="#options" id="ref-for-options②">options</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct②">struct</a> with <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point①">delimiter code point</a> set "<code>.</code>" and <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point①">prefix code point</a> set to the empty string.</p>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="standard-pathname-options">standard pathname options</dfn> is an <a data-link-type="dfn" href="#options" id="ref-for-options③">options</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct③">struct</a> with <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point②">delimiter code point</a> set "<code>/</code>" and <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point②">prefix code point</a> set to "<code>/</code>".</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pathname-options">pathname options</dfn> is an <a data-link-type="dfn" href="#options" id="ref-for-options③">options</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct③">struct</a> with <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point②">delimiter code point</a> set "<code>/</code>" and <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point②">prefix code point</a> set to "<code>/</code>".</p>
    <div class="algorithm" data-algorithm="protocol component matches a special scheme">
      To determine if a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="protocol-component-matches-a-special-scheme">protocol component matches a special scheme</dfn> given a <a data-link-type="dfn" href="#component" id="ref-for-component①③">component</a> <var>protocol component</var>: 
     <ol>
@@ -1147,7 +1147,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser④">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-token-index">token index</dfn>, a number, initially set to 0.</p>
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑤">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-token-increment">token increment</dfn>, a number, initially set to 1.</p>
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑥">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-group-depth">group depth</dfn>, a number, initially set to 0.</p>
-   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑦">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-should-treat-as-a-standard-url">should treat as a standard URL</dfn>, a boolean, initially set to false.</p>
+   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑦">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-protocol-matches-a-special-scheme-flag">protocol matches a special scheme flag</dfn>, a boolean, initially set to false.</p>
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑧">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-state">state</dfn>, a string, initially set to "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init"><code>init</code></a>".  It must be one of the following:</p>
    <ul>
     <li>"<dfn class="dfn-paneled" data-dfn-for="constructor string parser/state" data-dfn-type="dfn" data-noexport id="constructor-string-parser-state-init"><code>init</code></dfn>"
@@ -1300,10 +1300,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>If the result of running <a data-link-type="dfn" href="#is-a-protocol-suffix" id="ref-for-is-a-protocol-suffix①">is a protocol suffix</a> given <var>parser</var> is true:</p>
             <ol>
              <li data-md>
-              <p>Run <a data-link-type="dfn" href="#compute-should-treat-as-a-standard-url" id="ref-for-compute-should-treat-as-a-standard-url">compute should treat as a standard URL</a> given <var>parser</var>.</p>
-              <p class="note allow-2119" role="note">We must eagerly compile the protocol component to determine if it matches any <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme②">special schemes</a>.  If it does then we treat the URLPattern constructor string as a "standard URL".  The determines if the pathname defaults to a "<code>/</code>" and also whether we should look for the username, password, hostname, and port components.  Authority slashes may also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component. </p>
+              <p>Run <a data-link-type="dfn" href="#compute-protocol-matches-a-special-scheme-flag" id="ref-for-compute-protocol-matches-a-special-scheme-flag">compute protocol matches a special scheme flag</a> given <var>parser</var>.</p>
+              <p class="note" role="note">We need to eagerly compile the protocol component to determine if it matches any <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme②">special schemes</a>.  If it does then certain special rules apply.  It determines if the pathname defaults to a "<code>/</code>" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component. </p>
              <li data-md>
-              <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url">should treat as a standard URL</a> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①①">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname④">pathname</a></code>"] to "<code>/</code>".</p>
+              <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag">protocol matches a special scheme flag</a> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①①">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname④">pathname</a></code>"] to "<code>/</code>".</p>
              <li data-md>
               <p>Let <var>next state</var> be "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname①"><code>pathname</code></a>".</p>
              <li data-md>
@@ -1317,7 +1317,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
                 <p>Set <var>skip</var> to 3.</p>
               </ol>
              <li data-md>
-              <p>Else if <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url①">should treat as a standard URL</a> is true, then set <var>next state</var> to "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority③"><code>authority</code></a>".</p>
+              <p>Else if <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag①">protocol matches a special scheme flag</a> is true, then set <var>next state</var> to "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority③"><code>authority</code></a>".</p>
              <li data-md>
               <p>Run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state④">change state</a> given <var>parser</var>, <var>next state</var>, and <var>skip</var>.</p>
             </ol>
@@ -1586,15 +1586,15 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices">code point substring</a> from indices <var>component start input index</var> to <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> inclusive within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
     </ol>
    </div>
-   <div class="algorithm" data-algorithm="compute should treat as a standard URL">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="compute-should-treat-as-a-standard-url">compute should treat as a standard URL</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑥">constructor string parser</a> <var>parser</var>: 
+   <div class="algorithm" data-algorithm="compute protocol matches a special scheme flag">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="compute-protocol-matches-a-special-scheme-flag">compute protocol matches a special scheme flag</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑥">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Let <var>protocol string</var> be the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string①">make a component string</a> given <var>parser</var>.</p>
      <li data-md>
       <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-should-treat-as-a-standard-url" id="ref-for-constructor-string-parser-should-treat-as-a-standard-url②">should treat as a standard URL</a> to true.</p>
+      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag②">protocol matches a special scheme flag</a> to true.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="2" id="patterns"><span class="secno">2. </span><span class="content">Patterns</span><a class="self-link" href="#patterns"></a></h2>
@@ -2745,8 +2745,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a> or empty string if it is null.</p>
     </ol>
    </div>
-   <div class="algorithm" data-algorithm="canonicalize a standard pathname">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-standard-pathname">canonicalize a standard pathname</dfn> given a string <var>value</var>: 
+   <div class="algorithm" data-algorithm="canonicalize a pathname">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-pathname">canonicalize a pathname</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑥">URL record</a>.</p>
@@ -2971,7 +2971,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>type</var> is "<code>pattern</code>" then return <var>pathnameValue</var>.</p>
      <li data-md>
-      <p>If <var>protocolValue</var> is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme③">special scheme</a>, then return the result of running <a data-link-type="dfn" href="#canonicalize-a-standard-pathname" id="ref-for-canonicalize-a-standard-pathname①">canonicalize a standard pathname</a> given <var>pathnameValue</var>.</p>
+      <p>If <var>protocolValue</var> is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme③">special scheme</a>, then return the result of running <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname①">canonicalize a pathname</a> given <var>pathnameValue</var>.</p>
      <li data-md>
       <p>Else return the result of running <a data-link-type="dfn" href="#canonicalize-a-cannot-be-a-base-url-pathname" id="ref-for-canonicalize-a-cannot-be-a-base-url-pathname①">canonicalize a cannot-be-a-base-URL pathname</a> given <var>pathnameValue</var>.</p>
     </ol>
@@ -3017,10 +3017,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#canonicalize-a-hash">canonicalize a hash</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-hostname">canonicalize a hostname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-password">canonicalize a password</a><span>, in § 3.1</span>
+   <li><a href="#canonicalize-a-pathname">canonicalize a pathname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-port">canonicalize a port</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-protocol">canonicalize a protocol</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-search">canonicalize a search</a><span>, in § 3.1</span>
-   <li><a href="#canonicalize-a-standard-pathname">canonicalize a standard pathname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-username">canonicalize a username</a><span>, in § 3.1</span>
    <li><a href="#change-state">change state</a><span>, in § 1.2</span>
    <li><a href="#token-type-char">char</a><span>, in § 2.1.1</span>
@@ -3029,7 +3029,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#compile-a-component">compile a component</a><span>, in § 1.1</span>
    <li><a href="#component">component</a><span>, in § 1.1</span>
    <li><a href="#constructor-string-parser-component-start">component start</a><span>, in § 1.2</span>
-   <li><a href="#compute-should-treat-as-a-standard-url">compute should treat as a standard URL</a><span>, in § 1.2</span>
+   <li><a href="#compute-protocol-matches-a-special-scheme-flag">compute protocol matches a special scheme flag</a><span>, in § 1.2</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input)</a><span>, in § 1</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input, baseURL)</a><span>, in § 1</span>
    <li><a href="#constructor-string-parser">constructor string parser</a><span>, in § 1.2</span>
@@ -3160,6 +3160,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-pathname">dict-member for URLPatternResult</a><span>, in § 1</span>
     </ul>
    <li><a href="#urlpattern-pathname-component">pathname component</a><span>, in § 1</span>
+   <li><a href="#pathname-options">pathname options</a><span>, in § 1.1</span>
    <li><a href="#pattern-parser">pattern parser</a><span>, in § 2.1.5</span>
    <li>
     pattern string
@@ -3200,6 +3201,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ul>
    <li><a href="#urlpattern-protocol-component">protocol component</a><span>, in § 1</span>
    <li><a href="#protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a><span>, in § 1.1</span>
+   <li><a href="#constructor-string-parser-protocol-matches-a-special-scheme-flag">protocol matches a special scheme flag</a><span>, in § 1.2</span>
    <li>
     regexp
     <ul>
@@ -3222,8 +3224,6 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#seek-and-get-the-next-code-point">seek and get the next code point</a><span>, in § 2.1.2</span>
    <li><a href="#part-type-segment-wildcard">segment-wildcard</a><span>, in § 2.1.3</span>
    <li><a href="#pattern-parser-segment-wildcard-regexp">segment wildcard regexp</a><span>, in § 2.1.5</span>
-   <li><a href="#constructor-string-parser-should-treat-as-a-standard-url">should treat as a standard URL</a><span>, in § 1.2</span>
-   <li><a href="#standard-pathname-options">standard pathname options</a><span>, in § 1.1</span>
    <li><a href="#constructor-string-parser-state">state</a><span>, in § 1.2</span>
    <li><a href="#tokenize-policy-strict">strict</a><span>, in § 2.1.2</span>
    <li><a href="#part-suffix">suffix</a><span>, in § 2.1.3</span>
@@ -4190,10 +4190,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-hostname-options">1. The URLPattern class </a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="standard-pathname-options">
-   <b><a href="#standard-pathname-options">#standard-pathname-options</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="pathname-options">
+   <b><a href="#pathname-options">#pathname-options</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-standard-pathname-options">1. The URLPattern class </a>
+    <li><a href="#ref-for-pathname-options">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="protocol-component-matches-a-special-scheme">
@@ -4251,10 +4251,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-constructor-string-parser-group-depth">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-group-depth①">(2)</a> <a href="#ref-for-constructor-string-parser-group-depth②">(3)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="constructor-string-parser-should-treat-as-a-standard-url">
-   <b><a href="#constructor-string-parser-should-treat-as-a-standard-url">#constructor-string-parser-should-treat-as-a-standard-url</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="constructor-string-parser-protocol-matches-a-special-scheme-flag">
+   <b><a href="#constructor-string-parser-protocol-matches-a-special-scheme-flag">#constructor-string-parser-protocol-matches-a-special-scheme-flag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-constructor-string-parser-should-treat-as-a-standard-url">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-should-treat-as-a-standard-url①">(2)</a> <a href="#ref-for-constructor-string-parser-should-treat-as-a-standard-url②">(3)</a>
+    <li><a href="#ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag①">(2)</a> <a href="#ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser-state">
@@ -4431,10 +4431,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-make-a-component-string">1.2. Constructor String Parsing</a> <a href="#ref-for-make-a-component-string①">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="compute-should-treat-as-a-standard-url">
-   <b><a href="#compute-should-treat-as-a-standard-url">#compute-should-treat-as-a-standard-url</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="compute-protocol-matches-a-special-scheme-flag">
+   <b><a href="#compute-protocol-matches-a-special-scheme-flag">#compute-protocol-matches-a-special-scheme-flag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-compute-should-treat-as-a-standard-url">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-compute-protocol-matches-a-special-scheme-flag">1.2. Constructor String Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="pattern-string">
@@ -5043,11 +5043,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-canonicalize-a-port①">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="canonicalize-a-standard-pathname">
-   <b><a href="#canonicalize-a-standard-pathname">#canonicalize-a-standard-pathname</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="canonicalize-a-pathname">
+   <b><a href="#canonicalize-a-pathname">#canonicalize-a-pathname</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-canonicalize-a-standard-pathname">1. The URLPattern class </a>
-    <li><a href="#ref-for-canonicalize-a-standard-pathname①">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-canonicalize-a-pathname">1. The URLPattern class </a>
+    <li><a href="#ref-for-canonicalize-a-pathname①">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="canonicalize-a-cannot-be-a-base-url-pathname">
