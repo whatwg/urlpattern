@@ -1147,8 +1147,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser④">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-token-index">token index</dfn>, a number, initially set to 0.</p>
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑤">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-token-increment">token increment</dfn>, a number, initially set to 1.</p>
    <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑥">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-group-depth">group depth</dfn>, a number, initially set to 0.</p>
-   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑦">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-protocol-matches-a-special-scheme-flag">protocol matches a special scheme flag</dfn>, a boolean, initially set to false.</p>
-   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑧">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-state">state</dfn>, a string, initially set to "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init"><code>init</code></a>".  It must be one of the following:</p>
+   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑦">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</dfn>, a number, initially set to 0.</p>
+   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑧">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-protocol-matches-a-special-scheme-flag">protocol matches a special scheme flag</dfn>, a boolean, initially set to false.</p>
+   <p>A <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑨">constructor string parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="constructor string parser" data-dfn-type="dfn" data-export id="constructor-string-parser-state">state</dfn>, a string, initially set to "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init"><code>init</code></a>".  It must be one of the following:</p>
    <ul>
     <li>"<dfn class="dfn-paneled" data-dfn-for="constructor string parser/state" data-dfn-type="dfn" data-noexport id="constructor-string-parser-state-init"><code>init</code></dfn>"
     <li>"<dfn class="dfn-paneled" data-dfn-for="constructor string parser/state" data-dfn-type="dfn" data-export id="constructor-string-parser-state-protocol"><code>protocol</code></dfn>"
@@ -1172,7 +1173,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="parse-a-constructor-string">parse a constructor string</dfn> given a string <var>input</var>: 
     <ol>
      <li data-md>
-      <p>Let <var>parser</var> be a new <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser⑨">constructor string parser</a> whose <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input">input</a> is <var>input</var> and <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list">token list</a> is the result of running <a data-link-type="dfn" href="#tokenize" id="ref-for-tokenize">tokenize</a> given <var>input</var> and "<a data-link-type="dfn" href="#tokenize-policy-lenient" id="ref-for-tokenize-policy-lenient"><code>lenient</code></a>".</p>
+      <p>Let <var>parser</var> be a new <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⓪">constructor string parser</a> whose <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input">input</a> is <var>input</var> and <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list">token list</a> is the result of running <a data-link-type="dfn" href="#tokenize" id="ref-for-tokenize">tokenize</a> given <var>input</var> and "<a data-link-type="dfn" href="#tokenize-policy-lenient" id="ref-for-tokenize-policy-lenient"><code>lenient</code></a>".</p>
       <div class="note" role="note">
        <p>When constructing a pattern using a <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit⑥">URLPatternInit</a></code> like <code>new URLPattern({ pathname: 'foo' })</code> any missing components will be defaulted to wildcards.  In the constructor string case, however, all components are precisely defined as either empty string or a longer value.  This is due to there being no way to simply "leave out" a component when writing a URL. </p>
        <p>To implement this we initialize components in <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result">result</a> with empty string in advance. </p>
@@ -1354,7 +1355,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <dd>
           <ol>
            <li data-md>
-            <p>If the result of running <a data-link-type="dfn" href="#is-a-port-prefix" id="ref-for-is-a-port-prefix">is a port prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑧">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-port" id="ref-for-constructor-string-parser-state-port"><code>port</code></a>", and 1.</p>
+            <p>If the the result of running <a data-link-type="dfn" href="#is-an-ipv6-open" id="ref-for-is-an-ipv6-open">is an IPv6 open</a> given <var>parser</var> is true, then increment <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</a> by 1.</p>
+           <li data-md>
+            <p>Else if the the result of running <a data-link-type="dfn" href="#is-an-ipv6-close" id="ref-for-is-an-ipv6-close">is an IPv6 close</a> given <var>parser</var> is true, then decrement <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth①">hostname IPv6 bracket depth</a> by 1.</p>
+           <li data-md>
+            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-port-prefix" id="ref-for-is-a-port-prefix">is a port prefix</a> given <var>parser</var> is true and <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth②">hostname IPv6 bracket depth</a> is zero, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑧">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-port" id="ref-for-constructor-string-parser-state-port"><code>port</code></a>", and 1.</p>
            <li data-md>
             <p>Else if the result of running <a data-link-type="dfn" href="#is-a-pathname-start" id="ref-for-is-a-pathname-start①">is a pathname start</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑨">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname②"><code>pathname</code></a>", and 0.</p>
            <li data-md>
@@ -1407,7 +1412,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="change state">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="change-state">change state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⓪">constructor string parser</a> <var>parser</var>, a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑥">state</a> <var>state</var>, and a number <var>skip</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="change-state">change state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①①">constructor string parser</a> <var>parser</var>, a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑥">state</a> <var>state</var>, and a number <var>skip</var>: 
     <ol>
      <li data-md>
       <p>If <var>state</var> is not "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init⑤"><code>init</code></a>", not "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority⑤"><code>authority</code></a>", and not "<a data-link-type="dfn" href="#constructor-string-parser-state-done" id="ref-for-constructor-string-parser-state-done②"><code>done</code></a>", then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①③">result</a>[<var>state</var>] to the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string">make a component string</a> given <var>parser</var>.</p>
@@ -1422,7 +1427,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="rewind">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind">rewind</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①①">constructor string parser</a> <var>parser</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind">rewind</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①②">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①⓪">token index</a> to <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-component-start" id="ref-for-constructor-string-parser-component-start①">component start</a>.</p>
@@ -1431,7 +1436,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="rewind and set state">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind-and-set-state">rewind and set state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①②">constructor string parser</a> <var>parser</var> and a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑧">state</a> <var>state</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind-and-set-state">rewind and set state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①③">constructor string parser</a> <var>parser</var> and a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑧">state</a> <var>state</var>: 
     <ol>
      <li data-md>
       <p>Run <a data-link-type="dfn" href="#rewind" id="ref-for-rewind①">rewind</a> given <var>parser</var>.</p>
@@ -1440,7 +1445,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="get a safe token">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-a-safe-token">get a safe token</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①③">constructor string parser</a> <var>parser</var> and a number <var>index</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-a-safe-token">get a safe token</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①④">constructor string parser</a> <var>parser</var> and a number <var>index</var>: 
     <ol>
      <li data-md>
       <p>If <var>index</var> is less than <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list③">token list</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size①">size</a>, then return <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list④">token list</a>[<var>index</var>].</p>
@@ -1457,7 +1462,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a non-special pattern char">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-non-special-pattern-char">is a non-special pattern char</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①④">constructor string parser</a> <var>parser</var>, a number <var>index</var>, and a string <var>value</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-non-special-pattern-char">is a non-special pattern char</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑤">constructor string parser</a> <var>parser</var>, a number <var>index</var>, and a string <var>value</var>: 
     <ol>
      <li data-md>
       <p>Let <var>token</var> be the result of running <a data-link-type="dfn" href="#get-a-safe-token" id="ref-for-get-a-safe-token">get a safe token</a> given <var>parser</var> and <var>index</var>.</p>
@@ -1476,14 +1481,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a protocol suffix">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-protocol-suffix">is a protocol suffix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑤">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-protocol-suffix">is a protocol suffix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑥">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①①">token index</a>, and "<code>:</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="next is authority slashes">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="next-is-authority-slashes">next is authority slashes</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑥">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="next-is-authority-slashes">next is authority slashes</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑦">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>If the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char①">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①②">token index</a> + 1, and "<code>/</code>" is false, then return false.</p>
@@ -1494,35 +1499,35 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is an identity terminator">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-identity-terminator">is an identity terminator</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑦">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-identity-terminator">is an identity terminator</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑧">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char③">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①④">token index</a>, and "<code>@</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a password prefix">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-password-prefix">is a password prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑧">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-password-prefix">is a password prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑨">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char④">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①⑤">token index</a>, and "<code>:</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a port prefix">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-port-prefix">is a port prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①⑨">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-port-prefix">is a port prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⓪">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char⑤">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①⑥">token index</a>, and "<code>:</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a pathname start">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-pathname-start">is a pathname start</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⓪">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-pathname-start">is a pathname start</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②①">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char⑥">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①⑦">token index</a>, and "<code>/</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a search prefix">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-search-prefix">is a search prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②①">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-search-prefix">is a search prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②②">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>If result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char⑦">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index①⑧">token index</a> and "<code>?</code>" is true, then return true.</p>
@@ -1547,14 +1552,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a hash prefix">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-hash-prefix">is a hash prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②②">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-hash-prefix">is a hash prefix</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②③">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char⑧">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②①">token index</a> and "<code>#</code>".</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a group open">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-group-open">is a group open</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②③">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-group-open">is a group open</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②④">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list⑨">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②②">token index</a>]'s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type⑨">type</a> is "<a data-link-type="dfn" href="#token-type-open" id="ref-for-token-type-open"><code>open</code></a>", then return true.</p>
@@ -1563,7 +1568,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a group close">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-group-close">is a group close</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②④">constructor string parser</a> <var>parser</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-a-group-close">is a group close</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑤">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①⓪">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②③">token index</a>]'s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type①⓪">type</a> is "<a data-link-type="dfn" href="#token-type-close" id="ref-for-token-type-close①"><code>close</code></a>", then return true.</p>
@@ -1571,13 +1576,27 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Else return false.</p>
     </ol>
    </div>
-   <div class="algorithm" data-algorithm="make a component string">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="make-a-component-string">make a component string</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑤">constructor string parser</a> <var>parser</var>: 
+   <div class="algorithm" data-algorithm="is an IPv6 open">
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-ipv6-open">is an IPv6 open</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑥">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert④">Assert</a>: <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②④">token index</a> is less than <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①①">token list</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size④">size</a>.</p>
+      <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char⑨">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②④">token index</a>, and "<code>[</code>".</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="is an IPv6 close">
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-ipv6-close">is an IPv6 close</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑦">constructor string parser</a> <var>parser</var>: 
+    <ol>
      <li data-md>
-      <p>Let <var>token</var> be <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①②">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②⑤">token index</a>].</p>
+      <p>Return the result of running <a data-link-type="dfn" href="#is-a-non-special-pattern-char" id="ref-for-is-a-non-special-pattern-char①⓪">is a non-special pattern char</a> given <var>parser</var>, <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②⑤">token index</a>, and "<code>]</code>".</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="make a component string">
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="make-a-component-string">make a component string</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑧">constructor string parser</a> <var>parser</var>: 
+    <ol>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert④">Assert</a>: <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②⑥">token index</a> is less than <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①①">token list</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size④">size</a>.</p>
+     <li data-md>
+      <p>Let <var>token</var> be <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①②">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②⑦">token index</a>].</p>
      <li data-md>
       <p>Let <var>component start token</var> be the result of running <a data-link-type="dfn" href="#get-a-safe-token" id="ref-for-get-a-safe-token②">get a safe token</a> given <var>parser</var> and <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-component-start" id="ref-for-constructor-string-parser-component-start②">component start</a>.</p>
      <li data-md>
@@ -1587,7 +1606,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="compute protocol matches a special scheme flag">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="compute-protocol-matches-a-special-scheme-flag">compute protocol matches a special scheme flag</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑥">constructor string parser</a> <var>parser</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="compute-protocol-matches-a-special-scheme-flag">compute protocol matches a special scheme flag</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser②⑨">constructor string parser</a> <var>parser</var>: 
     <ol>
      <li data-md>
       <p>Let <var>protocol string</var> be the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string①">make a component string</a> given <var>parser</var>.</p>
@@ -3081,6 +3100,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><a href="#dom-urlpatternresult-hostname">dict-member for URLPatternResult</a><span>, in § 1</span>
     </ul>
    <li><a href="#urlpattern-hostname-component">hostname component</a><span>, in § 1</span>
+   <li><a href="#constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</a><span>, in § 1.2</span>
    <li><a href="#hostname-options">hostname options</a><span>, in § 1.1</span>
    <li>
     index
@@ -3105,6 +3125,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#is-a-hash-prefix">is a hash prefix</a><span>, in § 1.2</span>
    <li><a href="#is-an-absolute-pathname">is an absolute pathname</a><span>, in § 3.2</span>
    <li><a href="#is-an-identity-terminator">is an identity terminator</a><span>, in § 1.2</span>
+   <li><a href="#is-an-ipv6-close">is an IPv6 close</a><span>, in § 1.2</span>
+   <li><a href="#is-an-ipv6-open">is an IPv6 open</a><span>, in § 1.2</span>
    <li><a href="#is-a-non-special-pattern-char">is a non-special pattern char</a><span>, in § 1.2</span>
    <li><a href="#is-a-password-prefix">is a password prefix</a><span>, in § 1.2</span>
    <li><a href="#is-a-pathname-start">is a pathname start</a><span>, in § 1.2</span>
@@ -4206,7 +4228,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="constructor-string-parser">
    <b><a href="#constructor-string-parser">#constructor-string-parser</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-constructor-string-parser">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser①">(2)</a> <a href="#ref-for-constructor-string-parser②">(3)</a> <a href="#ref-for-constructor-string-parser③">(4)</a> <a href="#ref-for-constructor-string-parser④">(5)</a> <a href="#ref-for-constructor-string-parser⑤">(6)</a> <a href="#ref-for-constructor-string-parser⑥">(7)</a> <a href="#ref-for-constructor-string-parser⑦">(8)</a> <a href="#ref-for-constructor-string-parser⑧">(9)</a> <a href="#ref-for-constructor-string-parser⑨">(10)</a> <a href="#ref-for-constructor-string-parser①⓪">(11)</a> <a href="#ref-for-constructor-string-parser①①">(12)</a> <a href="#ref-for-constructor-string-parser①②">(13)</a> <a href="#ref-for-constructor-string-parser①③">(14)</a> <a href="#ref-for-constructor-string-parser①④">(15)</a> <a href="#ref-for-constructor-string-parser①⑤">(16)</a> <a href="#ref-for-constructor-string-parser①⑥">(17)</a> <a href="#ref-for-constructor-string-parser①⑦">(18)</a> <a href="#ref-for-constructor-string-parser①⑧">(19)</a> <a href="#ref-for-constructor-string-parser①⑨">(20)</a> <a href="#ref-for-constructor-string-parser②⓪">(21)</a> <a href="#ref-for-constructor-string-parser②①">(22)</a> <a href="#ref-for-constructor-string-parser②②">(23)</a> <a href="#ref-for-constructor-string-parser②③">(24)</a> <a href="#ref-for-constructor-string-parser②④">(25)</a> <a href="#ref-for-constructor-string-parser②⑤">(26)</a> <a href="#ref-for-constructor-string-parser②⑥">(27)</a>
+    <li><a href="#ref-for-constructor-string-parser">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser①">(2)</a> <a href="#ref-for-constructor-string-parser②">(3)</a> <a href="#ref-for-constructor-string-parser③">(4)</a> <a href="#ref-for-constructor-string-parser④">(5)</a> <a href="#ref-for-constructor-string-parser⑤">(6)</a> <a href="#ref-for-constructor-string-parser⑥">(7)</a> <a href="#ref-for-constructor-string-parser⑦">(8)</a> <a href="#ref-for-constructor-string-parser⑧">(9)</a> <a href="#ref-for-constructor-string-parser⑨">(10)</a> <a href="#ref-for-constructor-string-parser①⓪">(11)</a> <a href="#ref-for-constructor-string-parser①①">(12)</a> <a href="#ref-for-constructor-string-parser①②">(13)</a> <a href="#ref-for-constructor-string-parser①③">(14)</a> <a href="#ref-for-constructor-string-parser①④">(15)</a> <a href="#ref-for-constructor-string-parser①⑤">(16)</a> <a href="#ref-for-constructor-string-parser①⑥">(17)</a> <a href="#ref-for-constructor-string-parser①⑦">(18)</a> <a href="#ref-for-constructor-string-parser①⑧">(19)</a> <a href="#ref-for-constructor-string-parser①⑨">(20)</a> <a href="#ref-for-constructor-string-parser②⓪">(21)</a> <a href="#ref-for-constructor-string-parser②①">(22)</a> <a href="#ref-for-constructor-string-parser②②">(23)</a> <a href="#ref-for-constructor-string-parser②③">(24)</a> <a href="#ref-for-constructor-string-parser②④">(25)</a> <a href="#ref-for-constructor-string-parser②⑤">(26)</a> <a href="#ref-for-constructor-string-parser②⑥">(27)</a> <a href="#ref-for-constructor-string-parser②⑦">(28)</a> <a href="#ref-for-constructor-string-parser②⑧">(29)</a> <a href="#ref-for-constructor-string-parser②⑨">(30)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser-input">
@@ -4236,7 +4258,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="constructor-string-parser-token-index">
    <b><a href="#constructor-string-parser-token-index">#constructor-string-parser-token-index</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-constructor-string-parser-token-index">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-token-index①">(2)</a> <a href="#ref-for-constructor-string-parser-token-index②">(3)</a> <a href="#ref-for-constructor-string-parser-token-index③">(4)</a> <a href="#ref-for-constructor-string-parser-token-index④">(5)</a> <a href="#ref-for-constructor-string-parser-token-index⑤">(6)</a> <a href="#ref-for-constructor-string-parser-token-index⑥">(7)</a> <a href="#ref-for-constructor-string-parser-token-index⑦">(8)</a> <a href="#ref-for-constructor-string-parser-token-index⑧">(9)</a> <a href="#ref-for-constructor-string-parser-token-index⑨">(10)</a> <a href="#ref-for-constructor-string-parser-token-index①⓪">(11)</a> <a href="#ref-for-constructor-string-parser-token-index①①">(12)</a> <a href="#ref-for-constructor-string-parser-token-index①②">(13)</a> <a href="#ref-for-constructor-string-parser-token-index①③">(14)</a> <a href="#ref-for-constructor-string-parser-token-index①④">(15)</a> <a href="#ref-for-constructor-string-parser-token-index①⑤">(16)</a> <a href="#ref-for-constructor-string-parser-token-index①⑥">(17)</a> <a href="#ref-for-constructor-string-parser-token-index①⑦">(18)</a> <a href="#ref-for-constructor-string-parser-token-index①⑧">(19)</a> <a href="#ref-for-constructor-string-parser-token-index①⑨">(20)</a> <a href="#ref-for-constructor-string-parser-token-index②⓪">(21)</a> <a href="#ref-for-constructor-string-parser-token-index②①">(22)</a> <a href="#ref-for-constructor-string-parser-token-index②②">(23)</a> <a href="#ref-for-constructor-string-parser-token-index②③">(24)</a> <a href="#ref-for-constructor-string-parser-token-index②④">(25)</a> <a href="#ref-for-constructor-string-parser-token-index②⑤">(26)</a>
+    <li><a href="#ref-for-constructor-string-parser-token-index">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-token-index①">(2)</a> <a href="#ref-for-constructor-string-parser-token-index②">(3)</a> <a href="#ref-for-constructor-string-parser-token-index③">(4)</a> <a href="#ref-for-constructor-string-parser-token-index④">(5)</a> <a href="#ref-for-constructor-string-parser-token-index⑤">(6)</a> <a href="#ref-for-constructor-string-parser-token-index⑥">(7)</a> <a href="#ref-for-constructor-string-parser-token-index⑦">(8)</a> <a href="#ref-for-constructor-string-parser-token-index⑧">(9)</a> <a href="#ref-for-constructor-string-parser-token-index⑨">(10)</a> <a href="#ref-for-constructor-string-parser-token-index①⓪">(11)</a> <a href="#ref-for-constructor-string-parser-token-index①①">(12)</a> <a href="#ref-for-constructor-string-parser-token-index①②">(13)</a> <a href="#ref-for-constructor-string-parser-token-index①③">(14)</a> <a href="#ref-for-constructor-string-parser-token-index①④">(15)</a> <a href="#ref-for-constructor-string-parser-token-index①⑤">(16)</a> <a href="#ref-for-constructor-string-parser-token-index①⑥">(17)</a> <a href="#ref-for-constructor-string-parser-token-index①⑦">(18)</a> <a href="#ref-for-constructor-string-parser-token-index①⑧">(19)</a> <a href="#ref-for-constructor-string-parser-token-index①⑨">(20)</a> <a href="#ref-for-constructor-string-parser-token-index②⓪">(21)</a> <a href="#ref-for-constructor-string-parser-token-index②①">(22)</a> <a href="#ref-for-constructor-string-parser-token-index②②">(23)</a> <a href="#ref-for-constructor-string-parser-token-index②③">(24)</a> <a href="#ref-for-constructor-string-parser-token-index②④">(25)</a> <a href="#ref-for-constructor-string-parser-token-index②⑤">(26)</a> <a href="#ref-for-constructor-string-parser-token-index②⑥">(27)</a> <a href="#ref-for-constructor-string-parser-token-index②⑦">(28)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser-token-increment">
@@ -4249,6 +4271,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#constructor-string-parser-group-depth">#constructor-string-parser-group-depth</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-constructor-string-parser-group-depth">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-group-depth①">(2)</a> <a href="#ref-for-constructor-string-parser-group-depth②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="constructor-string-parser-hostname-ipv6-bracket-depth">
+   <b><a href="#constructor-string-parser-hostname-ipv6-bracket-depth">#constructor-string-parser-hostname-ipv6-bracket-depth</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-constructor-string-parser-hostname-ipv6-bracket-depth">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-hostname-ipv6-bracket-depth①">(2)</a> <a href="#ref-for-constructor-string-parser-hostname-ipv6-bracket-depth②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser-protocol-matches-a-special-scheme-flag">
@@ -4362,7 +4390,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="is-a-non-special-pattern-char">
    <b><a href="#is-a-non-special-pattern-char">#is-a-non-special-pattern-char</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-is-a-non-special-pattern-char">1.2. Constructor String Parsing</a> <a href="#ref-for-is-a-non-special-pattern-char①">(2)</a> <a href="#ref-for-is-a-non-special-pattern-char②">(3)</a> <a href="#ref-for-is-a-non-special-pattern-char③">(4)</a> <a href="#ref-for-is-a-non-special-pattern-char④">(5)</a> <a href="#ref-for-is-a-non-special-pattern-char⑤">(6)</a> <a href="#ref-for-is-a-non-special-pattern-char⑥">(7)</a> <a href="#ref-for-is-a-non-special-pattern-char⑦">(8)</a> <a href="#ref-for-is-a-non-special-pattern-char⑧">(9)</a>
+    <li><a href="#ref-for-is-a-non-special-pattern-char">1.2. Constructor String Parsing</a> <a href="#ref-for-is-a-non-special-pattern-char①">(2)</a> <a href="#ref-for-is-a-non-special-pattern-char②">(3)</a> <a href="#ref-for-is-a-non-special-pattern-char③">(4)</a> <a href="#ref-for-is-a-non-special-pattern-char④">(5)</a> <a href="#ref-for-is-a-non-special-pattern-char⑤">(6)</a> <a href="#ref-for-is-a-non-special-pattern-char⑥">(7)</a> <a href="#ref-for-is-a-non-special-pattern-char⑦">(8)</a> <a href="#ref-for-is-a-non-special-pattern-char⑧">(9)</a> <a href="#ref-for-is-a-non-special-pattern-char⑨">(10)</a> <a href="#ref-for-is-a-non-special-pattern-char①⓪">(11)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="is-a-protocol-suffix">
@@ -4423,6 +4451,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#is-a-group-close">#is-a-group-close</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-is-a-group-close">1.2. Constructor String Parsing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="is-an-ipv6-open">
+   <b><a href="#is-an-ipv6-open">#is-an-ipv6-open</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-an-ipv6-open">1.2. Constructor String Parsing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="is-an-ipv6-close">
+   <b><a href="#is-an-ipv6-close">#is-an-ipv6-close</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-is-an-ipv6-close">1.2. Constructor String Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="make-a-component-string">
