@@ -280,7 +280,8 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Set [=this=]'s [=URLPattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
   1. Set [=this=]'s [=URLPattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
   1. Set [=this=]'s [=URLPattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
-  1. Set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
+  1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
+  1. Else, set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set [=this=]'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. If the result of running [=protocol component matches a special scheme=] given [=this=]'s [=URLPattern/protocol component=] is true, then set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and [=pathname options=].
   1. Else set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a cannot-be-a-base-URL pathname=], and [=default options=]
@@ -462,6 +463,17 @@ The <dfn>pathname options</dfn> is an [=options=] [=struct=] with [=options/deli
   1. [=list/For each=] |scheme| of |special scheme list|:
     1. Let |test result| be [$RegExpBuiltinExec$](|protocol component|'s [=component/regular expression=], |scheme|).
     1. If |test result| is not null, then return true.
+  1. Return false.
+</div>
+
+<div algorithm>
+  To determine if a <dfn>hostname pattern is an IPv6 address</dfn> given a [=/pattern string=] |input|:
+
+  1. If |input|'s [=string/code point length=] is less than 2, then return false.
+  1. Let |input code points| be |input| interpreted as a [=list=] of [=/code points=].
+  1. If |input code points|[0] is U+005B (`[`), then return true.
+  1. If |input code points|[0] is U+007B (`{`) and |input code points|[1] is U+005B (`[`), then return true.
+  1. If |input code points|[0] is U+005C (<code>\</code>) and |input code points|[1] is U+005B (`[`), then return true.
   1. Return false.
 </div>
 
@@ -1525,6 +1537,23 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
   1. Return |dummyURL|'s [=url/host=].
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize an IPv6 hostname</dfn> given a string |value|:
+
+  1. Let |result| be the empty string.
+  1. [=list/For each=] |code point| in |value| interpreted as a [=list=] of [=/code points=]:
+    1. If all of the following are true:
+      <ul>
+        <li>|code point| is not an [=ASCII hex digit=];</li>
+        <li>|code point| is not U+005B (`[`);</li>
+        <li>|code point| is not U+005D (`]`); and</li>
+        <li>|code point| is not U+003A (`:`),</li>
+      </ul>
+      <p>then throw a {{TypeError}}.
+    1. Append the result of running [=ASCII lowercase=] given |code point| to the end of |result|.
+  1. Return |result|.
 </div>
 
 <div algorithm>
