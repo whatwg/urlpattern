@@ -1491,6 +1491,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a protocol</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| followed by "`://dummy.test`", with |dummyURL| as <i>[=basic URL parser/url=]</i>.
      <p class="note">Note, [=basic URL parser/state override=] is not used here because it enforces restrictions that are only appropriate for the {{URL/protocol}} setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
@@ -1501,6 +1502,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a username</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. [=Set the username=] given |dummyURL| and |value|.
   1. Return |dummyURL|'s [=url/username=].
@@ -1509,6 +1511,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a password</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. [=Set the password=] given |dummyURL| and |value|.
   1. Return |dummyURL|'s [=url/password=].
@@ -1517,6 +1520,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a hostname</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
@@ -1526,6 +1530,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a port</dfn> given a string |portValue| and optionally a string |protocolValue|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. If |protocolValue| was given, then set |dummyURL|'s [=url/scheme=] to |protocolValue|.
      <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize default port values.</p>
@@ -1537,6 +1542,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a pathname</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
@@ -1546,6 +1552,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a cannot-be-a-base-URL pathname</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/path=][0] to empty string.
   1. Let |parseResult| be the result of running [=basic URL parser|URL parsing=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=cannot be a base URL path state=] as <i>[=basic URL parser/state override=]</i>.
@@ -1556,6 +1563,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a search</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/query=] to the empty string.
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=query state=] as <i>[=basic URL parser/state override=]</i>.
@@ -1566,6 +1574,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a hash</dfn> given a string |value|:
 
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/fragment=] to the empty string.
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=fragment state=] as <i>[=basic URL parser/state override=]</i>.
