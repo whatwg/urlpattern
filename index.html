@@ -858,80 +858,82 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②">this</a>'s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component">password component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component②">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password">password</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-password" id="ref-for-canonicalize-a-password">canonicalize a password</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options②">default options</a>.</p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this③">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component③">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hostname" id="ref-for-canonicalize-a-hostname">canonicalize a hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options">hostname options</a>.</p>
+      <p>If the result running <a data-link-type="dfn" href="#hostname-pattern-is-an-ipv6-address" id="ref-for-hostname-pattern-is-an-ipv6-address">hostname pattern is an IPv6 address</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname">hostname</a></code>"] is true, then set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this③">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component③">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname①">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-ipv6-hostname" id="ref-for-canonicalize-an-ipv6-hostname">canonicalize an IPv6 hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options">hostname options</a>.</p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this④">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component④">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port②">port</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-port" id="ref-for-canonicalize-a-port">canonicalize a port</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options③">default options</a>.</p>
+      <p>Else, set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this④">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component①">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component④">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname②">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hostname" id="ref-for-canonicalize-a-hostname">canonicalize a hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options①">hostname options</a>.</p>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <a data-link-type="dfn" href="#pathname-options" id="ref-for-pathname-options">pathname options</a>.</p>
+      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port②">port</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-port" id="ref-for-canonicalize-a-port">canonicalize a port</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options③">default options</a>.</p>
      <li data-md>
-      <p>Else set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-cannot-be-a-base-url-pathname" id="ref-for-canonicalize-a-cannot-be-a-base-url-pathname">canonicalize a cannot-be-a-base-URL pathname</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options④">default options</a></p>
+      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <a data-link-type="dfn" href="#pathname-options" id="ref-for-pathname-options">pathname options</a>.</p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑧">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search">search</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-search" id="ref-for-canonicalize-a-search">canonicalize a search</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑤">default options</a>.</p>
+      <p>Else set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑧">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-cannot-be-a-base-url-pathname" id="ref-for-canonicalize-a-cannot-be-a-base-url-pathname">canonicalize a cannot-be-a-base-URL pathname</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options④">default options</a></p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑨">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component">hash component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑧">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash">hash</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hash" id="ref-for-canonicalize-a-hash">canonicalize a hash</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑥">default options</a>.</p>
+      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this⑨">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑧">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search">search</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-search" id="ref-for-canonicalize-a-search">canonicalize a search</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑤">default options</a>.</p>
+     <li data-md>
+      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⓪">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component">hash component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash">hash</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hash" id="ref-for-canonicalize-a-hash">canonicalize a hash</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑥">default options</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="protocol" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-protocol"><code>protocol</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⓪">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component②">protocol component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①①">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component②">protocol component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="username" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-username"><code>username</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①①">this</a>'s <a data-link-type="dfn" href="#urlpattern-username-component" id="ref-for-urlpattern-username-component①">username component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string①">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①②">this</a>'s <a data-link-type="dfn" href="#urlpattern-username-component" id="ref-for-urlpattern-username-component①">username component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string①">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="password" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-password"><code>password</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①②">this</a>'s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component①">password component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string②">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①③">this</a>'s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component①">password component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string②">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="hostname" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-hostname"><code>hostname</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①③">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component①">hostname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string③">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①④">this</a>'s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component②">hostname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string③">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="port" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-port"><code>port</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①④">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component①">port component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string④">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component①">port component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string④">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="pathname" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-pathname"><code>pathname</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component②">pathname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑤">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component②">pathname component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑤">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="search" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-search"><code>search</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component①">search component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑥">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component①">search component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑥">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="hash" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="attribute" data-export id="dom-urlpattern-hash"><code>hash</code></dfn> getter steps are: 
     <ol>
      <li data-md>
-      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component①">hash component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑦">pattern string</a>.</p>
+      <p>Return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑧">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component①">hash component</a>'s <a data-link-type="dfn" href="#component-pattern-string" id="ref-for-component-pattern-string⑦">pattern string</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="test(input, baseURL)" data-algorithm-for="URLPattern">
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="method" data-export data-lt="test(input, baseURL)|test(input)" id="dom-urlpattern-test"><code>test(<var>input</var>, <var>baseURL</var>)</code></dfn> method steps are: 
     <ol>
      <li data-md>
-      <p>Let <var>result</var> be the result of <a data-link-type="dfn" href="#match" id="ref-for-match">match</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑧">this</a>, <var>input</var>, and <var>baseURL</var> if given.</p>
+      <p>Let <var>result</var> be the result of <a data-link-type="dfn" href="#match" id="ref-for-match">match</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑨">this</a>, <var>input</var>, and <var>baseURL</var> if given.</p>
      <li data-md>
       <p>If <var>result</var> is null, return false.</p>
      <li data-md>
@@ -942,7 +944,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="method" data-export data-lt="exec(input, baseURL)|exec(input)" id="dom-urlpattern-exec"><code>exec(<var>input</var>, <var>baseURL</var>)</code></dfn> method steps are: 
     <ol>
      <li data-md>
-      <p>Return the result of <a data-link-type="dfn" href="#match" id="ref-for-match①">match</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①⑨">this</a>, <var>input</var>, and <var>baseURL</var> if given.</p>
+      <p>Return the result of <a data-link-type="dfn" href="#match" id="ref-for-match①">match</a> given <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②⓪">this</a>, <var>input</var>, and <var>baseURL</var> if given.</p>
     </ol>
    </div>
    <h3 class="heading settled" data-level="1.1" id="urlpattern-internals"><span class="secno">1.1. </span><span class="content">Internals</span><a class="self-link" href="#urlpattern-internals"></a></h3>
@@ -961,7 +963,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Let (<var>regular expression string</var>, <var>name list</var>) be the result of running <a data-link-type="dfn" href="#generate-a-regular-expression-and-name-list" id="ref-for-generate-a-regular-expression-and-name-list">generate a regular expression and name list</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
       <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, "<code>u</code>").  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>.</p>
-      <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
+      <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
      <li data-md>
       <p>Let <var>pattern string</var> be the result of running <a data-link-type="dfn" href="#generate-a-pattern-string" id="ref-for-generate-a-pattern-string">generate a pattern string</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
@@ -1005,7 +1007,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>password</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password①">password</a></code>"].</p>
        <li data-md>
-        <p>Set <var>hostname</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname①">hostname</a></code>"].</p>
+        <p>Set <var>hostname</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname③">hostname</a></code>"].</p>
        <li data-md>
         <p>Set <var>port</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port③">port</a></code>"].</p>
        <li data-md>
@@ -1058,7 +1060,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>passwordExecResult</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpbuiltinexec" id="ref-for-sec-regexpbuiltinexec②">RegExpBuiltinExec</a>(<var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component②">password component</a>'s <a data-link-type="dfn" href="#component-regular-expression" id="ref-for-component-regular-expression③">regular expression</a>, <var>password</var>).</p>
      <li data-md>
-      <p>Let <var>hostnameExecResult</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpbuiltinexec" id="ref-for-sec-regexpbuiltinexec③">RegExpBuiltinExec</a>(<var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component②">hostname component</a>'s <a data-link-type="dfn" href="#component-regular-expression" id="ref-for-component-regular-expression④">regular expression</a>, <var>hostname</var>).</p>
+      <p>Let <var>hostnameExecResult</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpbuiltinexec" id="ref-for-sec-regexpbuiltinexec③">RegExpBuiltinExec</a>(<var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component③">hostname component</a>'s <a data-link-type="dfn" href="#component-regular-expression" id="ref-for-component-regular-expression④">regular expression</a>, <var>hostname</var>).</p>
      <li data-md>
       <p>Let <var>portExecResult</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpbuiltinexec" id="ref-for-sec-regexpbuiltinexec④">RegExpBuiltinExec</a>(<var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component②">port component</a>'s <a data-link-type="dfn" href="#component-regular-expression" id="ref-for-component-regular-expression⑤">regular expression</a>, <var>port</var>).</p>
      <li data-md>
@@ -1080,7 +1082,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternresult-password" id="ref-for-dom-urlpatternresult-password">password</a></code>"] to the result of <a data-link-type="dfn" href="#create-a-component-match-result" id="ref-for-create-a-component-match-result②">creating a component match result</a> given <var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-password-component" id="ref-for-urlpattern-password-component③">password component</a>, <var>password</var>, and <var>passwordExecResult</var>.</p>
      <li data-md>
-      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternresult-hostname" id="ref-for-dom-urlpatternresult-hostname">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#create-a-component-match-result" id="ref-for-create-a-component-match-result③">creating a component match result</a> given <var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component③">hostname component</a>, <var>hostname</var>, and <var>hostnameExecResult</var>.</p>
+      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternresult-hostname" id="ref-for-dom-urlpatternresult-hostname">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#create-a-component-match-result" id="ref-for-create-a-component-match-result③">creating a component match result</a> given <var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component④">hostname component</a>, <var>hostname</var>, and <var>hostnameExecResult</var>.</p>
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternresult-port" id="ref-for-dom-urlpatternresult-port">port</a></code>"] to the result of <a data-link-type="dfn" href="#create-a-component-match-result" id="ref-for-create-a-component-match-result④">creating a component match result</a> given <var>urlpattern</var>’s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component③">port component</a>, <var>port</var>, and <var>portExecResult</var>.</p>
      <li data-md>
@@ -1136,6 +1138,23 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If <var>test result</var> is not null, then return true.</p>
       </ol>
+     <li data-md>
+      <p>Return false.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="hostname pattern is an IPv6 address">
+     To determine if a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="hostname-pattern-is-an-ipv6-address">hostname pattern is an IPv6 address</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①">pattern string</a> <var>input</var>: 
+    <ol>
+     <li data-md>
+      <p>If <var>input</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length">code point length</a> is less than 2, then return false.</p>
+     <li data-md>
+      <p>Let <var>input code points</var> be <var>input</var> interpreted as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list③">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point">code points</a>.</p>
+     <li data-md>
+      <p>If <var>input code points</var>[0] is U+005B (<code>[</code>), then return true.</p>
+     <li data-md>
+      <p>If <var>input code points</var>[0] is U+007B (<code>{</code>) and <var>input code points</var>[1] is U+005B (<code>[</code>), then return true.</p>
+     <li data-md>
+      <p>If <var>input code points</var>[0] is U+005C (<code>\</code>) and <var>input code points</var>[1] is U+005B (<code>[</code>), then return true.</p>
      <li data-md>
       <p>Return false.</p>
     </ol>
@@ -1243,7 +1262,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If the result of running <a data-link-type="dfn" href="#is-a-group-open" id="ref-for-is-a-group-open">is a group open</a> given <var>parser</var> is true:</p>
         <div class="note" role="note">
-         <p>We ignore all code points within "<code>{ ... }</code>" pattern groupings.  It would not make sense to allow a URL component boundary to lie within a grouping; e.g. "<code>https://example.c{om/fo}o</code>".  While not supported within <a data-link-type="dfn" href="#pattern-string-well-formed" id="ref-for-pattern-string-well-formed①">well formed</a> <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①">pattern strings</a>, we handle nested groupings here to avoid parser confusion. </p>
+         <p>We ignore all code points within "<code>{ ... }</code>" pattern groupings.  It would not make sense to allow a URL component boundary to lie within a grouping; e.g. "<code>https://example.c{om/fo}o</code>".  While not supported within <a data-link-type="dfn" href="#pattern-string-well-formed" id="ref-for-pattern-string-well-formed①">well formed</a> <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string②">pattern strings</a>, we handle nested groupings here to avoid parser confusion. </p>
          <p>It is not necessary to perform this logic for regexp or named groups since those values are collapsed into individual <a data-link-type="dfn" href="#token" id="ref-for-token②">tokens</a> by the <a data-link-type="dfn" href="#tokenize" id="ref-for-tokenize①">tokenize</a> algorithm. </p>
         </div>
         <ol>
@@ -1283,7 +1302,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
              <li data-md>
               <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result⑤">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password②">password</a></code>"] to the empty string.</p>
              <li data-md>
-              <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result⑥">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname②">hostname</a></code>"] to the empty string.</p>
+              <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result⑥">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname④">hostname</a></code>"] to the empty string.</p>
              <li data-md>
               <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result⑦">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port④">port</a></code>"] to the empty string.</p>
              <li data-md>
@@ -1613,7 +1632,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>protocol string</var> be the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string①">make a component string</a> given <var>parser</var>.</p>
      <li data-md>
-      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
+      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①①">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
      <li data-md>
       <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag②">protocol matches a special scheme flag</a> to true.</p>
     </ol>
@@ -1622,8 +1641,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pattern-string">pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn class="dfn-paneled" data-dfn-for="pattern string" data-dfn-type="dfn" data-noexport id="pattern-string-well-formed">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> JavaScript library.</p>
    <h3 class="heading settled" data-level="2.1" id="parsing-patterns"><span class="secno">2.1. </span><span class="content">Parsing Patterns</span><a class="self-link" href="#parsing-patterns"></a></h3>
    <h4 class="heading settled" data-level="2.1.1" id="tokens"><span class="secno">2.1.1. </span><span class="content">Tokens</span><a class="self-link" href="#tokens"></a></h4>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token-list">token list</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list③">list</a> containing zero or more <a data-link-type="dfn" href="#token" id="ref-for-token③">token</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑤">structs</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token">token</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑥">struct</a> representing a single lexical token within a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string②">pattern string</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token-list">token list</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list④">list</a> containing zero or more <a data-link-type="dfn" href="#token" id="ref-for-token③">token</a> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑤">structs</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="token">token</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑥">struct</a> representing a single lexical token within a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string③">pattern string</a>.</p>
    <p>A <a data-link-type="dfn" href="#token" id="ref-for-token④">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-type">type</dfn>, a string, initially "<a data-link-type="dfn" href="#token-type-invalid-char" id="ref-for-token-type-invalid-char①"><code>invalid-char</code></a>".  It must be one of the following:</p>
    <dl>
     <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-open"><code>open</code></dfn>"
@@ -1643,18 +1662,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-asterisk"><code>asterisk</code></dfn>"
     <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①②">token</a> represents a U+002A (<code>*</code>) code point that can be either a wildcard matching group or a matching group modifier. 
     <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-end"><code>end</code></dfn>"
-    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①③">token</a> represents the end of the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string③">pattern string</a>. 
+    <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①③">token</a> represents the end of the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string④">pattern string</a>. 
     <dt>"<dfn class="dfn-paneled" data-dfn-for="token/type" data-dfn-type="dfn" data-noexport id="token-type-invalid-char"><code>invalid-char</code></dfn>"
     <dd>The <a data-link-type="dfn" href="#token" id="ref-for-token①④">token</a> represents a code point that is invalid in the pattern.  This could be because of the code point value itself or due to its location within the pattern relative to other syntactic elements. 
    </dl>
-   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①⑤">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-index">index</dfn>, a number, initially 0.  It is the position of the first code point in the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string④">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①⑥">token</a>.</p>
-   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①⑦">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-value">value</dfn>, a string, initially the empty string.  It contains the code points from the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑤">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①⑧">token</a>.</p>
+   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①⑤">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-index">index</dfn>, a number, initially 0.  It is the position of the first code point in the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑤">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①⑥">token</a>.</p>
+   <p>A <a data-link-type="dfn" href="#token" id="ref-for-token①⑦">token</a> has an associated <dfn class="dfn-paneled" data-dfn-for="token" data-dfn-type="dfn" data-noexport id="token-value">value</dfn>, a string, initially the empty string.  It contains the code points from the <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑥">pattern string</a> represented by the <a data-link-type="dfn" href="#token" id="ref-for-token①⑧">token</a>.</p>
    <h4 class="heading settled" data-level="2.1.2" id="tokenizing"><span class="secno">2.1.2. </span><span class="content">Tokenizing</span><a class="self-link" href="#tokenizing"></a></h4>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tokenize-policy">tokenize policy</dfn> is a string that must be either "<dfn class="dfn-paneled" data-dfn-for="tokenize policy" data-dfn-type="dfn" data-noexport id="tokenize-policy-strict"><code>strict</code></dfn>" or "<dfn class="dfn-paneled" data-dfn-for="tokenize policy" data-dfn-type="dfn" data-noexport id="tokenize-policy-lenient"><code>lenient</code></dfn>".</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tokenizer">tokenizer</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑦">struct</a>.</p>
-   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-input">input</dfn>, a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑥">pattern string</a>, initially the empty string.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-input">input</dfn>, a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑦">pattern string</a>, initially the empty string.</p>
    <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-policy">policy</dfn>, a <a data-link-type="dfn" href="#tokenize-policy" id="ref-for-tokenize-policy①">tokenize policy</a>, initially "<a data-link-type="dfn" href="#tokenize-policy-strict" id="ref-for-tokenize-policy-strict"><code>strict</code></a>".</p>
-   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer②">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list①">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list④">list</a>.</p>
+   <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer②">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list①">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑤">list</a>.</p>
    <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer③">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-index">index</dfn>, a number, initially 0.</p>
    <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer④">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-next-index">next index</dfn>, a number, initially 0.</p>
    <p>A <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer⑤">tokenizer</a> has an associated <dfn class="dfn-paneled" data-dfn-for="tokenizer" data-dfn-type="dfn" data-noexport id="tokenizer-code-point">code point</dfn>, a Unicode code point, initially null.</p>
@@ -1668,7 +1687,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy">policy</a> to <var>policy</var>.</p>
      <li data-md>
-      <p>While <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index">index</a> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input①">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length">code point length</a>:</p>
+      <p>While <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index">index</a> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input①">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length①">code point length</a>:</p>
       <ol>
        <li data-md>
         <p>Run <a data-link-type="dfn" href="#get-the-next-code-point" id="ref-for-get-the-next-code-point">get the next code point</a> given <var>tokenizer</var>.</p>
@@ -1692,7 +1711,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point②">code point</a> is U+005C (<code>\</code>):</p>
         <ol>
          <li data-md>
-          <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①">index</a> is equal to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input②">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length①">code point length</a> − 1:</p>
+          <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①">index</a> is equal to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input②">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length②">code point length</a> − 1:</p>
           <ol>
            <li data-md>
             <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error">process a tokenizing error</a> given <var>tokenizer</var>, <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index">next index</a>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index②">index</a>.</p>
@@ -1732,7 +1751,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Let <var>name start</var> be <var>name position</var>.</p>
          <li data-md>
-          <p>While <var>name position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input③">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length②">code point length</a>:</p>
+          <p>While <var>name position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input③">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length③">code point length</a>:</p>
           <ol>
            <li data-md>
             <p>Run <a data-link-type="dfn" href="#seek-and-get-the-next-code-point" id="ref-for-seek-and-get-the-next-code-point">seek and get the next code point</a> given <var>tokenizer</var> and <var>name position</var>.</p>
@@ -1768,7 +1787,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Let <var>error</var> be false.</p>
          <li data-md>
-          <p>While <var>regexp position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input④">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length③">code point length</a>:</p>
+          <p>While <var>regexp position</var> is less than <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input④">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length④">code point length</a>:</p>
           <ol>
            <li data-md>
             <p>Run <a data-link-type="dfn" href="#seek-and-get-the-next-code-point" id="ref-for-seek-and-get-the-next-code-point①">seek and get the next code point</a> given <var>tokenizer</var> and <var>regexp position</var>.</p>
@@ -1796,7 +1815,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①⓪">code point</a> is U+005C (<code>\</code>):</p>
             <ol>
              <li data-md>
-              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑤">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length④">code point length</a> − 1:</p>
+              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑤">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑤">code point length</a> − 1:</p>
               <ol>
                <li data-md>
                 <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error④">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑥">index</a>.</p>
@@ -1842,7 +1861,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
              <li data-md>
               <p>Increment <var>depth</var> by 1.</p>
              <li data-md>
-              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑥">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑤">code point length</a> − 1:</p>
+              <p>If <var>regexp position</var> equals <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑥">input</a>'s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑥">code point length</a> − 1:</p>
               <ol>
                <li data-md>
                 <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑥">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index⑧">index</a>.</p>
@@ -1984,8 +2003,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <h4 class="heading settled" data-level="2.1.3" id="parts"><span class="secno">2.1.3. </span><span class="content">Parts</span><a class="self-link" href="#parts"></a></h4>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="part-list">part list</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑤">list</a> of zero or more <a data-link-type="dfn" href="#part" id="ref-for-part">parts</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="part">part</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑧">struct</a> representing one piece of a parser <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑦">pattern string</a>.  It can contain at most one matching group, a fixed text prefix, a fixed text suffix, and a modifier.  It can contain as little as a single fixed text string or a single matching group.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="part-list">part list</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑥">list</a> of zero or more <a data-link-type="dfn" href="#part" id="ref-for-part">parts</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="part">part</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑧">struct</a> representing one piece of a parser <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑧">pattern string</a>.  It can contain at most one matching group, a fixed text prefix, a fixed text suffix, and a modifier.  It can contain as little as a single fixed text string or a single matching group.</p>
    <p>A <a data-link-type="dfn" href="#part" id="ref-for-part①">part</a> has an associated <dfn class="dfn-paneled" data-dfn-for="part" data-dfn-type="dfn" data-export id="part-type">type</dfn>, a string, which must be set upon creation.  It must be one of the following:</p>
    <dl>
     <dt>"<dfn class="dfn-paneled" data-dfn-for="part/type" data-dfn-type="dfn" data-noexport id="part-type-fixed-text"><code>fixed-text</code></dfn>"
@@ -2013,21 +2032,21 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#part" id="ref-for-part①③">part</a> has an associated <dfn class="dfn-paneled" data-dfn-for="part" data-dfn-type="dfn" data-noexport id="part-prefix">prefix</dfn>, a string, initially the empty string.</p>
    <p>A <a data-link-type="dfn" href="#part" id="ref-for-part①④">part</a> has an associated <dfn class="dfn-paneled" data-dfn-for="part" data-dfn-type="dfn" data-noexport id="part-suffix">suffix</dfn>, a string, initially the empty string.</p>
    <h4 class="heading settled" data-level="2.1.4" id="options-header"><span class="secno">2.1.4. </span><span class="content">Options</span><a class="self-link" href="#options-header"></a></h4>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="options">options</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑨">struct</a> contains different settings that control how <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑧">pattern string</a> behaves.  These options originally come from <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> where <code>sensitive</code>, <code>strict</code>, <code>start</code>, and <code>end</code> are always set to true.</p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="options">options</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑨">struct</a> contains different settings that control how <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑨">pattern string</a> behaves.  These options originally come from <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> where <code>sensitive</code>, <code>strict</code>, <code>start</code>, and <code>end</code> are always set to true.</p>
    <p>An <a data-link-type="dfn" href="#options" id="ref-for-options④">options</a> has an associated <dfn class="dfn-paneled" data-dfn-for="options" data-dfn-type="dfn" data-noexport id="options-delimiter-code-point">delimiter code point</dfn>, a string, which must be set upon creation.  It must contain one <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-code-point" id="ref-for-ascii-code-point">ASCII code point</a> or the empty string.  This code point is treated as a segment separator and is used for determining how far a <code>:foo</code> named group should match by default.  For example, if the <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point③">delimiter code point</a> is "<code>/</code>" then "<code>/:foo</code>" will match "<code>/bar</code>", but not "<code>/bar/baz</code>".  If the <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point④">delimiter code point</a> is the empty string then the example pattern would match both strings.</p>
    <p>An <a data-link-type="dfn" href="#options" id="ref-for-options⑤">options</a> has an associated <dfn class="dfn-paneled" data-dfn-for="options" data-dfn-type="dfn" data-noexport id="options-prefix-code-point">prefix code point</dfn>, a string, which must be set upon creation.  It must contain one <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-code-point" id="ref-for-ascii-code-point①">ASCII code point</a> or the empty string.  The code point is treated as an automatic prefix if found immediately preceding a match group.  This matters when a match group is modified to be optional or repeating.  For example, if <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point③">prefix code point</a> is "<code>/</code>" then "<code>/foo/:bar?/baz</code>" will treat the "<code>/</code>" before "<code>:bar</code>" as a prefix that becomes optional along with the named group.  So in this example the pattern would match "<code>/foo/baz</code>".</p>
    <h4 class="heading settled" data-level="2.1.5" id="parsing"><span class="secno">2.1.5. </span><span class="content">Parsing</span><a class="self-link" href="#parsing"></a></h4>
-   <div class="algorithm" data-algorithm="encoding callback"> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="encoding-callback">encoding callback</dfn> is an abstract algorithm that takes a given string <var>input</var>.  The <var>input</var> will be a simple text piece of a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑨">pattern string</a>.  An implementing algorithm will validate and encode the <var>input</var>.  It must return the encoded string or throw an exception. </div>
+   <div class="algorithm" data-algorithm="encoding callback"> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="encoding-callback">encoding callback</dfn> is an abstract algorithm that takes a given string <var>input</var>.  The <var>input</var> will be a simple text piece of a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①⓪">pattern string</a>.  An implementing algorithm will validate and encode the <var>input</var>.  It must return the encoded string or throw an exception. </div>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pattern-parser">pattern parser</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct①⓪">struct</a>.</p>
-   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list②">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑥">list</a>.</p>
+   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-token-list">token list</dfn>, a <a data-link-type="dfn" href="#token-list" id="ref-for-token-list②">token list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑦">list</a>.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser①">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-encoding-callback">encoding callback</dfn>, a <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback①">encoding callback</a>, that must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser②">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-segment-wildcard-regexp">segment wildcard regexp</dfn>, a string, that must be set upon creation.</p>
-   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser③">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-part-list">part list</dfn>, a <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑦">list</a>.</p>
+   <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser③">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-part-list">part list</dfn>, a <a data-link-type="dfn" href="#part-list" id="ref-for-part-list①">part list</a>, initially an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑧">list</a>.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser④">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-pending-fixed-value">pending fixed value</dfn>, a string, initially the empty string.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑤">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-index">index</dfn>, a number, initially 0.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑥">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-next-numeric-name">next numeric name</dfn>, a number, initially 0.</p>
    <div class="algorithm" data-algorithm="parse a pattern string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="parse-a-pattern-string">parse a pattern string</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①⓪">pattern string</a> <var>input</var>, <a data-link-type="dfn" href="#options" id="ref-for-options⑥">options</a> <var>options</var>, and <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback②">encoding callback</a> <var>encoding callback</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="parse-a-pattern-string">parse a pattern string</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a> <var>input</var>, <a data-link-type="dfn" href="#options" id="ref-for-options⑥">options</a> <var>options</var>, and <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback②">encoding callback</a> <var>encoding callback</var>: 
     <ol>
      <li data-md>
       <p>Let <var>parser</var> be a new <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑦">pattern parser</a> whose <a data-link-type="dfn" href="#pattern-parser-encoding-callback" id="ref-for-pattern-parser-encoding-callback">encoding callback</a> is <var>encoding callback</var> and <a data-link-type="dfn" href="#pattern-parser-segment-wildcard-regexp" id="ref-for-pattern-parser-segment-wildcard-regexp">segment wildcard regexp</a> is the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp">generate a segment wildcard regexp</a> given <var>options</var>.</p>
@@ -2362,7 +2381,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be "<code>^</code>".</p>
      <li data-md>
-      <p>Let <var>name list</var> be a new <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑧">list</a>.</p>
+      <p>Let <var>name list</var> be a new <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list⑨">list</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate②">For each</a> <var>part</var> of <var>part list</var>:</p>
       <ol>
@@ -2551,7 +2570,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="2.3" id="converting-part-lists-to-pattern-strings"><span class="secno">2.3. </span><span class="content">Converting Part Lists to Pattern Strings</span><a class="self-link" href="#converting-part-lists-to-pattern-strings"></a></h3>
    <div class="algorithm" data-algorithm="generate a pattern string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list③">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①②">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list③">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
@@ -2758,6 +2777,30 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host①">host</a>.</p>
     </ol>
    </div>
+   <div class="algorithm" data-algorithm="canonicalize an IPv6 hostname">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-an-ipv6-hostname">canonicalize an IPv6 hostname</dfn> given a string <var>value</var>: 
+    <ol>
+     <li data-md>
+      <p>Let <var>result</var> be the empty string.</p>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate④">For each</a> <var>code point</var> in <var>value</var> interpreted as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list①⓪">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point①">code points</a>:</p>
+      <ol>
+       <li data-md>
+        <p>If all of the following are true:</p>
+        <ul>
+         <li><var>code point</var> is not an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-hex-digit" id="ref-for-ascii-hex-digit">ASCII hex digit</a>;
+         <li><var>code point</var> is not U+005B (<code>[</code>);
+         <li><var>code point</var> is not U+005D (<code>]</code>); and
+         <li><var>code point</var> is not U+003A (<code>:</code>),
+        </ul>
+        <p>then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>. </p>
+       <li data-md>
+        <p>Append the result of running <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-lowercase" id="ref-for-ascii-lowercase">ASCII lowercase</a> given <var>code point</var> to the end of <var>result</var>.</p>
+      </ol>
+     <li data-md>
+      <p>Return <var>result</var>.</p>
+    </ol>
+   </div>
    <div class="algorithm" data-algorithm="canonicalize a port">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-port">canonicalize a port</dfn> given a string <var>portValue</var> and optionally a string <var>protocolValue</var>: 
     <ol>
@@ -2771,7 +2814,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑦">basic URL parser</a> given <var>portValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url②">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#port-state" id="ref-for-port-state">port state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override②">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a> or empty string if it is null.</p>
     </ol>
@@ -2786,7 +2829,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑧">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url③">url</a> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#path-start-state" id="ref-for-path-start-state">path start state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override③">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string①">API pathname string</a>.</p>
     </ol>
@@ -2803,7 +2846,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑨">URL parsing</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url④">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state" id="ref-for-cannot-be-a-base-url-path-state">cannot be a base URL path state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override④">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string②">API pathname string</a>.</p>
     </ol>
@@ -2820,7 +2863,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①⓪">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑤">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#query-state" id="ref-for-query-state">query state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑤">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query②">query</a>.</p>
     </ol>
@@ -2837,7 +2880,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①①">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑥">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#fragment-state" id="ref-for-fragment-state">fragment state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑥">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①③">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment②">fragment</a>.</p>
     </ol>
@@ -2855,7 +2898,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password③">password</a></code>"] to <var>password</var>.</p>
      <li data-md>
-      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname③">hostname</a></code>"] to <var>hostname</var>.</p>
+      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑤">hostname</a></code>"] to <var>hostname</var>.</p>
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑤">port</a></code>"] to <var>port</var>.</p>
      <li data-md>
@@ -2872,7 +2915,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>baseURL</var> to the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"].</p>
        <li data-md>
-        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①③">TypeError</a></code>.</p>
+        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①④">TypeError</a></code>.</p>
        <li data-md>
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol④">protocol</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a>.</p>
        <li data-md>
@@ -2880,7 +2923,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password④">password</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-password" id="ref-for-concept-url-password②">password</a>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname④">hostname</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host②">host</a> or the empty string if the value is null.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑥">hostname</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host②">host</a> or the empty string if the value is null.</p>
        <li data-md>
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑥">port</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port②">port</a> or the empty string if the value is null.</p>
        <li data-md>
@@ -2897,7 +2940,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password⑤">password</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password⑥">password</a></code>"] to the result of <a data-link-type="dfn" href="#process-password-for-init" id="ref-for-process-password-for-init">process password for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password⑦">password</a></code>"] and <var>type</var>.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑤">hostname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑥">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#process-hostname-for-init" id="ref-for-process-hostname-for-init">process hostname for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑦">hostname</a></code>"] and <var>type</var>.</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑦">hostname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑧">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#process-hostname-for-init" id="ref-for-process-hostname-for-init">process hostname for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑨">hostname</a></code>"] and <var>type</var>.</p>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑦">port</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑧">port</a></code>"] to the result of <a data-link-type="dfn" href="#process-port-for-init" id="ref-for-process-port-for-init">process port for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑨">port</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑧">protocol</a></code>"], and <var>type</var>.</p>
      <li data-md>
@@ -2915,7 +2958,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>then: </p>
         <ol>
          <li data-md>
-          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string④">API pathname string</a>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point">code points</a>, or null if there are no instances of the code point.</p>
+          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string④">API pathname string</a>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code points</a>, or null if there are no instances of the code point.</p>
          <li data-md>
           <p>If <var>slash index</var> is not null:</p>
           <ol>
@@ -2939,7 +2982,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is an absolute pathname">
-     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-absolute-pathname">is an absolute pathname</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①②">pattern string</a> <var>input</var> and a string <var>type</var>: 
+     To run <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="is-an-absolute-pathname">is an absolute pathname</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①③">pattern string</a> <var>input</var> and a string <var>type</var>: 
     <ol>
      <li data-md>
       <p>If <var>input</var> is the empty string, then return false.</p>
@@ -2948,7 +2991,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>type</var> is "<code>url</code>", then return false.</p>
      <li data-md>
-      <p>If <var>input</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑥">code point length</a> is less than 2, then return false.</p>
+      <p>If <var>input</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑦">code point length</a> is less than 2, then return false.</p>
      <li data-md>
       <p>If <var>input</var>[0] is U+005C (<code>\</code>) and <var>input</var>[1] is U+002F (<code>/</code>), then return true.</p>
      <li data-md>
@@ -3055,6 +3098,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#canonicalize-a-cannot-be-a-base-url-pathname">canonicalize a cannot-be-a-base-URL pathname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-hash">canonicalize a hash</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-hostname">canonicalize a hostname</a><span>, in § 3.1</span>
+   <li><a href="#canonicalize-an-ipv6-hostname">canonicalize an IPv6 hostname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-password">canonicalize a password</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-pathname">canonicalize a pathname</a><span>, in § 3.1</span>
    <li><a href="#canonicalize-a-port">canonicalize a port</a><span>, in § 3.1</span>
@@ -3122,6 +3166,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#urlpattern-hostname-component">hostname component</a><span>, in § 1</span>
    <li><a href="#constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</a><span>, in § 1.2</span>
    <li><a href="#hostname-options">hostname options</a><span>, in § 1.1</span>
+   <li><a href="#hostname-pattern-is-an-ipv6-address">hostname pattern is an IPv6 address</a><span>, in § 1.1</span>
    <li>
     index
     <ul>
@@ -3382,6 +3427,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-ascii-digit">2.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-ascii-hex-digit">
+   <a href="https://infra.spec.whatwg.org/#ascii-hex-digit">https://infra.spec.whatwg.org/#ascii-hex-digit</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-ascii-hex-digit">3.1. Encoding Callbacks</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-ascii-lowercase">
+   <a href="https://infra.spec.whatwg.org/#ascii-lowercase">https://infra.spec.whatwg.org/#ascii-lowercase</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-ascii-lowercase">3.1. Encoding Callbacks</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-ascii-string">
    <a href="https://infra.spec.whatwg.org/#ascii-string">https://infra.spec.whatwg.org/#ascii-string</a><b>Referenced in:</b>
    <ul>
@@ -3411,14 +3468,17 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-code-point">
    <a href="https://infra.spec.whatwg.org/#code-point">https://infra.spec.whatwg.org/#code-point</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-code-point">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-code-point">1.1. Internals</a>
+    <li><a href="#ref-for-code-point①">3.1. Encoding Callbacks</a>
+    <li><a href="#ref-for-code-point②">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-code-point-length">
    <a href="https://infra.spec.whatwg.org/#string-code-point-length">https://infra.spec.whatwg.org/#string-code-point-length</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-string-code-point-length">2.1.2. Tokenizing</a> <a href="#ref-for-string-code-point-length①">(2)</a> <a href="#ref-for-string-code-point-length②">(3)</a> <a href="#ref-for-string-code-point-length③">(4)</a> <a href="#ref-for-string-code-point-length④">(5)</a> <a href="#ref-for-string-code-point-length⑤">(6)</a>
-    <li><a href="#ref-for-string-code-point-length⑥">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-string-code-point-length">1.1. Internals</a>
+    <li><a href="#ref-for-string-code-point-length①">2.1.2. Tokenizing</a> <a href="#ref-for-string-code-point-length②">(2)</a> <a href="#ref-for-string-code-point-length③">(3)</a> <a href="#ref-for-string-code-point-length④">(4)</a> <a href="#ref-for-string-code-point-length⑤">(5)</a> <a href="#ref-for-string-code-point-length⑥">(6)</a>
+    <li><a href="#ref-for-string-code-point-length⑦">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-code-point-substring">
@@ -3451,6 +3511,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-list-iterate①">2.1.5. Parsing</a>
     <li><a href="#ref-for-list-iterate②">2.2. Converting Part Lists to Regular Expressions</a>
     <li><a href="#ref-for-list-iterate③">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-list-iterate④">3.1. Encoding Callbacks</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-length">
@@ -3463,12 +3524,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-list">
    <a href="https://infra.spec.whatwg.org/#list">https://infra.spec.whatwg.org/#list</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-list">1.1. Internals</a> <a href="#ref-for-list①">(2)</a> <a href="#ref-for-list②">(3)</a>
-    <li><a href="#ref-for-list③">2.1.1. Tokens</a>
-    <li><a href="#ref-for-list④">2.1.2. Tokenizing</a>
-    <li><a href="#ref-for-list⑤">2.1.3. Parts</a>
-    <li><a href="#ref-for-list⑥">2.1.5. Parsing</a> <a href="#ref-for-list⑦">(2)</a>
-    <li><a href="#ref-for-list⑧">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-list">1.1. Internals</a> <a href="#ref-for-list①">(2)</a> <a href="#ref-for-list②">(3)</a> <a href="#ref-for-list③">(4)</a>
+    <li><a href="#ref-for-list④">2.1.1. Tokens</a>
+    <li><a href="#ref-for-list⑤">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-list⑥">2.1.3. Parts</a>
+    <li><a href="#ref-for-list⑦">2.1.5. Parsing</a> <a href="#ref-for-list⑧">(2)</a>
+    <li><a href="#ref-for-list⑨">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-list①⓪">3.1. Encoding Callbacks</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-scalar-value-string">
@@ -3691,8 +3753,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-exceptiondef-typeerror①">1.1. Internals</a> <a href="#ref-for-exceptiondef-typeerror②">(2)</a>
     <li><a href="#ref-for-exceptiondef-typeerror③">2.1.2. Tokenizing</a>
     <li><a href="#ref-for-exceptiondef-typeerror④">2.1.5. Parsing</a> <a href="#ref-for-exceptiondef-typeerror⑤">(2)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror⑥">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑦">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑧">(3)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(4)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(5)</a> <a href="#ref-for-exceptiondef-typeerror①①">(6)</a> <a href="#ref-for-exceptiondef-typeerror①②">(7)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror①③">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-exceptiondef-typeerror⑥">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑦">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑧">(3)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(4)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(5)</a> <a href="#ref-for-exceptiondef-typeerror①①">(6)</a> <a href="#ref-for-exceptiondef-typeerror①②">(7)</a> <a href="#ref-for-exceptiondef-typeerror①③">(8)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror①④">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
@@ -3724,7 +3786,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-this">
    <a href="https://heycam.github.io/webidl/#this">https://heycam.github.io/webidl/#this</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-this">1. The URLPattern class </a> <a href="#ref-for-this①">(2)</a> <a href="#ref-for-this②">(3)</a> <a href="#ref-for-this③">(4)</a> <a href="#ref-for-this④">(5)</a> <a href="#ref-for-this⑤">(6)</a> <a href="#ref-for-this⑥">(7)</a> <a href="#ref-for-this⑦">(8)</a> <a href="#ref-for-this⑧">(9)</a> <a href="#ref-for-this⑨">(10)</a> <a href="#ref-for-this①⓪">(11)</a> <a href="#ref-for-this①①">(12)</a> <a href="#ref-for-this①②">(13)</a> <a href="#ref-for-this①③">(14)</a> <a href="#ref-for-this①④">(15)</a> <a href="#ref-for-this①⑤">(16)</a> <a href="#ref-for-this①⑥">(17)</a> <a href="#ref-for-this①⑦">(18)</a> <a href="#ref-for-this①⑧">(19)</a> <a href="#ref-for-this①⑨">(20)</a>
+    <li><a href="#ref-for-this">1. The URLPattern class </a> <a href="#ref-for-this①">(2)</a> <a href="#ref-for-this②">(3)</a> <a href="#ref-for-this③">(4)</a> <a href="#ref-for-this④">(5)</a> <a href="#ref-for-this⑤">(6)</a> <a href="#ref-for-this⑥">(7)</a> <a href="#ref-for-this⑦">(8)</a> <a href="#ref-for-this⑧">(9)</a> <a href="#ref-for-this⑨">(10)</a> <a href="#ref-for-this①⓪">(11)</a> <a href="#ref-for-this①①">(12)</a> <a href="#ref-for-this①②">(13)</a> <a href="#ref-for-this①③">(14)</a> <a href="#ref-for-this①④">(15)</a> <a href="#ref-for-this①⑤">(16)</a> <a href="#ref-for-this①⑥">(17)</a> <a href="#ref-for-this①⑦">(18)</a> <a href="#ref-for-this①⑧">(19)</a> <a href="#ref-for-this①⑨">(20)</a> <a href="#ref-for-this②⓪">(21)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -3746,6 +3808,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><span class="dfn-paneled" id="term-for-list-append">append</span>
      <li><span class="dfn-paneled" id="term-for-ascii-code-point">ascii code point</span>
      <li><span class="dfn-paneled" id="term-for-ascii-digit">ascii digit</span>
+     <li><span class="dfn-paneled" id="term-for-ascii-hex-digit">ascii hex digit</span>
+     <li><span class="dfn-paneled" id="term-for-ascii-lowercase">ascii lowercase</span>
      <li><span class="dfn-paneled" id="term-for-ascii-string">ascii string</span>
      <li><span class="dfn-paneled" id="term-for-assert">assert</span>
      <li><span class="dfn-paneled" id="term-for-iteration-break">break</span>
@@ -3920,10 +3984,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpatterninit-hostname">
    <b><a href="#dom-urlpatterninit-hostname">#dom-urlpatterninit-hostname</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpatterninit-hostname">1. The URLPattern class </a>
-    <li><a href="#ref-for-dom-urlpatterninit-hostname①">1.1. Internals</a>
-    <li><a href="#ref-for-dom-urlpatterninit-hostname②">1.2. Constructor String Parsing</a>
-    <li><a href="#ref-for-dom-urlpatterninit-hostname③">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-hostname④">(2)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑤">(3)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑥">(4)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑦">(5)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-hostname">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-hostname①">(2)</a> <a href="#ref-for-dom-urlpatterninit-hostname②">(3)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-hostname③">1.1. Internals</a>
+    <li><a href="#ref-for-dom-urlpatterninit-hostname④">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-dom-urlpatterninit-hostname⑤">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-hostname⑥">(2)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑦">(3)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑧">(4)</a> <a href="#ref-for-dom-urlpatterninit-hostname⑨">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpatterninit-port">
@@ -4073,8 +4137,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="urlpattern-hostname-component">
    <b><a href="#urlpattern-hostname-component">#urlpattern-hostname-component</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-urlpattern-hostname-component">1. The URLPattern class </a> <a href="#ref-for-urlpattern-hostname-component①">(2)</a>
-    <li><a href="#ref-for-urlpattern-hostname-component②">1.1. Internals</a> <a href="#ref-for-urlpattern-hostname-component③">(2)</a>
+    <li><a href="#ref-for-urlpattern-hostname-component">1. The URLPattern class </a> <a href="#ref-for-urlpattern-hostname-component①">(2)</a> <a href="#ref-for-urlpattern-hostname-component②">(3)</a>
+    <li><a href="#ref-for-urlpattern-hostname-component③">1.1. Internals</a> <a href="#ref-for-urlpattern-hostname-component④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="urlpattern-port-component">
@@ -4202,9 +4266,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="compile-a-component">
    <b><a href="#compile-a-component">#compile-a-component</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-compile-a-component">1. The URLPattern class </a> <a href="#ref-for-compile-a-component①">(2)</a> <a href="#ref-for-compile-a-component②">(3)</a> <a href="#ref-for-compile-a-component③">(4)</a> <a href="#ref-for-compile-a-component④">(5)</a> <a href="#ref-for-compile-a-component⑤">(6)</a> <a href="#ref-for-compile-a-component⑥">(7)</a> <a href="#ref-for-compile-a-component⑦">(8)</a> <a href="#ref-for-compile-a-component⑧">(9)</a>
-    <li><a href="#ref-for-compile-a-component⑨">1.1. Internals</a>
-    <li><a href="#ref-for-compile-a-component①⓪">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-compile-a-component">1. The URLPattern class </a> <a href="#ref-for-compile-a-component①">(2)</a> <a href="#ref-for-compile-a-component②">(3)</a> <a href="#ref-for-compile-a-component③">(4)</a> <a href="#ref-for-compile-a-component④">(5)</a> <a href="#ref-for-compile-a-component⑤">(6)</a> <a href="#ref-for-compile-a-component⑥">(7)</a> <a href="#ref-for-compile-a-component⑦">(8)</a> <a href="#ref-for-compile-a-component⑧">(9)</a> <a href="#ref-for-compile-a-component⑨">(10)</a>
+    <li><a href="#ref-for-compile-a-component①⓪">1.1. Internals</a>
+    <li><a href="#ref-for-compile-a-component①①">1.2. Constructor String Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="match">
@@ -4229,7 +4293,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="hostname-options">
    <b><a href="#hostname-options">#hostname-options</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-hostname-options">1. The URLPattern class </a>
+    <li><a href="#ref-for-hostname-options">1. The URLPattern class </a> <a href="#ref-for-hostname-options①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="pathname-options">
@@ -4243,6 +4307,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-protocol-component-matches-a-special-scheme">1. The URLPattern class </a>
     <li><a href="#ref-for-protocol-component-matches-a-special-scheme①">1.2. Constructor String Parsing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="hostname-pattern-is-an-ipv6-address">
+   <b><a href="#hostname-pattern-is-an-ipv6-address">#hostname-pattern-is-an-ipv6-address</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-hostname-pattern-is-an-ipv6-address">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser">
@@ -4500,15 +4570,15 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="pattern-string">
    <b><a href="#pattern-string">#pattern-string</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-pattern-string">1.1. Internals</a>
-    <li><a href="#ref-for-pattern-string①">1.2. Constructor String Parsing</a>
-    <li><a href="#ref-for-pattern-string②">2.1.1. Tokens</a> <a href="#ref-for-pattern-string③">(2)</a> <a href="#ref-for-pattern-string④">(3)</a> <a href="#ref-for-pattern-string⑤">(4)</a>
-    <li><a href="#ref-for-pattern-string⑥">2.1.2. Tokenizing</a>
-    <li><a href="#ref-for-pattern-string⑦">2.1.3. Parts</a>
-    <li><a href="#ref-for-pattern-string⑧">2.1.4. Options</a>
-    <li><a href="#ref-for-pattern-string⑨">2.1.5. Parsing</a> <a href="#ref-for-pattern-string①⓪">(2)</a>
-    <li><a href="#ref-for-pattern-string①①">2.3. Converting Part Lists to Pattern Strings</a>
-    <li><a href="#ref-for-pattern-string①②">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-pattern-string">1.1. Internals</a> <a href="#ref-for-pattern-string①">(2)</a>
+    <li><a href="#ref-for-pattern-string②">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-pattern-string③">2.1.1. Tokens</a> <a href="#ref-for-pattern-string④">(2)</a> <a href="#ref-for-pattern-string⑤">(3)</a> <a href="#ref-for-pattern-string⑥">(4)</a>
+    <li><a href="#ref-for-pattern-string⑦">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-pattern-string⑧">2.1.3. Parts</a>
+    <li><a href="#ref-for-pattern-string⑨">2.1.4. Options</a>
+    <li><a href="#ref-for-pattern-string①⓪">2.1.5. Parsing</a> <a href="#ref-for-pattern-string①①">(2)</a>
+    <li><a href="#ref-for-pattern-string①②">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-pattern-string①③">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="pattern-string-well-formed">
@@ -5094,6 +5164,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-canonicalize-a-hostname">1. The URLPattern class </a>
     <li><a href="#ref-for-canonicalize-a-hostname①">3.2. URLPatternInit Processing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="canonicalize-an-ipv6-hostname">
+   <b><a href="#canonicalize-an-ipv6-hostname">#canonicalize-an-ipv6-hostname</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-canonicalize-an-ipv6-hostname">1. The URLPattern class </a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="canonicalize-a-port">
