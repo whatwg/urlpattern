@@ -363,6 +363,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
 <div algorithm>
   To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
 
+  1. If |input| is null, then set |input| to "`*`".
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, "`u`").  If this throws an exception, catch it, and throw a {{TypeError}}.
