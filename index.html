@@ -2705,6 +2705,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-protocol">canonicalize a protocol</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+     <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL record</a>.</p>
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser④">basic URL parser</a> given <var>value</var> followed by "<code>://dummy.test</code>", with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url">url</a></i>.</p>
@@ -2719,6 +2721,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-username">canonicalize a username</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+     <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url①">URL record</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://url.spec.whatwg.org/#set-the-username" id="ref-for-set-the-username">Set the username</a> given <var>dummyURL</var> and <var>value</var>.</p>
@@ -2730,6 +2734,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-password">canonicalize a password</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+     <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url②">URL record</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://url.spec.whatwg.org/#set-the-password" id="ref-for-set-the-password">Set the password</a> given <var>dummyURL</var> and <var>value</var>.</p>
@@ -2740,6 +2746,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="algorithm" data-algorithm="canonicalize a hostname">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-hostname">canonicalize a hostname</dfn> given a string <var>value</var>: 
     <ol>
+     <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url③">URL record</a>.</p>
      <li data-md>
@@ -2753,6 +2761,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="algorithm" data-algorithm="canonicalize a port">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-port">canonicalize a port</dfn> given a string <var>portValue</var> and optionally a string <var>protocolValue</var>: 
     <ol>
+     <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url④">URL record</a>.</p>
      <li data-md>
@@ -2770,6 +2780,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-pathname">canonicalize a pathname</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+     <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑥">URL record</a>.</p>
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑧">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url③">url</a> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#path-start-state" id="ref-for-path-start-state">path start state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override③">state override</a></i>.</p>
@@ -2782,6 +2794,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="algorithm" data-algorithm="canonicalize a cannot-be-a-base-URL pathname">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-cannot-be-a-base-url-pathname">canonicalize a cannot-be-a-base-URL pathname</dfn> given a string <var>value</var>: 
     <ol>
+     <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑦">URL record</a>.</p>
      <li data-md>
@@ -2798,6 +2812,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-search">canonicalize a search</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+     <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑧">URL record</a>.</p>
      <li data-md>
       <p>Set <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query①">query</a> to the empty string.</p>
@@ -2812,6 +2828,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="algorithm" data-algorithm="canonicalize a hash">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-hash">canonicalize a hash</dfn> given a string <var>value</var>: 
     <ol>
+     <li data-md>
+      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑨">URL record</a>.</p>
      <li data-md>
