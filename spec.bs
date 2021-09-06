@@ -1170,6 +1170,7 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
       1. Run [=consume a required token=] given |parser| and "<a for=token/type>`close`</a>".
       1. Set |modifier token| to the result of running [=try to consume a modifier token=] given |parser|.
       1. Run [=add a part=] given |parser|, |prefix|, |name token|, |regexp or wildcard token|, |suffix|, and |modifier token|.
+      1. [=Continue=].
     1. Run [=maybe add a part from the pending fixed value=] given |parser|.
     1. Run [=consume a required token=] given |parser| and "<a for=token/type>`end`</a>".
   1. Return |parser|'s [=pattern parser/part list=].
