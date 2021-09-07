@@ -912,6 +912,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
         1. Run [=process a tokenizing error=] given |tokenizer|, |name start|, and |tokenizer|'s [=tokenizer/index=].
         1. [=Continue=].
       1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`name`</a>", |name position|, and |name start|.
+      1. [=Continue=].
     1. If |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
       1. Let |depth| be 1.
       1. Let |regexp position| be |tokenizer|'s [=tokenizer/next index=].
@@ -967,6 +968,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
         1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
         1. [=Continue=].
       1. Run [=add a token=] given |tokenizer|, "<a for=token/type>`regexp`</a>", |regexp position|, |regexp start|, and |regexp length|.
+      1. [=Continue=].
     1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`char`</a>".
   1. Run [=add a token with default length=] given |tokenizer|, "<a for=token/type>`end`</a>", |tokenizer|'s [=tokenizer/index=], and |tokenizer|'s [=tokenizer/index=].
   1. Return |tokenizer|'s [=tokenizer/token list=].
