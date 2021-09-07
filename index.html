@@ -1625,7 +1625,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>component start input index</var> be <var>component start token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index">index</a>.</p>
      <li data-md>
-      <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices">code point substring</a> from indices <var>component start input index</var> to <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> inclusive within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
+      <p>Let <var>end index</var> be <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> − 1.</p>
+     <li data-md>
+      <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices">code point substring</a> from indices <var>component start input index</var> to <var>end index</var> inclusive within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="compute protocol matches a special scheme flag">
