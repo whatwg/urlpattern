@@ -1776,6 +1776,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           </ol>
          <li data-md>
           <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-length" id="ref-for-add-a-token-with-default-length①">add a token with default length</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-name" id="ref-for-token-type-name①"><code>name</code></a>", <var>name position</var>, and <var>name start</var>.</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①①">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point⑦">code point</a> is U+0028 (<code>(</code>):</p>
@@ -1841,7 +1843,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
              <li data-md>
               <p>Set <var>regexp position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index⑥">next index</a>.</p>
              <li data-md>
-              <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①①">Continue</a>.</p>
+              <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①②">Continue</a>.</p>
             </ol>
            <li data-md>
             <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①②">code point</a> is U+0029 (<code>)</code>):</p>
@@ -1893,14 +1895,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>Set <var>regexp position</var> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-next-index" id="ref-for-tokenizer-next-index①⓪">next index</a>.</p>
           </ol>
          <li data-md>
-          <p>If <var>error</var> is true <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①②">continue</a>.</p>
+          <p>If <var>error</var> is true <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①③">continue</a>.</p>
          <li data-md>
           <p>If <var>depth</var> is not zero:</p>
           <ol>
            <li data-md>
             <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑧">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①⓪">index</a>.</p>
            <li data-md>
-            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①③">Continue</a>.</p>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①④">Continue</a>.</p>
           </ol>
          <li data-md>
           <p>Let <var>regexp length</var> be <var>regexp position</var> − <var>regexp start</var> − 1.</p>
@@ -1910,10 +1912,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>Run <a data-link-type="dfn" href="#process-a-tokenizing-error" id="ref-for-process-a-tokenizing-error⑨">process a tokenizing error</a> given <var>tokenizer</var>, <var>regexp start</var>, and <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①①">index</a>.</p>
            <li data-md>
-            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①④">Continue</a>.</p>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑤">Continue</a>.</p>
           </ol>
          <li data-md>
           <p>Run <a data-link-type="dfn" href="#add-a-token" id="ref-for-add-a-token">add a token</a> given <var>tokenizer</var>, "<a data-link-type="dfn" href="#token-type-regexp" id="ref-for-token-type-regexp①"><code>regexp</code></a>", <var>regexp position</var>, <var>regexp start</var>, and <var>regexp length</var>.</p>
+         <li data-md>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑥">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Run <a data-link-type="dfn" href="#add-a-token-with-default-position-and-length" id="ref-for-add-a-token-with-default-position-and-length④">add a token with default position and length</a> given <var>tokenizer</var> and "<a data-link-type="dfn" href="#token-type-char" id="ref-for-token-type-char①"><code>char</code></a>".</p>
@@ -2108,7 +2112,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Run <a data-link-type="dfn" href="#add-a-part" id="ref-for-add-a-part">add a part</a> given <var>parser</var>, <var>prefix</var>, <var>name token</var>, <var>regexp or wildcard token</var>, the empty string, and <var>modifier token</var>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑤">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑦">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Let <var>fixed token</var> be <var>char token</var>.</p>
@@ -2121,7 +2125,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Append <var>fixed token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value④">value</a> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-pending-fixed-value" id="ref-for-pattern-parser-pending-fixed-value①">pending fixed value</a>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑥">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑧">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Let <var>open token</var> be the result of running <a data-link-type="dfn" href="#try-to-consume-a-token" id="ref-for-try-to-consume-a-token③">try to consume a token</a> given <var>parser</var> and "<a data-link-type="dfn" href="#token-type-open" id="ref-for-token-type-open②"><code>open</code></a>".</p>
@@ -2157,7 +2161,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Run <a data-link-type="dfn" href="#add-a-part" id="ref-for-add-a-part①">add a part</a> given <var>parser</var>, <var>prefix</var>, <var>name token</var>, <var>regexp or wildcard token</var>, <var>suffix</var>, and <var>modifier token</var>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑦">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑨">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Run <a data-link-type="dfn" href="#maybe-add-a-part-from-the-pending-fixed-value" id="ref-for-maybe-add-a-part-from-the-pending-fixed-value①">maybe add a part from the pending fixed value</a> given <var>parser</var>.</p>
@@ -2411,7 +2415,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑧">modifier</a> to the end of <var>result</var>.</p>
           </ol>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑧">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②⓪">Continue</a>.</p>
         </ol>
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑧">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name③">name</a> is not the empty string.</p>
@@ -2460,7 +2464,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
           </ol>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue①⑨">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②①">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①②">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑤"><code>none</code></a>" or "<a data-link-type="dfn" href="#part-modifier-optional" id="ref-for-part-modifier-optional②"><code>optional</code></a>":</p>
@@ -2486,7 +2490,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string③">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①③">modifier</a> to the end of <var>result</var>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②⓪">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②②">Continue</a>.</p>
         </ol>
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑨">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①④">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more①"><code>zero-or-more</code></a>" or "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more①"><code>one-or-more</code></a>".</p>
@@ -2590,7 +2594,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑥">value</a> to the end of <var>result</var>.</p>
            <li data-md>
-            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②①">Continue</a>.</p>
+            <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②③">Continue</a>.</p>
           </ol>
          <li data-md>
           <p>Append "<code>{</code>" to the end of <var>result</var>.</p>
@@ -2601,7 +2605,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string④">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑦">modifier</a> to the end of <var>result</var>.</p>
          <li data-md>
-          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②②">Continue</a>.</p>
+          <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue②④">Continue</a>.</p>
         </ol>
        <li data-md>
         <p>Let <var>needs grouping</var> be true if at least one of the following are true, otherwise let it be false:</p>
@@ -3502,10 +3506,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://infra.spec.whatwg.org/#iteration-continue">https://infra.spec.whatwg.org/#iteration-continue</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-iteration-continue">1.2. Constructor String Parsing</a> <a href="#ref-for-iteration-continue①">(2)</a> <a href="#ref-for-iteration-continue②">(3)</a> <a href="#ref-for-iteration-continue③">(4)</a>
-    <li><a href="#ref-for-iteration-continue④">2.1.2. Tokenizing</a> <a href="#ref-for-iteration-continue⑤">(2)</a> <a href="#ref-for-iteration-continue⑥">(3)</a> <a href="#ref-for-iteration-continue⑦">(4)</a> <a href="#ref-for-iteration-continue⑧">(5)</a> <a href="#ref-for-iteration-continue⑨">(6)</a> <a href="#ref-for-iteration-continue①⓪">(7)</a> <a href="#ref-for-iteration-continue①①">(8)</a> <a href="#ref-for-iteration-continue①②">(9)</a> <a href="#ref-for-iteration-continue①③">(10)</a> <a href="#ref-for-iteration-continue①④">(11)</a>
-    <li><a href="#ref-for-iteration-continue①⑤">2.1.5. Parsing</a> <a href="#ref-for-iteration-continue①⑥">(2)</a> <a href="#ref-for-iteration-continue①⑦">(3)</a>
-    <li><a href="#ref-for-iteration-continue①⑧">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-iteration-continue①⑨">(2)</a> <a href="#ref-for-iteration-continue②⓪">(3)</a>
-    <li><a href="#ref-for-iteration-continue②①">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-iteration-continue②②">(2)</a>
+    <li><a href="#ref-for-iteration-continue④">2.1.2. Tokenizing</a> <a href="#ref-for-iteration-continue⑤">(2)</a> <a href="#ref-for-iteration-continue⑥">(3)</a> <a href="#ref-for-iteration-continue⑦">(4)</a> <a href="#ref-for-iteration-continue⑧">(5)</a> <a href="#ref-for-iteration-continue⑨">(6)</a> <a href="#ref-for-iteration-continue①⓪">(7)</a> <a href="#ref-for-iteration-continue①①">(8)</a> <a href="#ref-for-iteration-continue①②">(9)</a> <a href="#ref-for-iteration-continue①③">(10)</a> <a href="#ref-for-iteration-continue①④">(11)</a> <a href="#ref-for-iteration-continue①⑤">(12)</a> <a href="#ref-for-iteration-continue①⑥">(13)</a>
+    <li><a href="#ref-for-iteration-continue①⑦">2.1.5. Parsing</a> <a href="#ref-for-iteration-continue①⑧">(2)</a> <a href="#ref-for-iteration-continue①⑨">(3)</a>
+    <li><a href="#ref-for-iteration-continue②⓪">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-iteration-continue②①">(2)</a> <a href="#ref-for-iteration-continue②②">(3)</a>
+    <li><a href="#ref-for-iteration-continue②③">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-iteration-continue②④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-list-iterate">
