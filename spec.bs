@@ -879,7 +879,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Set |tokenizer|'s [=tokenizer/input=] to |input|.
   1. Set |tokenizer|'s [=tokenizer/policy=] to |policy|.
   1. While |tokenizer|'s [=tokenizer/index=] is less than |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=]:
-    1. Run [=get the next code point=] given |tokenizer|.
+    1. Run [=seek and get the next code point=] given |tokenizer| and |tokenizer|'s [=tokenizer/index=].
     1. If |tokenizer|'s [=tokenizer/code point=] is U+002A (`*`):
       1. Run [=add a token with default position and length=] given |tokenizer| and "<a for=token/type>`asterisk`</a>".
       1. [=Continue=].
