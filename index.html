@@ -1435,12 +1435,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="change state">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="change-state">change state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①①">constructor string parser</a> <var>parser</var>, a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑥">state</a> <var>state</var>, and a number <var>skip</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="change-state">change state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①①">constructor string parser</a> <var>parser</var>, a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑥">state</a> <var>new state</var>, and a number <var>skip</var>: 
     <ol>
      <li data-md>
-      <p>If <var>state</var> is not "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init⑤"><code>init</code></a>", not "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority⑤"><code>authority</code></a>", and not "<a data-link-type="dfn" href="#constructor-string-parser-state-done" id="ref-for-constructor-string-parser-state-done②"><code>done</code></a>", then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①③">result</a>[<var>state</var>] to the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string">make a component string</a> given <var>parser</var>.</p>
+      <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑦">state</a> is not "<a data-link-type="dfn" href="#constructor-string-parser-state-init" id="ref-for-constructor-string-parser-state-init⑤"><code>init</code></a>", not "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority⑤"><code>authority</code></a>", and not "<a data-link-type="dfn" href="#constructor-string-parser-state-done" id="ref-for-constructor-string-parser-state-done②"><code>done</code></a>", then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①③">result</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑧">state</a>] to the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string">make a component string</a> given <var>parser</var>.</p>
      <li data-md>
-      <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑦">state</a> to <var>state</var>.</p>
+      <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑨">state</a> to <var>new state</var>.</p>
      <li data-md>
       <p>Increment <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index⑧">token index</a> by <var>skip</var>.</p>
      <li data-md>
@@ -1459,12 +1459,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="rewind and set state">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind-and-set-state">rewind and set state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①③">constructor string parser</a> <var>parser</var> and a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑧">state</a> <var>state</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="rewind-and-set-state">rewind and set state</dfn> given a <a data-link-type="dfn" href="#constructor-string-parser" id="ref-for-constructor-string-parser①③">constructor string parser</a> <var>parser</var> and a <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state①⓪">state</a> <var>state</var>: 
     <ol>
      <li data-md>
       <p>Run <a data-link-type="dfn" href="#rewind" id="ref-for-rewind①">rewind</a> given <var>parser</var>.</p>
      <li data-md>
-      <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state⑨">state</a> to <var>state</var>.</p>
+      <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-state" id="ref-for-constructor-string-parser-state①①">state</a> to <var>state</var>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="get a safe token">
@@ -4382,7 +4382,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="constructor-string-parser-state">
    <b><a href="#constructor-string-parser-state">#constructor-string-parser-state</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-constructor-string-parser-state">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-state①">(2)</a> <a href="#ref-for-constructor-string-parser-state②">(3)</a> <a href="#ref-for-constructor-string-parser-state③">(4)</a> <a href="#ref-for-constructor-string-parser-state④">(5)</a> <a href="#ref-for-constructor-string-parser-state⑤">(6)</a> <a href="#ref-for-constructor-string-parser-state⑥">(7)</a> <a href="#ref-for-constructor-string-parser-state⑦">(8)</a> <a href="#ref-for-constructor-string-parser-state⑧">(9)</a> <a href="#ref-for-constructor-string-parser-state⑨">(10)</a>
+    <li><a href="#ref-for-constructor-string-parser-state">1.2. Constructor String Parsing</a> <a href="#ref-for-constructor-string-parser-state①">(2)</a> <a href="#ref-for-constructor-string-parser-state②">(3)</a> <a href="#ref-for-constructor-string-parser-state③">(4)</a> <a href="#ref-for-constructor-string-parser-state④">(5)</a> <a href="#ref-for-constructor-string-parser-state⑤">(6)</a> <a href="#ref-for-constructor-string-parser-state⑥">(7)</a> <a href="#ref-for-constructor-string-parser-state⑦">(8)</a> <a href="#ref-for-constructor-string-parser-state⑧">(9)</a> <a href="#ref-for-constructor-string-parser-state⑨">(10)</a> <a href="#ref-for-constructor-string-parser-state①⓪">(11)</a> <a href="#ref-for-constructor-string-parser-state①①">(12)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constructor-string-parser-state-init">
