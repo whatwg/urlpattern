@@ -800,7 +800,8 @@ To run <dfn>make a component string</dfn> given a [=constructor string parser=] 
   1. Let |token| be |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]].
   1. Let |component start token| be the result of running [=get a safe token=] given |parser| and |parser|'s [=constructor string parser/component start=].
   1. Let |component start input index| be |component start token|'s [=token/index=].
-  1. Return the [=code point substring by indices|code point substring=] from indices |component start input index| to |token|'s [=token/index=] exclusive within |parser|'s [=constructor string parser/input=].
+  1. Let |end index| be |token|'s [=token/index=] - 1.
+  1. Return the [=code point substring by indices|code point substring=] from indices |component start input index| to |end index| inclusive within |parser|'s [=constructor string parser/input=].
 </div>
 
 <div algorithm>
