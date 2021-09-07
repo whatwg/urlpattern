@@ -270,6 +270,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
     1. Set |init| to the result of running [=parse a constructor string=] given |input|.
+    1. If |baseURL| is not given and |init|["{{URLPatternInit/protocol}}"] is null, then throw a {{TypeError}}.
     1. Set |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
   1. Else:
     1. [=Assert=]: |input| is a {{URLPatternInit}}.
