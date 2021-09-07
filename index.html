@@ -835,6 +835,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>init</var> to the result of running <a data-link-type="dfn" href="#parse-a-constructor-string" id="ref-for-parse-a-constructor-string">parse a constructor string</a> given <var>input</var>.</p>
        <li data-md>
+        <p>If <var>baseURL</var> is not given and <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol">protocol</a></code>"] is null, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror">TypeError</a></code>.</p>
+       <li data-md>
         <p>Set <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl②">baseURL</a></code>"] to <var>baseURL</var>.</p>
       </ol>
      <li data-md>
@@ -843,16 +845,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert">Assert</a>: <var>input</var> is a <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit①">URLPatternInit</a></code>.</p>
        <li data-md>
-        <p>If <var>baseURL</var> is given, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror">TypeError</a></code>.</p>
+        <p>If <var>baseURL</var> is given, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>.</p>
        <li data-md>
         <p>Set <var>init</var> to <var>input</var>.</p>
       </ol>
      <li data-md>
       <p>Let <var>processedInit</var> be the result of <a data-link-type="dfn" href="#process-a-urlpatterninit" id="ref-for-process-a-urlpatterninit">process a URLPatternInit</a> given <var>init</var>, "<code>pattern</code>", null, null, null, null, null, null, null, and null.</p>
      <li data-md>
-      <p>If <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol">protocol</a></code>"] is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme">special scheme</a> and <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port">port</a></code>"] is its corresponding <a data-link-type="dfn" href="https://url.spec.whatwg.org/#default-port" id="ref-for-default-port">default port</a>, then set <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port①">port</a></code>"] to the empty string.</p>
+      <p>If <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①">protocol</a></code>"] is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme">special scheme</a> and <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port">port</a></code>"] is its corresponding <a data-link-type="dfn" href="https://url.spec.whatwg.org/#default-port" id="ref-for-default-port">default port</a>, then set <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port①">port</a></code>"] to the empty string.</p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component">protocol component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①">protocol</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options">default options</a>.</p>
+      <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component">protocol component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol②">protocol</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options">default options</a>.</p>
      <li data-md>
       <p>Set <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="#urlpattern-username-component" id="ref-for-urlpattern-username-component">username component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username">username</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-username" id="ref-for-canonicalize-a-username">canonicalize a username</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options①">default options</a>.</p>
      <li data-md>
@@ -962,7 +964,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let (<var>regular expression string</var>, <var>name list</var>) be the result of running <a data-link-type="dfn" href="#generate-a-regular-expression-and-name-list" id="ref-for-generate-a-regular-expression-and-name-list">generate a regular expression and name list</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
-      <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, "<code>u</code>").  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①">TypeError</a></code>.</p>
+      <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, "<code>u</code>").  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
       <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
      <li data-md>
       <p>Let <var>pattern string</var> be the result of running <a data-link-type="dfn" href="#generate-a-pattern-string" id="ref-for-generate-a-pattern-string">generate a pattern string</a> given <var>part list</var> and <var>options</var>.</p>
@@ -997,11 +999,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>If <var>input</var> is a <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit②">URLPatternInit</a></code> then:</p>
       <ol>
        <li data-md>
-        <p>If <var>baseURLString</var> was given, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
+        <p>If <var>baseURLString</var> was given, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror③">TypeError</a></code>.</p>
        <li data-md>
         <p>Let <var>applyResult</var> be the result of <a data-link-type="dfn" href="#process-a-urlpatterninit" id="ref-for-process-a-urlpatterninit①">process a URLPatternInit</a> given <var>input</var>, "url", <var>protocol</var>, <var>username</var>, <var>password</var>, <var>hostname</var>, <var>port</var>, <var>pathname</var>, <var>search</var>, and <var>hash</var>. If this throws an exception, catch it, and return null.</p>
        <li data-md>
-        <p>Set <var>protocol</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol②">protocol</a></code>"].</p>
+        <p>Set <var>protocol</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol③">protocol</a></code>"].</p>
        <li data-md>
         <p>Set <var>username</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username①">username</a></code>"].</p>
        <li data-md>
@@ -1977,7 +1979,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="process-a-tokenizing-error">process a tokenizing error</dfn> for a given <a data-link-type="dfn" href="#tokenizer" id="ref-for-tokenizer①②">tokenizer</a> <var>tokenizer</var>, a number <var>next position</var>, and a number <var>value position</var>: 
     <ol>
      <li data-md>
-      <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy①">policy</a> is "<a data-link-type="dfn" href="#tokenize-policy-strict" id="ref-for-tokenize-policy-strict①"><code>strict</code></a>", then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror③">TypeError</a></code>.</p>
+      <p>If <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy①">policy</a> is "<a data-link-type="dfn" href="#tokenize-policy-strict" id="ref-for-tokenize-policy-strict①"><code>strict</code></a>", then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror④">TypeError</a></code>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert⑤">Assert</a>: <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-policy" id="ref-for-tokenizer-policy②">policy</a> is "<a data-link-type="dfn" href="#tokenize-policy-lenient" id="ref-for-tokenize-policy-lenient①"><code>lenient</code></a>".</p>
      <li data-md>
@@ -2225,7 +2227,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be the result of running <a data-link-type="dfn" href="#try-to-consume-a-token" id="ref-for-try-to-consume-a-token⑨">try to consume a token</a> given <var>parser</var> and <var>type</var>.</p>
      <li data-md>
-      <p>If <var>result</var> is null, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror④">TypeError</a></code>.</p>
+      <p>If <var>result</var> is null, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>result</var>.</p>
     </ol>
@@ -2351,7 +2353,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Increment <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-next-numeric-name" id="ref-for-pattern-parser-next-numeric-name①">next numeric name</a> by 1.</p>
       </ol>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#is-a-duplicate-name" id="ref-for-is-a-duplicate-name">is a duplicate name</a> given <var>parser</var> and <var>name</var> is true, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑤">TypeError</a></code>.</p>
+      <p>If the result of running <a data-link-type="dfn" href="#is-a-duplicate-name" id="ref-for-is-a-duplicate-name">is a duplicate name</a> given <var>parser</var> and <var>name</var> is true, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑥">TypeError</a></code>.</p>
      <li data-md>
       <p>Let <var>encoded prefix</var> be the result of running <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-encoding-callback" id="ref-for-pattern-parser-encoding-callback③">encoding callback</a> given <var>prefix</var>.</p>
       <p class="note" role="note">Finally, we encode the fixed text values and create the <a data-link-type="dfn" href="#part" id="ref-for-part②②">part</a>. </p>
@@ -2733,7 +2735,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser④">basic URL parser</a> given <var>value</var> followed by "<code>://dummy.test</code>", with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url">url</a></i>.</p>
       <p class="note" role="note">Note, <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override">state override</a> is not used here because it enforces restrictions that are only appropriate for the <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-protocol" id="ref-for-dom-url-protocol">protocol</a></code> setter.  Instead we use the protocol to parse a dummy URL using the normal parsing entry point.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑥">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme①">scheme</a>.</p>
     </ol>
@@ -2774,7 +2776,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑤">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url①">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#hostname-state" id="ref-for-hostname-state">hostname state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override①">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑦">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host①">host</a>.</p>
     </ol>
@@ -2795,7 +2797,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li><var>code point</var> is not U+005D (<code>]</code>); and
          <li><var>code point</var> is not U+003A (<code>:</code>),
         </ul>
-        <p>then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑧">TypeError</a></code>. </p>
+        <p>then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>. </p>
        <li data-md>
         <p>Append the result of running <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-lowercase" id="ref-for-ascii-lowercase">ASCII lowercase</a> given <var>code point</var> to the end of <var>result</var>.</p>
       </ol>
@@ -2816,7 +2818,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑦">basic URL parser</a> given <var>portValue</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url②">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#port-state" id="ref-for-port-state">port state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override②">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror⑨">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port①">port</a> or empty string if it is null.</p>
     </ol>
@@ -2831,7 +2833,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑧">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url③">url</a> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#path-start-state" id="ref-for-path-start-state">path start state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override③">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⓪">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string①">API pathname string</a>.</p>
     </ol>
@@ -2848,7 +2850,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser⑨">URL parsing</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url④">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#cannot-be-a-base-url-path-state" id="ref-for-cannot-be-a-base-url-path-state">cannot be a base URL path state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override④">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string②">API pathname string</a>.</p>
     </ol>
@@ -2865,7 +2867,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①⓪">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑤">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#query-state" id="ref-for-query-state">query state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑤">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①②">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①③">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query②">query</a>.</p>
     </ol>
@@ -2882,7 +2884,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>parseResult</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-basic-url-parser" id="ref-for-concept-basic-url-parser①①">basic URL parser</a> given <var>value</var> with <var>dummyURL</var> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-url" id="ref-for-basic-url-parser-url⑥">url</a></i> and <a data-link-type="dfn" href="https://url.spec.whatwg.org/#fragment-state" id="ref-for-fragment-state">fragment state</a> as <i><a data-link-type="dfn" href="https://url.spec.whatwg.org/#basic-url-parser-state-override" id="ref-for-basic-url-parser-state-override⑥">state override</a></i>.</p>
      <li data-md>
-      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①③">TypeError</a></code>.</p>
+      <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①④">TypeError</a></code>.</p>
      <li data-md>
       <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment②">fragment</a>.</p>
     </ol>
@@ -2894,7 +2896,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be the result of creating a new <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit⑨">URLPatternInit</a></code>.</p>
      <li data-md>
-      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol③">protocol</a></code>"] to <var>protocol</var>.</p>
+      <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol④">protocol</a></code>"] to <var>protocol</var>.</p>
      <li data-md>
       <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username③">username</a></code>"] to <var>username</var>.</p>
      <li data-md>
@@ -2917,9 +2919,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Set <var>baseURL</var> to the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"].</p>
        <li data-md>
-        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①④">TypeError</a></code>.</p>
+        <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⑤">TypeError</a></code>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol④">protocol</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑤">protocol</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a>.</p>
        <li data-md>
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username④">username</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-username" id="ref-for-concept-url-username②">username</a>.</p>
        <li data-md>
@@ -2936,7 +2938,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash④">hash</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment③">fragment</a> or the empty string if the value is null.</p>
       </ol>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑤">protocol</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑥">protocol</a></code>"] to the result of <a data-link-type="dfn" href="#process-protocol-for-init" id="ref-for-process-protocol-for-init">process protocol for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑦">protocol</a></code>"] and <var>type</var>.</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑥">protocol</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑦">protocol</a></code>"] to the result of <a data-link-type="dfn" href="#process-protocol-for-init" id="ref-for-process-protocol-for-init">process protocol for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑧">protocol</a></code>"] and <var>type</var>.</p>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username⑤">username</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username⑥">username</a></code>"] to the result of <a data-link-type="dfn" href="#process-username-for-init" id="ref-for-process-username-for-init">process username for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username⑦">username</a></code>"] and <var>type</var>.</p>
      <li data-md>
@@ -2944,7 +2946,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑦">hostname</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑧">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#process-hostname-for-init" id="ref-for-process-hostname-for-init">process hostname for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑨">hostname</a></code>"] and <var>type</var>.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑦">port</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑧">port</a></code>"] to the result of <a data-link-type="dfn" href="#process-port-for-init" id="ref-for-process-port-for-init">process port for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑨">port</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑧">protocol</a></code>"], and <var>type</var>.</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑦">port</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑧">port</a></code>"] to the result of <a data-link-type="dfn" href="#process-port-for-init" id="ref-for-process-port-for-init">process port for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑨">port</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑨">protocol</a></code>"], and <var>type</var>.</p>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname⑦">pathname</a></code>"] is not null:</p>
       <ol>
@@ -2973,7 +2975,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           </ol>
         </ol>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①③">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init">process pathname for init</a> given <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①④">pathname</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑨">protocol</a></code>"], and <var>type</var>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①③">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init">process pathname for init</a> given <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①④">pathname</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①⓪">protocol</a></code>"], and <var>type</var>.</p>
       </ol>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑤">search</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑥">search</a></code>"] to the result of <a data-link-type="dfn" href="#process-search-for-init" id="ref-for-process-search-for-init">process search for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑦">search</a></code>"] and <var>type</var>.</p>
@@ -3751,12 +3753,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-exceptiondef-typeerror">
    <a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">https://heycam.github.io/webidl/#exceptiondef-typeerror</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a>
-    <li><a href="#ref-for-exceptiondef-typeerror①">1.1. Internals</a> <a href="#ref-for-exceptiondef-typeerror②">(2)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror③">2.1.2. Tokenizing</a>
-    <li><a href="#ref-for-exceptiondef-typeerror④">2.1.5. Parsing</a> <a href="#ref-for-exceptiondef-typeerror⑤">(2)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror⑥">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑦">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑧">(3)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(4)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(5)</a> <a href="#ref-for-exceptiondef-typeerror①①">(6)</a> <a href="#ref-for-exceptiondef-typeerror①②">(7)</a> <a href="#ref-for-exceptiondef-typeerror①③">(8)</a>
-    <li><a href="#ref-for-exceptiondef-typeerror①④">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-exceptiondef-typeerror">1. The URLPattern class </a> <a href="#ref-for-exceptiondef-typeerror①">(2)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror②">1.1. Internals</a> <a href="#ref-for-exceptiondef-typeerror③">(2)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror④">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-exceptiondef-typeerror⑤">2.1.5. Parsing</a> <a href="#ref-for-exceptiondef-typeerror⑥">(2)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror⑦">3.1. Encoding Callbacks</a> <a href="#ref-for-exceptiondef-typeerror⑧">(2)</a> <a href="#ref-for-exceptiondef-typeerror⑨">(3)</a> <a href="#ref-for-exceptiondef-typeerror①⓪">(4)</a> <a href="#ref-for-exceptiondef-typeerror①①">(5)</a> <a href="#ref-for-exceptiondef-typeerror①②">(6)</a> <a href="#ref-for-exceptiondef-typeerror①③">(7)</a> <a href="#ref-for-exceptiondef-typeerror①④">(8)</a>
+    <li><a href="#ref-for-exceptiondef-typeerror①⑤">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
@@ -3960,9 +3962,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpatterninit-protocol">
    <b><a href="#dom-urlpatterninit-protocol">#dom-urlpatterninit-protocol</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpatterninit-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-protocol①">(2)</a>
-    <li><a href="#ref-for-dom-urlpatterninit-protocol②">1.1. Internals</a>
-    <li><a href="#ref-for-dom-urlpatterninit-protocol③">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-protocol④">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑥">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑦">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑧">(6)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑨">(7)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-protocol①">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol②">(3)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-protocol③">1.1. Internals</a>
+    <li><a href="#ref-for-dom-urlpatterninit-protocol④">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑥">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑦">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑧">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑨">(6)</a> <a href="#ref-for-dom-urlpatterninit-protocol①⓪">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpatterninit-username">
