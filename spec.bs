@@ -1580,7 +1580,15 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/API pathname string=].
+  1. Let |result| be |dummyURL|'s [=url/API pathname string=].
+  1. If the first [=/code point=] in |value| is not U+002F (`/`):
+    <div class=note>
+      <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we strip the leading slash if one was inserted by the URL parser.
+      <p>Conditionally stripping the leading slash also works when the algorithm is called by [=process pathname for init=].  If there is no leading slash, then we require a {{URLPatternInit/baseURL}} to be provided which will always result in a leading slash in the resolved pathname.
+    </div>
+    1. Let |length| be |result|'s [=string/code point length=] &minus; 1.
+    1. Set |result| to the [=code point substring=] from index 1 with length |length| within |result|.
+  1. Return |result|.
 </div>
 
 <div algorithm>
