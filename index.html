@@ -3063,7 +3063,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>type</var> is "<code>pattern</code>" then return <var>pathnameValue</var>.</p>
      <li data-md>
-      <p>If <var>protocolValue</var> is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme③">special scheme</a>, then return the result of running <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname①">canonicalize a pathname</a> given <var>pathnameValue</var>.</p>
+      <p>If <var>protocolValue</var> is a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme③">special scheme</a> or the empty string, then return the result of running <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname①">canonicalize a pathname</a> given <var>pathnameValue</var>.</p>
+      <p class="note" role="note">If the <var>protocolValue</var> is the empty string then no value was provided for <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①①">protocol</a></code> in the constructor dictionary.  Normally we do not special case empty string dictionary values, but in this case we treat it as a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#special-scheme" id="ref-for-special-scheme④">special scheme</a> in order to default to the most common pathname canonicalization. </p>
      <li data-md>
       <p>Else return the result of running <a data-link-type="dfn" href="#canonicalize-a-cannot-be-a-base-url-pathname" id="ref-for-canonicalize-a-cannot-be-a-base-url-pathname①">canonicalize a cannot-be-a-base-URL pathname</a> given <var>pathnameValue</var>.</p>
     </ol>
@@ -3713,7 +3714,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-special-scheme">1. The URLPattern class </a>
     <li><a href="#ref-for-special-scheme①">1.1. Internals</a>
     <li><a href="#ref-for-special-scheme②">1.2. Constructor String Parsing</a>
-    <li><a href="#ref-for-special-scheme③">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-special-scheme③">3.2. URLPatternInit Processing</a> <a href="#ref-for-special-scheme④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-basic-url-parser-state-override">
@@ -3970,7 +3971,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-dom-urlpatterninit-protocol">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-protocol①">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol②">(3)</a>
     <li><a href="#ref-for-dom-urlpatterninit-protocol③">1.1. Internals</a>
-    <li><a href="#ref-for-dom-urlpatterninit-protocol④">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑥">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑦">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑧">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑨">(6)</a> <a href="#ref-for-dom-urlpatterninit-protocol①⓪">(7)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-protocol④">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-protocol⑤">(2)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑥">(3)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑦">(4)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑧">(5)</a> <a href="#ref-for-dom-urlpatterninit-protocol⑨">(6)</a> <a href="#ref-for-dom-urlpatterninit-protocol①⓪">(7)</a> <a href="#ref-for-dom-urlpatterninit-protocol①①">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpatterninit-username">
