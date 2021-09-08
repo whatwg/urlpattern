@@ -403,7 +403,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
     1. If |baseURLString| was given, then:
       1. Set |baseURL| to the result of [=URL parser|parsing=] |baseURLString|.
       1. If |baseURL| is failure, return null.
-      1. [=list/Append=] |baseURL| to |inputs|.
+      1. [=list/Append=] |baseURLString| to |inputs|.
     1. Let |url| be the result of [=URL parser|parsing=] |input| given |baseURL|.
     1. If |url| is failure, return null.
     1. Set |protocol| to |url|'s [=url/scheme=].
