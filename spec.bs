@@ -1719,7 +1719,8 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   To <dfn>process pathname for init</dfn> given a string |pathnameValue|, a string |protocolValue|, and a string |type|:
 
   1. If |type| is "`pattern`" then return |pathnameValue|.
-  1. If |protocolValue| is a [=special scheme=], then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
+  1. If |protocolValue| is a [=special scheme=] or the empty string, then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
+    <p class=note>If the |protocolValue| is the empty string then no value was provided for {{URLPatternInit/protocol}} in the constructor dictionary.  Normally we do not special case empty string dictionary values, but in this case we treat it as a [=special scheme=] in order to default to the most common pathname canonicalization.
   1. Else return the result of running [=canonicalize a cannot-be-a-base-URL pathname=] given |pathnameValue|.
 </div algorithm>
 
