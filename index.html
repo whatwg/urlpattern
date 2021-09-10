@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-09-08">8 September 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-09-10">10 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2841,7 +2841,21 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>parseResult</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①①">TypeError</a></code>.</p>
      <li data-md>
-      <p>Return <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string①">API pathname string</a>.</p>
+      <p>Let <var>result</var> be <var>dummyURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string①">API pathname string</a>.</p>
+     <li data-md>
+      <p>If the first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code point</a> in <var>value</var> is not U+002F (<code>/</code>):</p>
+      <div class="note" role="note">
+       <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we strip the leading slash if one was inserted by the URL parser. </p>
+       <p>Conditionally stripping the leading slash also works when the algorithm is called by <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init">process pathname for init</a>.  If there is no leading slash, then we require a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl③">baseURL</a></code> to be provided which will always result in a leading slash in the resolved pathname. </p>
+      </div>
+      <ol>
+       <li data-md>
+        <p>Let <var>length</var> be <var>result</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑦">code point length</a> − 1.</p>
+       <li data-md>
+        <p>Set <var>result</var> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring①">code point substring</a> from index 1 with length <var>length</var> within <var>result</var>.</p>
+      </ol>
+     <li data-md>
+      <p>Return <var>result</var>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="canonicalize a cannot-be-a-base-URL pathname">
@@ -2920,10 +2934,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>baseURL</var> be null.</p>
      <li data-md>
-      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl③">baseURL</a></code>"] is not null:</p>
+      <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"] is not null:</p>
       <ol>
        <li data-md>
-        <p>Set <var>baseURL</var> to the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl④">baseURL</a></code>"].</p>
+        <p>Set <var>baseURL</var> to the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser②">parsing</a> <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl⑤">baseURL</a></code>"].</p>
        <li data-md>
         <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⑤">TypeError</a></code>.</p>
        <li data-md>
@@ -2968,7 +2982,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>then: </p>
         <ol>
          <li data-md>
-          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string④">API pathname string</a>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code points</a>, or null if there are no instances of the code point.</p>
+          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string④">API pathname string</a>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point③">code points</a>, or null if there are no instances of the code point.</p>
          <li data-md>
           <p>If <var>slash index</var> is not null:</p>
           <ol>
@@ -2981,7 +2995,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           </ol>
         </ol>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①③">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init">process pathname for init</a> given <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①④">pathname</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①⓪">protocol</a></code>"], and <var>type</var>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①③">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init①">process pathname for init</a> given <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①④">pathname</a></code>"], <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol①⓪">protocol</a></code>"], and <var>type</var>.</p>
       </ol>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑤">search</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑥">search</a></code>"] to the result of <a data-link-type="dfn" href="#process-search-for-init" id="ref-for-process-search-for-init">process search for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search⑦">search</a></code>"] and <var>type</var>.</p>
@@ -3001,7 +3015,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>type</var> is "<code>url</code>", then return false.</p>
      <li data-md>
-      <p>If <var>input</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑦">code point length</a> is less than 2, then return false.</p>
+      <p>If <var>input</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑧">code point length</a> is less than 2, then return false.</p>
      <li data-md>
       <p>If <var>input</var>[0] is U+005C (<code>\</code>) and <var>input</var>[1] is U+002F (<code>/</code>), then return true.</p>
      <li data-md>
@@ -3480,8 +3494,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://infra.spec.whatwg.org/#code-point">https://infra.spec.whatwg.org/#code-point</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-code-point">1.1. Internals</a>
-    <li><a href="#ref-for-code-point①">3.1. Encoding Callbacks</a>
-    <li><a href="#ref-for-code-point②">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-code-point①">3.1. Encoding Callbacks</a> <a href="#ref-for-code-point②">(2)</a>
+    <li><a href="#ref-for-code-point③">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-code-point-length">
@@ -3489,13 +3503,15 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-string-code-point-length">1.1. Internals</a>
     <li><a href="#ref-for-string-code-point-length①">2.1.2. Tokenizing</a> <a href="#ref-for-string-code-point-length②">(2)</a> <a href="#ref-for-string-code-point-length③">(3)</a> <a href="#ref-for-string-code-point-length④">(4)</a> <a href="#ref-for-string-code-point-length⑤">(5)</a> <a href="#ref-for-string-code-point-length⑥">(6)</a>
-    <li><a href="#ref-for-string-code-point-length⑦">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-string-code-point-length⑦">3.1. Encoding Callbacks</a>
+    <li><a href="#ref-for-string-code-point-length⑧">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-code-point-substring">
    <a href="https://infra.spec.whatwg.org/#code-point-substring">https://infra.spec.whatwg.org/#code-point-substring</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-code-point-substring">2.1.2. Tokenizing</a>
+    <li><a href="#ref-for-code-point-substring①">3.1. Encoding Callbacks</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-code-point-substring-by-indices">
@@ -4041,7 +4057,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#dom-urlpatterninit-baseurl">#dom-urlpatterninit-baseurl</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-urlpatterninit-baseurl">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-baseurl①">(2)</a> <a href="#ref-for-dom-urlpatterninit-baseurl②">(3)</a>
-    <li><a href="#ref-for-dom-urlpatterninit-baseurl③">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-baseurl④">(2)</a>
+    <li><a href="#ref-for-dom-urlpatterninit-baseurl③">3.1. Encoding Callbacks</a>
+    <li><a href="#ref-for-dom-urlpatterninit-baseurl④">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-baseurl⑤">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatternresult">
@@ -5264,7 +5281,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="process-pathname-for-init">
    <b><a href="#process-pathname-for-init">#process-pathname-for-init</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-process-pathname-for-init">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-process-pathname-for-init">3.1. Encoding Callbacks</a>
+    <li><a href="#ref-for-process-pathname-for-init①">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="process-search-for-init">
