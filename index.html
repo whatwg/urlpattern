@@ -4,7 +4,7 @@
   <title>URLPattern API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2016/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 4f053d00e, updated Tue Aug 10 14:13:32 2021 -0700" name="generator">
+  <meta content="Bikeshed version a210b7d86, updated Thu Sep 16 13:45:19 2021 -0700" name="generator">
   <link href="https://wicg.github.io/urlpattern/" rel="canonical">
 <style>
 .selected-text-file-an-issue {
@@ -639,7 +639,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-09-10">10 September 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2021-09-23">23 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1625,9 +1625,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>component start input index</var> be <var>component start token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index">index</a>.</p>
      <li data-md>
-      <p>Let <var>end index</var> be <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a> − 1.</p>
+      <p>Let <var>end index</var> be <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index①">index</a>.</p>
      <li data-md>
-      <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices">code point substring</a> from indices <var>component start input index</var> to <var>end index</var> inclusive within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
+      <p>Return the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-positions" id="ref-for-code-point-substring-by-positions">code point substring</a> from <var>component start input index</var> to <var>end index</var> within <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-input" id="ref-for-constructor-string-parser-input①">input</a>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="compute protocol matches a special scheme flag">
@@ -1958,7 +1958,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-index" id="ref-for-token-index②">index</a> to <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-index" id="ref-for-tokenizer-index①⑤">index</a>.</p>
      <li data-md>
-      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value②">value</a> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring">code point substring</a> from index <var>value position</var> with length <var>value length</var> within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a>.</p>
+      <p>Set <var>token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value②">value</a> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring">code point substring</a> from <var>value position</var> with length <var>value length</var> within <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-input" id="ref-for-tokenizer-input⑧">input</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append②">Append</a> <var>token</var> to the back of <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-token-list" id="ref-for-tokenizer-token-list①">token list</a>.</p>
      <li data-md>
@@ -2852,7 +2852,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>Let <var>length</var> be <var>result</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string-code-point-length" id="ref-for-string-code-point-length⑦">code point length</a> − 1.</p>
        <li data-md>
-        <p>Set <var>result</var> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring①">code point substring</a> from index 1 with length <var>length</var> within <var>result</var>.</p>
+        <p>Set <var>result</var> to the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring" id="ref-for-code-point-substring①">code point substring</a> from 1 with length <var>length</var> within <var>result</var>.</p>
       </ol>
      <li data-md>
       <p>Return <var>result</var>.</p>
@@ -2987,7 +2987,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>If <var>slash index</var> is not null:</p>
           <ol>
            <li data-md>
-            <p>Let <var>new pathname</var> be the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-indices" id="ref-for-code-point-substring-by-indices①">code point substring</a> from indices 0 to <var>slash index</var> inclusive within <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string⑤">API pathname string</a>.</p>
+            <p>Let <var>new pathname</var> be the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point-substring-by-positions" id="ref-for-code-point-substring-by-positions①">code point substring</a> from 0 to <var>slash index</var> + 1 within <var>baseURL</var>’s <a data-link-type="dfn" href="#url-api-pathname-string" id="ref-for-url-api-pathname-string⑤">API pathname string</a>.</p>
            <li data-md>
             <p>Append <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①①">pathname</a></code>"] to the end of <var>new pathname</var>.</p>
            <li data-md>
@@ -3518,11 +3518,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-code-point-substring①">3.1. Encoding Callbacks</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-code-point-substring-by-indices">
-   <a href="https://infra.spec.whatwg.org/#code-point-substring-by-indices">https://infra.spec.whatwg.org/#code-point-substring-by-indices</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-code-point-substring-by-positions">
+   <a href="https://infra.spec.whatwg.org/#code-point-substring-by-positions">https://infra.spec.whatwg.org/#code-point-substring-by-positions</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-code-point-substring-by-indices">1.2. Constructor String Parsing</a>
-    <li><a href="#ref-for-code-point-substring-by-indices①">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-code-point-substring-by-positions">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-code-point-substring-by-positions①">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-iteration-continue">
@@ -3847,7 +3847,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li><span class="dfn-paneled" id="term-for-code-point">code point</span>
      <li><span class="dfn-paneled" id="term-for-string-code-point-length">code point length</span>
      <li><span class="dfn-paneled" id="term-for-code-point-substring">code point substring</span>
-     <li><span class="dfn-paneled" id="term-for-code-point-substring-by-indices">code point substring by indices</span>
+     <li><span class="dfn-paneled" id="term-for-code-point-substring-by-positions">code point substring by positions</span>
      <li><span class="dfn-paneled" id="term-for-iteration-continue">continue</span>
      <li><span class="dfn-paneled" id="term-for-list-iterate">for each</span>
      <li><span class="dfn-paneled" id="term-for-string-length">length</span>
