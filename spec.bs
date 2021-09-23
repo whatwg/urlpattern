@@ -801,8 +801,8 @@ To run <dfn>make a component string</dfn> given a [=constructor string parser=] 
   1. Let |token| be |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]].
   1. Let |component start token| be the result of running [=get a safe token=] given |parser| and |parser|'s [=constructor string parser/component start=].
   1. Let |component start input index| be |component start token|'s [=token/index=].
-  1. Let |end index| be |token|'s [=token/index=] &minus; 1.
-  1. Return the [=code point substring by indices|code point substring=] from indices |component start input index| to |end index| inclusive within |parser|'s [=constructor string parser/input=].
+  1. Let |end index| be |token|'s [=token/index=].
+  1. Return the [=code point substring by positions|code point substring=] from |component start input index| to |end index| within |parser|'s [=constructor string parser/input=].
 </div>
 
 <div algorithm>
@@ -995,7 +995,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Let |token| be a new [=token=].
   1. Set |token|'s [=token/type=] to |type|.
   1. Set |token|'s [=token/index=] to |tokenizer|'s [=tokenizer/index=].
-  1. Set |token|'s [=token/value=] to the [=code point substring=] from index |value position| with length |value length| within |tokenizer|'s [=tokenizer/input=].
+  1. Set |token|'s [=token/value=] to the [=code point substring=] from |value position| with length |value length| within |tokenizer|'s [=tokenizer/input=].
   1. [=list/Append=] |token| to the back of |tokenizer|'s [=tokenizer/token list=].
   1. Set |tokenizer|'s [=token/index=] to |next position|.
 </div>
@@ -1587,7 +1587,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
       <p>Conditionally stripping the leading slash also works when the algorithm is called by [=process pathname for init=].  If there is no leading slash, then we require a {{URLPatternInit/baseURL}} to be provided which will always result in a leading slash in the resolved pathname.
     </div>
     1. Let |length| be |result|'s [=string/code point length=] &minus; 1.
-    1. Set |result| to the [=code point substring=] from index 1 with length |length| within |result|.
+    1. Set |result| to the [=code point substring=] from 1 with length |length| within |result|.
   1. Return |result|.
 </div>
 
@@ -1666,7 +1666,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
       <p>then:
       1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
       1. If |slash index| is not null:
-        1. Let |new pathname| be the [=code point substring by indices|code point substring=] from indices 0 to |slash index| inclusive within |baseURL|'s [=url/API pathname string=].
+        1. Let |new pathname| be the [=code point substring by positions|code point substring=] from 0 to |slash index| + 1 within |baseURL|'s [=url/API pathname string=].
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
         1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
     1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
