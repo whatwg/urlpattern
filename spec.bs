@@ -21,7 +21,6 @@ Markup Shorthands: markdown yes
 
 <pre class="link-defaults">
 spec:infra; type:dfn; text:list
-spec:url; type:dfn; for:/; text:url
 spec:webidl; type:dfn; text:record
 </pre>
 
@@ -39,8 +38,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: RegExp; url: #sec-regexp-regular-expression-objects
 spec: url; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
-    text: cannot be a base URL flag; url: #url-cannot-be-a-base-url-flag
-    text: cannot be a base URL path state; url: #cannot-be-a-base-url-path-state
     text: default port; url: #default-port
     text: fragment state; url: #fragment-state
     text: hostname state; url: #hostname-state
@@ -285,7 +282,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Else, set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set [=this=]'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. If the result of running [=protocol component matches a special scheme=] given [=this=]'s [=URLPattern/protocol component=] is true, then set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and [=pathname options=].
-  1. Else set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a cannot-be-a-base-URL pathname=], and [=default options=]
+  1. Else set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and [=default options=]
   1. Set [=this=]'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and [=default options=].
   1. Set [=this=]'s [=URLPattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and [=default options=].
 </div>
@@ -411,7 +408,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
     1. Set |password| to |url|'s [=url/password=].
     1. Set |hostname| to |url|'s [=url/host=] or the empty string if the value is null.
     1. Set |port| to |url|'s [=url/port=] or the empty string if the value is null.
-    1. Set |pathname| to |url|'s [=url/API pathname string=].
+    1. Set |pathname| to the result of [=URL path serializing=] |url|.
     1. Set |search| to |url|'s [=url/query=] or the empty string if the value is null.
     1. Set |hash| to |url|'s [=url/fragment=] or the empty string if the value is null.
   1. Let |protocolExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URLPattern/protocol component=]'s [=component/regular expression=], |protocol|).
@@ -591,7 +588,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
             1. Run [=compute protocol matches a special scheme flag=] given |parser|.
-              <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as a "cannot be a base URL" and go straight to the pathname component.
+              <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as "opaque path URL" and go straight to the pathname component.
             1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
@@ -1580,7 +1577,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Let |result| be |dummyURL|'s [=url/API pathname string=].
+  1. Let |result| be the result of [=URL path serializing=] |dummyURL|.
   1. If the first [=/code point=] in |value| is not U+002F (`/`):
     <div class=note>
       <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we strip the leading slash if one was inserted by the URL parser.
@@ -1592,14 +1589,14 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 </div>
 
 <div algorithm>
-  To <dfn>canonicalize a cannot-be-a-base-URL pathname</dfn> given a string |value|:
+  To <dfn>canonicalize an opaque pathname</dfn> given a string |value|:
 
   1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
-  1. Set |dummyURL|'s [=url/path=][0] to empty string.
-  1. Let |parseResult| be the result of running [=basic URL parser|URL parsing=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=cannot be a base URL path state=] as <i>[=basic URL parser/state override=]</i>.
+  1. Set |dummyURL|'s [=url/path=] to the empty string.
+  1. Let |parseResult| be the result of running [=basic URL parser|URL parsing=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=basic URL parser/opaque path state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/API pathname string=].
+  1. Return the result of [=URL path serializing=] |dummyURL|.
 </div>
 
 <div algorithm>
@@ -1647,7 +1644,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     1. Set |result|["{{URLPatternInit/password}}"] to |baseURL|'s [=url/password=].
     1. Set |result|["{{URLPatternInit/hostname}}"] to |baseURL|'s [=url/host=] or the empty string if the value is null.
     1. Set |result|["{{URLPatternInit/port}}"] to |baseURL|'s [=url/port=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/pathname}}"] to |baseURL|'s [=url/API pathname string=].
+    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=URL path serializing=] |baseURL|.
     1. Set |result|["{{URLPatternInit/search}}"] to |baseURL|'s [=url/query=] or the empty string if the value is null.
     1. Set |result|["{{URLPatternInit/hash}}"] to |baseURL|'s [=url/fragment=] or the empty string if the value is null.
   1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
@@ -1660,13 +1657,14 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     1. If the following are all true:
       <ul>
         <li>|baseURL| is not null;</li>
-        <li>|baseURL|'s [=cannot be a base URL flag=] is false; and</li>
+        <li>|baseURL| has an [=url/opaque path=]; and</li>
         <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
       </ul>
       <p>then:
-      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURL|'s [=url/API pathname string=], interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
+      1. Let |baseURLPath| be the result of [=URL path serializing=] |baseURL|.
+      1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURLPath|, interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
       1. If |slash index| is not null:
-        1. Let |new pathname| be the [=code point substring by positions|code point substring=] from 0 to |slash index| + 1 within |baseURL|'s [=url/API pathname string=].
+        1. Let |new pathname| be the [=code point substring by positions|code point substring=] from 0 to |slash index| + 1 within |baseURLPath|.
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
         1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
     1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
@@ -1729,7 +1727,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |type| is "`pattern`" then return |pathnameValue|.
   1. If |protocolValue| is a [=special scheme=] or the empty string, then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
     <p class=note>If the |protocolValue| is the empty string then no value was provided for {{URLPatternInit/protocol}} in the constructor dictionary.  Normally we do not special case empty string dictionary values, but in this case we treat it as a [=special scheme=] in order to default to the most common pathname canonicalization.
-  1. Else return the result of running [=canonicalize a cannot-be-a-base-URL pathname=] given |pathnameValue|.
+  1. Else return the result of running [=canonicalize an opaque pathname=] given |pathnameValue|.
 </div algorithm>
 
 <div algorithm>
@@ -1747,7 +1745,3 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a hash=] given |strippedValue|.
 </div algorithm>
-
-<h2 id=patching>Patching</h2>
-
-This spec depends on factoring out the {{URL/pathname}} getter steps into a new exported algorithm, <dfn for=url>API pathname string</dfn>, that operates on a [=URL record=].
