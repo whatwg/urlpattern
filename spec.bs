@@ -588,7 +588,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
             1. Run [=compute protocol matches a special scheme flag=] given |parser|.
-              <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as "opaque path URL" and go straight to the pathname component.
+              <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as an "opaque path URL" and go straight to the pathname component.
             1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
@@ -1727,7 +1727,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |type| is "`pattern`" then return |pathnameValue|.
   1. If |protocolValue| is a [=special scheme=] or the empty string, then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
     <p class=note>If the |protocolValue| is the empty string then no value was provided for {{URLPatternInit/protocol}} in the constructor dictionary.  Normally we do not special case empty string dictionary values, but in this case we treat it as a [=special scheme=] in order to default to the most common pathname canonicalization.
-  1. Else return the result of running [=canonicalize an opaque pathname=] given |pathnameValue|.
+  1. Return the result of running [=canonicalize an opaque pathname=] given |pathnameValue|.
 </div algorithm>
 
 <div algorithm>
