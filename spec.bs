@@ -1421,7 +1421,10 @@ To <dfn>escape a regexp string</dfn> given a string |input|:
 To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] |part list| and [=/options=] |options|:
 
   1. Let |result| be the empty string.
-  1. [=list/For each=] |part| of |part list|:
+  1. Let |index list| be the result of [=list/getting the indices=] for |part list|.
+  1. [=list/For each=] |index| of |index list|:
+    1. Let |part| be |part list|[|index|].
+    1. Let |last part| be |part list|[|index| - 1] if |index| is greater than 0, otherwise let it be null.
     1. If |part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>" then:
       1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" then:
         1. Append the result of running [=escape a pattern string=] given |part|'s [=part/value=] to the end of |result|.
@@ -1452,7 +1455,12 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Append the result of running [=generate a segment wildcard regexp=] given |options| to the end of |result|.
       1. Append "`)`" to the end of |result|.
     1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>":
-      1. If |custom name| is true:
+      1. If one of the following are true:
+        <ul>
+          <li>|custom name| is true.</li>
+          <li>|last part| is not null, |last part|'s [=part/type=] is not "<a for=part/type>`fixed-text`</a>", and |last part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>".
+        </ul>
+        Then:
         1. Append "`(`" to the end of |result|.
         1. Append [=full wildcard regexp value=] to the end of |result|.
         1. Append "`)`" to the end of |result|.
