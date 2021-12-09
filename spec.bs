@@ -1425,6 +1425,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
   1. [=list/For each=] |index| of |index list|:
     1. Let |part| be |part list|[|index|].
     1. Let |last part| be |part list|[|index| - 1] if |index| is greater than 0, otherwise let it be null.
+    1. Let |next part| be |part list|[|index| + 1] if |index| is less than |index list|'s [=list/size] = 1, otherwise let it be null.
     1. If |part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>" then:
       1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" then:
         1. Append the result of running [=escape a pattern string=] given |part|'s [=part/value=] to the end of |result|.
@@ -1434,13 +1435,14 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Append "`}`" to the end of |result|.
       1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
       1. [=Continue=].
+    1. Let |custom name| be true if |part|'s [=part/name=][0] is not an [=ASCII digit=].
     1. Let |needs grouping| be true if at least one of the following are true, otherwise let it be false:
       <ul>
         <li>|part|'s [=part/suffix=] is not the empty string.</li>
-        <li>|part|'s [=part/prefix=] is not the empty string and is not |options|'s [=options/prefix code point=].
+        <li>|part|'s [=part/prefix=] is not the empty string and is not |options|'s [=options/prefix code point=].</li>
+        <li>|custom name| is true, |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>", |next part| is not null, |next part|'s [=part/type=] is not "<a for=part/type>`fixed-text`</a>", |next part|'s [=part/prefix=] is the empty string, |next part|'s [=part/suffix=] is the empty string, and |next part|'s [=part/name=][0] is an [=ASCII digit=].
       </ul>
     1. [=Assert=]: |part|'s [=part/name=] is not the empty string or null.
-    1. Let |custom name| be true if |part|'s [=part/name=][0] is not an [=ASCII digit=].
     1. If |needs grouping| is true, then append "`{`" to the end of |result|.
     1. Append the result of running [=escape a pattern string=] given |part|'s [=part/prefix=] to the end of |result|.
     1. If |custom name| is true:
