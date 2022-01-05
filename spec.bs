@@ -1425,7 +1425,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
   1. [=list/For each=] |index| of |index list|:
     1. Let |part| be |part list|[|index|].
     1. Let |last part| be |part list|[|index| - 1] if |index| is greater than 0, otherwise let it be null.
-    1. Let |next part| be |part list|[|index| + 1] if |index| is less than |index list|'s [=list/size] = 1, otherwise let it be null.
+    1. Let |next part| be |part list|[|index| + 1] if |index| is less than |index list|'s [=list/size] - 1, otherwise let it be null.
     1. If |part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>" then:
       1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" then:
         1. Append the result of running [=escape a pattern string=] given |part|'s [=part/value=] to the end of |result|.
@@ -1435,7 +1435,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Append "`}`" to the end of |result|.
       1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
       1. [=Continue=].
-    1. Let |custom name| be true if |part|'s [=part/name=][0] is not an [=ASCII digit=].
+    1. Let |custom name| be true if |part|'s [=part/name=][0] is not an [=ASCII digit=]; otherwise false.
     1. Let |needs grouping| be true if at least one of the following are true, otherwise let it be false:
       <ul>
         <li>|part|'s [=part/suffix=] is not the empty string.</li>
