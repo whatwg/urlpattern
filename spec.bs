@@ -1467,6 +1467,14 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
         1. Append [=full wildcard regexp value=] to the end of |result|.
         1. Append "`)`" to the end of |result|.
       1. Else append "`*`" to the end of |result|.
+    1. If all of the following are true:
+      <ul>
+        <li>|part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>"; and</li>
+        <li>|custom name| is true; and</li>
+        <li>|part|'s [=part/suffix=] is not the empty string; and</li>
+        <li>The result of running [=is a valid name code point=] given |part|'s [=part/suffix=]'s first [=/code point=] and the boolean false is true</li>
+      </ul>
+      then append U+005C (<code>\</code>) to the end of |result|.
     1. Append the result of running [=escape a pattern string=] given |part|'s [=part/suffix=] to the end of |result|.
     1. If |needs grouping| is true, then append "`}`" to the end of |result|.
     1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
