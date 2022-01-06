@@ -1453,7 +1453,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       </ul>
       then:
       1. If |next part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>":
-        1. Set |needs grouping| to true if the result of running [=is a valid name code point=] given |next part|'s [=part/value=]'s first [=/code point=] and then boolean false is true.
+        1. Set |needs grouping| to true if the result of running [=is a valid name code point=] given |next part|'s [=part/value=]'s first [=/code point=] and the boolean false is true.
       1. Else:
         1. Set |needs grouping| to true if |next part|'s [=part/name=][0] is an [=ASCII digit=].
     1. [=Assert=]: |part|'s [=part/name=] is not the empty string or null.
