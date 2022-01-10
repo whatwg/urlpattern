@@ -1444,6 +1444,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
     1. If all of the following are true:
       <ul>
         <li>|needs grouping| is false; and</li>
+        <li>|part|'s [=part/prefix=] is the empty string; and</li>
         <li>|custom name| is true; and</li>
         <li>|part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>"; and</li>
         <li>|part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>"; and</li>
@@ -1456,6 +1457,15 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
         1. Set |needs grouping| to true if the result of running [=is a valid name code point=] given |next part|'s [=part/value=]'s first [=/code point=] and the boolean false is true.
       1. Else:
         1. Set |needs grouping| to true if |next part|'s [=part/name=][0] is an [=ASCII digit=].
+    1. If all of the following are true:
+      <ul>
+        <li>|needs grouping| is false; and</li>
+        <li>|part|'s [=part/prefix=] is the empty string; and</li>
+        <li>|previous part| is not null; and</li>
+        <li>|previous part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>"; and</li>
+        <li>|previous part|'s [=part/value=]'s last [=/code point=] is |options|'s [=options/prefix code point=].</li>
+      </ul>
+      then set |needs grouping| to true.
     1. [=Assert=]: |part|'s [=part/name=] is not the empty string or null.
     1. If |needs grouping| is true, then append "`{`" to the end of |result|.
     1. Append the result of running [=escape a pattern string=] given |part|'s [=part/prefix=] to the end of |result|.
@@ -1471,16 +1481,19 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Append the result of running [=generate a segment wildcard regexp=] given |options| to the end of |result|.
       1. Append "`)`" to the end of |result|.
     1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>":
-      1. If one of the following is true:
+      1. If |custom name| is false and one of the following is true:
         <ul>
-          <li>|custom name| is true; or</li>
-          <li>|previous part| is not null, |previous part|'s [=part/type=] is not "<a for=part/type>`fixed-text`</a>", and |previous part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>"
+          <li>|previous part| is null; or</li>
+          <li>|previous part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>"; or</li>
+          <li>|previous part|'s [=part/modifier=] is not "<a for=part/modifier>`none`</a>"; or</li>
+          <li>|needs grouping| is true; or</li>
+          <li>|part|'s [=part/prefix=] is not the empty string</li>
         </ul>
-        then:
+        then append "`*`" to the end of |result|.
+      1. Else:
         1. Append "`(`" to the end of |result|.
         1. Append [=full wildcard regexp value=] to the end of |result|.
         1. Append "`)`" to the end of |result|.
-      1. Else append "`*`" to the end of |result|.
     1. If all of the following are true:
       <ul>
         <li>|part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>"; and</li>
