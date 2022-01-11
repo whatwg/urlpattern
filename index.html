@@ -705,7 +705,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-06">6 January 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-11">11 January 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2886,11 +2886,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>If all of the following are true:</p>
         <ul>
          <li><var>needs grouping</var> is false; and
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①④">prefix</a> is the empty string; and
          <li><var>custom name</var> is true; and
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑧">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard②"><code>segment-wildcard</code></a>"; and
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑧">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑦"><code>none</code></a>"; and
          <li><var>next part</var> is not null; and
-         <li><var>next part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①④">prefix</a> is the empty string; and
+         <li><var>next part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑤">prefix</a> is the empty string; and
          <li><var>next part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①③">suffix</a> is the empty string
         </ul>
          then: 
@@ -2909,11 +2910,21 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           </ol>
         </ol>
        <li data-md>
+        <p>If all of the following are true:</p>
+        <ul>
+         <li><var>needs grouping</var> is false; and
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑥">prefix</a> is the empty string; and
+         <li><var>previous part</var> is not null; and
+         <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①⓪">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑦"><code>fixed-text</code></a>"; and
+         <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑨">value</a>'s last <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code point</a> is <var>options</var>’s <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point⑥">prefix code point</a>.
+        </ul>
+         then set <var>needs grouping</var> to true. 
+       <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert①②">Assert</a>: <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑦">name</a> is not the empty string or null.</p>
        <li data-md>
         <p>If <var>needs grouping</var> is true, then append "<code>{</code>" to the end of <var>result</var>.</p>
        <li data-md>
-        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑤">prefix</a> to the end of <var>result</var>.</p>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑦">prefix</a> to the end of <var>result</var>.</p>
        <li data-md>
         <p>If <var>custom name</var> is true:</p>
         <ol>
@@ -2923,17 +2934,17 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑧">name</a> to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①⓪">type</a> is "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp①"><code>regexp</code></a>" then:</p>
+        <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①①">type</a> is "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp①"><code>regexp</code></a>" then:</p>
         <ol>
          <li data-md>
           <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑨">value</a> to the end of <var>result</var>.</p>
+          <p>Append <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value①⓪">value</a> to the end of <var>result</var>.</p>
          <li data-md>
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①①">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard③"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
+        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①②">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard③"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
         <ol>
          <li data-md>
           <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
@@ -2943,15 +2954,20 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①②">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard②"><code>full-wildcard</code></a>":</p>
+        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①③">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard②"><code>full-wildcard</code></a>":</p>
         <ol>
          <li data-md>
-          <p>If one of the following is true:</p>
+          <p>If <var>custom name</var> is false and one of the following is true:</p>
           <ul>
-           <li><var>custom name</var> is true; or
-           <li><var>previous part</var> is not null, <var>previous part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①③">type</a> is not "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑦"><code>fixed-text</code></a>", and <var>previous part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑨">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑧"><code>none</code></a>" 
+           <li><var>previous part</var> is null; or
+           <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①④">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑧"><code>fixed-text</code></a>"; or
+           <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑨">modifier</a> is not "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑧"><code>none</code></a>"; or
+           <li><var>needs grouping</var> is true; or
+           <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑧">prefix</a> is not the empty string
           </ul>
-           then: 
+           then append "<code>*</code>" to the end of <var>result</var>. 
+         <li data-md>
+          <p>Else:</p>
           <ol>
            <li data-md>
             <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
@@ -2960,16 +2976,14 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
           </ol>
-         <li data-md>
-          <p>Else append "<code>*</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
         <p>If all of the following are true:</p>
         <ul>
-         <li><var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①④">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard④"><code>segment-wildcard</code></a>"; and
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①⑤">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard④"><code>segment-wildcard</code></a>"; and
          <li><var>custom name</var> is true; and
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①④">suffix</a> is not the empty string; and
-         <li>The result of running <a data-link-type="dfn" href="#is-a-valid-name-code-point" id="ref-for-is-a-valid-name-code-point②">is a valid name code point</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①⑤">suffix</a>'s first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code point</a> and the boolean false is true
+         <li>The result of running <a data-link-type="dfn" href="#is-a-valid-name-code-point" id="ref-for-is-a-valid-name-code-point②">is a valid name code point</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①⑤">suffix</a>'s first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point③">code point</a> and the boolean false is true
         </ul>
          then append U+005C (<code>\</code>) to the end of <var>result</var>. 
        <li data-md>
@@ -3098,7 +3112,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate④">For each</a> <var>code point</var> in <var>value</var> interpreted as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list①⓪">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point③">code points</a>:</p>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate④">For each</a> <var>code point</var> in <var>value</var> interpreted as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list①⓪">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point④">code points</a>:</p>
       <ol>
        <li data-md>
         <p>If all of the following are true:</p>
@@ -3148,7 +3162,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>result</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer①">URL path serializing</a> <var>dummyURL</var>.</p>
      <li data-md>
-      <p>If the first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point④">code point</a> in <var>value</var> is not U+002F (<code>/</code>):</p>
+      <p>If the first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point⑤">code point</a> in <var>value</var> is not U+002F (<code>/</code>):</p>
       <div class="note" role="note">
        <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we strip the leading slash if one was inserted by the URL parser. </p>
        <p>Conditionally stripping the leading slash also works when the algorithm is called by <a data-link-type="dfn" href="#process-pathname-for-init" id="ref-for-process-pathname-for-init">process pathname for init</a>.  If there is no leading slash, then we require a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl③">baseURL</a></code> to be provided which will always result in a leading slash in the resolved pathname. </p>
@@ -3289,7 +3303,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>Let <var>baseURLPath</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer④">URL path serializing</a> <var>baseURL</var>.</p>
          <li data-md>
-          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURLPath</var>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point⑤">code points</a>, or null if there are no instances of the code point.</p>
+          <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURLPath</var>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point⑥">code points</a>, or null if there are no instances of the code point.</p>
          <li data-md>
           <p>If <var>slash index</var> is not null:</p>
           <ol>
@@ -3802,9 +3816,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <a href="https://infra.spec.whatwg.org/#code-point">https://infra.spec.whatwg.org/#code-point</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-code-point">1.1. Internals</a>
-    <li><a href="#ref-for-code-point①">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-code-point②">(2)</a>
-    <li><a href="#ref-for-code-point③">3.1. Encoding Callbacks</a> <a href="#ref-for-code-point④">(2)</a>
-    <li><a href="#ref-for-code-point⑤">3.2. URLPatternInit Processing</a>
+    <li><a href="#ref-for-code-point①">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-code-point②">(2)</a> <a href="#ref-for-code-point③">(3)</a>
+    <li><a href="#ref-for-code-point④">3.1. Encoding Callbacks</a> <a href="#ref-for-code-point⑤">(2)</a>
+    <li><a href="#ref-for-code-point⑥">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-code-point-length">
@@ -5193,7 +5207,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-type">2.1.5. Parsing</a> <a href="#ref-for-part-type①">(2)</a> <a href="#ref-for-part-type②">(3)</a> <a href="#ref-for-part-type③">(4)</a>
     <li><a href="#ref-for-part-type④">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-type⑤">(2)</a> <a href="#ref-for-part-type⑥">(3)</a>
-    <li><a href="#ref-for-part-type⑦">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type⑧">(2)</a> <a href="#ref-for-part-type⑨">(3)</a> <a href="#ref-for-part-type①⓪">(4)</a> <a href="#ref-for-part-type①①">(5)</a> <a href="#ref-for-part-type①②">(6)</a> <a href="#ref-for-part-type①③">(7)</a> <a href="#ref-for-part-type①④">(8)</a>
+    <li><a href="#ref-for-part-type⑦">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type⑧">(2)</a> <a href="#ref-for-part-type⑨">(3)</a> <a href="#ref-for-part-type①⓪">(4)</a> <a href="#ref-for-part-type①①">(5)</a> <a href="#ref-for-part-type①②">(6)</a> <a href="#ref-for-part-type①③">(7)</a> <a href="#ref-for-part-type①④">(8)</a> <a href="#ref-for-part-type①⑤">(9)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-type-fixed-text">
@@ -5201,7 +5215,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-type-fixed-text">2.1.5. Parsing</a> <a href="#ref-for-part-type-fixed-text①">(2)</a> <a href="#ref-for-part-type-fixed-text②">(3)</a>
     <li><a href="#ref-for-part-type-fixed-text③">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-type-fixed-text④">(2)</a>
-    <li><a href="#ref-for-part-type-fixed-text⑤">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type-fixed-text⑥">(2)</a> <a href="#ref-for-part-type-fixed-text⑦">(3)</a>
+    <li><a href="#ref-for-part-type-fixed-text⑤">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-type-fixed-text⑥">(2)</a> <a href="#ref-for-part-type-fixed-text⑦">(3)</a> <a href="#ref-for-part-type-fixed-text⑧">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-type-regexp">
@@ -5232,7 +5246,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-value">2.1.5. Parsing</a> <a href="#ref-for-part-value①">(2)</a> <a href="#ref-for-part-value②">(3)</a>
     <li><a href="#ref-for-part-value③">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-value④">(2)</a> <a href="#ref-for-part-value⑤">(3)</a>
-    <li><a href="#ref-for-part-value⑥">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-value⑦">(2)</a> <a href="#ref-for-part-value⑧">(3)</a> <a href="#ref-for-part-value⑨">(4)</a>
+    <li><a href="#ref-for-part-value⑥">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-value⑦">(2)</a> <a href="#ref-for-part-value⑧">(3)</a> <a href="#ref-for-part-value⑨">(4)</a> <a href="#ref-for-part-value①⓪">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-modifier">
@@ -5289,7 +5303,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-prefix">2.1.5. Parsing</a>
     <li><a href="#ref-for-part-prefix①">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-prefix②">(2)</a> <a href="#ref-for-part-prefix③">(3)</a> <a href="#ref-for-part-prefix④">(4)</a> <a href="#ref-for-part-prefix⑤">(5)</a> <a href="#ref-for-part-prefix⑥">(6)</a> <a href="#ref-for-part-prefix⑦">(7)</a> <a href="#ref-for-part-prefix⑧">(8)</a> <a href="#ref-for-part-prefix⑨">(9)</a> <a href="#ref-for-part-prefix①⓪">(10)</a> <a href="#ref-for-part-prefix①①">(11)</a> <a href="#ref-for-part-prefix①②">(12)</a>
-    <li><a href="#ref-for-part-prefix①③">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix①④">(2)</a> <a href="#ref-for-part-prefix①⑤">(3)</a>
+    <li><a href="#ref-for-part-prefix①③">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix①④">(2)</a> <a href="#ref-for-part-prefix①⑤">(3)</a> <a href="#ref-for-part-prefix①⑥">(4)</a> <a href="#ref-for-part-prefix①⑦">(5)</a> <a href="#ref-for-part-prefix①⑧">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-suffix">
@@ -5324,7 +5338,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-options-prefix-code-point">1.1. Internals</a> <a href="#ref-for-options-prefix-code-point①">(2)</a> <a href="#ref-for-options-prefix-code-point②">(3)</a>
     <li><a href="#ref-for-options-prefix-code-point③">2.1.4. Options</a>
     <li><a href="#ref-for-options-prefix-code-point④">2.1.5. Parsing</a>
-    <li><a href="#ref-for-options-prefix-code-point⑤">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-options-prefix-code-point⑤">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-options-prefix-code-point⑥">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="encoding-callback">
