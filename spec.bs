@@ -1618,7 +1618,13 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a pathname</dfn> given a string |value|:
 
-  1. If |value| is the empty string, return |value|.
+  1. If |value| is one of the following:
+    <ul>
+      <li>the empty string; or</li>
+      <li>"`.`"; or</li>
+      <li>"`..`"
+    </ul>
+    then return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
