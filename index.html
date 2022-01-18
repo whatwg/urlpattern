@@ -4,7 +4,7 @@
   <title>URLPattern API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version cace53f8c, updated Tue Dec 7 12:12:54 2021 -0800" name="generator">
+  <meta content="Bikeshed version 2e3c4c68b, updated Fri Jan 14 14:49:00 2022 -0800" name="generator">
   <link href="https://wicg.github.io/urlpattern/" rel="canonical">
 <style>
 .selected-text-file-an-issue {
@@ -705,7 +705,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-11">11 January 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-18">18 January 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -3152,7 +3152,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="canonicalize-a-pathname">canonicalize a pathname</dfn> given a string <var>value</var>: 
     <ol>
      <li data-md>
-      <p>If <var>value</var> is the empty string, return <var>value</var>.</p>
+      <p>If <var>value</var> is one of the following:</p>
+      <ul>
+       <li>the empty string; or
+       <li>"<code>.</code>"; or
+       <li>"<code>..</code>" 
+      </ul>
+       then return <var>value</var>. 
      <li data-md>
       <p>Let <var>dummyURL</var> be a new <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url⑥">URL record</a>.</p>
      <li data-md>
