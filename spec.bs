@@ -1618,24 +1618,19 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a pathname</dfn> given a string |value|:
 
-  1. If |value| is one of the following:
-    <ul>
-      <li>the empty string; or</li>
-      <li>"`.`"; or</li>
-      <li>"`..`"
-    </ul>
-    then return |value|.
+  1. If |value| is the empty string, then return |value|.
+  1. Let |leading slash| be true if the first [=/code point=] in |value| is U+002F (`/`) and otherwise false.
+  1. Let |modified value| be "`/-`" if |leading slash| is false and otherwise the empty string.
+    <div class=note>
+      <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we disable the prepending of the slash by inserting our own. An additional character is also inserted here in order to avoid inadvertantly collapsing a leading dot due to the fake leading slash being interpreted as a "`/.`" sequence.  These inserted characters are then removed from the result below.
+      <p>Note, implementations are free to simply disable slash prepending in their URL parsing code instead of paying the performance penalty of inserting and removing characters in this algorithm.
+    </div>
+  1. Append |value| to the end of |modified value|.
   1. Let |dummyURL| be a new [=URL record=].
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |modified value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
   1. Let |result| be the result of [=URL path serializing=] |dummyURL|.
-  1. If the first [=/code point=] in |value| is not U+002F (`/`):
-    <div class=note>
-      <p>The URL parser will automatically prepend a leading slash to the canonicalized pathname.  This does not work here unfortunately.  This algorithm is called for pieces of the pathname, instead of the entire pathname, when used as an encoding callback.  Therefore we strip the leading slash if one was inserted by the URL parser.
-      <p>Conditionally stripping the leading slash also works when the algorithm is called by [=process pathname for init=].  If there is no leading slash, then we require a {{URLPatternInit/baseURL}} to be provided which will always result in a leading slash in the resolved pathname.
-    </div>
-    1. Let |length| be |result|'s [=string/code point length=] &minus; 1.
-    1. Set |result| to the [=code point substring=] from 1 with length |length| within |result|.
+  1. If |leading slash| is false, then set |result| to the [=code point substring to the end of the string|code point substring=] from 2 to the end of the string within |result|.
   1. Return |result|.
 </div>
 
