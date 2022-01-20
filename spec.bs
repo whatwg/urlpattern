@@ -1444,7 +1444,6 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
     1. If all of the following are true:
       <ul>
         <li>|needs grouping| is false; and</li>
-        <li>|part|'s [=part/prefix=] is the empty string; and</li>
         <li>|custom name| is true; and</li>
         <li>|part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>"; and</li>
         <li>|part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>"; and</li>
