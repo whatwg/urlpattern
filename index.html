@@ -705,7 +705,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-19">19 January 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-01-24">24 January 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2886,12 +2886,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>If all of the following are true:</p>
         <ul>
          <li><var>needs grouping</var> is false; and
-         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①④">prefix</a> is the empty string; and
          <li><var>custom name</var> is true; and
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑧">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard②"><code>segment-wildcard</code></a>"; and
          <li><var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑧">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑦"><code>none</code></a>"; and
          <li><var>next part</var> is not null; and
-         <li><var>next part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑤">prefix</a> is the empty string; and
+         <li><var>next part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①④">prefix</a> is the empty string; and
          <li><var>next part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①③">suffix</a> is the empty string
         </ul>
          then: 
@@ -2913,7 +2912,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>If all of the following are true:</p>
         <ul>
          <li><var>needs grouping</var> is false; and
-         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑥">prefix</a> is the empty string; and
+         <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑤">prefix</a> is the empty string; and
          <li><var>previous part</var> is not null; and
          <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①⓪">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑦"><code>fixed-text</code></a>"; and
          <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑨">value</a>'s last <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point②">code point</a> is <var>options</var>’s <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point⑥">prefix code point</a>.
@@ -2924,7 +2923,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If <var>needs grouping</var> is true, then append "<code>{</code>" to the end of <var>result</var>.</p>
        <li data-md>
-        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑦">prefix</a> to the end of <var>result</var>.</p>
+        <p>Append the result of running <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string②">escape a pattern string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑥">prefix</a> to the end of <var>result</var>.</p>
        <li data-md>
         <p>If <var>custom name</var> is true:</p>
         <ol>
@@ -2963,7 +2962,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①④">type</a> is "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text⑧"><code>fixed-text</code></a>"; or
            <li><var>previous part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⑨">modifier</a> is not "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none⑧"><code>none</code></a>"; or
            <li><var>needs grouping</var> is true; or
-           <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑧">prefix</a> is not the empty string
+           <li><var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①⑦">prefix</a> is not the empty string
           </ul>
            then append "<code>*</code>" to the end of <var>result</var>. 
          <li data-md>
@@ -5307,7 +5306,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-part-prefix">2.1.5. Parsing</a>
     <li><a href="#ref-for-part-prefix①">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-part-prefix②">(2)</a> <a href="#ref-for-part-prefix③">(3)</a> <a href="#ref-for-part-prefix④">(4)</a> <a href="#ref-for-part-prefix⑤">(5)</a> <a href="#ref-for-part-prefix⑥">(6)</a> <a href="#ref-for-part-prefix⑦">(7)</a> <a href="#ref-for-part-prefix⑧">(8)</a> <a href="#ref-for-part-prefix⑨">(9)</a> <a href="#ref-for-part-prefix①⓪">(10)</a> <a href="#ref-for-part-prefix①①">(11)</a> <a href="#ref-for-part-prefix①②">(12)</a>
-    <li><a href="#ref-for-part-prefix①③">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix①④">(2)</a> <a href="#ref-for-part-prefix①⑤">(3)</a> <a href="#ref-for-part-prefix①⑥">(4)</a> <a href="#ref-for-part-prefix①⑦">(5)</a> <a href="#ref-for-part-prefix①⑧">(6)</a>
+    <li><a href="#ref-for-part-prefix①③">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-part-prefix①④">(2)</a> <a href="#ref-for-part-prefix①⑤">(3)</a> <a href="#ref-for-part-prefix①⑥">(4)</a> <a href="#ref-for-part-prefix①⑦">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-suffix">
