@@ -163,7 +163,7 @@ dictionary URLPatternResult {
 
 dictionary URLPatternComponentResult {
   USVString input;
-  record<USVString, USVString> groups;
+  record<USVString, (USVString or undefined)> groups;
 };
 </xmp>
 
@@ -438,7 +438,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
 
   1. Let |result| be a new {{URLPatternComponentResult}}.
   1. Set |result|["{{URLPatternComponentResult/input}}"] to |input|.
-  1. Let |groups| be a <code>[=record=]<{{USVString}}, {{USVString}}></code>.
+  1. Let |groups| be a <code>[=record=]<{{USVString}}, ({{USVString}} or {{undefined}})></code>.
   1. Let |index| be 1.
   1. While |index| is less than [$Get$](|execResult|, "`length`"):
     1. Let |name| be |component|'s [=component/group name list=][|index| &minus; 1].
