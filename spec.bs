@@ -831,9 +831,9 @@ Note: The {{URLPatternList}} is a utility that combines many patterns into one
 matcher. This functionality can also be achieved in a naive userland
 implementation that iterates over a list of patterns and matches each one
 individually. This has the unfortunate effect of not being very fast. With the
-built-in {{URLPatternList}} implementers can use a radix tree for matching under
-the hood which can drastically improve performance over the naive userland
-implementation.
+built-in {{URLPatternList}} implementers can use an optimized implementation for
+matching under the hood which can drastically improve performance over the naive
+userland implementation.
 
 Each {{URLPatternList}} has an associated <dfn for=URLPatternList>pattern list</dfn>, a [=list=] of {{URLPattern}}s.
 
