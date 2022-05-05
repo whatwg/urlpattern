@@ -815,21 +815,15 @@ To <dfn>compute protocol matches a special scheme flag</dfn> given a [=construct
 <xmp class="idl">
 [Exposed=(Window,Worker)]
 interface URLPatternList {
-  constructor(sequence<URLPatternListEntry> entries);
+  constructor(sequence<URLPattern> patterns);
 
-  USVString? test(optional URLPatternInput input = {}, optional USVString baseURL);
+  boolean test(optional URLPatternInput input = {}, optional USVString baseURL);
 
   URLPatternListResult? exec(optional URLPatternInput input = {}, optional USVString baseURL);
 };
 
-dictionary URLPatternListEntry {
-  required (USVString or URLPattern) pattern;
-  required USVString key;
-};
-
-dictionary URLPatternListResult {
-  URLPatternResult match;
-  USVString key;
+dictionary URLPatternListResult : URLPatternResult {
+  URLPattern pattern;
 };
 </xmp>
 
@@ -843,17 +837,12 @@ implementation.
 
 Each {{URLPatternList}} has an associated <dfn for=URLPatternList>pattern list</dfn>, a [=list=] of {{URLPattern}}s.
 
-Each {{URLPatternList}} has an associated <dfn for=URLPatternList>key list</dfn>, a [=list=] of [=string=]s.
-
 <div algorithm>
-  The <dfn constructor for=URLPatternList lt="URLPatternList(entries)">new URLPattern(|entries|)</dfn> constructor steps are:
+  The <dfn constructor for=URLPatternList lt="URLPatternList(patterns)">new URLPatternList(|patterns|)</dfn> constructor steps are:
 
-  1. [=list/For each=] |entry| in |entries|, run the following steps:
-    1. [=list/Append=] the |entry|'s {{URLPatternListEntry/pattern}} to [=this=]'s [=URLPatternList/pattern list=].
-    1. Let |key| be |entry|'s {{URLPatternListEntry/key}}.
-    1. If |key| is the empty string, throw a {{TypeError}}.
-    1. If [=this=]'s [=URLPatternList/key list=] [=list/contains=] |key|, throw a {{TypeError}}.
-    1. [=list/Append=] |key| to [=this=]'s [=URLPatternList/key list=].
+  1. [=list/For each=] |pattern| in |patterns|, run the following steps:
+    1. If [=this=]'s [=URLPatternList/pattern list=] [=list/contains=] |pattern|, throw a {{TypeError}}.
+    1. [=list/Append=] the |pattern| to [=this=]'s [=URLPatternList/pattern list=].
   1. If [=this=]'s [=URLPatternList/pattern list=] is empty, throw a {{TypeError}}.
 
   Issue: The patterns need to be in a "least -> most significant" sort order so
@@ -865,24 +854,20 @@ Each {{URLPatternList}} has an associated <dfn for=URLPatternList>key list</dfn>
 <div>
   The <dfn method for=URLPatternList>test(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |i| be 0.
   1. [=list/For each=] |pattern| in [=this=]'s [=URLPatternList/pattern list=], run the following steps:
     1. Let |result| be the result of [=match=] given |pattern|, |input|, and |baseURL| if given.
     1. If |result| is null, [=continue=].
-    1. Return [=this=]'s [=URLPatternList/key list=][|i|].
-  1. Return null.
+    1. Return true.
+  1. Return false.
 </div>
 
 <div>
   The <dfn method for=URLPatternList>match(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |i| be 0.
   1. [=list/For each=] |pattern| in [=this=]'s [=URLPatternList/pattern list=], run the following steps:
-    1. Let |match| be the result of [=match=] given |pattern|, |input|, and |baseURL| if given.
-    1. If |match| is null, [=continue=].
-    1. Let |result| be a new {{URLPatternListResult}} dictionary.
-    1. Set |result|'s {{URLPatternListResult/match}} to |match|.
-    1. Set |result|'s {{URLPatternListResult/key}} to [=this=]'s [=URLPatternList/key list=][|i|].
+    1. Let |result| be the result of [=match=] given |pattern|, |input|, and |baseURL| if given.
+    1. If |result| is null, [=continue=].
+    1. Set |result|'s {{URLPatternListResult/pattern}} to |pattern|.
     1. Return |result|.
   1. Return null.
 </div>
