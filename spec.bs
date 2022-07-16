@@ -120,7 +120,7 @@ typedef (USVString or URLPatternInit) URLPatternInput;
 
 [Exposed=(Window,Worker)]
 interface URLPattern {
-  constructor(optional URLPatternInput input = {}, optional USVString baseURL, optional URLPatternOptions options = {});
+  constructor(optional URLPatternInput input = {}, optional USVString baseURL, optional URLPatternOptions options = { ignoreCase: false });
 
   boolean test(optional URLPatternInput input = {}, optional USVString baseURL);
 
@@ -289,9 +289,6 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
     1. [=Assert=]: |input| is a {{URLPatternInit}}.
     1. If |baseURL| is given, then throw a {{TypeError}}.
     1. Set |init| to |input|.
-  1. Let |ignoreCase| be false.
-  1. If |options| has a boolean {{URLPatternOptions/ignoreCase}} property then:
-    1. Set |ignoreCase| to |options|["{{URLPatternOptions/ignoreCase}}"].
   1. Let |processedInit| be the result of [=process a URLPatternInit=] given |init|, "`pattern`", null, null, null, null, null, null, null, and null.
   1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is its corresponding [=default port=], then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
   1. Set [=this=]'s [=URLPattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
@@ -300,9 +297,9 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
   1. Else, set [=this=]'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set [=this=]'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
-  1. Let |compileOptions| be the [=default options=] with the ignoreCase property set to |ignoreCase|.
+  1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
   1. If the result of running [=protocol component matches a special scheme=] given [=this=]'s [=URLPattern/protocol component=] is true, then:
-    1. Let |pathCompileOptions| be the [=pathname options=] with the ignoreCase property set to |ignoreCase|.
+    1. Let |pathCompileOptions| be copy of the [=pathname options=] with the the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
     1. Set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
   1. Else set [=this=]'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
   1. Set [=this=]'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
@@ -388,7 +385,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |flags| be an empty string.
-  1. If |options|["ignoreCase"] is true then set |flags| to "`ui`".
+  1. If |options|'s [=options/ignore case=] is true then set |flags| to "`ui`".
   1. Else set |flags| to "`u`"
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
     <p class="note allow-2119">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
@@ -1099,11 +1096,13 @@ A [=part=] has an associated <dfn for=part>suffix</dfn>, a string, initially the
 
 <h4 id=options-header>Options</h4>
 
-An <dfn>options</dfn> [=struct=] contains different settings that control how [=/pattern string=] behaves.  These options originally come from [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like [path-to-regexp](https://github.com/pillarjs/path-to-regexp) where `ignoreCase` (the original [path-to-regexp](https://github.com/pillarjs/path-to-regexp) options is `sensitive` that is synonymous to negated `ignoreCase`), `strict`, `start`, and `end`.  All the aforementioned properties are always set to true except `ignoreCase` which is set to false.
+An <dfn>options</dfn> [=struct=] contains different settings that control how [=/pattern string=] behaves.  These options originally come from [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like [path-to-regexp](https://github.com/pillarjs/path-to-regexp) where `strict`, `start`, and `end` are always set to false.
 
 An [=/options=] has an associated <dfn for=options>delimiter code point</dfn>, a string, which must be set upon creation.  It must contain one [=ASCII code point=] or the empty string.  This code point is treated as a segment separator and is used for determining how far a `:foo` named group should match by default.  For example, if the [=options/delimiter code point=] is "`/`" then "`/:foo`" will match "`/bar`", but not "`/bar/baz`".  If the [=options/delimiter code point=] is the empty string then the example pattern would match both strings.
 
 An [=/options=] has an associated <dfn for=options>prefix code point</dfn>, a string, which must be set upon creation.  It must contain one [=ASCII code point=] or the empty string.  The code point is treated as an automatic prefix if found immediately preceding a match group.  This matters when a match group is modified to be optional or repeating.  For example, if [=options/prefix code point=] is "`/`" then "`/foo/:bar?/baz`" will treat the "`/`" before "`:bar`" as a prefix that becomes optional along with the named group.  So in this example the pattern would match "`/foo/baz`".
+
+An [=/options=] has an associated <dfn for=options>ignore case</dfn>, a boolean, which must be set up upon creation.  It defaults to false.  Depending on the set value, true or false, this flag enables case-sensitive or case-insensitive matches, respectively.  For the purpose of comparison, this case be thought of as the negated `sensitive` option in [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
 
 <h4 id=parsing>Parsing</h4>
 
