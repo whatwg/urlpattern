@@ -121,6 +121,7 @@ typedef (USVString or URLPatternInit) URLPatternInput;
 [Exposed=(Window,Worker)]
 interface URLPattern {
   constructor(optional URLPatternInput input = {}, optional USVString baseURL, optional URLPatternOptions options = {});
+  constructor(URLPatternInput input, URLPatternOptions options);
 
   boolean test(optional URLPatternInput input = {}, optional USVString baseURL);
 
