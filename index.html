@@ -4,7 +4,7 @@
   <title>URLPattern API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version fb1e763a4, updated Tue Mar 1 13:13:50 2022 -0800" name="generator">
+  <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
   <link href="https://wicg.github.io/urlpattern/" rel="canonical">
 <style>
 .selected-text-file-an-issue {
@@ -705,7 +705,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-04-18">18 April 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-09-22">22 September 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -795,11 +795,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -807,7 +807,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="urlpattern"><code><c- g>URLPattern</c-></code></dfn> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/URLPattern(input, baseURL), URLPattern/constructor(input, baseURL), URLPattern/URLPattern(input), URLPattern/constructor(input), URLPattern/URLPattern(), URLPattern/constructor()" data-dfn-type="argument" data-export id="dom-urlpattern-urlpattern-input-baseurl-input"><code><c- g>input</c-></code><a class="self-link" href="#dom-urlpattern-urlpattern-input-baseurl-input"></a></dfn> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/URLPattern(input, baseURL), URLPattern/constructor(input, baseURL), URLPattern/URLPattern(input), URLPattern/constructor(input), URLPattern/URLPattern(), URLPattern/constructor()" data-dfn-type="argument" data-export id="dom-urlpattern-urlpattern-input-baseurl-baseurl"><code><c- g>baseURL</c-></code><a class="self-link" href="#dom-urlpattern-urlpattern-input-baseurl-baseurl"></a></dfn>);
+  <a class="idl-code" data-link-type="constructor" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/URLPattern(input, baseURL, options), URLPattern/constructor(input, baseURL, options), URLPattern/URLPattern(input, baseURL), URLPattern/constructor(input, baseURL), URLPattern/URLPattern(input), URLPattern/constructor(input), URLPattern/URLPattern(), URLPattern/constructor()" data-dfn-type="argument" data-export id="dom-urlpattern-urlpattern-input-baseurl-options-input"><code><c- g>input</c-></code><a class="self-link" href="#dom-urlpattern-urlpattern-input-baseurl-options-input"></a></dfn> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/URLPattern(input, baseURL, options), URLPattern/constructor(input, baseURL, options), URLPattern/URLPattern(input, baseURL), URLPattern/constructor(input, baseURL), URLPattern/URLPattern(input), URLPattern/constructor(input), URLPattern/URLPattern(), URLPattern/constructor()" data-dfn-type="argument" data-export id="dom-urlpattern-urlpattern-input-baseurl-options-baseurl"><code><c- g>baseURL</c-></code><a class="self-link" href="#dom-urlpattern-urlpattern-input-baseurl-options-baseurl"></a></dfn>, <c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-urlpatternoptions" id="ref-for-dictdef-urlpatternoptions"><c- n>URLPatternOptions</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/URLPattern(input, baseURL, options), URLPattern/constructor(input, baseURL, options), URLPattern/URLPattern(input, baseURL), URLPattern/constructor(input, baseURL), URLPattern/URLPattern(input), URLPattern/constructor(input), URLPattern/URLPattern(), URLPattern/constructor()" data-dfn-type="argument" data-export id="dom-urlpattern-urlpattern-input-baseurl-options-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-urlpattern-urlpattern-input-baseurl-options-options"></a></dfn> = {});
 
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a> <a class="idl-code" data-link-type="method" href="#dom-urlpattern-test" id="ref-for-dom-urlpattern-test"><c- g>test</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput①"><c- n>URLPatternInput</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/test(input, baseURL), URLPattern/test(input), URLPattern/test()" data-dfn-type="argument" data-export id="dom-urlpattern-test-input-baseurl-input"><code><c- g>input</c-></code><a class="self-link" href="#dom-urlpattern-test-input-baseurl-input"></a></dfn> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="URLPattern/test(input, baseURL), URLPattern/test(input), URLPattern/test()" data-dfn-type="argument" data-export id="dom-urlpattern-test-input-baseurl-baseurl"><code><c- g>baseURL</c-></code><a class="self-link" href="#dom-urlpattern-test-input-baseurl-baseurl"></a></dfn>);
 
@@ -833,6 +833,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①⑧"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="URLPatternInit" data-dfn-type="dict-member" data-export data-type="USVString " id="dom-urlpatterninit-search"><code><c- g>search</c-></code></dfn>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①⑨"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="URLPatternInit" data-dfn-type="dict-member" data-export data-type="USVString " id="dom-urlpatterninit-hash"><code><c- g>hash</c-></code></dfn>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②⓪"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="URLPatternInit" data-dfn-type="dict-member" data-export data-type="USVString " id="dom-urlpatterninit-baseurl"><code><c- g>baseURL</c-></code></dfn>;
+};
+
+<c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-urlpatternoptions"><code><c- g>URLPatternOptions</c-></code></dfn> {
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean①"><c- b>boolean</c-></a> <dfn class="dfn-paneled idl-code" data-default="false" data-dfn-for="URLPatternOptions" data-dfn-type="dict-member" data-export data-type="boolean " id="dom-urlpatternoptions-ignorecase"><code><c- g>ignoreCase</c-></code></dfn> = <c- b>false</c->;
 };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-urlpatternresult"><code><c- g>URLPatternResult</c-></code></dfn> {
@@ -866,6 +870,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <dd> Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern⑨">URLPattern</a></code> object.  The <var>input</var> is an object containing separate patterns for each URL component; e.g. hostname, pathname, etc.  Missing components will default to a wildcard pattern.  In addition, <var>input</var> can contain a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl">baseURL</a></code> property that provides static text patterns for any missing components. 
     <dt><code><var>urlPattern</var> = new <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern②">URLPattern</a></code>(<var>patternString</var>, <var>baseURL</var>)</code>
     <dd> Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①⓪">URLPattern</a></code> object. <var>patternString</var> is a URL string containing pattern syntax for one or more components.  If <var>baseURL</var> is provided, then <var>patternString</var> can be relative.  This constructor will always set at least an empty string value and does not default any components to wildcard patterns. 
+    <dt><code><var>urlPattern</var> = new <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern③">URLPattern</a></code>(<var>input</var>, <var>options</var>)</code>
+    <dd>
+      Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①①">URLPattern</a></code> object.  The <var>options</var> is an object containing the additional configuration options that can affect how the components are matched.  Currently it has only one property <code class="idl"><a data-link-type="idl" href="#dom-urlpatternoptions-ignorecase" id="ref-for-dom-urlpatternoptions-ignorecase">ignoreCase</a></code> which can be set to true to enable case-insensitive matching. 
+     <p>Note that by default, that is in the absence of the <var>options</var> argument, matching is always case-sensitive.</p>
+    <dt><code><var>urlPattern</var> = new <code class="idl"><a data-link-type="idl" href="#dom-urlpattern-urlpattern" id="ref-for-dom-urlpattern-urlpattern④">URLPattern</a></code>(<var>patternString</var>, <var>baseURL</var>, <var>options</var>)</code>
+    <dd> Constructs a new <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①②">URLPattern</a></code> object.  This overrides supports a <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatternoptions" id="ref-for-dictdef-urlpatternoptions①">URLPatternOptions</a></code> object when constructing a pattern from a <var>patternString</var> object, describing the patterns for individual components, and base URL. 
     <dt><code><var>matches</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-test" id="ref-for-dom-urlpattern-test①">test</a></code>(<var>input</var>)</code>
     <dd> Tests if <var>urlPattern</var> matches the given arguments.  The <var>input</var> is an object containing strings representing each URL component; e.g. hostname, pathname, etc.  Missing components are treated as empty strings.  In addition, <var>input</var> can contain a <code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl①">baseURL</a></code> property that provides values for any missing components.  If <var>urlPattern</var> matches the <var>input</var> on a component-by-component basis then true is returned.  Otherwise, false is returned. 
     <dt><code><var>matches</var> = <var>urlPattern</var>.<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-test" id="ref-for-dom-urlpattern-test②">test</a></code>(<var>url</var>, <var>baseURL</var>)</code>
@@ -913,16 +923,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
-   <div class="algorithm" data-algorithm="URLPattern(input, baseURL)" data-algorithm-for="URLPattern">
-     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="constructor" data-export data-lt="URLPattern(input, baseURL)|constructor(input, baseURL)|URLPattern(input)|constructor(input)|URLPattern()|constructor()" id="dom-urlpattern-urlpattern"><code>new URLPattern(<var>input</var>, <var>baseURL</var>)</code></dfn> constructor steps are: 
+   <div class="algorithm" data-algorithm="URLPattern(input, baseURL, options)" data-algorithm-for="URLPattern">
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="URLPattern" data-dfn-type="constructor" data-export data-lt="URLPattern(input, baseURL, options)|constructor(input, baseURL, options)|URLPattern(input, baseURL)|constructor(input, baseURL)|URLPattern(input)|constructor(input)|URLPattern()|constructor()" id="dom-urlpattern-urlpattern"><code>new URLPattern(<var>input</var>, <var>baseURL</var>, <var>options</var>)</code></dfn> constructor steps are: 
     <ol>
      <li data-md>
       <p>Let <var>init</var> be null.</p>
@@ -963,28 +973,36 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑤">this</a>'s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port②">port</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-port" id="ref-for-canonicalize-a-port">canonicalize a port</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options③">default options</a>.</p>
      <li data-md>
-      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <a data-link-type="dfn" href="#pathname-options" id="ref-for-pathname-options">pathname options</a>.</p>
+      <p>Let <var>compileOptions</var> be a copy of the <a data-link-type="dfn" href="#default-options" id="ref-for-default-options④">default options</a> with the <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case">ignore case</a> property set to <var>options</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternoptions-ignorecase" id="ref-for-dom-urlpatternoptions-ignorecase①">ignoreCase</a></code>"].</p>
      <li data-md>
-      <p>Else set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑧">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-opaque-pathname" id="ref-for-canonicalize-an-opaque-pathname">canonicalize an opaque pathname</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options④">default options</a></p>
+      <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme">protocol component matches a special scheme</a> given <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑥">this</a>'s <a data-link-type="dfn" href="#urlpattern-protocol-component" id="ref-for-urlpattern-protocol-component①">protocol component</a> is true, then:</p>
+      <ol>
+       <li data-md>
+        <p>Let <var>pathCompileOptions</var> be copy of the <a data-link-type="dfn" href="#pathname-options" id="ref-for-pathname-options">pathname options</a> with the the <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case①">ignore case</a> property set to <var>options</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatternoptions-ignorecase" id="ref-for-dom-urlpatternoptions-ignorecase②">ignoreCase</a></code>"].</p>
+       <li data-md>
+        <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑦">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <var>pathCompileOptions</var>.</p>
+      </ol>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑨">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑧">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search">search</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-search" id="ref-for-canonicalize-a-search">canonicalize a search</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑤">default options</a>.</p>
+      <p>Else set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑧">this</a>'s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-opaque-pathname" id="ref-for-canonicalize-an-opaque-pathname">canonicalize an opaque pathname</a>, and <var>compileOptions</var>.</p>
      <li data-md>
-      <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①⓪">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component">hash component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash">hash</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hash" id="ref-for-canonicalize-a-hash">canonicalize a hash</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑥">default options</a>.</p>
+      <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑨">this</a>'s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑧">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search">search</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-search" id="ref-for-canonicalize-a-search">canonicalize a search</a>, and <var>compileOptions</var>.</p>
+     <li data-md>
+      <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①⓪">this</a>'s <a data-link-type="dfn" href="#urlpattern-hash-component" id="ref-for-urlpattern-hash-component">hash component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑨">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash">hash</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hash" id="ref-for-canonicalize-a-hash">canonicalize a hash</a>, and <var>compileOptions</var>.</p>
     </ol>
    </div>
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/protocol" title="The protocol property of the URLPattern interface is a USVString containing the pattern used to match the protocol part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/protocol</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/protocol" title="The protocol property of the URLPattern interface is a string containing the pattern used to match the protocol part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/protocol</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -998,16 +1016,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/username" title="The username property of the URLPattern interface is a USVString containing the pattern used to match the username part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/username</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/username" title="The username property of the URLPattern interface is a string containing the pattern used to match the username part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/username</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1021,16 +1039,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/password" title="The password property of the URLPattern interface is a USVString containing the pattern used to match the password part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/password</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/password" title="The password property of the URLPattern interface is a string containing the pattern used to match the password part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/password</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1044,16 +1062,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/hostname" title="The hostname property of the URLPattern interface is a USVString containing the pattern used to match the hostname part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/hostname</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/hostname" title="The hostname property of the URLPattern interface is a string containing the pattern used to match the hostname part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/hostname</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1067,16 +1085,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/port" title="The port property of the URLPattern interface is a USVString containing the pattern used to match the port part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/port</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/port" title="The port property of the URLPattern interface is a string containing the pattern used to match the port part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/port</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1090,16 +1108,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/pathname" title="The pathname property of the URLPattern interface is a USVString containing the pattern used to match the pathname part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/pathname</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/pathname" title="The pathname property of the URLPattern interface is a string containing the pattern used to match the pathname part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/pathname</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1113,16 +1131,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/search" title="The search property of the URLPattern interface is a USVString containing the pattern used to match the search part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/search</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/search" title="The search property of the URLPattern interface is a string containing the pattern used to match the search part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/search</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1136,16 +1154,16 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <div class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
-     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/hash" title="The hash property of the URLPattern interface is a USVString containing the pattern used to match the fragment part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/hash</a></p>
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/hash" title="The hash property of the URLPattern interface is a string containing the pattern used to match the fragment part of a URL. This value may differ from the input to the constructor due to normalization.">URLPattern/hash</a></p>
      <p class="less-than-two-engines-text">In only one current engine.</p>
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1164,11 +1182,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1191,11 +1209,11 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>95+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>81+</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>95+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>95+</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>67+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1207,7 +1225,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <h3 class="heading settled" data-level="1.1" id="urlpattern-internals"><span class="secno">1.1. </span><span class="content">Internals</span><a class="self-link" href="#urlpattern-internals"></a></h3>
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①①">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct">structs</a>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①③">URLPattern</a></code> is associated with multiple <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="component">component</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct">structs</a>.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑧">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-pattern-string">pattern string</dfn>, a <a data-link-type="dfn" href="#pattern-string-well-formed" id="ref-for-pattern-string-well-formed">well formed</a> <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string">pattern string</a>, which must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component⑨">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-regular-expression">regular expression</dfn>, a <code class="idl"><a data-link-type="idl" href="https://tc39.es/ecma262/#sec-regexp-regular-expression-objects" id="ref-for-sec-regexp-regular-expression-objects">RegExp</a></code>, which must be set upon creation.</p>
    <p>A <a data-link-type="dfn" href="#component" id="ref-for-component①⓪">component</a> has an associated <dfn class="dfn-paneled" data-dfn-for="component" data-dfn-type="dfn" data-noexport id="component-group-name-list">group name list</dfn>, a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list">list</a> of strings, which must be set upon creation.</p>
@@ -1221,7 +1239,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let (<var>regular expression string</var>, <var>name list</var>) be the result of running <a data-link-type="dfn" href="#generate-a-regular-expression-and-name-list" id="ref-for-generate-a-regular-expression-and-name-list">generate a regular expression and name list</a> given <var>part list</var> and <var>options</var>.</p>
      <li data-md>
-      <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, "<code>u</code>").  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
+      <p>Let <var>flags</var> be an empty string.</p>
+     <li data-md>
+      <p>If <var>options</var>’s <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case②">ignore case</a> is true then set <var>flags</var> to "<code>ui</code>".</p>
+     <li data-md>
+      <p>Else set <var>flags</var> to "<code>u</code>"</p>
+     <li data-md>
+      <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, <var>flags</var>).  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
       <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
      <li data-md>
       <p>Let <var>pattern string</var> be the result of running <a data-link-type="dfn" href="#generate-a-pattern-string" id="ref-for-generate-a-pattern-string">generate a pattern string</a> given <var>part list</var> and <var>options</var>.</p>
@@ -1230,7 +1254,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     </ol>
    </div>
    <div class="algorithm" data-algorithm="match">
-     To perform a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="match">match</dfn> given a <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①②">URLPattern</a></code> <var>urlpattern</var>, a <code class="idl"><a data-link-type="idl" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput④">URLPatternInput</a></code> <var>input</var>, and an optional string <var>baseURLString</var>: 
+     To perform a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="match">match</dfn> given a <code class="idl"><a data-link-type="idl" href="#urlpattern" id="ref-for-urlpattern①④">URLPattern</a></code> <var>urlpattern</var>, a <code class="idl"><a data-link-type="idl" href="#typedefdef-urlpatterninput" id="ref-for-typedefdef-urlpatterninput④">URLPatternInput</a></code> <var>input</var>, and an optional string <var>baseURLString</var>: 
     <ol>
      <li data-md>
       <p>Let <var>protocol</var> be the empty string.</p>
@@ -1893,7 +1917,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>protocol string</var> be the result of running <a data-link-type="dfn" href="#make-a-component-string" id="ref-for-make-a-component-string①">make a component string</a> given <var>parser</var>.</p>
      <li data-md>
-      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①①">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑦">default options</a>.</p>
+      <p>Let <var>protocol component</var> be the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①①">compiling a component</a> given <var>protocol string</var>, <a data-link-type="dfn" href="#canonicalize-a-protocol" id="ref-for-canonicalize-a-protocol①">canonicalize a protocol</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options⑤">default options</a>.</p>
      <li data-md>
       <p>If the result of running <a data-link-type="dfn" href="#protocol-component-matches-a-special-scheme" id="ref-for-protocol-component-matches-a-special-scheme①">protocol component matches a special scheme</a> given <var>protocol component</var> is true, then set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag②">protocol matches a special scheme flag</a> to true.</p>
     </ol>
@@ -2297,9 +2321,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#part" id="ref-for-part①③">part</a> has an associated <dfn class="dfn-paneled" data-dfn-for="part" data-dfn-type="dfn" data-noexport id="part-prefix">prefix</dfn>, a string, initially the empty string.</p>
    <p>A <a data-link-type="dfn" href="#part" id="ref-for-part①④">part</a> has an associated <dfn class="dfn-paneled" data-dfn-for="part" data-dfn-type="dfn" data-noexport id="part-suffix">suffix</dfn>, a string, initially the empty string.</p>
    <h4 class="heading settled" data-level="2.1.4" id="options-header"><span class="secno">2.1.4. </span><span class="content">Options</span><a class="self-link" href="#options-header"></a></h4>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="options">options</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑨">struct</a> contains different settings that control how <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑨">pattern string</a> behaves.  These options originally come from <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> where <code>sensitive</code>, <code>strict</code>, <code>start</code>, and <code>end</code> are always set to true.</p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="options">options</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct⑨">struct</a> contains different settings that control how <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string⑨">pattern string</a> behaves.  These options originally come from <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.  We only include the options that are modified within the URLPattern specification and exclude the other options.  For the purposes of comparison, this specification acts like <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> where <code>strict</code>, <code>start</code>, and <code>end</code> are always set to false.</p>
    <p>An <a data-link-type="dfn" href="#options" id="ref-for-options④">options</a> has an associated <dfn class="dfn-paneled" data-dfn-for="options" data-dfn-type="dfn" data-noexport id="options-delimiter-code-point">delimiter code point</dfn>, a string, which must be set upon creation.  It must contain one <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-code-point" id="ref-for-ascii-code-point">ASCII code point</a> or the empty string.  This code point is treated as a segment separator and is used for determining how far a <code>:foo</code> named group should match by default.  For example, if the <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point③">delimiter code point</a> is "<code>/</code>" then "<code>/:foo</code>" will match "<code>/bar</code>", but not "<code>/bar/baz</code>".  If the <a data-link-type="dfn" href="#options-delimiter-code-point" id="ref-for-options-delimiter-code-point④">delimiter code point</a> is the empty string then the example pattern would match both strings.</p>
    <p>An <a data-link-type="dfn" href="#options" id="ref-for-options⑤">options</a> has an associated <dfn class="dfn-paneled" data-dfn-for="options" data-dfn-type="dfn" data-noexport id="options-prefix-code-point">prefix code point</dfn>, a string, which must be set upon creation.  It must contain one <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-code-point" id="ref-for-ascii-code-point①">ASCII code point</a> or the empty string.  The code point is treated as an automatic prefix if found immediately preceding a match group.  This matters when a match group is modified to be optional or repeating.  For example, if <a data-link-type="dfn" href="#options-prefix-code-point" id="ref-for-options-prefix-code-point③">prefix code point</a> is "<code>/</code>" then "<code>/foo/:bar?/baz</code>" will treat the "<code>/</code>" before "<code>:bar</code>" as a prefix that becomes optional along with the named group.  So in this example the pattern would match "<code>/foo/baz</code>".</p>
+   <p>An <a data-link-type="dfn" href="#options" id="ref-for-options⑥">options</a> has an associated <dfn class="dfn-paneled" data-dfn-for="options" data-dfn-type="dfn" data-noexport id="options-ignore-case">ignore case</dfn>, a boolean, which must be set up upon creation.  It defaults to false.  Depending on the set value, true or false, this flag enables case-sensitive or case-insensitive matches, respectively.  For the purpose of comparison, this case be thought of as the negated <code>sensitive</code> option in <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>.</p>
    <h4 class="heading settled" data-level="2.1.5" id="parsing"><span class="secno">2.1.5. </span><span class="content">Parsing</span><a class="self-link" href="#parsing"></a></h4>
    <div class="algorithm" data-algorithm="encoding callback"> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="encoding-callback">encoding callback</dfn> is an abstract algorithm that takes a given string <var>input</var>.  The <var>input</var> will be a simple text piece of a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①⓪">pattern string</a>.  An implementing algorithm will validate and encode the <var>input</var>.  It must return the encoded string or throw an exception. </div>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pattern-parser">pattern parser</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct" id="ref-for-struct①⓪">struct</a>.</p>
@@ -2311,7 +2336,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑤">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-index">index</dfn>, a number, initially 0.</p>
    <p>A <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑥">pattern parser</a> has an associated <dfn class="dfn-paneled" data-dfn-for="pattern parser" data-dfn-type="dfn" data-noexport id="pattern-parser-next-numeric-name">next numeric name</dfn>, a number, initially 0.</p>
    <div class="algorithm" data-algorithm="parse a pattern string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="parse-a-pattern-string">parse a pattern string</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a> <var>input</var>, <a data-link-type="dfn" href="#options" id="ref-for-options⑥">options</a> <var>options</var>, and <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback②">encoding callback</a> <var>encoding callback</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="parse-a-pattern-string">parse a pattern string</dfn> given a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①①">pattern string</a> <var>input</var>, <a data-link-type="dfn" href="#options" id="ref-for-options⑦">options</a> <var>options</var>, and <a data-link-type="dfn" href="#encoding-callback" id="ref-for-encoding-callback②">encoding callback</a> <var>encoding callback</var>: 
     <ol>
      <li data-md>
       <p>Let <var>parser</var> be a new <a data-link-type="dfn" href="#pattern-parser" id="ref-for-pattern-parser⑦">pattern parser</a> whose <a data-link-type="dfn" href="#pattern-parser-encoding-callback" id="ref-for-pattern-parser-encoding-callback">encoding callback</a> is <var>encoding callback</var> and <a data-link-type="dfn" href="#pattern-parser-segment-wildcard-regexp" id="ref-for-pattern-parser-segment-wildcard-regexp">segment wildcard regexp</a> is the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp">generate a segment wildcard regexp</a> given <var>options</var>.</p>
@@ -2433,7 +2458,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="full-wildcard-regexp-value">full wildcard regexp value</dfn> is the string "<code>.*</code>".</p>
    <div class="algorithm" data-algorithm="generate a segment wildcard regexp">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="generate-a-segment-wildcard-regexp">generate a segment wildcard regexp</dfn> given an <a data-link-type="dfn" href="#options" id="ref-for-options⑦">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="generate-a-segment-wildcard-regexp">generate a segment wildcard regexp</dfn> given an <a data-link-type="dfn" href="#options" id="ref-for-options⑧">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be "<code>[^</code>".</p>
@@ -2643,7 +2668,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="2.2" id="converting-part-lists-to-regular-expressions"><span class="secno">2.2. </span><span class="content">Converting Part Lists to Regular Expressions</span><a class="self-link" href="#converting-part-lists-to-regular-expressions"></a></h3>
    <div class="algorithm" data-algorithm="generate a regular expression and name list">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-regular-expression-and-name-list">generate a regular expression and name list</dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list②">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑧">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-regular-expression-and-name-list">generate a regular expression and name list</dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list②">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be "<code>^</code>".</p>
@@ -2837,7 +2862,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </div>
    <h3 class="heading settled" data-level="2.3" id="converting-part-lists-to-pattern-strings"><span class="secno">2.3. </span><span class="content">Converting Part Lists to Pattern Strings</span><a class="self-link" href="#converting-part-lists-to-pattern-strings"></a></h3>
    <div class="algorithm" data-algorithm="generate a pattern string">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①②">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list③">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options⑨">options</a> <var>options</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="generate-a-pattern-string">generate a <a data-link-type="dfn" href="#pattern-string" id="ref-for-pattern-string①②">pattern string</a></dfn> from a given <a data-link-type="dfn" href="#part-list" id="ref-for-part-list③">part list</a> <var>part list</var> and <a data-link-type="dfn" href="#options" id="ref-for-options①⓪">options</a> <var>options</var>: 
     <ol>
      <li data-md>
       <p>Let <var>result</var> be the empty string.</p>
@@ -3458,6 +3483,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#dom-urlpattern-urlpattern">constructor()</a><span>, in § 1</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input)</a><span>, in § 1</span>
    <li><a href="#dom-urlpattern-urlpattern">constructor(input, baseURL)</a><span>, in § 1</span>
+   <li><a href="#dom-urlpattern-urlpattern">constructor(input, baseURL, options)</a><span>, in § 1</span>
    <li><a href="#constructor-string-parser">constructor string parser</a><span>, in § 1.2</span>
    <li><a href="#consume-a-required-token">consume a required token</a><span>, in § 2.1.5</span>
    <li><a href="#consume-text">consume text</a><span>, in § 2.1.5</span>
@@ -3511,6 +3537,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</a><span>, in § 1.2</span>
    <li><a href="#hostname-options">hostname options</a><span>, in § 1.1</span>
    <li><a href="#hostname-pattern-is-an-ipv6-address">hostname pattern is an IPv6 address</a><span>, in § 1.1</span>
+   <li><a href="#options-ignore-case">ignore case</a><span>, in § 2.1.4</span>
+   <li><a href="#dom-urlpatternoptions-ignorecase">ignoreCase</a><span>, in § 1</span>
    <li>
     index
     <ul>
@@ -3691,6 +3719,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#dom-urlpattern-urlpattern">URLPattern(input)</a><span>, in § 1</span>
    <li><a href="#typedefdef-urlpatterninput">URLPatternInput</a><span>, in § 1</span>
    <li><a href="#dom-urlpattern-urlpattern">URLPattern(input, baseURL)</a><span>, in § 1</span>
+   <li><a href="#dom-urlpattern-urlpattern">URLPattern(input, baseURL, options)</a><span>, in § 1</span>
+   <li><a href="#dictdef-urlpatternoptions">URLPatternOptions</a><span>, in § 1</span>
    <li><a href="#dictdef-urlpatternresult">URLPatternResult</a><span>, in § 1</span>
    <li>
     username
@@ -4128,7 +4158,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="term-for-idl-boolean">
    <a href="https://webidl.spec.whatwg.org/#idl-boolean">https://webidl.spec.whatwg.org/#idl-boolean</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-boolean">1. The URLPattern class </a>
+    <li><a href="#ref-for-idl-boolean">1. The URLPattern class </a> <a href="#ref-for-idl-boolean①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-record">
@@ -4256,7 +4286,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
 <c- b>interface</c-> <a href="#urlpattern"><code><c- g>URLPattern</c-></code></a> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-urlpattern-urlpattern"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <a href="#dom-urlpattern-urlpattern-input-baseurl-input"><code><c- g>input</c-></code></a> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a href="#dom-urlpattern-urlpattern-input-baseurl-baseurl"><code><c- g>baseURL</c-></code></a>);
+  <a class="idl-code" data-link-type="constructor" href="#dom-urlpattern-urlpattern"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <a href="#dom-urlpattern-urlpattern-input-baseurl-options-input"><code><c- g>input</c-></code></a> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a href="#dom-urlpattern-urlpattern-input-baseurl-options-baseurl"><code><c- g>baseURL</c-></code></a>, <c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-urlpatternoptions"><c- n>URLPatternOptions</c-></a> <a href="#dom-urlpattern-urlpattern-input-baseurl-options-options"><code><c- g>options</c-></code></a> = {});
 
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a class="idl-code" data-link-type="method" href="#dom-urlpattern-test"><c- g>test</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#typedefdef-urlpatterninput"><c- n>URLPatternInput</c-></a> <a href="#dom-urlpattern-test-input-baseurl-input"><code><c- g>input</c-></code></a> = {}, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a href="#dom-urlpattern-test-input-baseurl-baseurl"><code><c- g>baseURL</c-></code></a>);
 
@@ -4282,6 +4312,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-urlpatterninit-search"><code><c- g>search</c-></code></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-urlpatterninit-hash"><code><c- g>hash</c-></code></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-urlpatterninit-baseurl"><code><c- g>baseURL</c-></code></a>;
+};
+
+<c- b>dictionary</c-> <a href="#dictdef-urlpatternoptions"><code><c- g>URLPatternOptions</c-></code></a> {
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean"><c- b>boolean</c-></a> <a data-default="false" data-type="boolean " href="#dom-urlpatternoptions-ignorecase"><code><c- g>ignoreCase</c-></code></a> = <c- b>false</c->;
 };
 
 <c- b>dictionary</c-> <a href="#dictdef-urlpatternresult"><code><c- g>URLPatternResult</c-></code></a> {
@@ -4313,8 +4347,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="urlpattern">
    <b><a href="#urlpattern">#urlpattern</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a> <a href="#ref-for-urlpattern①">(2)</a> <a href="#ref-for-urlpattern②">(3)</a> <a href="#ref-for-urlpattern③">(4)</a> <a href="#ref-for-urlpattern④">(5)</a> <a href="#ref-for-urlpattern⑤">(6)</a> <a href="#ref-for-urlpattern⑥">(7)</a> <a href="#ref-for-urlpattern⑦">(8)</a> <a href="#ref-for-urlpattern⑧">(9)</a> <a href="#ref-for-urlpattern⑨">(10)</a> <a href="#ref-for-urlpattern①⓪">(11)</a>
-    <li><a href="#ref-for-urlpattern①①">1.1. Internals</a> <a href="#ref-for-urlpattern①②">(2)</a>
+    <li><a href="#ref-for-urlpattern">1. The URLPattern class </a> <a href="#ref-for-urlpattern①">(2)</a> <a href="#ref-for-urlpattern②">(3)</a> <a href="#ref-for-urlpattern③">(4)</a> <a href="#ref-for-urlpattern④">(5)</a> <a href="#ref-for-urlpattern⑤">(6)</a> <a href="#ref-for-urlpattern⑥">(7)</a> <a href="#ref-for-urlpattern⑦">(8)</a> <a href="#ref-for-urlpattern⑧">(9)</a> <a href="#ref-for-urlpattern⑨">(10)</a> <a href="#ref-for-urlpattern①⓪">(11)</a> <a href="#ref-for-urlpattern①①">(12)</a> <a href="#ref-for-urlpattern①②">(13)</a>
+    <li><a href="#ref-for-urlpattern①③">1.1. Internals</a> <a href="#ref-for-urlpattern①④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatterninit">
@@ -4402,6 +4436,18 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-dom-urlpatterninit-baseurl">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatterninit-baseurl①">(2)</a> <a href="#ref-for-dom-urlpatterninit-baseurl②">(3)</a>
     <li><a href="#ref-for-dom-urlpatterninit-baseurl③">3.2. URLPatternInit Processing</a> <a href="#ref-for-dom-urlpatterninit-baseurl④">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dictdef-urlpatternoptions">
+   <b><a href="#dictdef-urlpatternoptions">#dictdef-urlpatternoptions</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-urlpatternoptions">1. The URLPattern class </a> <a href="#ref-for-dictdef-urlpatternoptions①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-urlpatternoptions-ignorecase">
+   <b><a href="#dom-urlpatternoptions-ignorecase">#dom-urlpatternoptions-ignorecase</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-urlpatternoptions-ignorecase">1. The URLPattern class </a> <a href="#ref-for-dom-urlpatternoptions-ignorecase①">(2)</a> <a href="#ref-for-dom-urlpatternoptions-ignorecase②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-urlpatternresult">
@@ -4543,7 +4589,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="dom-urlpattern-urlpattern">
    <b><a href="#dom-urlpattern-urlpattern">#dom-urlpattern-urlpattern</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-urlpattern-urlpattern">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-urlpattern①">(2)</a> <a href="#ref-for-dom-urlpattern-urlpattern②">(3)</a>
+    <li><a href="#ref-for-dom-urlpattern-urlpattern">1. The URLPattern class </a> <a href="#ref-for-dom-urlpattern-urlpattern①">(2)</a> <a href="#ref-for-dom-urlpattern-urlpattern②">(3)</a> <a href="#ref-for-dom-urlpattern-urlpattern③">(4)</a> <a href="#ref-for-dom-urlpattern-urlpattern④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-urlpattern-protocol">
@@ -4657,8 +4703,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <aside class="dfn-panel" data-for="default-options">
    <b><a href="#default-options">#default-options</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-default-options">1. The URLPattern class </a> <a href="#ref-for-default-options①">(2)</a> <a href="#ref-for-default-options②">(3)</a> <a href="#ref-for-default-options③">(4)</a> <a href="#ref-for-default-options④">(5)</a> <a href="#ref-for-default-options⑤">(6)</a> <a href="#ref-for-default-options⑥">(7)</a>
-    <li><a href="#ref-for-default-options⑦">1.2. Constructor String Parsing</a>
+    <li><a href="#ref-for-default-options">1. The URLPattern class </a> <a href="#ref-for-default-options①">(2)</a> <a href="#ref-for-default-options②">(3)</a> <a href="#ref-for-default-options③">(4)</a> <a href="#ref-for-default-options④">(5)</a>
+    <li><a href="#ref-for-default-options⑤">1.2. Constructor String Parsing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="hostname-options">
@@ -5329,10 +5375,10 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#options">#options</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-options">1.1. Internals</a> <a href="#ref-for-options①">(2)</a> <a href="#ref-for-options②">(3)</a> <a href="#ref-for-options③">(4)</a>
-    <li><a href="#ref-for-options④">2.1.4. Options</a> <a href="#ref-for-options⑤">(2)</a>
-    <li><a href="#ref-for-options⑥">2.1.5. Parsing</a> <a href="#ref-for-options⑦">(2)</a>
-    <li><a href="#ref-for-options⑧">2.2. Converting Part Lists to Regular Expressions</a>
-    <li><a href="#ref-for-options⑨">2.3. Converting Part Lists to Pattern Strings</a>
+    <li><a href="#ref-for-options④">2.1.4. Options</a> <a href="#ref-for-options⑤">(2)</a> <a href="#ref-for-options⑥">(3)</a>
+    <li><a href="#ref-for-options⑦">2.1.5. Parsing</a> <a href="#ref-for-options⑧">(2)</a>
+    <li><a href="#ref-for-options⑨">2.2. Converting Part Lists to Regular Expressions</a>
+    <li><a href="#ref-for-options①⓪">2.3. Converting Part Lists to Pattern Strings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="options-delimiter-code-point">
@@ -5350,6 +5396,13 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-options-prefix-code-point③">2.1.4. Options</a>
     <li><a href="#ref-for-options-prefix-code-point④">2.1.5. Parsing</a>
     <li><a href="#ref-for-options-prefix-code-point⑤">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-options-prefix-code-point⑥">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="options-ignore-case">
+   <b><a href="#options-ignore-case">#options-ignore-case</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-options-ignore-case">1. The URLPattern class </a> <a href="#ref-for-options-ignore-case①">(2)</a>
+    <li><a href="#ref-for-options-ignore-case②">1.1. Internals</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="encoding-callback">
