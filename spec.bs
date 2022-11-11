@@ -1721,14 +1721,14 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
     1. Set |baseURL| to the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
     1. If |baseURL| is failure, then throw a {{TypeError}}.
-    1. Set |result|["{{URLPatternInit/protocol}}"] to |baseURL|'s [=url/scheme=].
-    1. Set |result|["{{URLPatternInit/username}}"] to |baseURL|'s [=url/username=].
-    1. Set |result|["{{URLPatternInit/password}}"] to |baseURL|'s [=url/password=].
-    1. Set |result|["{{URLPatternInit/hostname}}"] to |baseURL|'s [=url/host=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/port}}"] to |baseURL|'s [=url/port=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=URL path serializing=] |baseURL|.
-    1. Set |result|["{{URLPatternInit/search}}"] to |baseURL|'s [=url/query=] or the empty string if the value is null.
-    1. Set |result|["{{URLPatternInit/hash}}"] to |baseURL|'s [=url/fragment=] or the empty string if the value is null.
+    1. Set |result|["{{URLPatternInit/protocol}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/scheme=] and |type|.
+    1. Set |result|["{{URLPatternInit/username}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/username=] and |type|.
+    1. Set |result|["{{URLPatternInit/password}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/password=] and |type|.
+    1. Set |result|["{{URLPatternInit/hostname}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/host=] and |type|.
+    1. Set |result|["{{URLPatternInit/port}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/port=] and |type|.
+    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=processing a base URL string=] given the result of [=URL path serializing=] |baseURL| and |type|.
+    1. Set |result|["{{URLPatternInit/search}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/query=] and |type|.
+    1. Set |result|["{{URLPatternInit/hash}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/fragment=] and |type|.
   1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
   1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
   1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
@@ -1743,7 +1743,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
         <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
       </ul>
       <p>then:
-      1. Let |baseURLPath| be the result of [=URL path serializing=] |baseURL|.
+      1. Let |baseURLPath| be the result of running [=process a base URL string=] given the result of [=URL path serializing=] |baseURL| and |type|.
       1. Let |slash index| be the index of the last U+002F (`/`) code point found in |baseURLPath|, interpreted as a sequence of [=/code points=], or null if there are no instances of the code point.
       1. If |slash index| is not null:
         1. Let |new pathname| be the [=code point substring by positions|code point substring=] from 0 to |slash index| + 1 within |baseURLPath|.
@@ -1753,6 +1753,14 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
   1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
   1. Return |result|.
+</div>
+
+<div algorithm>
+  To <dfn>process a base URL string</dfn> given a string |input| and a string |type|:
+
+  1. [=Assert=] that |input| is not null.
+  1. If |type| is not "`pattern`" return |input|.
+  1. Return the result of [=escaping a pattern string=] given |input|.
 </div>
 
 <div algorithm>
