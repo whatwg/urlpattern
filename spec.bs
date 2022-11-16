@@ -1758,7 +1758,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>process a base URL string</dfn> given a string |input| and a string |type|:
 
-  1. [=Assert=] that |input| is not null.
+  1. [=Assert=]: |input| is not null.
   1. If |type| is not "`pattern`" return |input|.
   1. Return the result of [=escaping a pattern string=] given |input|.
 </div>
