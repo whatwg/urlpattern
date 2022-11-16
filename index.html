@@ -4,7 +4,7 @@
   <title>URLPattern API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 44af0bf3e, updated Fri Jul 29 17:05:16 2022 -0700" name="generator">
+  <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://wicg.github.io/urlpattern/" rel="canonical">
 <style>
 .selected-text-file-an-issue {
@@ -330,61 +330,226 @@ a[href].issue-return {
     margin-bottom: 0;
 }</style>
 <style>/* style-mdn-anno */
-
-            @media (max-width: 767px) { .mdn-anno { opacity: .1 } }
-            .mdn-anno { font: 1em sans-serif; padding: 0.3em; position: absolute; z-index: 8; right: 0.3em; background: #EEE; color: black; box-shadow: 0 0 3px #999; overflow: hidden; border-collapse: initial; border-spacing: initial; min-width: 9em; max-width: min-content; white-space: nowrap; word-wrap: normal; hyphens: none}
-            .mdn-anno:not(.wrapped) { opacity: 1}
-            .mdn-anno:hover { z-index: 9 }
-            .mdn-anno.wrapped { min-width: 0 }
-            .mdn-anno.wrapped > :not(button) { display: none; }
-            .mdn-anno > .mdn-anno-btn { cursor: pointer; border: none; color: #000; background: transparent; margin: -8px; float: right; padding: 10px 8px 8px 8px; outline: none; }
-            .mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag { color: red; padding-right: 2px; }
-            .mdn-anno > .mdn-anno-btn > .all-engines-flag { color: green; padding-right: 2px; }
-            .mdn-anno > .mdn-anno-btn > span { color: #fff; background-color: #000; font-weight: normal; font-family: zillaslab, Palatino, "Palatino Linotype", serif; padding: 2px 3px 0px 3px; line-height: 1.3em; vertical-align: top; }
-            .mdn-anno > .feature { margin-top: 20px; }
-            .mdn-anno > .feature:not(:first-of-type) { border-top: 1px solid #999; margin-top: 6px; padding-top: 2px; }
-            .mdn-anno > .feature > .less-than-two-engines-text { color: red }
-            .mdn-anno > .feature > .all-engines-text { color: green }
-            .mdn-anno > .feature > p { font-size: .75em; margin-top: 6px; margin-bottom: 0; }
-            .mdn-anno > .feature > p + p { margin-top: 3px; }
-            .mdn-anno > .feature > .support { display: block; font-size: 0.6em; margin: 0; padding: 0; margin-top: 2px }
-            .mdn-anno > .feature > .support + div { padding-top: 0.5em; }
-            .mdn-anno > .feature > .support > hr { display: block; border: none; border-top: 1px dotted #999; padding: 3px 0px 0px 0px; margin: 2px 3px 0px 3px; }
-            .mdn-anno > .feature > .support > hr::before { content: ""; }
-            .mdn-anno > .feature > .support > span { padding: 0.2em 0; display: block; display: table; }
-            .mdn-anno > .feature > .support > span.no { color: #CCCCCC; filter: grayscale(100%); }
-            .mdn-anno > .feature > .support > span.no::before { opacity: 0.5; }
-            .mdn-anno > .feature > .support > span:first-of-type { padding-top: 0.5em; }
-            .mdn-anno > .feature > .support > span > span { padding: 0 0.5em; display: table-cell; }
-            .mdn-anno > .feature > .support > span > span:first-child { width: 100%; }
-            .mdn-anno > .feature > .support > span > span:last-child { width: 100%; white-space: pre; padding: 0; }
-            .mdn-anno > .feature > .support > span::before { content: ' '; display: table-cell; min-width: 1.5em; height: 1.5em; background: no-repeat center center; background-size: contain; text-align: right; font-size: 0.75em; font-weight: bold; }
-            .mdn-anno > .feature > .support > .chrome_android::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
-            .mdn-anno > .feature > .support > .firefox_android::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
-            .mdn-anno > .feature > .support > .chrome::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
-            .mdn-anno > .feature > .support > .edge_blink::before { background-image: url(https://resources.whatwg.org/browser-logos/edge.svg); }
-            .mdn-anno > .feature > .support > .edge::before { background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg); }
-            .mdn-anno > .feature > .support > .firefox::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
-            .mdn-anno > .feature > .support > .ie::before { background-image: url(https://resources.whatwg.org/browser-logos/ie.png); }
-            .mdn-anno > .feature > .support > .safari_ios::before { background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg); }
-            .mdn-anno > .feature > .support > .nodejs::before { background-image: url(https://nodejs.org/static/images/favicons/favicon.ico); }
-            .mdn-anno > .feature > .support > .opera_android::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
-            .mdn-anno > .feature > .support > .opera::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
-            .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
-            .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
-            .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
-            .name-slug-mismatch { color: red }
-            .caniuse-status:hover { z-index: 9; }
-
-            /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
-            .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
-            .h-entry p + .mdn-anno { margin-top: 0; }
-            h2 + .mdn-anno.after { margin: -48px 0 0 0; }
-            h3 + .mdn-anno.after { margin: -46px 0 0 0; }
-            h4 + .mdn-anno.after { margin: -42px 0 0 0; }
-            h5 + .mdn-anno.after { margin: -40px 0 0 0; }
-            h6 + .mdn-anno.after { margin: -40px 0 0 0; }
-            </style>
+@media (max-width: 767px) {
+	.mdn-anno {
+		opacity: .1;
+	}
+}
+:root {
+	--mdn-bg: #EEE;
+	--mdn-shadow: #999;
+	--mdn-nosupport-text: #ccc;
+}
+.mdn-anno {
+	font: 1em sans-serif;
+	padding: 0.3em;
+	position: absolute;
+	z-index: 8;
+	right: 0.3em;
+	background: var(--mdn-bg, #EEE);
+	color: var(--text, black);
+	box-shadow: 0 0 3px var(--mdn-shadow, #999);
+	overflow: hidden;
+	border-collapse: initial;
+	border-spacing: initial;
+	min-width: 9em;
+	max-width: min-content;
+	white-space: nowrap;
+	word-wrap: normal;
+	hyphens: none;
+	border-radius: .25em;
+}
+.mdn-anno:not(.wrapped) {
+	opacity: 1;
+	z-index: 9;
+}
+.mdn-anno.wrapped {
+	min-width: 0;
+}
+.mdn-anno.wrapped > :not(button) {
+	display: none;
+}
+.mdn-anno:hover {
+	outline: var(--text, black) 1px solid;
+}
+.mdn-anno > .mdn-anno-btn {
+	cursor: pointer;
+	border: none;
+	color: #000;
+	background: transparent;
+	margin: -8px;
+	float: right;
+	padding: 10px 8px 8px 8px;
+	outline: none;
+}
+.mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag {
+	color: red;
+	padding-right: 2px;
+}
+.mdn-anno > .mdn-anno-btn > .all-engines-flag {
+	color: green;
+	padding-right: 2px;
+}
+.mdn-anno > .mdn-anno-btn > span {
+	color: #fff;
+	background-color: #000;
+	font-weight: normal;
+	font-family: zillaslab, Palatino, "Palatino Linotype", serif;
+	padding: 2px 3px 0px 3px;
+	line-height: 1.3em;
+	vertical-align: top;
+}
+.mdn-anno > .feature {
+	margin-top: 20px;
+}
+.mdn-anno > .feature:not(:first-of-type) {
+	border-top: 1px solid #999;
+	margin-top: 6px;
+	padding-top: 2px;
+}
+.mdn-anno > .feature > .less-than-two-engines-text {
+	color: red;
+}
+.mdn-anno > .feature > .all-engines-text {
+	color: green;
+}
+.mdn-anno > .feature > p {
+	font-size: .75em;
+	margin-top: 6px;
+	margin-bottom: 0;
+}
+.mdn-anno > .feature > p + p {
+	margin-top: 3px;
+}
+.mdn-anno > .feature > .support {
+	display: block;
+	font-size: 0.6em;
+	margin: 0;
+	padding: 0;
+	margin-top: 2px;
+}
+.mdn-anno > .feature > .support + div {
+	padding-top: 0.5em;
+}
+.mdn-anno > .feature > .support > hr {
+	display: block;
+	border: none;
+	border-top: 1px dotted #999;
+	padding: 3px 0px 0px 0px;
+	margin: 2px 3px 0px 3px;
+}
+.mdn-anno > .feature > .support > hr::before {
+	content: "";
+}
+.mdn-anno > .feature > .support > span {
+	padding: 0.2em 0;
+	display: block;
+	display: table;
+}
+.mdn-anno > .feature > .support > span.no {
+	color: var(--mdn-nosupport-text);
+	filter: grayscale(100%);
+}
+.mdn-anno > .feature > .support > span.no::before {
+	opacity: 0.5;
+}
+.mdn-anno > .feature > .support > span:first-of-type {
+	padding-top: 0.5em;
+}
+.mdn-anno > .feature > .support > span > span {
+	padding: 0 0.5em;
+	display: table-cell;
+}
+.mdn-anno > .feature > .support > span > span:first-child {
+	width: 100%;
+}
+.mdn-anno > .feature > .support > span > span:last-child {
+	width: 100%;
+	white-space: pre;
+	padding: 0;
+}
+.mdn-anno > .feature > .support > span::before {
+	content: ' ';
+	display: table-cell;
+	min-width: 1.5em;
+	height: 1.5em;
+	background: no-repeat center center;
+	background-size: contain;
+	text-align: right;
+	font-size: 0.75em;
+	font-weight: bold;
+}
+.mdn-anno > .feature > .support > .chrome_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg);
+}
+.mdn-anno > .feature > .support > .firefox_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/firefox.png);
+}
+.mdn-anno > .feature > .support > .chrome::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg);
+}
+.mdn-anno > .feature > .support > .edge_blink::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/edge.svg);
+}
+.mdn-anno > .feature > .support > .edge::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg);
+}
+.mdn-anno > .feature > .support > .firefox::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/firefox.png);
+}
+.mdn-anno > .feature > .support > .ie::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/ie.png);
+}
+.mdn-anno > .feature > .support > .safari_ios::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg);
+}
+.mdn-anno > .feature > .support > .nodejs::before {
+	background-image: url(https://nodejs.org/static/images/favicons/favicon.ico);
+}
+.mdn-anno > .feature > .support > .opera_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
+}
+.mdn-anno > .feature > .support > .opera::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
+}
+.mdn-anno > .feature > .support > .safari::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/safari.png);
+}
+.mdn-anno > .feature > .support > .samsunginternet_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg);
+}
+.mdn-anno > .feature > .support > .webview_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png);
+}
+.name-slug-mismatch {
+	color: red;
+}
+.caniuse-status:hover {
+	z-index: 9;
+}
+/* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */;
+.h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno {
+	right: -6.7em;
+}
+.h-entry p + .mdn-anno {
+	margin-top: 0;
+}
+ h2 + .mdn-anno.after {
+	margin: -48px 0 0 0;
+}
+ h3 + .mdn-anno.after {
+	margin: -46px 0 0 0;
+}
+ h4 + .mdn-anno.after {
+	margin: -42px 0 0 0;
+}
+ h5 + .mdn-anno.after {
+	margin: -40px 0 0 0;
+}
+ h6 + .mdn-anno.after {
+	margin: -40px 0 0 0;
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -411,6 +576,14 @@ a.self-link:hover {
 }
 .heading > a.self-link {
     font-size: 83%;
+}
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
 }
 li > a.self-link {
     left: calc(-1 * (3.5rem - 26px) - 2em);
@@ -637,6 +810,12 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
     }
+}@media (prefers-color-scheme: dark) {
+	:root {
+		--mdn-bg: #222;
+		--mdn-shadow: #444;
+		--mdn-nosupport-text: #666;
+	}
 }
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -705,7 +884,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">URLPattern API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-09-28">28 September 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-11-16">16 November 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -3299,21 +3478,21 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If <var>baseURL</var> is failure, then throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror①⑤">TypeError</a></code>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑤">protocol</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑤">protocol</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme④">scheme</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username④">username</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-username" id="ref-for-concept-url-username②">username</a>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-username" id="ref-for-dom-urlpatterninit-username④">username</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string①">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-username" id="ref-for-concept-url-username②">username</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password④">password</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-password" id="ref-for-concept-url-password②">password</a>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-password" id="ref-for-dom-urlpatterninit-password④">password</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string②">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-password" id="ref-for-concept-url-password②">password</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑥">hostname</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host②">host</a> or the empty string if the value is null.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname⑥">hostname</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string③">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host②">host</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑥">port</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port②">port</a> or the empty string if the value is null.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port⑥">port</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string④">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port②">port</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname⑥">pathname</a></code>"] to the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer③">URL path serializing</a> <var>baseURL</var>.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname⑥">pathname</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string⑤">processing a base URL string</a> given the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer③">URL path serializing</a> <var>baseURL</var> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search④">search</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query③">query</a> or the empty string if the value is null.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search④">search</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string⑥">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query③">query</a> and <var>type</var>.</p>
        <li data-md>
-        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash④">hash</a></code>"] to <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment③">fragment</a> or the empty string if the value is null.</p>
+        <p>Set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash④">hash</a></code>"] to the result of <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string⑦">processing a base URL string</a> given <var>baseURL</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-fragment" id="ref-for-concept-url-fragment③">fragment</a> and <var>type</var>.</p>
       </ol>
      <li data-md>
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑥">protocol</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑦">protocol</a></code>"] to the result of <a data-link-type="dfn" href="#process-protocol-for-init" id="ref-for-process-protocol-for-init">process protocol for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-protocol" id="ref-for-dom-urlpatterninit-protocol⑧">protocol</a></code>"] and <var>type</var>.</p>
@@ -3340,7 +3519,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>then: </p>
         <ol>
          <li data-md>
-          <p>Let <var>baseURLPath</var> be the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer④">URL path serializing</a> <var>baseURL</var>.</p>
+          <p>Let <var>baseURLPath</var> be the result of running <a data-link-type="dfn" href="#process-a-base-url-string" id="ref-for-process-a-base-url-string⑧">process a base URL string</a> given the result of <a data-link-type="dfn" href="https://url.spec.whatwg.org/#url-path-serializer" id="ref-for-url-path-serializer④">URL path serializing</a> <var>baseURL</var> and <var>type</var>.</p>
          <li data-md>
           <p>Let <var>slash index</var> be the index of the last U+002F (<code>/</code>) code point found in <var>baseURLPath</var>, interpreted as a sequence of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point⑥">code points</a>, or null if there are no instances of the code point.</p>
          <li data-md>
@@ -3363,6 +3542,17 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <p>If <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash⑤">hash</a></code>"] is not null then set <var>result</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash⑥">hash</a></code>"] to the result of <a data-link-type="dfn" href="#process-hash-for-init" id="ref-for-process-hash-for-init">process hash for init</a> given <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash⑦">hash</a></code>"] and <var>type</var>.</p>
      <li data-md>
       <p>Return <var>result</var>.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="process a base URL string">
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="process-a-base-url-string">process a base URL string</dfn> given a string <var>input</var> and a string <var>type</var>: 
+    <ol>
+     <li data-md>
+      <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert①④">Assert</a>: <var>input</var> is not null.</p>
+     <li data-md>
+      <p>If <var>type</var> is not "<code>pattern</code>" return <var>input</var>.</p>
+     <li data-md>
+      <p>Return the result of <a data-link-type="dfn" href="#escape-a-pattern-string" id="ref-for-escape-a-pattern-string④">escaping a pattern string</a> given <var>input</var>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is an absolute pathname">
@@ -3657,6 +3847,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <li><a href="#urlpattern-port-component">port component</a><span>, in § 1</span>
    <li><a href="#part-prefix">prefix</a><span>, in § 2.1.3</span>
    <li><a href="#options-prefix-code-point">prefix code point</a><span>, in § 2.1.4</span>
+   <li><a href="#process-a-base-url-string">process a base URL string</a><span>, in § 3.2</span>
    <li><a href="#process-a-tokenizing-error">process a tokenizing error</a><span>, in § 2.1.2</span>
    <li><a href="#process-a-urlpatterninit">process a URLPatternInit</a><span>, in § 3.2</span>
    <li><a href="#process-hash-for-init">process hash for init</a><span>, in § 3.2</span>
@@ -3849,6 +4040,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
     <li><a href="#ref-for-assert⑥">2.1.5. Parsing</a> <a href="#ref-for-assert⑦">(2)</a>
     <li><a href="#ref-for-assert⑧">2.2. Converting Part Lists to Regular Expressions</a> <a href="#ref-for-assert⑨">(2)</a> <a href="#ref-for-assert①⓪">(3)</a> <a href="#ref-for-assert①①">(4)</a>
     <li><a href="#ref-for-assert①②">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-assert①③">(2)</a>
+    <li><a href="#ref-for-assert①④">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-iteration-break">
@@ -5584,6 +5776,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <b><a href="#escape-a-pattern-string">#escape-a-pattern-string</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-escape-a-pattern-string">2.3. Converting Part Lists to Pattern Strings</a> <a href="#ref-for-escape-a-pattern-string①">(2)</a> <a href="#ref-for-escape-a-pattern-string②">(3)</a> <a href="#ref-for-escape-a-pattern-string③">(4)</a>
+    <li><a href="#ref-for-escape-a-pattern-string④">3.2. URLPatternInit Processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="convert-a-modifier-to-a-string">
@@ -5668,6 +5861,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    <ul>
     <li><a href="#ref-for-process-a-urlpatterninit">1. The URLPattern class </a>
     <li><a href="#ref-for-process-a-urlpatterninit①">1.1. Internals</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="process-a-base-url-string">
+   <b><a href="#process-a-base-url-string">#process-a-base-url-string</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-process-a-base-url-string">3.2. URLPatternInit Processing</a> <a href="#ref-for-process-a-base-url-string①">(2)</a> <a href="#ref-for-process-a-base-url-string②">(3)</a> <a href="#ref-for-process-a-base-url-string③">(4)</a> <a href="#ref-for-process-a-base-url-string④">(5)</a> <a href="#ref-for-process-a-base-url-string⑤">(6)</a> <a href="#ref-for-process-a-base-url-string⑥">(7)</a> <a href="#ref-for-process-a-base-url-string⑦">(8)</a> <a href="#ref-for-process-a-base-url-string⑧">(9)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="is-an-absolute-pathname">
@@ -5781,13 +5980,11 @@ document.body.addEventListener("click", function(e) {
 });
 </script>
 <script>/* script-mdn-anno */
-
-            document.body.addEventListener("click", (e) => {
-                if(e.target.closest(".mdn-anno-btn")) {
-                    e.target.closest(".mdn-anno").classList.toggle("wrapped");
-                }
-            });
-            </script>
+document.body.addEventListener("click", (e) => {
+    if(e.target.closest(".mdn-anno-btn")) {
+        e.target.closest(".mdn-anno").classList.toggle("wrapped");
+    }
+});</script>
 <script>/* script-var-click-highlighting */
 
     document.addEventListener("click", e=>{
