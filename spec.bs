@@ -479,6 +479,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
     1. Let |name| be |component|'s [=component/group name list=][|index| &minus; 1].
     1. Let |value| be [$Get$](|execResult|, [$ToString$](|index|)).
     1. Set |groups|[|name|] to |value|.
+    1. Increment |index| by 1.
   1. Set |result|["{{URLPatternComponentResult/groups}}"] to |groups|.
   1. Return |result|.
 </div>
