@@ -36,16 +36,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: IdentifierStart; url: #prod-IdentifierStart
   type: interface
     text: RegExp; url: #sec-regexp-regular-expression-objects
-spec: url; urlPrefix: https://url.spec.whatwg.org/
-  type: dfn
-    text: default port; url: #default-port
-    text: fragment state; url: #fragment-state
-    text: hostname state; url: #hostname-state
-    text: path start state; url: #path-start-state
-    text: port state; url: #port-state
-    text: query state; url: #query-state
-    text: special scheme; url: #special-scheme
-    text: scheme start state; url: #scheme-start-state
 </pre>
 
 <style>
