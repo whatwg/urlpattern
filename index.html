@@ -1174,7 +1174,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Set <var>init</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-baseurl" id="ref-for-dom-urlpatterninit-baseurl②">baseURL</a></code>"] to <var>baseURL</var>.</p>
       </ol>
      <li data-md>
-      <p>Else:</p>
+      <p>Otherwise:</p>
       <ol>
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#assert" id="ref-for-assert">Assert</a>: <var>input</var> is a <code class="idl"><a data-link-type="idl" href="#dictdef-urlpatterninit" id="ref-for-dictdef-urlpatterninit①">URLPatternInit</a></code>.</p>
@@ -1196,7 +1196,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If the result running <a data-link-type="dfn" href="#hostname-pattern-is-an-ipv6-address" id="ref-for-hostname-pattern-is-an-ipv6-address">hostname pattern is an IPv6 address</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname">hostname</a></code>"] is true, then set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component③">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname①">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-ipv6-hostname" id="ref-for-canonicalize-an-ipv6-hostname">canonicalize an IPv6 hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options">hostname options</a>.</p>
      <li data-md>
-      <p>Else, set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component①">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component④">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname②">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hostname" id="ref-for-canonicalize-a-hostname">canonicalize a hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options①">hostname options</a>.</p>
+      <p>Otherwise, set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-hostname-component" id="ref-for-urlpattern-hostname-component①">hostname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component④">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hostname" id="ref-for-dom-urlpatterninit-hostname②">hostname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-hostname" id="ref-for-canonicalize-a-hostname">canonicalize a hostname</a>, and <a data-link-type="dfn" href="#hostname-options" id="ref-for-hostname-options①">hostname options</a>.</p>
      <li data-md>
       <p>Set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-port-component" id="ref-for-urlpattern-port-component">port component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑤">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-port" id="ref-for-dom-urlpatterninit-port②">port</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-port" id="ref-for-canonicalize-a-port">canonicalize a port</a>, and <a data-link-type="dfn" href="#default-options" id="ref-for-default-options③">default options</a>.</p>
      <li data-md>
@@ -1210,7 +1210,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑥">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-pathname" id="ref-for-canonicalize-a-pathname">canonicalize a pathname</a>, and <var>pathCompileOptions</var>.</p>
       </ol>
      <li data-md>
-      <p>Else set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-opaque-pathname" id="ref-for-canonicalize-an-opaque-pathname">canonicalize an opaque pathname</a>, and <var>compileOptions</var>.</p>
+      <p>Otherwise set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-pathname-component" id="ref-for-urlpattern-pathname-component①">pathname component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑦">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-pathname" id="ref-for-dom-urlpatterninit-pathname①">pathname</a></code>"], <a data-link-type="dfn" href="#canonicalize-an-opaque-pathname" id="ref-for-canonicalize-an-opaque-pathname">canonicalize an opaque pathname</a>, and <var>compileOptions</var>.</p>
      <li data-md>
       <p>Set <var>this</var>’s <a data-link-type="dfn" href="#urlpattern-search-component" id="ref-for-urlpattern-search-component">search component</a> to the result of <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component⑧">compiling a component</a> given <var>processedInit</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-search" id="ref-for-dom-urlpatterninit-search">search</a></code>"], <a data-link-type="dfn" href="#canonicalize-a-search" id="ref-for-canonicalize-a-search">canonicalize a search</a>, and <var>compileOptions</var>.</p>
      <li data-md>
@@ -1310,7 +1310,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>options</var>’s <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case②">ignore case</a> is true then set <var>flags</var> to "<code>ui</code>".</p>
      <li data-md>
-      <p>Else set <var>flags</var> to "<code>u</code>"</p>
+      <p>Otherwise set <var>flags</var> to "<code>u</code>"</p>
      <li data-md>
       <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, <var>flags</var>).  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
       <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
@@ -1368,7 +1368,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Set <var>hash</var> to <var>applyResult</var>["<code class="idl"><a data-link-type="idl" href="#dom-urlpatterninit-hash" id="ref-for-dom-urlpatterninit-hash①">hash</a></code>"].</p>
       </ol>
      <li data-md>
-      <p>Else:</p>
+      <p>Otherwise:</p>
       <ol>
        <li data-md>
         <p>Let <var>baseURL</var> be null.</p>
@@ -1573,7 +1573,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash"><code>hash</code></a>" and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix">is a search prefix</a> given <var>parser</var> is true:</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix">is a search prefix</a> given <var>parser</var> is true:</p>
             <ol>
              <li data-md>
               <p>Run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search"><code>search</code></a>" and 1.</p>
@@ -1581,7 +1581,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
               <p>Set <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-result" id="ref-for-constructor-string-parser-result①">result</a>["<code class="idl"><a data-link-type="idl" href="#dom-urlpattern-hash" id="ref-for-dom-urlpattern-hash②">hash</a></code>"] to the empty string.</p>
             </ol>
            <li data-md>
-            <p>Else:</p>
+            <p>Otherwise:</p>
             <ol>
              <li data-md>
               <p>Run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state②">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname"><code>pathname</code></a>" and 0.</p>
@@ -1631,7 +1631,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>If the result of running <a data-link-type="dfn" href="#is-a-group-close" id="ref-for-is-a-group-close">is a group close</a> given <var>parser</var> is true, then decrement <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-group-depth" id="ref-for-constructor-string-parser-group-depth②">group depth</a> by 1.</p>
          <li data-md>
-          <p>Else:</p>
+          <p>Otherwise:</p>
           <ol>
            <li data-md>
             <p>Increment <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index⑥">token index</a> by <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-increment" id="ref-for-constructor-string-parser-token-increment⑥">token increment</a>.</p>
@@ -1691,7 +1691,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
                 <p>Set <var>skip</var> to 3.</p>
               </ol>
              <li data-md>
-              <p>Else if <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag①">protocol matches a special scheme flag</a> is true, then set <var>next state</var> to "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority③"><code>authority</code></a>".</p>
+              <p>Otherwise if <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-protocol-matches-a-special-scheme-flag" id="ref-for-constructor-string-parser-protocol-matches-a-special-scheme-flag①">protocol matches a special scheme flag</a> is true, then set <var>next state</var> to "<a data-link-type="dfn" href="#constructor-string-parser-state-authority" id="ref-for-constructor-string-parser-state-authority③"><code>authority</code></a>".</p>
              <li data-md>
               <p>Run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state④">change state</a> given <var>parser</var>, <var>next state</var>, and <var>skip</var>.</p>
             </ol>
@@ -1702,7 +1702,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the result of running <a data-link-type="dfn" href="#is-an-identity-terminator" id="ref-for-is-an-identity-terminator">is an identity terminator</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#rewind-and-set-state" id="ref-for-rewind-and-set-state②">rewind and set state</a> given <var>parser</var> and "<a data-link-type="dfn" href="#constructor-string-parser-state-username" id="ref-for-constructor-string-parser-state-username"><code>username</code></a>".</p>
            <li data-md>
-            <p>Else if any of the following are true:</p>
+            <p>Otherwise if any of the following are true:</p>
             <ul>
              <li>the result of running <a data-link-type="dfn" href="#is-a-pathname-start" id="ref-for-is-a-pathname-start">is a pathname start</a> given <var>parser</var>;
              <li>the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix①">is a search prefix</a> given <var>parser</var>; or
@@ -1716,7 +1716,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the result of running <a data-link-type="dfn" href="#is-a-password-prefix" id="ref-for-is-a-password-prefix">is a password prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑤">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-password" id="ref-for-constructor-string-parser-state-password"><code>password</code></a>", and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-an-identity-terminator" id="ref-for-is-an-identity-terminator①">is an identity terminator</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑥">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hostname" id="ref-for-constructor-string-parser-state-hostname②"><code>hostname</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-an-identity-terminator" id="ref-for-is-an-identity-terminator①">is an identity terminator</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑥">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hostname" id="ref-for-constructor-string-parser-state-hostname②"><code>hostname</code></a>", and 1.</p>
           </ol>
          <dt>"<a data-link-type="dfn" href="#constructor-string-parser-state-password" id="ref-for-constructor-string-parser-state-password①"><code>password</code></a>"
          <dd>
@@ -1730,15 +1730,15 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the the result of running <a data-link-type="dfn" href="#is-an-ipv6-open" id="ref-for-is-an-ipv6-open">is an IPv6 open</a> given <var>parser</var> is true, then increment <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth">hostname IPv6 bracket depth</a> by 1.</p>
            <li data-md>
-            <p>Else if the the result of running <a data-link-type="dfn" href="#is-an-ipv6-close" id="ref-for-is-an-ipv6-close">is an IPv6 close</a> given <var>parser</var> is true, then decrement <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth①">hostname IPv6 bracket depth</a> by 1.</p>
+            <p>Otherwise if the the result of running <a data-link-type="dfn" href="#is-an-ipv6-close" id="ref-for-is-an-ipv6-close">is an IPv6 close</a> given <var>parser</var> is true, then decrement <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth①">hostname IPv6 bracket depth</a> by 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-port-prefix" id="ref-for-is-a-port-prefix">is a port prefix</a> given <var>parser</var> is true and <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth②">hostname IPv6 bracket depth</a> is zero, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑧">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-port" id="ref-for-constructor-string-parser-state-port"><code>port</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-port-prefix" id="ref-for-is-a-port-prefix">is a port prefix</a> given <var>parser</var> is true and <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-hostname-ipv6-bracket-depth" id="ref-for-constructor-string-parser-hostname-ipv6-bracket-depth②">hostname IPv6 bracket depth</a> is zero, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑧">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-port" id="ref-for-constructor-string-parser-state-port"><code>port</code></a>", and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-pathname-start" id="ref-for-is-a-pathname-start①">is a pathname start</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑨">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname②"><code>pathname</code></a>", and 0.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-pathname-start" id="ref-for-is-a-pathname-start①">is a pathname start</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state⑨">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname②"><code>pathname</code></a>", and 0.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix②">is a search prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①⓪">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search①"><code>search</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix②">is a search prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①⓪">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search①"><code>search</code></a>", and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix②">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①①">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash①"><code>hash</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix②">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①①">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash①"><code>hash</code></a>", and 1.</p>
           </ol>
          <dt>"<a data-link-type="dfn" href="#constructor-string-parser-state-port" id="ref-for-constructor-string-parser-state-port①"><code>port</code></a>"
          <dd>
@@ -1746,9 +1746,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the result of running <a data-link-type="dfn" href="#is-a-pathname-start" id="ref-for-is-a-pathname-start②">is a pathname start</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①②">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname③"><code>pathname</code></a>", and 0.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix③">is a search prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①③">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search②"><code>search</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix③">is a search prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①③">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search②"><code>search</code></a>", and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix③">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①④">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash②"><code>hash</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix③">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①④">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash②"><code>hash</code></a>", and 1.</p>
           </ol>
          <dt>"<a data-link-type="dfn" href="#constructor-string-parser-state-pathname" id="ref-for-constructor-string-parser-state-pathname④"><code>pathname</code></a>"
          <dd>
@@ -1756,7 +1756,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
            <li data-md>
             <p>If the result of running <a data-link-type="dfn" href="#is-a-search-prefix" id="ref-for-is-a-search-prefix④">is a search prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①⑤">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search③"><code>search</code></a>", and 1.</p>
            <li data-md>
-            <p>Else if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix④">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①⑥">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash③"><code>hash</code></a>", and 1.</p>
+            <p>Otherwise if the result of running <a data-link-type="dfn" href="#is-a-hash-prefix" id="ref-for-is-a-hash-prefix④">is a hash prefix</a> given <var>parser</var> is true, then run <a data-link-type="dfn" href="#change-state" id="ref-for-change-state①⑥">change state</a> given <var>parser</var>, "<a data-link-type="dfn" href="#constructor-string-parser-state-hash" id="ref-for-constructor-string-parser-state-hash③"><code>hash</code></a>", and 1.</p>
           </ol>
          <dt>"<a data-link-type="dfn" href="#constructor-string-parser-state-search" id="ref-for-constructor-string-parser-state-search④"><code>search</code></a>"
          <dd>
@@ -1937,7 +1937,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list⑨">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②②">token index</a>]'s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type⑨">type</a> is "<a data-link-type="dfn" href="#token-type-open" id="ref-for-token-type-open"><code>open</code></a>", then return true.</p>
      <li data-md>
-      <p>Else return false.</p>
+      <p>Otherwise return false.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is a group close">
@@ -1946,7 +1946,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-list" id="ref-for-constructor-string-parser-token-list①⓪">token list</a>[<var>parser</var>’s <a data-link-type="dfn" href="#constructor-string-parser-token-index" id="ref-for-constructor-string-parser-token-index②③">token index</a>]'s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type①⓪">type</a> is "<a data-link-type="dfn" href="#token-type-close" id="ref-for-token-type-close①"><code>close</code></a>", then return true.</p>
      <li data-md>
-      <p>Else return false.</p>
+      <p>Otherwise return false.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is an IPv6 open">
@@ -2212,7 +2212,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
               </ol>
             </ol>
            <li data-md>
-            <p>Else if <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①③">code point</a> is U+0028 (<code>(</code>):</p>
+            <p>Otherwise if <var>tokenizer</var>’s <a data-link-type="dfn" href="#tokenizer-code-point" id="ref-for-tokenizer-code-point①③">code point</a> is U+0028 (<code>(</code>):</p>
             <ol>
              <li data-md>
               <p>Increment <var>depth</var> by 1.</p>
@@ -2348,7 +2348,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>first</var> is true return the result of checking if <var>code point</var> is contained in the <a data-link-type="dfn" href="https://tc39.es/ecma262/#prod-IdentifierStart" id="ref-for-prod-IdentifierStart">IdentifierStart</a> set of code points.</p>
      <li data-md>
-      <p>Else return the result of checking if <var>code point</var> is contained in the <a data-link-type="dfn" href="https://tc39.es/ecma262/#prod-IdentifierPart" id="ref-for-prod-IdentifierPart">IdentifierPart</a> set of code points.</p>
+      <p>Otherwise return the result of checking if <var>code point</var> is contained in the <a data-link-type="dfn" href="https://tc39.es/ecma262/#prod-IdentifierPart" id="ref-for-prod-IdentifierPart">IdentifierPart</a> set of code points.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="is ASCII">
@@ -2636,9 +2636,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If <var>modifier token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑥">value</a> is "<code>?</code>" then set <var>modifier</var> to "<a data-link-type="dfn" href="#part-modifier-optional" id="ref-for-part-modifier-optional"><code>optional</code></a>".</p>
        <li data-md>
-        <p>Else if <var>modifier token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑦">value</a> is "<code>*</code>" then set <var>modifier</var> to "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more"><code>zero-or-more</code></a>".</p>
+        <p>Otherwise if <var>modifier token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑦">value</a> is "<code>*</code>" then set <var>modifier</var> to "<a data-link-type="dfn" href="#part-modifier-zero-or-more" id="ref-for-part-modifier-zero-or-more"><code>zero-or-more</code></a>".</p>
        <li data-md>
-        <p>Else if <var>modifier token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑧">value</a> is "<code>+</code>" then set <var>modifier</var> to "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more"><code>one-or-more</code></a>".</p>
+        <p>Otherwise if <var>modifier token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑧">value</a> is "<code>+</code>" then set <var>modifier</var> to "<a data-link-type="dfn" href="#part-modifier-one-or-more" id="ref-for-part-modifier-one-or-more"><code>one-or-more</code></a>".</p>
       </ol>
      <li data-md>
       <p>If <var>name token</var> is null and <var>regexp or wildcard token</var> is null and <var>modifier</var> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none②"><code>none</code></a>":</p>
@@ -2674,9 +2674,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>regexp or wildcard token</var> is null, then set <var>regexp value</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-segment-wildcard-regexp" id="ref-for-pattern-parser-segment-wildcard-regexp①">segment wildcard regexp</a>.</p>
      <li data-md>
-      <p>Else if <var>regexp or wildcard token</var>’s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type①⑧">type</a> is "<a data-link-type="dfn" href="#token-type-asterisk" id="ref-for-token-type-asterisk④"><code>asterisk</code></a>", then set <var>regexp value</var> to the <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value">full wildcard regexp value</a>.</p>
+      <p>Otherwise if <var>regexp or wildcard token</var>’s <a data-link-type="dfn" href="#token-type" id="ref-for-token-type①⑧">type</a> is "<a data-link-type="dfn" href="#token-type-asterisk" id="ref-for-token-type-asterisk④"><code>asterisk</code></a>", then set <var>regexp value</var> to the <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value">full wildcard regexp value</a>.</p>
      <li data-md>
-      <p>Else set <var>regexp value</var> to <var>regexp or wildcard token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑨">value</a>.</p>
+      <p>Otherwise set <var>regexp value</var> to <var>regexp or wildcard token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value⑨">value</a>.</p>
      <li data-md>
       <p>Let <var>type</var> be "<a data-link-type="dfn" href="#part-type-regexp" id="ref-for-part-type-regexp"><code>regexp</code></a>".</p>
       <p class="note" role="note">Next, we convert <var>regexp value</var> into a <a data-link-type="dfn" href="#part" id="ref-for-part②⓪">part</a> <a data-link-type="dfn" href="#part-type" id="ref-for-part-type②">type</a>.  We make sure to go to a regular expression first so that an equivalent "<a data-link-type="dfn" href="#token-type-regexp" id="ref-for-token-type-regexp⑦"><code>regexp</code></a>" <a data-link-type="dfn" href="#token" id="ref-for-token③⑥">token</a> will be treated the same as a "<a data-link-type="dfn" href="#token-type-name" id="ref-for-token-type-name⑧"><code>name</code></a>" or "<a data-link-type="dfn" href="#token-type-asterisk" id="ref-for-token-type-asterisk⑤"><code>asterisk</code></a>" <a data-link-type="dfn" href="#token" id="ref-for-token③⑦">token</a>.</p>
@@ -2689,7 +2689,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
         <p>Set <var>regexp value</var> to the empty string.</p>
       </ol>
      <li data-md>
-      <p>Else if <var>regexp value</var> is the <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value①">full wildcard regexp value</a>:</p>
+      <p>Otherwise if <var>regexp value</var> is the <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value①">full wildcard regexp value</a>:</p>
       <ol>
        <li data-md>
         <p>Set <var>type</var> to "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard"><code>full-wildcard</code></a>".</p>
@@ -2702,7 +2702,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>If <var>name token</var> is not null, then set <var>name</var> to <var>name token</var>’s <a data-link-type="dfn" href="#token-value" id="ref-for-token-value①⓪">value</a>.</p>
      <li data-md>
-      <p>Else if <var>regexp or wildcard token</var> is not null:</p>
+      <p>Otherwise if <var>regexp or wildcard token</var> is not null:</p>
       <ol>
        <li data-md>
         <p>Set <var>name</var> to <var>parser</var>’s <a data-link-type="dfn" href="#pattern-parser-next-numeric-name" id="ref-for-pattern-parser-next-numeric-name">next numeric name</a>.</p>
@@ -2752,7 +2752,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
          <li data-md>
           <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier⑦">modifier</a> is "<a data-link-type="dfn" href="#part-modifier-none" id="ref-for-part-modifier-none③"><code>none</code></a>", then append the result of running <a data-link-type="dfn" href="#escape-a-regexp-string" id="ref-for-escape-a-regexp-string①">escape a regexp string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value③">value</a> to the end of <var>result</var>.</p>
          <li data-md>
-          <p>Else:</p>
+          <p>Otherwise:</p>
           <div class="note" role="note">
            <p>A "<a data-link-type="dfn" href="#part-type-fixed-text" id="ref-for-part-type-fixed-text④"><code>fixed-text</code></a>" <var>part</var> with a modifier uses a non capturing group.  It uses the following form. </p>
            <p><code>(?:&lt;fixed text>)&lt;modifier></code> </p>
@@ -2780,7 +2780,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑤">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard①"><code>segment-wildcard</code></a>", then set <var>regexp value</var> to the result of running <a data-link-type="dfn" href="#generate-a-segment-wildcard-regexp" id="ref-for-generate-a-segment-wildcard-regexp①">generate a segment wildcard regexp</a> given <var>options</var>.</p>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑥">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard①"><code>full-wildcard</code></a>", then set <var>regexp value</var> to <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value②">full wildcard regexp value</a>.</p>
+        <p>Otherwise if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type⑥">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard①"><code>full-wildcard</code></a>", then set <var>regexp value</var> to <a data-link-type="dfn" href="#full-wildcard-regexp-value" id="ref-for-full-wildcard-regexp-value②">full wildcard regexp value</a>.</p>
        <li data-md>
         <p>If <var>part</var>’s <a data-link-type="dfn" href="#part-prefix" id="ref-for-part-prefix①">prefix</a> is the empty string and <var>part</var>’s <a data-link-type="dfn" href="#part-suffix" id="ref-for-part-suffix①">suffix</a> is the empty string:</p>
         <div class="note" role="note">
@@ -2803,7 +2803,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>Append the result of running <a data-link-type="dfn" href="#convert-a-modifier-to-a-string" id="ref-for-convert-a-modifier-to-a-string①">convert a modifier to a string</a> given <var>part</var>’s <a data-link-type="dfn" href="#part-modifier" id="ref-for-part-modifier①⓪">modifier</a> to the end of <var>result</var>.</p>
           </ol>
          <li data-md>
-          <p>Else:</p>
+          <p>Otherwise:</p>
           <ol>
            <li data-md>
             <p>Append "<code>((?:</code>" to the end of <var>result</var>.</p>
@@ -2996,7 +2996,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
             <p>Set <var>needs grouping</var> to true if the result of running <a data-link-type="dfn" href="#is-a-valid-name-code-point" id="ref-for-is-a-valid-name-code-point①">is a valid name code point</a> given <var>next part</var>’s <a data-link-type="dfn" href="#part-value" id="ref-for-part-value⑧">value</a>'s first <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#code-point" id="ref-for-code-point①">code point</a> and the boolean false is true.</p>
           </ol>
          <li data-md>
-          <p>Else:</p>
+          <p>Otherwise:</p>
           <ol>
            <li data-md>
             <p>Set <var>needs grouping</var> to true if <var>next part</var>’s <a data-link-type="dfn" href="#part-name" id="ref-for-part-name⑥">name</a>[0] is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-digit" id="ref-for-ascii-digit①">ASCII digit</a>.</p>
@@ -3037,7 +3037,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①②">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard③"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
+        <p>Otherwise if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①②">type</a> is "<a data-link-type="dfn" href="#part-type-segment-wildcard" id="ref-for-part-type-segment-wildcard③"><code>segment-wildcard</code></a>" and <var>custom name</var> is false:</p>
         <ol>
          <li data-md>
           <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
@@ -3047,7 +3047,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           <p>Append "<code>)</code>" to the end of <var>result</var>.</p>
         </ol>
        <li data-md>
-        <p>Else if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①③">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard②"><code>full-wildcard</code></a>":</p>
+        <p>Otherwise if <var>part</var>’s <a data-link-type="dfn" href="#part-type" id="ref-for-part-type①③">type</a> is "<a data-link-type="dfn" href="#part-type-full-wildcard" id="ref-for-part-type-full-wildcard②"><code>full-wildcard</code></a>":</p>
         <ol>
          <li data-md>
           <p>If <var>custom name</var> is false and one of the following is true:</p>
@@ -3060,7 +3060,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
           </ul>
            then append "<code>*</code>" to the end of <var>result</var>. 
          <li data-md>
-          <p>Else:</p>
+          <p>Otherwise:</p>
           <ol>
            <li data-md>
             <p>Append "<code>(</code>" to the end of <var>result</var>.</p>
