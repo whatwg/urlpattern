@@ -36,16 +36,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: IdentifierStart; url: #prod-IdentifierStart
   type: interface
     text: RegExp; url: #sec-regexp-regular-expression-objects
-spec: url; urlPrefix: https://url.spec.whatwg.org/
-  type: dfn
-    text: default port; url: #default-port
-    text: fragment state; url: #fragment-state
-    text: hostname state; url: #hostname-state
-    text: path start state; url: #path-start-state
-    text: port state; url: #port-state
-    text: query state; url: #query-state
-    text: special scheme; url: #special-scheme
-    text: scheme start state; url: #scheme-start-state
 </pre>
 
 <style>
@@ -1224,7 +1214,7 @@ To <dfn>generate a segment wildcard regexp</dfn> given an [=/options=] |options|
   1. Append the result of running [=escape a regexp string=] given |options|'s [=options/delimiter code point=] to the end of |result|.
   1. Append "`]+?`" to the end of |result|.
   1. Return |result|.
-</div algorithm>
+</div>
 
 <div algorithm>
 To <dfn>try to consume a token</dfn> given a [=pattern parser=] |parser| and [=token/type=] |type|:
@@ -1451,7 +1441,7 @@ To <dfn>escape a regexp string</dfn> given a string |input|:
       <p>then append "<code>\</code>" to the end of |result|.
     1. Append |c| to the end of |result|.
   1. Return |result|.
-</div algorithm>
+</div>
 
 <h3 id=converting-part-lists-to-pattern-strings>Converting Part Lists to Pattern Strings</h3>
 
@@ -1782,35 +1772,35 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |strippedValue| be the given |value| with a single trailing U+003A (`:`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a protocol=] given |strippedValue|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process username for init</dfn> given a string |value| and a string |type|:
 
   1. If |type| is "`pattern`" then return |value|.
   1. Return the result of running [=canonicalize a username=] given |value|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process password for init</dfn> given a string |value| and a string |type|:
 
   1. If |type| is "`pattern`" then return |value|.
   1. Return the result of running [=canonicalize a password=] given |value|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process hostname for init</dfn> given a string |value| and a string |type|:
 
   1. If |type| is "`pattern`" then return |value|.
   1. Return the result of running [=canonicalize a hostname=] given |value|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process port for init</dfn> given a string |portValue|, a string |protocolValue|, and a string |type|:
 
   1. If |type| is "`pattern`" then return |portValue|.
   1. Return the result of running [=canonicalize a port=] given |portValue| and |protocolValue|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process pathname for init</dfn> given a string |pathnameValue|, a string |protocolValue|, and a string |type|:
@@ -1819,7 +1809,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |protocolValue| is a [=special scheme=] or the empty string, then return the result of running [=canonicalize a pathname=] given |pathnameValue|.
     <p class=note>If the |protocolValue| is the empty string then no value was provided for {{URLPatternInit/protocol}} in the constructor dictionary.  Normally we do not special case empty string dictionary values, but in this case we treat it as a [=special scheme=] in order to default to the most common pathname canonicalization.
   1. Return the result of running [=canonicalize an opaque pathname=] given |pathnameValue|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process search for init</dfn> given a string |value| and a string |type|:
@@ -1827,7 +1817,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |strippedValue| be the given |value| with a single leading U+003F (`?`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a search=] given |strippedValue|.
-</div algorithm>
+</div>
 
 <div algorithm>
   To <dfn>process hash for init</dfn> given a string |value| and a string |type|:
@@ -1835,4 +1825,4 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |strippedValue| be the given |value| with a single leading U+0023 (`#`) removed, if any.
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a hash=] given |strippedValue|.
-</div algorithm>
+</div>
