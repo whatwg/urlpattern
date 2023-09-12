@@ -288,7 +288,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
     1. Set |init| to the result of running [=parse a constructor string=] given |input|.
     1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] is null, then throw a {{TypeError}}.
     1. Set |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
-  1. Else:
+  1. Otherwise:
     1. [=Assert=]: |input| is a {{URLPatternInit}}.
     1. If |baseURL| is not null, then throw a {{TypeError}}.
     1. Set |init| to |input|.
@@ -298,13 +298,13 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Set |this|'s [=URLPattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
   1. Set |this|'s [=URLPattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
   1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
-  1. Else, set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
+  1. Otherwise, set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set |this|'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
   1. If the result of running [=protocol component matches a special scheme=] given |this|'s [=URLPattern/protocol component=] is true, then:
     1. Let |pathCompileOptions| be copy of the [=pathname options=] with the the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
     1. Set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
-  1. Else set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
+  1. Otherwise set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
   1. Set |this|'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
   1. Set |this|'s [=URLPattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and |compileOptions|.
 </div>
@@ -389,7 +389,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |flags| be an empty string.
   1. If |options|'s [=options/ignore case=] is true then set |flags| to "`ui`".
-  1. Else set |flags| to "`u`"
+  1. Otherwise set |flags| to "`u`"
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
     <p class="note allow-2119">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
@@ -420,7 +420,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
     1. Set |pathname| to |applyResult|["{{URLPatternInit/pathname}}"].
     1. Set |search| to |applyResult|["{{URLPatternInit/search}}"].
     1. Set |hash| to |applyResult|["{{URLPatternInit/hash}}"].
-  1. Else:
+  1. Otherwise:
     1. Let |baseURL| be null.
     1. If |baseURLString| was given, then:
       1. Set |baseURL| to the result of [=URL parser|parsing=] |baseURLString|.
@@ -566,10 +566,10 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         1. Run [=rewind=] given |parser|.
           <p class=note>We next determine at which component the relative pattern begins.  Relative pathnames are most common, but URLs and URLPattern constructor strings can begin with the search or hash components as well.
         1. If the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>" and 1.
-        1. Else if the result of running [=is a search prefix=] given |parser| is true:
+        1. Otherwise if the result of running [=is a search prefix=] given |parser| is true:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>" and 1.
           1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
-        1. Else:
+        1. Otherwise:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>" and 0.
           1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/search}}"] to the empty string.
           1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
@@ -592,7 +592,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
       1. [=Continue=].
     1. If |parser|'s [=constructor string parser/group depth=] is greater than 0:
       1. If the result of running [=is a group close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/group depth=] by 1.
-      1. Else:
+      1. Otherwise:
         1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
         1. [=Continue=].
     1. Switch on |parser|'s [=constructor string parser/state=] and run the associated steps:
@@ -621,13 +621,13 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
             1. If the result of running [=next is authority slashes=] given |parser| is true:
               1. Set |next state| to "<a for="constructor string parser/state">`authority`</a>".
               1. Set |skip| to 3.
-            1. Else if |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
+            1. Otherwise if |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |next state| to "<a for="constructor string parser/state">`authority`</a>".
             1. Run [=change state=] given |parser|, |next state|, and |skip|.
         </dd>
         <dt>"<a for="constructor string parser/state">`authority`</a>"</dt>
         <dd>
           1. If the result of running [=is an identity terminator=] given |parser| is true, then run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`username`</a>".
-          1. Else if any of the following are true:
+          1. Otherwise if any of the following are true:
             <ul>
               <li>the result of running [=is a pathname start=] given |parser|;</li>
               <li>the result of running [=is a search prefix=] given |parser|; or</li>
@@ -638,7 +638,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dt>"<a for="constructor string parser/state">`username`</a>"</dt>
         <dd>
           1. If the result of running [=is a password prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`password`</a>", and 1.
-          1. Else if the result of running [=is an identity terminator=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hostname`</a>", and 1.
+          1. Otherwise if the result of running [=is an identity terminator=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hostname`</a>", and 1.
         </dd>
         <dt>"<a for="constructor string parser/state">`password`</a>"</dt>
         <dd>
@@ -647,22 +647,22 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dt>"<a for="constructor string parser/state">`hostname`</a>"</dt>
         <dd>
           1. If the the result of running [=is an IPv6 open=] given |parser| is true, then increment |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
-          1. Else if the the result of running [=is an IPv6 close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
-          1. Else if the result of running [=is a port prefix=] given |parser| is true and |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] is zero, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
-          1. Else if the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
-          1. Else if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
-          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+          1. Otherwise if the the result of running [=is an IPv6 close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
+          1. Otherwise if the result of running [=is a port prefix=] given |parser| is true and |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] is zero, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
+          1. Otherwise if the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
+          1. Otherwise if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
+          1. Otherwise if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
         </dd>
         <dt>"<a for="constructor string parser/state">`port`</a>"</dt>
         <dd>
           1. If the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
-          1. Else if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
-          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+          1. Otherwise if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
+          1. Otherwise if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
         </dd>
         <dt>"<a for="constructor string parser/state">`pathname`</a>"</dt>
         <dd>
           1. If the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
-          1. Else if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
+          1. Otherwise if the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>", and 1.
         </dd>
         <dt>"<a for="constructor string parser/state">`search`</a>"</dt>
         <dd>
@@ -796,13 +796,13 @@ To run <dfn>is a hash prefix</dfn> given a [=constructor string parser=] |parser
 <div algorithm>
 To run <dfn>is a group open</dfn> given a [=constructor string parser=] |parser|:
   1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`open`</a>", then return true.
-  1. Else return false.
+  1. Otherwise return false.
 </div>
 
 <div algorithm>
 To run <dfn>is a group close</dfn> given a [=constructor string parser=] |parser|:
   1. If |parser|'s [=constructor string parser/token list=][|parser|'s [=constructor string parser/token index=]]'s [=token/type=] is "<a for=token/type>`close`</a>", then return true.
-  1. Else return false.
+  1. Otherwise return false.
 </div>
 
 <div algorithm>
@@ -969,7 +969,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
           1. If |depth| is 0:
             1. Set |regexp position| to |tokenizer|'s [=tokenizer/next index=].
             1. [=Break=].
-        1. Else if |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
+        1. Otherwise if |tokenizer|'s [=tokenizer/code point=] is U+0028 (`(`):
           1. Increment |depth| by 1.
           1. If |regexp position| equals |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=] &minus; 1:
             1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
@@ -1048,7 +1048,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   To perform <dfn>is a valid name code point</dfn> given a Unicode |code point| and a boolean |first|:
 
   1. If |first| is true return the result of checking if |code point| is contained in the [=IdentifierStart=] set of code points.
-  1. Else return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
+  1. Otherwise return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
 </div>
 
 <div algorithm>
@@ -1279,8 +1279,8 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
   1. Let |modifier| be "<a for=part/modifier>`none`</a>".
   1. If |modifier token| is not null:
     1. If |modifier token|'s [=token/value=] is "`?`" then set |modifier| to "<a for=part/modifier>`optional`</a>".
-    1. Else if |modifier token|'s [=token/value=] is "`*`" then set |modifier| to "<a for=part/modifier>`zero-or-more`</a>".
-    1. Else if |modifier token|'s [=token/value=] is "`+`" then set |modifier| to "<a for=part/modifier>`one-or-more`</a>".
+    1. Otherwise if |modifier token|'s [=token/value=] is "`*`" then set |modifier| to "<a for=part/modifier>`zero-or-more`</a>".
+    1. Otherwise if |modifier token|'s [=token/value=] is "`+`" then set |modifier| to "<a for=part/modifier>`one-or-more`</a>".
   1. If |name token| is null and |regexp or wildcard token| is null and |modifier| is "<a for=part/modifier>`none`</a>":
     <p class=note>This was a "`{foo}`" grouping.  We add this to the [=pattern parser/pending fixed value=] so that it will be combined with any previous or subsequent text.</p>
     1. Append |prefix| to the end of |parser|'s [=pattern parser/pending fixed value=].
@@ -1297,20 +1297,20 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
   1. Let |regexp value| be the empty string.
     <p class=note>Next, we convert the |regexp or wildcard token| into a regular expression.
   1. If |regexp or wildcard token| is null, then set |regexp value| to |parser|'s [=pattern parser/segment wildcard regexp=].
-  1. Else if |regexp or wildcard token|'s [=token/type=] is "<a for=token/type>`asterisk`</a>", then set |regexp value| to the [=full wildcard regexp value=].
-  1. Else set |regexp value| to |regexp or wildcard token|'s [=token/value=].
+  1. Otherwise if |regexp or wildcard token|'s [=token/type=] is "<a for=token/type>`asterisk`</a>", then set |regexp value| to the [=full wildcard regexp value=].
+  1. Otherwise set |regexp value| to |regexp or wildcard token|'s [=token/value=].
   1. Let |type| be "<a for=part/type>`regexp`</a>".
     <p class=note>Next, we convert |regexp value| into a [=part=] [=part/type=].  We make sure to go to a regular expression first so that an equivalent "<a for=token/type>`regexp`</a>" [=token=] will be treated the same as a "<a for=token/type>`name`</a>" or "<a for=token/type>`asterisk`</a>" [=token=].</p>
   1. If |regexp value| is |parser|'s [=pattern parser/segment wildcard regexp=]:
     1. Set |type| to "<a for=part/type>`segment-wildcard`</a>".
     1. Set |regexp value| to the empty string.
-  1. Else if |regexp value| is the [=full wildcard regexp value=]:
+  1. Otherwise if |regexp value| is the [=full wildcard regexp value=]:
     1. Set |type| to "<a for=part/type>`full-wildcard`</a>".
     1. Set |regexp value| to the empty string.
   1. Let |name| be the empty string.
     <p class=note>Next, we determine the [=part=] [=part/name=].  This can be explicitly provided by a "<a for=token/type>`name`</a>" [=token=] or be automatically assigned.</a>
   1. If |name token| is not null, then set |name| to |name token|'s [=token/value=].
-  1. Else if |regexp or wildcard token| is not null:
+  1. Otherwise if |regexp or wildcard token| is not null:
     1. Set |name| to |parser|'s [=pattern parser/next numeric name=].
     1. Increment |parser|'s [=pattern parser/next numeric name=] by 1.
   1. If the result of running [=is a duplicate name=] given |parser| and |name| is true, then throw a {{TypeError}}.
@@ -1339,7 +1339,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
   1. [=list/For each=] |part| of |part list|:
     1. If |part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>":
       1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>", then append the result of running [=escape a regexp string=] given |part|'s [=part/value=] to the end of |result|.
-      1. Else:
+      1. Otherwise:
         <div class=note>
         <p>A "<a for=part/type>`fixed-text`</a>" |part| with a modifier uses a non capturing group.  It uses the following form.
         <p>`(?:<fixed text>)<modifier>`
@@ -1354,7 +1354,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
       <p class=note>We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with [path-to-regexp](https://github.com/pillarjs/path-to-regexp) which has indicated its unlikely to switch to using named capture groups.
     1. Let |regexp value| be |part|'s [=part/value=].
     1. If |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", then set |regexp value| to the result of running [=generate a segment wildcard regexp=] given |options|.
-    1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
+    1. Otherwise if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
     1. If |part|'s [=part/prefix=] is the empty string and |part|'s [=part/suffix=] is the empty string:
       <div class=note>
       <p class=allow-2119>If there is no [=part/prefix=] or [=part/suffix=] then generation depends on the modifier.  If there is no modifier or just the optional modifier, it uses the following simple form:
@@ -1367,7 +1367,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
         1. Append |regexp value| to the end of |result|.
         1. Append "`)`" to the end of |result|.
         1. Append the result of running [=convert a modifier to a string=] given |part|'s [=part/modifier=] to the end of |result|.
-      1. Else:
+      1. Otherwise:
         1. Append "`((?:`" to the end of |result|.
         1. Append |regexp value| to the end of |result|.
         1. Append "`)`" to the end of |result|.
@@ -1482,7 +1482,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       then:
       1. If |next part|'s [=part/type=] is "<a for=part/type>`fixed-text`</a>":
         1. Set |needs grouping| to true if the result of running [=is a valid name code point=] given |next part|'s [=part/value=]'s first [=/code point=] and the boolean false is true.
-      1. Else:
+      1. Otherwise:
         1. Set |needs grouping| to true if |next part|'s [=part/name=][0] is an [=ASCII digit=].
     1. If all of the following are true:
       <ul>
@@ -1503,11 +1503,11 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
       1. Append "`(`" to the end of |result|.
       1. Append |part|'s [=part/value=] to the end of |result|.
       1. Append "`)`" to the end of |result|.
-    1. Else if |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>" and |custom name| is false:
+    1. Otherwise if |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>" and |custom name| is false:
       1. Append "`(`" to the end of |result|.
       1. Append the result of running [=generate a segment wildcard regexp=] given |options| to the end of |result|.
       1. Append "`)`" to the end of |result|.
-    1. Else if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>":
+    1. Otherwise if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>":
       1. If |custom name| is false and one of the following is true:
         <ul>
           <li>|previous part| is null; or</li>
@@ -1517,7 +1517,7 @@ To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] 
           <li>|part|'s [=part/prefix=] is not the empty string</li>
         </ul>
         then append "`*`" to the end of |result|.
-      1. Else:
+      1. Otherwise:
         1. Append "`(`" to the end of |result|.
         1. Append [=full wildcard regexp value=] to the end of |result|.
         1. Append "`)`" to the end of |result|.
