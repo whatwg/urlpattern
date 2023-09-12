@@ -26,16 +26,9 @@ spec:webidl; type:dfn; text:record
 
 <pre class="anchors">
 spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
-  type: abstract-op
-    text: Get; url: #sec-get-o-p
-    text: RegExpBuiltinExec; url: #sec-regexpbuiltinexec
-    text: RegExpCreate; url: #sec-regexpcreate
-    text: ToString; url: #sec-tostring
   type: dfn
     text: IdentifierPart; url: #prod-IdentifierPart
     text: IdentifierStart; url: #prod-IdentifierStart
-  type: interface
-    text: RegExp; url: #sec-regexp-regular-expression-objects
 </pre>
 
 <style>
