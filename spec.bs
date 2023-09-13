@@ -112,21 +112,21 @@ It can be constructed using a string for each component, or from a shorthand str
   The shorthand "`https://example.com/:category/*`" corresponds to the following components:
 
   <dl class="props">
-    :  [=protocol component|protocol=]
+    :  [=URLPattern/protocol component|protocol=]
     :: "`https`"
-    :  [=username component|username=]
+    :  [=URLPattern/username component|username=]
     :: ""
-    :  [=password component|password=]
+    :  [=URLPattern/password component|password=]
     :: ""
-    :  [=hostname component|hostname=]
+    :  [=URLPattern/hostname component|hostname=]
     :: "`example.com`"
-    :  [=port component|port=]
+    :  [=URLPattern/port component|port=]
     :: ""
-    :  [=pathname component|pathname=]
+    :  [=URLPattern/pathname component|pathname=]
     :: "`/:category/*`"
-    :  [=search component|search=]
+    :  [=URLPattern/search component|search=]
     :: ""
-    :  [=hash component|hash=]
+    :  [=URLPattern/hash component|hash=]
     :: ""
   </dl>
 
