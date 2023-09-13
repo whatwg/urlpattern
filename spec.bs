@@ -104,7 +104,7 @@ p + dl.props { margin-top: -0.5em; }
 
 <h2 id=urlpattern-class>The {{URLPattern}} class </h2>
 
-A {{URLPattern}} consists of several [=components=], each of which represents a [=pattern string|pattern=] which could be matched against the corresponding component of a [=URL=].
+A {{URLPattern}} consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
 It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
 
@@ -875,7 +875,7 @@ To <dfn>compute protocol matches a special scheme flag</dfn> given a [=construct
 
 A <dfn>pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn for="pattern string">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular [path-to-regexp](https://github.com/pillarjs/path-to-regexp) JavaScript library.
 
-It can be [=parse a pattern string|parsed=] to produce a [=part list=] which describes, in order, what must appear in a component string for the pattern string to match.
+It can be [=parse a pattern string|parsed=] to produce a [=/part list=] which describes, in order, what must appear in a component string for the pattern string to match.
 
 <div class="example">
   Pattern strings can contain capture groups, which by default match the shortest possible string, up to a component-specific separator (`/` in the pathname, `.` in the hostname). For example, the pathname pattern "`/blog/:title`" will match "`/blog/hello-world`" but not "`/blog/2012/02"`.
