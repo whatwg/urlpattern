@@ -1361,9 +1361,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <li data-md>
       <p>Let <var>flags</var> be an empty string.</p>
      <li data-md>
-      <p>If <var>options</var>’s <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case②">ignore case</a> is true then set <var>flags</var> to "<code>ui</code>".</p>
+      <p>If <var>options</var>’s <a data-link-type="dfn" href="#options-ignore-case" id="ref-for-options-ignore-case②">ignore case</a> is true then set <var>flags</var> to "<code>vi</code>".</p>
      <li data-md>
-      <p>Otherwise set <var>flags</var> to "<code>u</code>"</p>
+      <p>Otherwise set <var>flags</var> to "<code>v</code>"</p>
      <li data-md>
       <p>Let <var>regular expression</var> be <a data-link-type="abstract-op" href="https://tc39.es/ecma262/multipage/text-processing.html#sec-regexpcreate" id="ref-for-sec-regexpcreate">RegExpCreate</a>(<var>regular expression string</var>, <var>flags</var>).  If this throws an exception, catch it, and throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#exceptiondef-typeerror" id="ref-for-exceptiondef-typeerror②">TypeError</a></code>.</p>
       <p class="note allow-2119" role="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the <a data-link-type="dfn" href="#part-list" id="ref-for-part-list">part list</a> when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the <a data-link-type="dfn" href="#compile-a-component" id="ref-for-compile-a-component①⓪">compile a component</a> algorithm so an error can be thrown if they are invalid. </p>
