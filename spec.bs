@@ -878,11 +878,11 @@ A <dfn>pattern string</dfn> is a string that is written to match a set of target
 It can be [=parse a pattern string|parsed=] to produce a [=/part list=] which describes, in order, what must appear in a component string for the pattern string to match.
 
 <div class="example">
-  Pattern strings can contain capture groups, which by default match the shortest possible string, up to a component-specific separator (`/` in the pathname, `.` in the hostname). For example, the pathname pattern "`/blog/:title`" will match "`/blog/hello-world`" but not "`/blog/2012/02"`.
+  Pattern strings can contain capture groups, which by default match the shortest possible string, up to a component-specific separator (`/` in the pathname, `.` in the hostname). For example, the pathname pattern "`/blog/:title`" will match "`/blog/hello-world`" but not "`/blog/2012/02`".
 
   A regular expression can also be used instead, so the pathname pattern "`/blog/:year(\\d+)/:month(\\d+)`" will match "`/blog/2012/02`".
 
-  A group can also be made optional, or repeated, by using a modifier. For example, the pathname pattern "`/products/:id?"` will match both "`/products`" and "`/products/2`" (but not "`/products/`"). In the pathname specifically, groups automatically require a leading `/`; to avoid this, the group can be explicitly deliminated, as in the pathname pattern "`/products/{:id}?"`.
+  A group can also be made optional, or repeated, by using a modifier. For example, the pathname pattern "`/products/:id?"` will match both "`/products`" and "`/products/2`" (but not "`/products/`"). In the pathname specifically, groups automatically require a leading `/`; to avoid this, the group can be explicitly deliminated, as in the pathname pattern "`/products/{:id}?`".
 
   A full wildcard `*` can also be used to match as much as possible, as in the pathname pattern "`/products/*`".
 </div>
