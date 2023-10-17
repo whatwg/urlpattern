@@ -1,21 +1,10 @@
 <pre class="metadata">
-Title: URLPattern API
+Group: WHATWG
+H1: URL Pattern
 Shortname: urlpattern
-Repository: WICG/urlpattern
-Inline Github Issues: true
-Group: WICG
-Status: CG-DRAFT
-Level: 1
-URL: https://wicg.github.io/urlpattern/
-Boilerplate: omit conformance, omit feedback-header
-Editor: Ben Kelly, Google https://www.google.com/, wanderview@chromium.org
-Abstract: The URLPattern API provides a web platform primitive for matching URLs based on a convenient pattern syntax.
-Status Text: This proposal will hopefully move into the WHATWG URL workstream in the future.
-!Participate: <a href="https://github.com/WICG/urlpattern">GitHub WICG/urlpattern</a> (<a href="https://github.com/WICG/urlpattern/issues/new">new issue</a>, <a href="https://github.com/WICG/urlpattern/issues?state=open">open issues</a>)
-!Commits: <a href="https://github.com/WICG/urlpattern/commits/main/spec.bs">GitHub spec.bs commits</a>
-Complain About: accidental-2119 yes, missing-example-ids yes
+Text Macro: TWITTER urlpatternapi
+Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
-Default Biblio Status: current
 Markup Shorthands: markdown yes
 </pre>
 
@@ -31,113 +20,55 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
     text: IdentifierStart; url: #prod-IdentifierStart
 </pre>
 
-<style>
-.selected-text-file-an-issue {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.8);
-  font-size: smaller;
-  padding: 4px 10px;
-  z-index: 4;
-}
-
-dfn var {
-  font-style: italic;
-}
-
-table {
-  margin: 1em 0;
-}
-
-/* WHATWG-style <hr>s, instead of WICG-style. Specific selector is necessary to override WICG styles. */
-:not(.head) > :not(.head) + hr {
-  display: block;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 3em 0;
-  height: auto;
-}
-:not(.head) > :not(.head) + hr::before {
-  content: none;
-}
-
-/* domintro from https://resources.whatwg.org/standard.css */
-.domintro {
-  position: relative;
-  color: green;
-  background: #DDFFDD;
-  margin: 2.5em 0 2em 0;
-  padding: 1.5em 1em 0.5em 2em;
-}
-
-.domintro dt, .domintro dt * {
-  color: black;
-  font-size: inherit;
-}
-.domintro dd {
-  margin: 0.5em 0 1em 2em; padding: 0;
-}
-.domintro dd p {
-  margin: 0.5em 0;
-}
-.domintro::before {
-  content: 'For web developers (non-normative)';
-  background: green;
-  color: white;
-  padding: 0.15em 0.25em;
-  font-style: normal;
-  position: absolute;
-  top: -0.8em;
-  left: -0.8em;
-}
-
-/* props from https://resources.whatwg.org/standard.css */
-dl.props { display: grid; grid-template-columns: max-content auto; row-gap: 0.25em; column-gap: 1em; }
-dl.props > dt { grid-column-start: 1; margin: 0; }
-dl.props > dd { grid-column-start: 2; margin: 0; }
-p + dl.props { margin-top: -0.5em; }
-</style>
-
-<script src="https://resources.whatwg.org/file-issue.js" async></script>
-
-<h2 id=urlpattern-class>The {{URLPattern}} class </h2>
+<h2 id=urlpattern-class>The {{URLPattern}} class</h2>
 
 A {{URLPattern}} consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
 It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
 
-<div class="example">
-  The shorthand "`https://example.com/:category/*`" corresponds to the following components:
+<div class="example" id="example-intro">
+  <p>The shorthand "`https://example.com/:category/*`" corresponds to the following components:
 
   <dl class="props">
-    :  [=URLPattern/protocol component|protocol=]
-    :: "`https`"
-    :  [=URLPattern/username component|username=]
-    :: ""
-    :  [=URLPattern/password component|password=]
-    :: ""
-    :  [=URLPattern/hostname component|hostname=]
-    :: "`example.com`"
-    :  [=URLPattern/port component|port=]
-    :: ""
-    :  [=URLPattern/pathname component|pathname=]
-    :: "`/:category/*`"
-    :  [=URLPattern/search component|search=]
-    :: ""
-    :  [=URLPattern/hash component|hash=]
-    :: ""
+    <dt>[=URLPattern/protocol component|protocol=]
+    <dd>"`https`"
+
+    <dt>[=URLPattern/username component|username=]
+    <dd>""
+
+    <dt>[=URLPattern/password component|password=]
+    <dd>""
+
+    <dt>[=URLPattern/hostname component|hostname=]
+    <dd>"`example.com`"
+
+    <dt>[=URLPattern/port component|port=]
+    <dd>""
+
+    <dt>[=URLPattern/pathname component|pathname=]
+    <dd>"`/:category/*`"
+
+    <dt>[=URLPattern/search component|search=]
+    <dd>""
+
+    <dt>[=URLPattern/hash component|hash=]
+    <dd>""
   </dl>
 
   It matches the following URLs:
-  * `https://example.com/products/`
-  * `https://example.com/blog/our-greatest-product-ever`
+
+  <ul class="brief">
+    * `https://example.com/products/`
+    * `https://example.com/blog/our-greatest-product-ever`
+  </ul>
 
   It does not match the following URLs:
-  * `https://example.com/`
-  * `http://example.com/products/`
-  * `https://example.com:8443/blog/our-greatest-product-ever`
+
+  <ul class="brief">
+    * `https://example.com/`
+    * `http://example.com/products/`
+    * `https://example.com:8443/blog/our-greatest-product-ever`
+  </ul>
 </div>
 
 <xmp class="idl">
@@ -536,7 +467,7 @@ The <dfn>pathname options</dfn> is an [=options=] [=struct=] with [=options/deli
   1. Return false.
 </div>
 
-<h3 id=constructor-string-parsing>Constructor String Parsing</h3>
+<h3 id=constructor-string-parsing>Constructor string parsing</h3>
 
 A <dfn export>constructor string parser</dfn> is a [=struct=].
 
@@ -877,17 +808,17 @@ A <dfn>pattern string</dfn> is a string that is written to match a set of target
 
 It can be [=parse a pattern string|parsed=] to produce a [=/part list=] which describes, in order, what must appear in a component string for the pattern string to match.
 
-<div class="example">
+<div class="example" id="example-pattern-strings">
   Pattern strings can contain capture groups, which by default match the shortest possible string, up to a component-specific separator (`/` in the pathname, `.` in the hostname). For example, the pathname pattern "`/blog/:title`" will match "`/blog/hello-world`" but not "`/blog/2012/02`".
 
   A regular expression can also be used instead, so the pathname pattern "`/blog/:year(\\d+)/:month(\\d+)`" will match "`/blog/2012/02`".
 
-  A group can also be made optional, or repeated, by using a modifier. For example, the pathname pattern "`/products/:id?"` will match both "`/products`" and "`/products/2`" (but not "`/products/`"). In the pathname specifically, groups automatically require a leading `/`; to avoid this, the group can be explicitly deliminated, as in the pathname pattern "`/products/{:id}?`".
+  A group can also be made <span class=allow-2119>optional</span>, or repeated, by using a modifier. For example, the pathname pattern "`/products/:id?"` will match both "`/products`" and "`/products/2`" (but not "`/products/`"). In the pathname specifically, groups automatically require a leading `/`; to avoid this, the group can be explicitly deliminated, as in the pathname pattern "`/products/{:id}?`".
 
   A full wildcard `*` can also be used to match as much as possible, as in the pathname pattern "`/products/*`".
 </div>
 
-<h3 id=parsing-patterns>Parsing Patterns</h3>
+<h3 id=parsing-patterns>Parsing patterns</h3>
 
 <h4 id=tokens>Tokens</h4>
 
@@ -1376,7 +1307,7 @@ To determine if a value <dfn>is a duplicate name</dfn> given a [=pattern parser=
   1. Return false.
 </div>
 
-<h3 id=converting-part-lists-to-regular-expressions>Converting Part Lists to Regular Expressions</h3>
+<h3 id=converting-part-lists-to-regular-expressions>Converting part lists to regular expressions</h3>
 
 <div algorithm>
 To <dfn export>generate a regular expression and name list</dfn> from a given [=/part list=] |part list| and [=/options=] |options|:
@@ -1490,7 +1421,7 @@ To <dfn>escape a regexp string</dfn> given a string |input|:
   1. Return |result|.
 </div>
 
-<h3 id=converting-part-lists-to-pattern-strings>Converting Part Lists to Pattern Strings</h3>
+<h3 id=converting-part-lists-to-pattern-strings>Converting part lists to pattern strings</h3>
 
 <div algorithm>
 To <dfn export>generate a [=/pattern string=]</dfn> from a given [=/part list=] |part list| and [=/options=] |options|:
@@ -1619,7 +1550,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 
 <h2 id=canon>Canonicalization</h2>
 
-<h3 id=canon-encoding-callbacks>Encoding Callbacks</h3>
+<h3 id=canon-encoding-callbacks>Encoding callbacks</h3>
 
 <div algorithm>
   To <dfn>canonicalize a protocol</dfn> given a string |value|:
@@ -1741,7 +1672,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Return |dummyURL|'s [=url/fragment=].
 </div>
 
-<h3 id=canon-processing-for-init>{{URLPatternInit}} Processing</h3>
+<h3 id=canon-processing-for-init>{{URLPatternInit}} processing</h3>
 
 <div algorithm>
   To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string |type|, a string or null |protocol|, a string or null |username|, a string or null |password|, a string or null |hostname|, a string or null |port|, a string or null |pathname|, a string or null |search|, and a string or null |hash|:
@@ -1873,3 +1804,21 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a hash=] given |strippedValue|.
 </div>
+
+<h2 id=acknowledgments class=no-num>Acknowledgments</h2>
+
+The editors would like to thank
+Anne van Kesteren,
+Luca Casonato, and
+Sayan Pal
+for their contributors to this specification.
+
+A special thanks to the [pillarjs/path-to-regexp](https://github.com/pillarjs/path-to-regexp) creators for their work on the open-source library and pattern syntax which inspired this standard.
+
+This standard is written by
+Ben Kelly ([Google](https://www.google.com/), [wanderview@chromium.org](mailto:wanderview@chromium.org)),
+Jeremy Roman ([Google](https://www.google.com/), [jbroman@chromium.org](mailto:jbroman@chromium.org)), and
+Shunya Shishido ([Google](https://www.google.com/), [sisidovski@chromium.org](mailto:sisidovski@chromium.org)).
+
+
+<p boilerplate=ipr>This Living Standard was originally developed in the W3C WICG, where it was available under the [W3C Software and Document License](https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document).
