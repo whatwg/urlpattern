@@ -42,7 +42,7 @@ start of a `:blank` named group pattern.
 
 **`URLPattern.protocol`**
 
-Returns the URL protocol pattern passed to the constructor.  This value may
+Returns the URL scheme pattern passed to the constructor.  This value may
 be differ from the input to the constructor due to normalization.
 
 **`URLPattern.username`**
@@ -57,27 +57,27 @@ be differ from the input to the constructor due to normalization.
 
 **`URLPattern.hostname`**
 
-Returns the URL username pattern set during construction.  This value may
+Returns the URL hostname pattern set during construction.  This value may
 be differ from the input to the constructor due to normalization.
 
 **`URLPattern.port`**
 
-Returns the URL username pattern set during construction.  This value may
+Returns the URL port pattern set during construction.  This value may
 be differ from the input to the constructor due to normalization.
 
 **`URLPattern.pathname`**
 
-Returns the URL username pattern set during construction.  This value may
+Returns the URL path pattern set during construction.  This value may
 be differ from the input to the constructor due to normalization.
 
 **`URLPattern.search`**
 
-Returns the URL username pattern set during construction.  This value may
+Returns the URL query pattern set during construction.  This value may
 be differ from the input to the constructor due to normalization.
 
 **`URLPattern.hash`**
 
-Returns the URL username pattern set during construction.  This value may
+Returns the URL hash pattern set during construction.  This value may
 be differ from the input to the constructor due to normalization.
 
 ## Events
