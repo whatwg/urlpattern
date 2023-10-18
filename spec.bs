@@ -357,7 +357,7 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
   1. If |options|'s [=options/ignore case=] is true then set |flags| to "`vi`".
   1. Otherwise set |flags| to "`v`"
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
-    <p class="note allow-2119">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they should be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
+    <p class="note">The specification uses regular expressions to perform all matching, but this is not required.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
   1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, and [=component/group name list=] is |name list|.
 </div>
@@ -509,7 +509,7 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
   <p>The URLPattern constructor string algorithm is very similar to the [=basic URL parser=] algorithm, but some differences prevent us from using that algorithm directly.
   <p>First, the URLPattern constructor string parser operates on [=tokens=] generated using the "`lenient`" [=tokenize policy=].  In constrast, [=basic URL parser=] operates on code points.  Operating on [=tokens=] allows the URLPattern constructor string parser to more easily distinguish between code points that are significant pattern syntax and code points that might be a URL component separator.  For example, it makes it trivial to handle named groups like "`:hmm`" in "`https://a.c:hmm.example.com:8080`" without getting confused with the port number.
   <p>Second, the URLPattern constructor string parser needs to avoid applying URL canonicalization to all code points like [=basic URL parser=] does.  Instead we perform canonicalization on only parts of the pattern string we know are safe later when compiling each component pattern string.
-  <p class=allow-2119>Finally, the URLPattern constructor string parser does not handle some parts of the [=basic URL parser=] state machine.  For example, it does not treat backslashes specially as they would all be treated as pattern characters and would require excessive escaping.  In addition, this parser may not handle some more esoteric parts of the URL parsing algorithm like file URLs with a hostname.  The goal with this parser was to handle the most common URLs while allowing any niche case to be handled instead via the {{URLPatternInit}} constructor.
+  <p>Finally, the URLPattern constructor string parser does not handle some parts of the [=basic URL parser=] state machine.  For example, it does not treat backslashes specially as they would all be treated as pattern characters and would require excessive escaping.  In addition, this parser might not handle some more esoteric parts of the URL parsing algorithm like file URLs with a hostname.  The goal with this parser was to handle the most common URLs while allowing any niche case to be handled instead via the {{URLPatternInit}} constructor.
 </div>
 
 <div algorithm>
@@ -562,11 +562,11 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
         1. [=Continue=].
     1. Switch on |parser|'s [=constructor string parser/state=] and run the associated steps:
-      <dl class=switch>
+      <dl class="switch">
         <dt>"<a for="constructor string parser/state">`init`</a>"</dt>
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
-            <p class="note allow-2119">We found a protocol suffix, so this must be an absolute URLPattern constructor string.  Therefore initialize all component to the empty string.
+            <p class="note">We found a protocol suffix, so this is an absolute URLPattern constructor string.  Therefore initialize all component to the empty string.
             1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/username}}"] to the empty string.
             1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/password}}"] to the empty string.
             1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
@@ -1114,9 +1114,9 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
   1. Let |parser| be a new [=pattern parser=] whose [=pattern parser/encoding callback=] is |encoding callback| and [=pattern parser/segment wildcard regexp=] is the result of running [=generate a segment wildcard regexp=] given |options|.
   1. Set |parser|'s [=pattern parser/token list=] to the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`strict`</a>".
   1. While |parser|'s [=pattern parser/index=] is less than |parser|'s [=pattern parser/token list=]'s [=list/size=]:
-    <div class="example">
+    <div class="example" id="parse-example-1">
       <p>This first section is looking for the sequence: `<prefix char><name><regexp><modifier>`.  There could be zero to all of these tokens.
-      <dl id="parse-example-1">
+      <dl>
         <dt>"`/:foo(bar)?`"</dt>
         <dd>All four [=tokens=].</dd>
         <dt>"`/`"</dt>
@@ -1139,7 +1139,7 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
     1. Let |name token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`name`</a>".
     1. Let |regexp or wildcard token| be the result of running [=try to consume a regexp or wildcard token=] given |parser| and |name token|.
     1. If |name token| is not null or |regexp or wildcard token| is not null:
-      <p class=note>If there is a matching group, we need to add the [=part=] immediately.
+      <p class="note">If there is a matching group, we need to add the [=part=] immediately.
       1. Let |prefix| be the empty string.
       1. If |char token| is not null then set |prefix| to |char token|'s [=token/value=].
       1. If |prefix| is not the empty string and not |options|'s [=options/prefix code point=]:
@@ -1150,15 +1150,15 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
       1. Run [=add a part=] given |parser|, |prefix|, |name token|, |regexp or wildcard token|, the empty string, and |modifier token|.
       1. [=Continue=].
     1. Let |fixed token| be |char token|.
-      <p class=note>If there was no matching group, then we need to buffer any fixed text.  We want to collect as much text as possible before adding it as a "<a for=part/type>`fixed-text`</a>" [=part=].
+      <p class="note">If there was no matching group, then we need to buffer any fixed text.  We want to collect as much text as possible before adding it as a "<a for=part/type>`fixed-text`</a>" [=part=].
     1. If |fixed token| is null, then set |fixed token| to the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`escaped-char`</a>".
     1. If |fixed token| is not null:
       1. Append |fixed token|'s [=token/value=] to |parser|'s [=pattern parser/pending fixed value=].
       1. [=Continue=].
     1. Let |open token| be the result of running [=try to consume a token=] given |parser| and "<a for=token/type>`open`</a>".
-      <div class=note>
-        <p class=allow-2119>Next we look for the sequence `<open><char prefix><name><regexp><char suffix><close><modifier>`.  The open and close are required, but the other tokens are optional.
-        <dl class=example id=parsing-example-2>
+      <div class="example" id="parsing-example-2">
+        <p>Next we look for the sequence `<open><char prefix><name><regexp><char suffix><close><modifier>`.  The open and close are necessary, but the other tokens are optional.
+        <dl>
           <dt>"`{a:foo(bar)b}?`"</dt>
           <dd>All [=tokens=] are present.
           <dt>"`{:foo}?`"</dt>
