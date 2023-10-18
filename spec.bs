@@ -1806,12 +1806,47 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 The editors would like to thank
+Alex Russell,
 Anne van Kesteren,
-Luca Casonato, and
-Sayan Pal
+Asa Kusuma,
+Blake Embrey,
+Cyrus Kasaaian,
+Daniel Murphy,
+Darwin Huang,
+Devlin Cronin,
+Domenic Denicola,
+Dominick Ng,
+Jake Archibald,
+Jeffrey Posnick,
+Jeremy Roman,
+Jimmy Shen,
+Joe Gregorio,
+Joshua Bell,
+Kenichi Ishibashi,
+Kenji Baheux,
+Kenneth Rohde Christiansen,
+Kingsley Ngan,
+Kinuko Yasuda,
+L. David Baron,
+Luca Casonato,
+Łukasz Anforowicz,
+Makoto Shimazu,
+Marijn Kruisselbrink,
+Matt Falkenhagen,
+Matt Giuca,
+Michael Landry,
+R. Samuel Klatchko,
+Rajesh Jagannathan,
+Ralph Chelala,
+Sangwhan Moon,
+Sayan Pal,
+Victor Costan, and
+Youenn Fablet
 for their contributors to this specification.
 
-A special thanks to the [pillarjs/path-to-regexp](https://github.com/pillarjs/path-to-regexp) creators for their work on the open-source library and pattern syntax which inspired this standard.
+Special thanks to Blake Embrey and the other [pillarjs/path-to-regexp](https://github.com/pillarjs/path-to-regexp) [contributors](https://github.com/pillarjs/path-to-regexp/graphs/contributors) for building an excellent open source library that so many have found useful.
+
+Also, special thanks to Kenneth Rohde Christiansen for his work on the polyfill. He put in extensive work to adapt to the changing {{URLPattern}} API.
 
 This standard is written by
 Ben Kelly ([Google](https://www.google.com/), [wanderview@chromium.org](mailto:wanderview@chromium.org)),
