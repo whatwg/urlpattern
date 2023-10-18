@@ -337,7 +337,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Set |this|'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
   1. If the result of running [=protocol component matches a special scheme=] given |this|'s [=URLPattern/protocol component=] is true, then:
-    1. Let |pathCompileOptions| be copy of the [=pathname options=] with the the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
+    1. Let |pathCompileOptions| be copy of the [=pathname options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
     1. Set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
   1. Otherwise set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
   1. Set |this|'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
@@ -681,8 +681,8 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         </dd>
         <dt>"<a for="constructor string parser/state">`hostname`</a>"</dt>
         <dd>
-          1. If the the result of running [=is an IPv6 open=] given |parser| is true, then increment |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
-          1. Otherwise if the the result of running [=is an IPv6 close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
+          1. If the result of running [=is an IPv6 open=] given |parser| is true, then increment |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
+          1. Otherwise if the result of running [=is an IPv6 close=] given |parser| is true, then decrement |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] by 1.
           1. Otherwise if the result of running [=is a port prefix=] given |parser| is true and |parser|'s [=constructor string parser/hostname IPv6 bracket depth=] is zero, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`port`</a>", and 1.
           1. Otherwise if the result of running [=is a pathname start=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>", and 0.
           1. Otherwise if the result of running [=is a search prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>", and 1.
@@ -1423,7 +1423,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
       1. [=Continue=].
     1. If |part|'s [=part/modifier=] is "<a for=part/modifier>`none`</a>" or "<a for=part/modifier>`optional`</a>":
       <div class=note>
-      <p>This section handles non-repeating parts with a [=part/prefix=] and/or [=part/suffix=].  There is an inner capturing group that contains the primary |regexp value|.  The inner group is then combined with the [=part/prefix=] and/or [=part/suffix=] in an outer non-capturing group.  Finally the modifier is applied.  The resulting form is as follows.
+      <p>This section handles non-repeating parts with a [=part/prefix=] or [=part/suffix=].  There is an inner capturing group that contains the primary |regexp value|.  The inner group is then combined with the [=part/prefix=] or [=part/suffix=] in an outer non-capturing group.  Finally the modifier is applied.  The resulting form is as follows.
       <p>`(?:<prefix>(<regexp value>)<suffix>)<modifier>`
       </div>
       1. Append "`(?:`" to the end of |result|.
@@ -1438,7 +1438,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
     1. [=Assert=]: |part|'s [=part/modifier=] is "<a for=part/modifier>`zero-or-more`</a>" or "<a for=part/modifier>`one-or-more`</a>".
     1. [=Assert=]: |part|'s [=part/prefix=] is not the empty string or |part|'s [=part/suffix=] is not the empty string.
       <div class=note>
-      <p class=allow-2119>Repeating parts with a [=part/prefix=] and/or [=part/suffix=] are dramatically more complicated.  We want to exclude the initial [=part/prefix=] and the final [=part/suffix=], but include them between any repeated elements.  To achieve this we provide a separate initial expression that excludes the [=part/prefix=].  Then the expression is duplicated with the [=part/prefix=]/[=part/suffix=] values included in an optional repeating element.  If zero values are permitted then a final optional modifier may be appended.  The resulting form is as follows.
+      <p class=allow-2119>Repeating parts with a [=part/prefix=] or [=part/suffix=] are dramatically more complicated.  We want to exclude the initial [=part/prefix=] and the final [=part/suffix=], but include them between any repeated elements.  To achieve this we provide a separate initial expression that excludes the [=part/prefix=].  Then the expression is duplicated with the [=part/prefix=]/[=part/suffix=] values included in an optional repeating element.  If zero values are permitted then a final optional modifier may be appended.  The resulting form is as follows.
       <p>`(?:<prefix>((?:<regexp value>)(?:<suffix><prefix>(?:<regexp value>))*)<suffix>)?`
       </div>
     1. Append "`(?:`" to the end of |result|.
