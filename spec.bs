@@ -1818,7 +1818,7 @@ A special thanks to the [pillarjs/path-to-regexp](https://github.com/pillarjs/pa
 This standard is written by
 Ben Kelly ([Google](https://www.google.com/), [wanderview@chromium.org](mailto:wanderview@chromium.org)),
 Jeremy Roman ([Google](https://www.google.com/), [jbroman@chromium.org](mailto:jbroman@chromium.org)), and
-Shunya Shishido ([Google](https://www.google.com/), [sisidovski@chromium.org](mailto:sisidovski@chromium.org)).
+宍戸俊哉 (Shunya Shishido, [Google](https://www.google.com/), [sisidovski@chromium.org](mailto:sisidovski@chromium.org)).
 
 
 <p boilerplate=ipr>This Living Standard was originally developed in the W3C WICG, where it was available under the [W3C Software and Document License](https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document).
