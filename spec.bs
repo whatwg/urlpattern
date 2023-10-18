@@ -1001,7 +1001,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
   1. Set |tokenizer|'s [=token/index=] to |next position|.
 </div>
 
-<div algorthm>
+<div algorithm>
   To <dfn>add a token with default length</dfn> for a given [=tokenizer=] |tokenizer|, [=token/type=] |type|, number |next position|, and number |value position|:
 
   1. Let |computed length| be |next position| &minus; |value position|.
@@ -1114,9 +1114,9 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
   1. Let |parser| be a new [=pattern parser=] whose [=pattern parser/encoding callback=] is |encoding callback| and [=pattern parser/segment wildcard regexp=] is the result of running [=generate a segment wildcard regexp=] given |options|.
   1. Set |parser|'s [=pattern parser/token list=] to the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`strict`</a>".
   1. While |parser|'s [=pattern parser/index=] is less than |parser|'s [=pattern parser/token list=]'s [=list/size=]:
-    <div class="note">
-     <p>This first section is looking for the sequence: `<prefix char><name><regexp><modifier>`.  There could be zero to all of these tokens.
-      <dl class="example" id="parse-example-1">
+    <div class="example">
+      <p>This first section is looking for the sequence: `<prefix char><name><regexp><modifier>`.  There could be zero to all of these tokens.
+      <dl id="parse-example-1">
         <dt>"`/:foo(bar)?`"</dt>
         <dd>All four [=tokens=].</dd>
         <dt>"`/`"</dt>
