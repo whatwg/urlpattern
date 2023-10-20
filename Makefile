@@ -1,27 +1,23 @@
-SHELL=/bin/bash
+SHELL=/bin/bash -o pipefail
+.PHONY: local remote deploy
+
+remote: spec.bs
+	@ (HTTP_STATUS=$$(curl https://api.csswg.org/bikeshed/ \
+	                       --output spec.html \
+	                       --write-out "%{http_code}" \
+	                       --header "Accept: text/plain, text/html" \
+	                       -F die-on=warning \
+	                       -F md-Text-Macro="COMMIT-SHA LOCAL COPY" \
+	                       -F file=@spec.bs) && \
+	[[ "$$HTTP_STATUS" -eq "200" ]]) || ( \
+		echo ""; cat spec.html; echo ""; \
+		rm -f spec.html; \
+		exit 22 \
+	);
 
 local: spec.bs
-	bikeshed --die-on=warning spec spec.bs spec.html
+	bikeshed spec spec.bs spec.html --md-Text-Macro="COMMIT-SHA LOCAL COPY"
 
-spec.html: spec.bs
-	@ (HTTP_STATUS=$$(curl https://api.csswg.org/bikeshed/ \
-                               --output spec.html \
-                               --write-out "%{http_code}" \
-                               --header "Accept: text/plain, text/html" \
-                               -F die-on=warning \
-                               -F file=@spec.bs) && \
-           [[ "$$HTTP_STATUS" -eq "200" ]]) || ( \
-              echo ""; cat spec.html; echo ""; \
-              rm -f spec.html; \
-              exit 22 \
-           );
-
-remote: spec.html
-
-ci: spec.bs
-	mkdir -p out
-	make remote
-	mv spec.html out/index.html
-
-clean:
-	rm spec.html
+deploy: spec.bs
+	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
+	bash ./deploy.sh

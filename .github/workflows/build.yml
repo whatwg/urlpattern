@@ -9,14 +9,17 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: make ci
-    - name: Deploy
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-      uses: peaceiris/actions-gh-pages@v3
+    - uses: actions/checkout@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out
+        fetch-depth: 2
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    # Note: `make deploy` will do a deploy dry run on PRs.
+    - run: make deploy
+      env:
+        SERVER: ${{ secrets.MARQUEE_SERVER }}
+        SERVER_PUBLIC_KEY: ${{ secrets.MARQUEE_PUBLIC_KEY }}
+        SERVER_DEPLOY_KEY: ${{ secrets.MARQUEE_DEPLOY_KEY }}
