@@ -2,7 +2,7 @@
 Group: WHATWG
 H1: URL Pattern
 Shortname: urlpattern
-Text Macro: TWITTER urlpatternapi
+Text Macro: TWITTER urlpatterns
 Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
 Markup Shorthands: markdown yes
