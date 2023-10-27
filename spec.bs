@@ -532,11 +532,8 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         1. If the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>" and 1.
         1. Otherwise if the result of running [=is a search prefix=] given |parser| is true:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>" and 1.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
         1. Otherwise:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>" and 0.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/search}}"] to the empty string.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
         1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
         1. [=Continue=].
       1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`authority`</a>":
@@ -564,14 +561,6 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dt>"<a for="constructor string parser/state">`init`</a>"</dt>
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
-            <p class="note">We found a protocol suffix, so this is an absolute URLPattern constructor string.  Therefore initialize all component to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/username}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/password}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hash}}"] to the empty string.
             1. Run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`protocol`</a>".
         </dd>
         <dt>"<a for="constructor string parser/state">`protocol`</a>"</dt>
@@ -579,7 +568,6 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
             1. Run [=compute protocol matches a special scheme flag=] given |parser|.
               <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as an "opaque path URL" and go straight to the pathname component.
-            1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
             1. If the result of running [=next is authority slashes=] given |parser| is true:
@@ -642,6 +630,9 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         </dd>
       </dl>
     1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+  1. If |parser|'s [=constructor string parser/result=] [=map/contains=] "{{URLPatternInit/hostname}}" and not "{{URLPatternInit/port}}", then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
+
+      <div class="note">This is special-cased because when an author does not specify a port, they usually intend the default port. If any port is acceptable, the author can specify it as a wildcard explicitly. For example, "`https://example.com/*`" should not match URLs beginning with "`https://example.com:8443/`", which is a different origin.</div>
   1. Return |parser|'s [=constructor string parser/result=].
 </div>
 
@@ -649,6 +640,12 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
 To <dfn>change state</dfn> given a [=constructor string parser=] |parser|, a [=constructor string parser/state=] |new state|, and a number |skip|:
 
   1. If |parser|'s [=constructor string parser/state=] is not "<a for="constructor string parser/state">`init`</a>", not "<a for="constructor string parser/state">`authority`</a>", and not "<a for="constructor string parser/state">`done`</a>", then set |parser|'s [=constructor string parser/result=][|parser|'s [=constructor string parser/state=]] to the result of running [=make a component string=] given |parser|.
+  1. If |parser|'s [=constructor string parser/state=] is not "<a for="constructor string parser/state">`init`</a>" and |new state| is not "<a for="constructor string parser/state">`done`</a>", then:
+    1. It |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", or "<a for="constructor string parser/state">`password`</a>"; |new state| is "<a for="constructor string parser/state">`port`</a>", "<a for="constructor string parser/state">`pathname`</a>", "<a for="constructor string parser/state">`search`</a>", or "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] does not [=map/exist=], then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
+    1. It |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", "<a for="constructor string parser/state">`password`</a>", "<a for="constructor string parser/state">`hostname`</a>", or "<a for="constructor string parser/state">`port`</a>"; |new state| is "<a for="constructor string parser/state">`search`</a>", or "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] does not [=map/exist=], then:
+      1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
+      1. Otherwise, set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to the empty string.
+    1. It |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", "<a for="constructor string parser/state">`password`</a>", "<a for="constructor string parser/state">`hostname`</a>", "<a for="constructor string parser/state">`port`</a>", or "<a for="constructor string parser/state">`pathname`</a>"; |new state| is "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] does not [=map/exist=], then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] to the empty string.
   1. Set |parser|'s [=constructor string parser/state=] to |new state|.
   1. Increment |parser|'s [=constructor string parser/token index=] by |skip|.
   1. Set |parser|'s [=constructor string parser/component start=] to |parser|'s [=constructor string parser/token index=].
