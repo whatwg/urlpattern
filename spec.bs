@@ -34,10 +34,10 @@ It can be constructed using a string for each component, or from a shorthand str
     <dd>"`https`"
 
     <dt>[=URLPattern/username component|username=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/password component|password=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/hostname component|hostname=]
     <dd>"`example.com`"
@@ -49,10 +49,10 @@ It can be constructed using a string for each component, or from a shorthand str
     <dd>"`/:category/*`"
 
     <dt>[=URLPattern/search component|search=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/hash component|hash=]
-    <dd>""
+    <dd>"`*`"
   </dl>
 
   It matches the following URLs:
@@ -510,6 +510,7 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
   <p>First, the URLPattern constructor string parser operates on [=tokens=] generated using the "`lenient`" [=tokenize policy=].  In constrast, [=basic URL parser=] operates on code points.  Operating on [=tokens=] allows the URLPattern constructor string parser to more easily distinguish between code points that are significant pattern syntax and code points that might be a URL component separator.  For example, it makes it trivial to handle named groups like "`:hmm`" in "`https://a.c:hmm.example.com:8080`" without getting confused with the port number.
   <p>Second, the URLPattern constructor string parser needs to avoid applying URL canonicalization to all code points like [=basic URL parser=] does.  Instead we perform canonicalization on only parts of the pattern string we know are safe later when compiling each component pattern string.
   <p>Finally, the URLPattern constructor string parser does not handle some parts of the [=basic URL parser=] state machine.  For example, it does not treat backslashes specially as they would all be treated as pattern characters and would require excessive escaping.  In addition, this parser might not handle some more esoteric parts of the URL parsing algorithm like file URLs with a hostname.  The goal with this parser was to handle the most common URLs while allowing any niche case to be handled instead via the {{URLPatternInit}} constructor.
+  <p>In the constructor string algorithm, the pathname, search and hash are wildcarded if earlier components are specified but later ones are not. For example, "`https://example.com/foo`" matches any search and any hash. Similarly, "`https://example.com`" matches any URL on that origin. The username and password components are always wildcard unless they are explicitly specified.
 </div>
 
 <div algorithm>
@@ -517,9 +518,8 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
 
   1. Let |parser| be a new [=constructor string parser=] whose [=constructor string parser/input=] is |input| and [=constructor string parser/token list=] is the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`lenient`</a>".
     <div class=note>
-      <p>When constructing a pattern using a {{URLPatternInit}} like `new URLPattern({ pathname: 'foo' })` any missing components will be defaulted to wildcards.  In the constructor string case, however, all components are precisely defined as either empty string or a longer value.  This is due to there being no way to simply "leave out" a component when writing a URL.
-      <p>To implement this we initialize components in |parser|'s [=constructor string parser/result=] with empty string in advance.
-      <p>We can't, however, do this immediately.  We want to allow the `baseURL` to provide information for relative URLs, so we only want to set the default empty string values for components following the first component in the relative URL.  We therefore wait to set the default component values until after we exit the "<a for="constructor string parser/state">`init`</a>" [=constructor string parser/state=].
+      <p>When constructing a pattern using a {{URLPatternInit}} like `new URLPattern({ pathname: 'foo' })` any missing components will be defaulted to wildcards.
+      <p>Components which appear "later" than those specified are instead treated as wildcards (see above). As a result, these values are not initialized to be empty in |parser|'s [=constructor string parser/result=] until a "later" component is seen.
     </div>
   1. [=While=] |parser|'s [=constructor string parser/token index=] is less than |parser|'s [=constructor string parser/token list=] [=list/size=]:
     1. Set |parser|'s [=constructor string parser/token increment=] to 1.
@@ -1683,6 +1683,16 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
   1. Let |baseURL| be null.
   1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
+    <div class="note">
+      The base URL can be used to supply additional context, but for each component, if |init| includes a component which is at least as specific as one in the base URL, none is inherited.
+
+      A component is more specific if it appears later in one of the following two lists (which are very similar to the order they appear in the URL syntax):
+
+      * protocol, hostname, port, pathname, search, hash
+      * protocol, hostname, port, username, password
+
+      Username and password are also never inherited when constructing patterns, only for a URL being matched.
+    </div>
     1. Set |baseURL| to the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
     1. If |baseURL| is failure, then throw a {{TypeError}}.
     1. If |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then set |result|["{{URLPatternInit/protocol}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/scheme=] and |type|.
