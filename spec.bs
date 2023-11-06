@@ -71,6 +71,97 @@ It can be constructed using a string for each component, or from a shorthand str
   </ul>
 </div>
 
+<div class="example" id="example-intro">
+  <p>The shorthand "`http{s}?://{:subdomain.}?shop.example/products/:id([0-9]+)#reviews`" corresponds to the following components:
+
+  <dl class="props">
+    <dt>[=URLPattern/protocol component|protocol=]
+    <dd>"`http{s}?`"
+
+    <dt>[=URLPattern/username component|username=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/password component|password=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/hostname component|hostname=]
+    <dd>"`{:subdomain.}?shop.example`"
+
+    <dt>[=URLPattern/port component|port=]
+    <dd>""
+
+    <dt>[=URLPattern/pathname component|pathname=]
+    <dd>"`/products/:id([0-9]+)`"
+
+    <dt>[=URLPattern/search component|search=]
+    <dd>""
+
+    <dt>[=URLPattern/hash component|hash=]
+    <dd>"`reviews`"
+  </dl>
+
+  It matches the following URLs:
+
+  <ul class="brief">
+    * `https://shop.example/products/74205#reviews`
+    * `https://kathryn@voyager.shop.example/products/74656#reviews`
+    * `http://insecure.shop.example/products/1701#reviews`
+  </ul>
+
+  It does not match the following URLs:
+
+  <ul class="brief">
+    * `https://shop.example/products/2000`
+    * `http://shop.example:8080/products/0#reviews`
+    * `https://nx.shop.example/products/01?speed=5#reviews`
+    * `https://shop.example/products/chair#reviews`
+  </ul>
+</div>
+
+<div class="example" id="example-intro">
+  <p>The shorthand "`../admin/*`" with the base URL "`https://discussion.example/forum/?page=2`" corresponds to the following components:
+
+  <dl class="props">
+    <dt>[=URLPattern/protocol component|protocol=]
+    <dd>"`https`"
+
+    <dt>[=URLPattern/username component|username=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/password component|password=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/hostname component|hostname=]
+    <dd>"`discussion.example`"
+
+    <dt>[=URLPattern/port component|port=]
+    <dd>""
+
+    <dt>[=URLPattern/pathname component|pathname=]
+    <dd>"`/admin/*`"
+
+    <dt>[=URLPattern/search component|search=]
+    <dd>"*"
+
+    <dt>[=URLPattern/hash component|hash=]
+    <dd>"`*`"
+  </dl>
+
+  It matches the following URLs:
+
+  <ul class="brief">
+    * `https://discussion.example/admin/`
+    * `https://edd:librarian@discussion.example/admin/update?id=1`
+  </ul>
+
+  It does not match the following URLs:
+
+  <ul class="brief">
+    * `https://discussion.example/forum/admin/`
+    * `http://discussion.example:8080/admin/update?id=1`
+  </ul>
+</div>
+
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
 
