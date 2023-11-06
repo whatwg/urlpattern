@@ -343,7 +343,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
     1. Set |init| to the result of running [=parse a constructor string=] given |input|.
-    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] is null, then throw a {{TypeError}}.
+    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then throw a {{TypeError}}.
     1. Set |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
   1. Otherwise:
     1. [=Assert=]: |input| is a {{URLPatternInit}}.
@@ -1770,7 +1770,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Set |result|["{{URLPatternInit/search}}"] to |search|.
   1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
   1. Let |baseURL| be null.
-  1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
+  1. If |init|["{{URLPatternInit/baseURL}}"] [=map/exists=]:
     <div class="note">
       The base URL can be used to supply additional context, but for each component, if |init| includes a component which is at least as specific as one in the base URL, none is inherited.
 
@@ -1791,12 +1791,12 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", and "{{URLPatternInit/pathname}}", then set |result|["{{URLPatternInit/pathname}}"] to the result of [=processing a base URL string=] given the result of [=URL path serializing=] |baseURL| and |type|.
     1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", and "{{URLPatternInit/search}}", then set |result|["{{URLPatternInit/search}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/query=] and |type|.
     1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", and "{{URLPatternInit/hash}}", then set |result|["{{URLPatternInit/hash}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/fragment=] and |type|.
-  1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
-  1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
-  1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
-  1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/pathname}}"] is not null:
+  1. If |init|["{{URLPatternInit/protocol}}"] [=map/exists=] then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
+  1. If |init|["{{URLPatternInit/username}}"] [=map/exists=] then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
+  1. If |init|["{{URLPatternInit/password}}"] [=map/exists=] then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=] then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/port}}"] [=map/exists=] then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. If |init|["{{URLPatternInit/pathname}}"] [=map/exists=]:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
     1. If the following are all true:
       <ul>
@@ -1812,8 +1812,8 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
         1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
     1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
+  1. If |init|["{{URLPatternInit/search}}"] [=map/exists=] then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hash}}"] [=map/exists=] then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
   1. Return |result|.
 </div>
 
