@@ -71,7 +71,7 @@ It can be constructed using a string for each component, or from a shorthand str
   </ul>
 </div>
 
-<div class="example" id="example-intro">
+<div class="example" id="example-intro-2">
   <p>The shorthand "`http{s}?://{:subdomain.}?shop.example/products/:id([0-9]+)#reviews`" corresponds to the following components:
 
   <dl class="props">
@@ -118,7 +118,7 @@ It can be constructed using a string for each component, or from a shorthand str
   </ul>
 </div>
 
-<div class="example" id="example-intro">
+<div class="example" id="example-intro-3">
   <p>The shorthand "`../admin/*`" with the base URL "`https://discussion.example/forum/?page=2`" corresponds to the following components:
 
   <dl class="props">
