@@ -34,10 +34,10 @@ It can be constructed using a string for each component, or from a shorthand str
     <dd>"`https`"
 
     <dt>[=URLPattern/username component|username=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/password component|password=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/hostname component|hostname=]
     <dd>"`example.com`"
@@ -49,10 +49,10 @@ It can be constructed using a string for each component, or from a shorthand str
     <dd>"`/:category/*`"
 
     <dt>[=URLPattern/search component|search=]
-    <dd>""
+    <dd>"`*`"
 
     <dt>[=URLPattern/hash component|hash=]
-    <dd>""
+    <dd>"`*`"
   </dl>
 
   It matches the following URLs:
@@ -68,6 +68,97 @@ It can be constructed using a string for each component, or from a shorthand str
     * `https://example.com/`
     * `http://example.com/products/`
     * `https://example.com:8443/blog/our-greatest-product-ever`
+  </ul>
+</div>
+
+<div class="example" id="example-intro-2">
+  <p>The shorthand "`http{s}?://{:subdomain.}?shop.example/products/:id([0-9]+)#reviews`" corresponds to the following components:
+
+  <dl class="props">
+    <dt>[=URLPattern/protocol component|protocol=]
+    <dd>"`http{s}?`"
+
+    <dt>[=URLPattern/username component|username=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/password component|password=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/hostname component|hostname=]
+    <dd>"`{:subdomain.}?shop.example`"
+
+    <dt>[=URLPattern/port component|port=]
+    <dd>""
+
+    <dt>[=URLPattern/pathname component|pathname=]
+    <dd>"`/products/:id([0-9]+)`"
+
+    <dt>[=URLPattern/search component|search=]
+    <dd>""
+
+    <dt>[=URLPattern/hash component|hash=]
+    <dd>"`reviews`"
+  </dl>
+
+  It matches the following URLs:
+
+  <ul class="brief">
+    * `https://shop.example/products/74205#reviews`
+    * `https://kathryn@voyager.shop.example/products/74656#reviews`
+    * `http://insecure.shop.example/products/1701#reviews`
+  </ul>
+
+  It does not match the following URLs:
+
+  <ul class="brief">
+    * `https://shop.example/products/2000`
+    * `http://shop.example:8080/products/0#reviews`
+    * `https://nx.shop.example/products/01?speed=5#reviews`
+    * `https://shop.example/products/chair#reviews`
+  </ul>
+</div>
+
+<div class="example" id="example-intro-3">
+  <p>The shorthand "`../admin/*`" with the base URL "`https://discussion.example/forum/?page=2`" corresponds to the following components:
+
+  <dl class="props">
+    <dt>[=URLPattern/protocol component|protocol=]
+    <dd>"`https`"
+
+    <dt>[=URLPattern/username component|username=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/password component|password=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/hostname component|hostname=]
+    <dd>"`discussion.example`"
+
+    <dt>[=URLPattern/port component|port=]
+    <dd>""
+
+    <dt>[=URLPattern/pathname component|pathname=]
+    <dd>"`/admin/*`"
+
+    <dt>[=URLPattern/search component|search=]
+    <dd>"`*`"
+
+    <dt>[=URLPattern/hash component|hash=]
+    <dd>"`*`"
+  </dl>
+
+  It matches the following URLs:
+
+  <ul class="brief">
+    * `https://discussion.example/admin/`
+    * `https://edd:librarian@discussion.example/admin/update?id=1`
+  </ul>
+
+  It does not match the following URLs:
+
+  <ul class="brief">
+    * `https://discussion.example/forum/admin/`
+    * `http://discussion.example:8080/admin/update?id=1`
   </ul>
 </div>
 
@@ -252,7 +343,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
     1. Set |init| to the result of running [=parse a constructor string=] given |input|.
-    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] is null, then throw a {{TypeError}}.
+    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then throw a {{TypeError}}.
     1. Set |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
   1. Otherwise:
     1. [=Assert=]: |input| is a {{URLPatternInit}}.
@@ -512,15 +603,16 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
   <p>Finally, the URLPattern constructor string parser does not handle some parts of the [=basic URL parser=] state machine.  For example, it does not treat backslashes specially as they would all be treated as pattern characters and would require excessive escaping.  In addition, this parser might not handle some more esoteric parts of the URL parsing algorithm like file URLs with a hostname.  The goal with this parser was to handle the most common URLs while allowing any niche case to be handled instead via the {{URLPatternInit}} constructor.
 </div>
 
+<div class=note>
+  <p>In the constructor string algorithm, the pathname, search, and hash are wildcarded if earlier components are specified but later ones are not. For example, "`https://example.com/foo`" matches any search and any hash. Similarly, "`https://example.com`" matches any URL on that origin. This is analogous to the notion of a more specific component in the notes about [=process a URLPatternInit=] (e.g., a search is more specific than a pathname), but the constructor syntax only has a few cases where it is possible to specify a more specific component without also specifying the less specific components.
+  <p>The username and password components are always wildcard unless they are explicitly specified.
+  <p>If a hostname is specified and the port is not, the port is assumed to be the default port. If any port should match, authors can write `:*` explicitly. For example, "`https://*`" is any HTTPS origin on port 443, and "`https://*:*`" is any HTTPS origin on any port.
+</div>
+
 <div algorithm>
 To <dfn>parse a constructor string</dfn> given a string |input|:
 
   1. Let |parser| be a new [=constructor string parser=] whose [=constructor string parser/input=] is |input| and [=constructor string parser/token list=] is the result of running [=tokenize=] given |input| and "<a for="tokenize policy">`lenient`</a>".
-    <div class=note>
-      <p>When constructing a pattern using a {{URLPatternInit}} like `new URLPattern({ pathname: 'foo' })` any missing components will be defaulted to wildcards.  In the constructor string case, however, all components are precisely defined as either empty string or a longer value.  This is due to there being no way to simply "leave out" a component when writing a URL.
-      <p>To implement this we initialize components in |parser|'s [=constructor string parser/result=] with empty string in advance.
-      <p>We can't, however, do this immediately.  We want to allow the `baseURL` to provide information for relative URLs, so we only want to set the default empty string values for components following the first component in the relative URL.  We therefore wait to set the default component values until after we exit the "<a for="constructor string parser/state">`init`</a>" [=constructor string parser/state=].
-    </div>
   1. [=While=] |parser|'s [=constructor string parser/token index=] is less than |parser|'s [=constructor string parser/token list=] [=list/size=]:
     1. Set |parser|'s [=constructor string parser/token increment=] to 1.
       <p class="note">On every iteration of the parse loop the |parser|'s [=constructor string parser/token index=] will be incremented by its [=constructor string parser/token increment=] value.  Typically this means incrementing by 1, but at certain times it is set to zero.  The [=constructor string parser/token increment=] is then always reset back to 1 at the top of the loop.
@@ -532,11 +624,8 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         1. If the result of running [=is a hash prefix=] given |parser| is true, then run [=change state=] given |parser|, "<a for="constructor string parser/state">`hash`</a>" and 1.
         1. Otherwise if the result of running [=is a search prefix=] given |parser| is true:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`search`</a>" and 1.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
         1. Otherwise:
           1. Run [=change state=] given |parser|, "<a for="constructor string parser/state">`pathname`</a>" and 0.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/search}}"] to the empty string.
-          1. Set |parser|'s [=constructor string parser/result=]["{{URLPattern/hash}}"] to the empty string.
         1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
         1. [=Continue=].
       1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`authority`</a>":
@@ -564,14 +653,6 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         <dt>"<a for="constructor string parser/state">`init`</a>"</dt>
         <dd>
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
-            <p class="note">We found a protocol suffix, so this is an absolute URLPattern constructor string.  Therefore initialize all component to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/username}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/password}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] to the empty string.
-            1. Set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hash}}"] to the empty string.
             1. Run [=rewind and set state=] given |parser| and "<a for="constructor string parser/state">`protocol`</a>".
         </dd>
         <dt>"<a for="constructor string parser/state">`protocol`</a>"</dt>
@@ -579,7 +660,6 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
           1. If the result of running [=is a protocol suffix=] given |parser| is true:
             1. Run [=compute protocol matches a special scheme flag=] given |parser|.
               <p class="note">We need to eagerly compile the protocol component to determine if it matches any [=special schemes=].  If it does then certain special rules apply.  It determines if the pathname defaults to a "`/`" and also whether we will look for the username, password, hostname, and port components.  Authority slashes can also cause us to look for these components as well.  Otherwise we treat this as an "opaque path URL" and go straight to the pathname component.
-            1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
             1. Let |next state| be "<a for="constructor string parser/state">`pathname`</a>".
             1. Let |skip| be 1.
             1. If the result of running [=next is authority slashes=] given |parser| is true:
@@ -642,6 +722,9 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
         </dd>
       </dl>
     1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
+  1. If |parser|'s [=constructor string parser/result=] [=map/contains=] "{{URLPatternInit/hostname}}" and not "{{URLPatternInit/port}}", then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
+
+      <div class="note">This is special-cased because when an author does not specify a port, they usually intend the default port. If any port is acceptable, the author can specify it as a wildcard explicitly. For example, "`https://example.com/*`" should not match URLs beginning with "`https://example.com:8443/`", which is a different origin.</div>
   1. Return |parser|'s [=constructor string parser/result=].
 </div>
 
@@ -649,6 +732,12 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
 To <dfn>change state</dfn> given a [=constructor string parser=] |parser|, a [=constructor string parser/state=] |new state|, and a number |skip|:
 
   1. If |parser|'s [=constructor string parser/state=] is not "<a for="constructor string parser/state">`init`</a>", not "<a for="constructor string parser/state">`authority`</a>", and not "<a for="constructor string parser/state">`done`</a>", then set |parser|'s [=constructor string parser/result=][|parser|'s [=constructor string parser/state=]] to the result of running [=make a component string=] given |parser|.
+  1. If |parser|'s [=constructor string parser/state=] is not "<a for="constructor string parser/state">`init`</a>" and |new state| is not "<a for="constructor string parser/state">`done`</a>", then:
+    1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", or "<a for="constructor string parser/state">`password`</a>"; |new state| is "<a for="constructor string parser/state">`port`</a>", "<a for="constructor string parser/state">`pathname`</a>", "<a for="constructor string parser/state">`search`</a>", or "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] does not [=map/exist=], then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/hostname}}"] to the empty string.
+    1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", "<a for="constructor string parser/state">`password`</a>", "<a for="constructor string parser/state">`hostname`</a>", or "<a for="constructor string parser/state">`port`</a>"; |new state| is "<a for="constructor string parser/state">`search`</a>" or "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] does not [=map/exist=], then:
+      1. If |parser|'s [=constructor string parser/protocol matches a special scheme flag=] is true, then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to "`/`".
+      1. Otherwise, set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/pathname}}"] to the empty string.
+    1. If |parser|'s [=constructor string parser/state=] is "<a for="constructor string parser/state">`protocol`</a>", "<a for="constructor string parser/state">`authority`</a>", "<a for="constructor string parser/state">`username`</a>", "<a for="constructor string parser/state">`password`</a>", "<a for="constructor string parser/state">`hostname`</a>", "<a for="constructor string parser/state">`port`</a>", or "<a for="constructor string parser/state">`pathname`</a>"; |new state| is "<a for="constructor string parser/state">`hash`</a>"; and |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] does not [=map/exist=], then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/search}}"] to the empty string.
   1. Set |parser|'s [=constructor string parser/state=] to |new state|.
   1. Increment |parser|'s [=constructor string parser/token index=] by |skip|.
   1. Set |parser|'s [=constructor string parser/component start=] to |parser|'s [=constructor string parser/token index=].
@@ -1685,23 +1774,33 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Set |result|["{{URLPatternInit/search}}"] to |search|.
   1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
   1. Let |baseURL| be null.
-  1. If |init|["{{URLPatternInit/baseURL}}"] is not null:
+  1. If |init|["{{URLPatternInit/baseURL}}"] [=map/exists=]:
+    <div class="note">
+      The base URL can be used to supply additional context, but for each component, if |init| includes a component which is at least as specific as one in the base URL, none is inherited.
+
+      A component is more specific if it appears later in one of the following two lists (which are very similar to the order they appear in the URL syntax):
+
+      * protocol, hostname, port, pathname, search, hash
+      * protocol, hostname, port, username, password
+
+      Username and password are also never inherited from a base URL when constructing a {{URLPattern}}. (They are, however, inherited from the base URL when parsing a URL supplied as an argument to {{URLPattern/test()}} or {{URLPattern/exec()}}.)
+    </div>
     1. Set |baseURL| to the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
     1. If |baseURL| is failure, then throw a {{TypeError}}.
-    1. Set |result|["{{URLPatternInit/protocol}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/scheme=] and |type|.
-    1. Set |result|["{{URLPatternInit/username}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/username=] and |type|.
-    1. Set |result|["{{URLPatternInit/password}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/password=] and |type|.
-    1. Set |result|["{{URLPatternInit/hostname}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/host=] and |type|.
-    1. Set |result|["{{URLPatternInit/port}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/port=] and |type|.
-    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=processing a base URL string=] given the result of [=URL path serializing=] |baseURL| and |type|.
-    1. Set |result|["{{URLPatternInit/search}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/query=] and |type|.
-    1. Set |result|["{{URLPatternInit/hash}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/fragment=] and |type|.
-  1. If |init|["{{URLPatternInit/protocol}}"] is not null then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
-  1. If |init|["{{URLPatternInit/username}}"] is not null then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
-  1. If |init|["{{URLPatternInit/password}}"] is not null then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hostname}}"] is not null then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
-  1. If |init|["{{URLPatternInit/port}}"] is not null then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/pathname}}"] is not null:
+    1. If |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then set |result|["{{URLPatternInit/protocol}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/scheme=] and |type|.
+    1. If |type| is not "`pattern`" and |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}" and "{{URLPatternInit/username}}", then set |result|["{{URLPatternInit/username}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/username=] and |type|.
+    1. If |type| is not "`pattern`" and |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/username}}" and "{{URLPatternInit/password}}", then set |result|["{{URLPatternInit/password}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/password=] and |type|.
+    1. If |init| [=map/contains=] neither "{{URLPatternInit/protocol}}" nor "{{URLPatternInit/hostname}}", then set |result|["{{URLPatternInit/hostname}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/host=] and |type|.
+    1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", and "{{URLPatternInit/port}}", then set |result|["{{URLPatternInit/port}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/port=] and |type|.
+    1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", and "{{URLPatternInit/pathname}}", then set |result|["{{URLPatternInit/pathname}}"] to the result of [=processing a base URL string=] given the result of [=URL path serializing=] |baseURL| and |type|.
+    1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", and "{{URLPatternInit/search}}", then set |result|["{{URLPatternInit/search}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/query=] and |type|.
+    1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", and "{{URLPatternInit/hash}}", then set |result|["{{URLPatternInit/hash}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/fragment=] and |type|.
+  1. If |init|["{{URLPatternInit/protocol}}"] [=map/exists=], then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
+  1. If |init|["{{URLPatternInit/username}}"] [=map/exists=], then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
+  1. If |init|["{{URLPatternInit/password}}"] [=map/exists=], then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=], then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/port}}"] [=map/exists=], then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. If |init|["{{URLPatternInit/pathname}}"] [=map/exists=]:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
     1. If the following are all true:
       <ul>
@@ -1717,8 +1816,8 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
         1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
     1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
-  1. If |init|["{{URLPatternInit/search}}"] is not null then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hash}}"] is not null then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
+  1. If |init|["{{URLPatternInit/search}}"] [=map/exists=] then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hash}}"] [=map/exists=] then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
   1. Return |result|.
 </div>
 
