@@ -1973,7 +1973,7 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
     1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
     1. Run [=initialize=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
     1. Return |pattern|.
-  
+
   <div class="issue">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</div>
 </div>
 
