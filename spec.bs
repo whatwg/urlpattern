@@ -468,7 +468,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
   1. Let |has regexp groups| be false.
   1. [=list/For each=] |part| of |part list|:
-    1. If |part|'s [=part/type=] is "<a for=token/type>`regexp`</a>", then set |has regexp groups| to true.
+    1. If |part|'s [=part/type=] is "<a for=part/type>`regexp`</a>", then set |has regexp groups| to true.
   1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, [=component/group name list=] is |name list|, and [=component/has regexp groups=] is |has regexp groups|.
 </div>
 
@@ -1974,10 +1974,10 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
     1. Run [=initialize=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
     1. Return |pattern|.
 
-  <div class="issue">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</div>
+  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
 </div>
 
-This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, [[HTML]]'s [=parse a URL=] algorithm.
+This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
 
 <h3 id=other-specs-json>Integrating with JSON data formats</h3>
 
@@ -1985,7 +1985,7 @@ JSON data formats which include URL patterns should mirror the behavior of <a hr
 * an object which specifies the components required to construct a pattern
 * a string (in the constructor string syntax)
 
-If a specification has an [[INFRA]] value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource).
+If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
 
 <div algorithm>
   To <dfn for=URLPattern>build a {{URLPattern}} from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps.
@@ -1998,7 +1998,7 @@ If a specification has an [[INFRA]] value (e.g., after using [=parse a JSON stri
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
     1. Return |pattern|.
   1. Otherwise, if |rawPattern| is a [=map=], then:
-    1. Let |init| be «[ "`baseURL`" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
+    1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
     1. [=map/For each=] |key| → |value| of |rawPattern|:
       1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=string=], or the member's type is not declared to be {{USVString}}, then return null.
 
@@ -2012,10 +2012,10 @@ If a specification has an [[INFRA]] value (e.g., after using [=parse a JSON stri
     1. Return |pattern|.
   1. Otherwise, return null.
 
-  <div class="issue">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</div>
+  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
 </div>
 
-Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, [[SPECULATION-RULES]] accepts a "`relative_to`" key which uses the [=document base URL=] instead of the JSON resource's URL.
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, Speculation Rules accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
