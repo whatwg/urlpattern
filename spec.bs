@@ -1963,7 +1963,7 @@ To accomplish this, specifications should accept {{URLPatternInput}} as an argum
     1. If |input|["`baseURL`"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
     1. Return the result of constructing a {{URLPattern/constructor(input, options)}} given |input|.
 
-  <div class=issue>Currently, {{URLPattern}} objects are not handled specially here, but perhaps they should be, since even though {{URLPattern}} has the properties necessary for {{URLPatternInit}}, this loses the {{URLPatternOptions/ignoreCase}} option (which is not exposed on the {{URLPattern}} interface).
+  <div class=issue>Currently, {{URLPattern}} objects are not handled specially here, but perhaps they should be, since even though {{URLPattern}} has the properties necessary for {{URLPatternInit}}, this loses the {{URLPatternOptions/ignoreCase}} option (which is not exposed on the {{URLPattern}} interface).</div>
 </div>
 
 This allows authors to concisely specify most patterns, and use the {{URLPattern/constructor|constructor}} to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, [[HTML]]'s [=parse a URL=] algorithm.
