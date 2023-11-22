@@ -2015,7 +2015,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
 </div>
 
-Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, Speculation Rules accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
