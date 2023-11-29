@@ -473,7 +473,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 </div>
 
 <div algorithm>
-  A {{URLPattern}} |pattern| <dfn for=URLPattern>has regexp groups</dfn> if the following steps return true:
+  A {{URLPattern}} |pattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
 
   1. If |pattern|'s [=URLPattern/protocol component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URLPattern/username component=] [=component/has regexp groups=] is true, then return true.
@@ -1958,7 +1958,7 @@ JavaScript APIs should accept all of:
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
 <div algorithm>
-  To <dfn for=URLPattern>build a {{URLPattern}} from a WebIDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=]</a> |realm|, perform the following steps:
+  To <dfn export>build a {{URLPattern}} from a WebIDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
     1. Return |input|.
@@ -1988,7 +1988,7 @@ JSON data formats which include URL patterns should mirror the behavior of <a hr
 If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
 
 <div algorithm>
-  To <dfn for=URLPattern>build a {{URLPattern}} from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps.
+  To <dfn export>build a {{URLPattern}} from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps.
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. If |rawPattern| is a [=string=], then:
