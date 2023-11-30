@@ -182,6 +182,8 @@ interface URLPattern {
   readonly attribute USVString pathname;
   readonly attribute USVString search;
   readonly attribute USVString hash;
+
+  readonly attribute boolean hasRegExpGroups;
 };
 
 dictionary URLPatternInit {
@@ -323,6 +325,11 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
   <dd>
     <p>Returns |urlPattern|'s normalized hash pattern string.
   </dd>
+
+  <dt><code>|urlPattern|.{{URLPattern/hasRegExpGroups}}</code></dt>
+  <dd>
+    <p>Returns whether |urlPattern| contains one or more groups which uses regular expression matching.
+  </dd>
 </dl>
 
 <div algorithm>
@@ -415,6 +422,13 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 </div>
 
 <div algorithm>
+  The <dfn attribute for="URLPattern">hasRegExpGroups</dfn> getter steps are:
+
+  1. If [=this=] [=URLPattern/has regexp groups=], then return true.
+  1. Return false.
+</div>
+
+<div algorithm>
   The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
 
   1. Let |result| be the result of [=match=] given [=this=], |input|, and |baseURL| if given.
@@ -438,6 +452,8 @@ A [=component=] has an associated <dfn for=component>regular expression</dfn>, a
 
 A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=list=] of strings, which must be set upon creation.
 
+A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a [=boolean=], which must be set upon creation.
+
 <div algorithm>
   To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
 
@@ -450,11 +466,28 @@ A [=component=] has an associated <dfn for=component>group name list</dfn>, a [=
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
     <p class="note">The specification uses regular expressions to perform all matching, but this is not mandated.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
-  1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, and [=component/group name list=] is |name list|.
+  1. Let |has regexp groups| be false.
+  1. [=list/For each=] |part| of |part list|:
+    1. If |part|'s [=part/type=] is "<a for=part/type>`regexp`</a>", then set |has regexp groups| to true.
+  1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, [=component/group name list=] is |name list|, and [=component/has regexp groups=] is |has regexp groups|.
 </div>
 
 <div algorithm>
-  To perform a <dfn>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  A {{URLPattern}} |pattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
+
+  1. If |pattern|'s [=URLPattern/protocol component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/username component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/password component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/hostname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/port component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/pathname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/search component=] [=component/has regexp groups=] is true, then return true.
+  1. If |pattern|'s [=URLPattern/hash component=] [=component/has regexp groups=] is true, then return true.
+  1. Return false.
+</div>
+
+<div algorithm>
+  To perform a <dfn export>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
@@ -1901,6 +1934,88 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |type| is "`pattern`" then return |strippedValue|.
   1. Return the result of running [=canonicalize a hash=] given |strippedValue|.
 </div>
+
+<h2 id=other-specs>Using URL patterns in other specifications</h2>
+
+To promote consistency on the web platform, other documents integrating with this specification should adhere to the following guidelines, unless there is good reason to diverge.
+
+1. **Accept shorthands**. Most author patterns will be simple and straightforward. Accordingly, APIs should accept shorthands for those common cases and avoid the need for authors to take additional steps to transform these into complete {{URLPattern}} objects.
+1. **Respect the base URL**. Just as URLs are generally parsed relative to a base URL for their environment (most commonly, a [=document base URL=]), URL patterns should respect this as well. The {{URLPattern}} constructor itself is an exception because it directly exposes the concept itself, similar to how the <a interface spec=URL>URL</a> constructor does not respect the base URL even though the rest of the platform does.
+1. **Be clear about regexp groups**. Some APIs may benefit from only allowing URL patterns which do not [=URLPattern/has regexp groups|have regexp groups=], for example, because user agents are likely to implement them in a different thread or process from those executing author script, and because of security or performance concerns, a JavaScript engine would not ordinarily run there. If so, this should be clearly documented (with reference to [=URLPattern/has regexp groups=]) and the operation should report an error as soon as possible (e.g., by throwing a JavaScript exception). If possible, this should be feature-detectable to allow for the possibility of this constraint being lifted in the future. Avoid creating different subsets of URL patterns without consulting the editors of this specification.
+1. **Be clear about what URLs will be matched**. For instance, algorithms during fetching are likely to operate on URLs with no [=url/fragment=]. If so, the specification should be clear that this is the case, and may advise showing a developer warning if a pattern which cannot match (e.g., because it requires a non-empty fragment) is used.
+
+<h3 id=other-specs-javascript>Integrating with JavaScript APIs</h3>
+
+<xmp class="idl">
+typedef (USVString or URLPatternInit or URLPattern) URLPatternCompatible;
+</xmp>
+
+JavaScript APIs should accept all of:
+* a {{URLPattern}} object
+* a dictionary-like object which specifies the components required to construct a pattern
+* a string (in the constructor string syntax)
+
+To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
+
+<div algorithm>
+  To <dfn export>build a {{URLPattern}} from a WebIDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
+
+  1. If the [=specific type=] of |input| is {{URLPattern}}:
+    1. Return |input|.
+  1. Otherwise, if the [=specific type=] of |input| is {{URLPatternInit}}:
+    1. Let |init| be a [=map/clone=] of |input|.
+    1. If |init|["{{URLPatternInit/baseURL}}"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
+    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
+    1. Run [=initialize=] given |pattern|, |init|, null, and an empty [=map=].
+    1. Return |pattern|.
+  1. Otherwise:
+    1. [=Assert=]: The [=specific type=] of |input| is {{USVString}}.
+    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
+    1. Run [=initialize=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
+    1. Return |pattern|.
+
+  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
+</div>
+
+This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
+
+<h3 id=other-specs-json>Integrating with JSON data formats</h3>
+
+JSON data formats which include URL patterns should mirror the behavior of <a href="#other-specs-javascript">JavaScript APIs</a> and accept both:
+* an object which specifies the components required to construct a pattern
+* a string (in the constructor string syntax)
+
+If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
+
+<div algorithm>
+  To <dfn export>build a {{URLPattern}} from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps.
+
+  1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
+  1. If |rawPattern| is a [=string=], then:
+    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
+    1. Run [=initialize=] given |pattern|, |rawPattern|, |serializedBaseURL|, and an empty [=map=].
+
+        <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
+    1. Return |pattern|.
+  1. Otherwise, if |rawPattern| is a [=map=], then:
+    1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
+    1. [=map/For each=] |key| → |value| of |rawPattern|:
+      1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=string=], or the member's type is not declared to be {{USVString}}, then return null.
+
+        <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
+        <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
+      1. Set |init|[|key|] to |value|.
+    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
+    1. Run [=initialize=] given |pattern|, |init|, null, and an empty [=map=].
+
+        <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
+    1. Return |pattern|.
+  1. Otherwise, return null.
+
+  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
+</div>
+
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
