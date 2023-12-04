@@ -431,7 +431,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |result| be the result of [=match=] given [=this=], |input|, and |baseURL| if given.
+  1. Let |result| be the result of [=URLPattern/match=] given [=this=], |input|, and |baseURL| if given.
   1. If |result| is null, return false.
   1. Return true.
 </div>
@@ -439,7 +439,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   The <dfn method for="URLPattern">exec(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Return the result of [=match=] given [=this=], |input|, and |baseURL| if given.
+  1. Return the result of [=URLPattern/match=] given [=this=], |input|, and |baseURL| if given.
 </div>
 
 <h3 id=urlpattern-internals>Internals</h3>
@@ -487,7 +487,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 </div>
 
 <div algorithm>
-  To perform a <dfn export>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for=URLPattern>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
@@ -1958,7 +1958,7 @@ JavaScript APIs should accept all of:
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
 <div algorithm>
-  To <dfn export>build a {{URLPattern}} from a WebIDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
+  To <dfn export>build a {{URLPattern}} from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
     1. Return |input|.
