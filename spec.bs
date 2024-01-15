@@ -1740,7 +1740,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
      <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize default port values.</p>
   1. Let |parseResult| be the result of running [=basic URL parser=] given |portValue| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=port state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/port=] or empty string if it is null.
+  1. Return |dummyURL|'s [=url/port=], [=serialize an integer|serialized=], or empty string if it is null.
 </div>
 
 <div algorithm>
