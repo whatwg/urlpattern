@@ -1807,7 +1807,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Set |result|["{{URLPatternInit/search}}"] to |search|.
   1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
   1. Let |baseURL| be null.
-  1. If |init|["{{URLPatternInit/baseURL}}"] [=map/exists=]:
+  1. If |init|["{{URLPatternInit/baseURL}}"] [=map/exists=] and is a non-empty string:
     <div class="note">
       The base URL can be used to supply additional context, but for each component, if |init| includes a component which is at least as specific as one in the base URL, none is inherited.
 
