@@ -360,28 +360,20 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
     1. If |baseURL| is not null, then throw a {{TypeError}}.
     1. Set |init| to |input|.
   1. Let |processedInit| be the result of [=process a URLPatternInit=] given |init|, "`pattern`", null, null, null, null, null, null, null, and null.
-  1. If |processedInit|["{{URLPatternInit/protocol}}"] [=map/exists=] and is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] [=map/exists=] and is its corresponding [=default port=], then [=map/set=] |processedInit|["{{URLPatternInit/port}}"] to the empty string.
-  1. Let |protocolString| be |processedInit|["{{URLPatternInit/protocol}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/protocol component=] to the result of [=compiling a component=] given |protocolString|, [=canonicalize a protocol=], and [=default options=].
-  1. Let |usernameString| be |processedInit|["{{URLPatternInit/username}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/username component=] to the result of [=compiling a component=] given |usernameString|, [=canonicalize a username=], and [=default options=].
-  1. Let |passwordString| be |processedInit|["{{URLPatternInit/password}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/password component=] to the result of [=compiling a component=] given |passwordString|, [=canonicalize a password=], and [=default options=].
-  1. Let |hostnameString| be |processedInit|["{{URLPatternInit/hostname}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. If the result running [=hostname pattern is an IPv6 address=] given |hostnameString| is true, then set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |hostnameString|, [=canonicalize an IPv6 hostname=], and [=hostname options=].
-  1. Otherwise, set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |hostnameString|, [=canonicalize a hostname=], and [=hostname options=].
-  1. Let |portString| be |processedInit|["{{URLPatternInit/port}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/port component=] to the result of [=compiling a component=] given |portString|, [=canonicalize a port=], and [=default options=].
-  1. Let |pathnameString| be |processedInit|["{{URLPatternInit/pathname}}"] if it [=map/exists=], and "`*`" otherwise.
+  1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is its corresponding [=default port=], then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
+  1. Set |this|'s [=URLPattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
+  1. Set |this|'s [=URLPattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
+  1. Set |this|'s [=URLPattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
+  1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
+  1. Otherwise, set |this|'s [=URLPattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
+  1. Set |this|'s [=URLPattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
   1. If the result of running [=protocol component matches a special scheme=] given |this|'s [=URLPattern/protocol component=] is true, then:
     1. Let |pathCompileOptions| be copy of the [=pathname options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
-    1. Set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |pathnameString|, [=canonicalize a pathname=], and |pathCompileOptions|.
-  1. Otherwise set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |pathnameString|, [=canonicalize an opaque pathname=], and |compileOptions|.
-  1. Let |searchString| be |processedInit|["{{URLPatternInit/search}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/search component=] to the result of [=compiling a component=] given |searchString|, [=canonicalize a search=], and |compileOptions|.
-  1. Let |hashString| be |processedInit|["{{URLPatternInit/hash}}"] if it [=map/exists=], and "`*`" otherwise.
-  1. Set |this|'s [=URLPattern/hash component=] to the result of [=compiling a component=] given |hashString|, [=canonicalize a hash=], and |compileOptions|.
+    1. Set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
+  1. Otherwise set |this|'s [=URLPattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
+  1. Set |this|'s [=URLPattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
+  1. Set |this|'s [=URLPattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and |compileOptions|.
 </div>
 
 <div algorithm>
@@ -468,6 +460,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 <div algorithm>
   To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
 
+  1. If |input| is null, then set |input| to "`*`".
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |flags| be an empty string.
