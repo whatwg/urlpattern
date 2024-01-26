@@ -1412,7 +1412,7 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
     <p class=note>Next, we determine the [=part=] [=part/name=].  This can be explicitly provided by a "<a for=token/type>`name`</a>" [=token=] or be automatically assigned.</a>
   1. If |name token| is not null, then set |name| to |name token|'s [=token/value=].
   1. Otherwise if |regexp or wildcard token| is not null:
-    1. Set |name| to |parser|'s [=pattern parser/next numeric name=].
+    1. Set |name| to |parser|'s [=pattern parser/next numeric name=], [=serialize an integer|serialized=].
     1. Increment |parser|'s [=pattern parser/next numeric name=] by 1.
   1. If the result of running [=is a duplicate name=] given |parser| and |name| is true, then throw a {{TypeError}}.
   1. Let |encoded prefix| be the result of running |parser|'s [=pattern parser/encoding callback=] given |prefix|.
