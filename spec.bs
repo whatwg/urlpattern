@@ -1801,14 +1801,14 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   To <dfn>process a URLPatternInit</dfn> given a {{URLPatternInit}} |init|, a string |type|, a string or null |protocol|, a string or null |username|, a string or null |password|, a string or null |hostname|, a string or null |port|, a string or null |pathname|, a string or null |search|, and a string or null |hash|:
 
   1. Let |result| be the result of creating a new {{URLPatternInit}}.
-  1. Set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
-  1. Set |result|["{{URLPatternInit/username}}"] to |username|.
-  1. Set |result|["{{URLPatternInit/password}}"] to |password|.
-  1. Set |result|["{{URLPatternInit/hostname}}"] to |hostname|.
-  1. Set |result|["{{URLPatternInit/port}}"] to |port|.
-  1. Set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
-  1. Set |result|["{{URLPatternInit/search}}"] to |search|.
-  1. Set |result|["{{URLPatternInit/hash}}"] to |hash|.
+  1. If |protocol| is not null, set |result|["{{URLPatternInit/protocol}}"] to |protocol|.
+  1. If |username| is not null, set |result|["{{URLPatternInit/username}}"] to |username|.
+  1. If |password| is not null, set |result|["{{URLPatternInit/password}}"] to |password|.
+  1. If |hostname| is not null, set |result|["{{URLPatternInit/hostname}}"] to |hostname|.
+  1. If |port| is not null, set |result|["{{URLPatternInit/port}}"] to |port|.
+  1. If |pathname| is not null, set |result|["{{URLPatternInit/pathname}}"] to |pathname|.
+  1. If |search| is not null, set |result|["{{URLPatternInit/search}}"] to |search|.
+  1. If |hash| is not null, set |result|["{{URLPatternInit/hash}}"] to |hash|.
   1. Let |baseURL| be null.
   1. If |init|["{{URLPatternInit/baseURL}}"] [=map/exists=]:
     <div class="note">
