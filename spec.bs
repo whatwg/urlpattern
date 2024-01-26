@@ -360,6 +360,8 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
     1. If |baseURL| is not null, then throw a {{TypeError}}.
     1. Set |init| to |input|.
   1. Let |processedInit| be the result of [=process a URLPatternInit=] given |init|, "`pattern`", null, null, null, null, null, null, null, and null.
+  1. [=list/For each=] |componentName| of « "{{URLPatternInit/protocol}}", "{{URLPatternInit/username}}", "{{URLPatternInit/password}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", "{{URLPatternInit/hash}}" »:
+    1. If |processedInit|[|componentName|] does not [=map/exist=], then [=map/set=] |processedInit|[|componentName|] to "`*`".
   1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is its corresponding [=default port=], then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
   1. Set |this|'s [=URLPattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
   1. Set |this|'s [=URLPattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
@@ -460,7 +462,6 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 <div algorithm>
   To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
 
-  1. If |input| is null, then set |input| to "`*`".
   1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
   1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
   1. Let |flags| be an empty string.
