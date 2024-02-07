@@ -926,6 +926,68 @@ To <dfn>compute protocol matches a special scheme flag</dfn> given a [=construct
   1. If the result of running [=protocol component matches a special scheme=] given |protocol component| is true, then set |parser|'s [=constructor string parser/protocol matches a special scheme flag=] to true.
 </div>
 
+<h2 id=urlpatternlist-class>The {{URLPatternList}} class </h2>
+
+<xmp class="idl">
+[Exposed=(Window,Worker)]
+interface URLPatternList {
+  constructor(sequence<URLPattern> patterns);
+
+  boolean test(optional URLPatternInput input = {}, optional USVString baseURL);
+
+  URLPatternListResult? exec(optional URLPatternInput input = {}, optional USVString baseURL);
+};
+
+dictionary URLPatternListResult : URLPatternResult {
+  URLPattern pattern;
+};
+</xmp>
+
+Note: The {{URLPatternList}} is a utility that combines many patterns into one
+matcher. This functionality can also be achieved in a naive userland
+implementation that iterates over a list of patterns and matches each one
+individually. This has the unfortunate effect of not being very fast. With the
+built-in {{URLPatternList}} implementers can use an optimized implementation for
+matching under the hood which can drastically improve performance over the naive
+userland implementation.
+
+Each {{URLPatternList}} has an associated <dfn for=URLPatternList>pattern list</dfn>, a [=list=] of {{URLPattern}}s.
+
+<div algorithm>
+  The <dfn constructor for=URLPatternList lt="URLPatternList(patterns)">new URLPatternList(|patterns|)</dfn> constructor steps are:
+
+  1. [=list/For each=] |pattern| in |patterns|, run the following steps:
+    1. If [=this=]'s [=URLPatternList/pattern list=] [=list/contains=] |pattern|, throw a {{TypeError}}.
+    1. [=list/Append=] the |pattern| to [=this=]'s [=URLPatternList/pattern list=].
+  1. If [=this=]'s [=URLPatternList/pattern list=] is empty, throw a {{TypeError}}.
+
+  Issue: The patterns need to be in a "least -> most significant" sort order so
+  implementers can efficiently use a radix tree under the hood. Enforcing /
+  sorting the patterns in this order depends on
+  <a href=https://github.com/WICG/urlpattern/issues/61>https://github.com/WICG/urlpattern/issues/61</a>.
+</div>
+
+<div>
+  The <dfn method for=URLPatternList>test(|input|, |baseURL|)</dfn> method steps are:
+
+  1. [=list/For each=] |pattern| in [=this=]'s [=URLPatternList/pattern list=], run the following steps:
+    1. Let |result| be the result of [=match=] given |pattern|, |input|, and |baseURL| if given.
+    1. If |result| is null, [=continue=].
+    1. Return true.
+  1. Return false.
+</div>
+
+<div>
+  The <dfn method for=URLPatternList>match(|input|, |baseURL|)</dfn> method steps are:
+
+  1. [=list/For each=] |pattern| in [=this=]'s [=URLPatternList/pattern list=], run the following steps:
+    1. Let |result| be the result of [=match=] given |pattern|, |input|, and |baseURL| if given.
+    1. If |result| is null, [=continue=].
+    1. Set |result|'s {{URLPatternListResult/pattern}} to |pattern|.
+    1. Return |result|.
+  1. Return null.
+</div>
+
 <h2 id=patterns>Patterns</h2>
 
 A <dfn>pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn for="pattern string">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular [path-to-regexp](https://github.com/pillarjs/path-to-regexp) JavaScript library.
