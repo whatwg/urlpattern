@@ -224,21 +224,21 @@ dictionary URLPatternComponentResult {
 };
 </xmp>
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
 
 <dl class="domintro non-normative">
   <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL, options)|URLPattern}}(|input|)</code></dt>
