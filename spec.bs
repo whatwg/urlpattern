@@ -25,7 +25,7 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
 
 <h2 id=urlpattern-class>The {{URLPattern}} class</h2>
 
-A {{URLPattern}} consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
+A {{URLPattern}} has an associated [=URL Pattern=], which consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
 It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
 
@@ -224,21 +224,21 @@ dictionary URLPatternComponentResult {
 };
 </xmp>
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
 
-Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL Pattern=] struct has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
 
 <dl class="domintro non-normative">
   <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL, options)|URLPattern}}(|input|)</code></dt>
@@ -338,17 +338,17 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   The <dfn constructor for=URLPattern lt="URLPattern(input, baseURL, options)">new URLPattern(|input|, |baseURL|, |options|)</dfn> constructor steps are:
 
-  1. Run [=initialize=] given [=this=], |input|, |baseURL|, and |options|.
+  1. Run [=initialize=] given [=this=]'s associated [=URL Pattern=], |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
   The <dfn constructor for=URLPattern lt="URLPattern(input, options)">new URLPattern(|input|, |options|)</dfn> constructor steps are:
 
-  1. Run [=initialize=] given [=this=], |input|, null, and |options|.
+  1. Run [=initialize=] given [=this=]'s associated [=URL Pattern=], |input|, null, and |options|.
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn for=URLPattern>initialize</dfn> a [=URL Pattern=] given a [=URL Pattern=] |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
@@ -436,7 +436,7 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |result| be the result of [=URLPattern/match=] given [=this=], |input|, and |baseURL| if given.
+  1. Let |result| be the result of [=URLPattern/match=] given [=this=]'s associated [=URL Pattern=], |input|, and |baseURL| if given.
   1. If |result| is null, return false.
   1. Return true.
 </div>
@@ -444,12 +444,14 @@ Each {{URLPattern}} object has an associated <dfn for=URLPattern>hash component<
 <div algorithm>
   The <dfn method for="URLPattern">exec(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Return the result of [=URLPattern/match=] given [=this=], |input|, and |baseURL| if given.
+  1. Return the result of [=URLPattern/match=] given [=this=]'s associated [=URL Pattern=], |input|, and |baseURL| if given.
 </div>
 
 <h3 id=urlpattern-internals>Internals</h3>
 
-A {{URLPattern}} is associated with multiple <dfn>component</dfn> [=structs=].
+A {{URLPattern}} has an associated <dfn>URL pattern</dfn> [=structs=].
+
+A [=URL pattern=] is associated with multiple <dfn>component</dfn> [=structs=].
 
 A [=component=] has an associated <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=], which must be set upon creation.
 
@@ -477,8 +479,9 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 </div>
 
 <div algorithm>
-  A {{URLPattern}} |pattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
+  A {{URLPattern}} |urlpattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
 
+  1. Let |pattern| be |urlpattern|'s associated [=URL Pattern=].
   1. If |pattern|'s [=URLPattern/protocol component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URLPattern/username component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URLPattern/password component=] [=component/has regexp groups=] is true, then return true.
@@ -491,7 +494,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 </div>
 
 <div algorithm>
-  To perform a <dfn export for=URLPattern>match</dfn> given a {{URLPattern}} |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for=URLPattern>match</dfn> given a [=URL Pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
