@@ -338,17 +338,21 @@ Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>,
 <div algorithm>
   The <dfn constructor for=URLPattern lt="URLPattern(input, baseURL, options)">new URLPattern(|input|, |baseURL|, |options|)</dfn> constructor steps are:
 
-  1. Run [=initialize=] given [=this=]'s associated [=URL Pattern=], |input|, |baseURL|, and |options|.
+  1. Run [=initialize=] given [=this=], |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
   The <dfn constructor for=URLPattern lt="URLPattern(input, options)">new URLPattern(|input|, |options|)</dfn> constructor steps are:
 
-  1. Run [=initialize=] given [=this=]'s associated [=URL Pattern=], |input|, null, and |options|.
+  1. Run [=initialize=] given [=this=], |input|, null, and |options|.
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>initialize</dfn> a [=URL Pattern=] given a [=URL Pattern=] |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, Run [=create=] given |this|'s associated [=URL Pattern=], |input|, |baseURL|, and |options|.
+</div>
+
+<div algorithm>
+  To <dfn for=URLPattern>create</dfn> a [=URL Pattern=] given a [=URL Pattern=] |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
