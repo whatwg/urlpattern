@@ -1980,23 +1980,22 @@ JavaScript APIs should accept all of:
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
 <div algorithm>
-  To <dfn export>build a {{URLPattern}} from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
+  To <dfn export>build a [=URL Pattern=] from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
-    1. Return |input|.
+    1. Return |input|'s associated [=URL Pattern=].
   1. Otherwise, if the [=specific type=] of |input| is {{URLPatternInit}}:
     1. Let |init| be a [=map/clone=] of |input|.
     1. If |init|["{{URLPatternInit/baseURL}}"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
-    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
-    1. Run [=initialize=] given |pattern|, |init|, null, and an empty [=map=].
+    1. Let |pattern| be a new [=URL Pattern=].
+    1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
     1. Return |pattern|.
   1. Otherwise:
     1. [=Assert=]: The [=specific type=] of |input| is {{USVString}}.
-    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
-    1. Run [=initialize=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
+    1. Let |pattern| be a new [=URL Pattern=].
+    1. Run [=create=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
     1. Return |pattern|.
 
-  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
 </div>
 
 This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
@@ -2010,12 +2009,12 @@ JSON data formats which include URL patterns should mirror the behavior of <a hr
 If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
 
 <div algorithm>
-  To <dfn export>build a {{URLPattern}} from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps.
+  To <dfn export>build a [=URL Pattern=] from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. If |rawPattern| is a [=string=], then:
-    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
-    1. Run [=initialize=] given |pattern|, |rawPattern|, |serializedBaseURL|, and an empty [=map=].
+    1. Let |pattern| be a new [=URL Pattern=].
+    1. Run [=create=] given |pattern|, |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
     1. Return |pattern|.
@@ -2027,17 +2026,16 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
       1. Set |init|[|key|] to |value|.
-    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
-    1. Run [=initialize=] given |pattern|, |init|, null, and an empty [=map=].
+    1. Let |pattern| be a new [=URL Pattern=].
+    1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
     1. Return |pattern|.
   1. Otherwise, return null.
 
-  <p class="XXX">Ideally we wouldn't need a realm here. If we extricate the URL pattern concept from the {{URLPattern}} interface, we won't anymore.</p>
 </div>
 
-Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a [=URL Pattern=] directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
@@ -2076,7 +2074,8 @@ Rajesh Jagannathan,
 Ralph Chelala,
 Sangwhan Moon,
 Sayan Pal,
-Victor Costan, and
+Victor Costan
+Yoshisato Yanagisawa, and
 Youenn Fablet
 for their contributors to this specification.
 
