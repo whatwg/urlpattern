@@ -2074,7 +2074,7 @@ Rajesh Jagannathan,
 Ralph Chelala,
 Sangwhan Moon,
 Sayan Pal,
-Victor Costan
+Victor Costan,
 Yoshisato Yanagisawa, and
 Youenn Fablet
 for their contributors to this specification.
