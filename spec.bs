@@ -25,7 +25,7 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
 
 <h2 id=urlpattern-class>The {{URLPattern}} class</h2>
 
-A {{URLPattern}} has an associated [=URL Pattern=], which consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
+A {{URLPattern}} has an associated [=URL pattern=], which consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
 It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
 
@@ -224,21 +224,21 @@ dictionary URLPatternComponentResult {
 };
 </xmp>
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>protocol component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>username component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>password component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>hostname component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>port component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>pathname component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>search component</dfn>, a [=component=], which must be set upon creation.
 
-Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
+Each [=URL pattern=] has an associated <dfn for=URLPattern>hash component</dfn>, a [=component=], which must be set upon creation.
 
 <dl class="domintro non-normative">
   <dt><code>|urlPattern| = new {{URLPattern/constructor(input, baseURL, options)|URLPattern}}(|input|)</code></dt>
@@ -348,11 +348,11 @@ Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>,
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, run [=create=] given |this|'s associated [=URL Pattern=], |input|, |baseURL|, and |options|.
+  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, run [=create=] given |this|'s associated [=URL pattern=], |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>create</dfn> a [=URL Pattern=] given a [=URL Pattern=] |urlPattern|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn for=URLPattern>create</dfn> a [=URL pattern=] given a [=URL pattern=] |urlPattern|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
@@ -440,7 +440,7 @@ Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>,
 <div algorithm>
   The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |result| be the result of [=URLPattern/match=] given [=this=]'s associated [=URL Pattern=], |input|, and |baseURL| if given.
+  1. Let |result| be the result of [=URLPattern/match=] given [=this=]'s associated [=URL pattern=], |input|, and |baseURL| if given.
   1. If |result| is null, return false.
   1. Return true.
 </div>
@@ -448,7 +448,7 @@ Each [=URL Pattern=] has an associated <dfn for=URLPattern>hash component</dfn>,
 <div algorithm>
   The <dfn method for="URLPattern">exec(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Return the result of [=URLPattern/match=] given [=this=]'s associated [=URL Pattern=], |input|, and |baseURL| if given.
+  1. Return the result of [=URLPattern/match=] given [=this=]'s associated [=URL pattern=], |input|, and |baseURL| if given.
 </div>
 
 <h3 id=urlpattern-internals>Internals</h3>
@@ -485,7 +485,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 <div algorithm>
   A {{URLPattern}} |urlpattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
 
-  1. Let |pattern| be |urlpattern|'s associated [=URL Pattern=].
+  1. Let |pattern| be |urlpattern|'s associated [=URL pattern=].
   1. If |pattern|'s [=URLPattern/protocol component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URLPattern/username component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URLPattern/password component=] [=component/has regexp groups=] is true, then return true.
@@ -498,7 +498,7 @@ A [=component=] has an associated <dfn for=component>has regexp groups</dfn>, a 
 </div>
 
 <div algorithm>
-  To perform a <dfn export for=URLPattern>match</dfn> given a [=URL Pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for=URLPattern>match</dfn> given a [=URL pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
@@ -1980,19 +1980,19 @@ JavaScript APIs should accept all of:
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
 <div algorithm>
-  To <dfn export>build a [=URL Pattern=] from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL|, perform the following steps:
+  To <dfn export>build a [=URL pattern=] from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
-    1. Return |input|'s associated [=URL Pattern=].
+    1. Return |input|'s associated [=URL pattern=].
   1. Otherwise, if the [=specific type=] of |input| is {{URLPatternInit}}:
     1. Let |init| be a [=map/clone=] of |input|.
     1. If |init|["{{URLPatternInit/baseURL}}"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
-    1. Let |pattern| be a new [=URL Pattern=].
+    1. Let |pattern| be a new [=URL pattern=].
     1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
     1. Return |pattern|.
   1. Otherwise:
     1. [=Assert=]: The [=specific type=] of |input| is {{USVString}}.
-    1. Let |pattern| be a new [=URL Pattern=].
+    1. Let |pattern| be a new [=URL pattern=].
     1. Run [=create=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
     1. Return |pattern|.
 
@@ -2009,11 +2009,11 @@ JSON data formats which include URL patterns should mirror the behavior of <a hr
 If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
 
 <div algorithm>
-  To <dfn export>build a [=URL Pattern=] from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
+  To <dfn export>build a [=URL pattern=] from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. If |rawPattern| is a [=string=], then:
-    1. Let |pattern| be a new [=URL Pattern=].
+    1. Let |pattern| be a new [=URL pattern=].
     1. Run [=create=] given |pattern|, |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
@@ -2026,7 +2026,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
       1. Set |init|[|key|] to |value|.
-    1. Let |pattern| be a new [=URL Pattern=].
+    1. Let |pattern| be a new [=URL pattern=].
     1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
@@ -2035,7 +2035,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 
 </div>
 
-Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a [=URL Pattern=] directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a [=URL pattern=] directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
