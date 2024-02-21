@@ -419,7 +419,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 <div algorithm>
   The <dfn attribute for="URLPattern">hasRegExpGroups</dfn> getter steps are:
 
-  1. If [=this=] [=URLPattern/has regexp groups=], then return true.
+  1. If [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/has regexp groups=], then return true.
   1. Return false.
 </div>
 
@@ -475,17 +475,16 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 </div>
 
 <div algorithm>
-  A {{URLPattern}} |urlpattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
+  A [=URL pattern=] |urlpattern| <dfn export for="URL pattern">has regexp groups</dfn> if the following steps return true:
 
-  1. Let |pattern| be |urlpattern|'s [=URLPattern/associated URL pattern=].
-  1. If |pattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
-  1. If |pattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
   1. Return false.
 </div>
 
@@ -1955,7 +1954,7 @@ To promote consistency on the web platform, other documents integrating with thi
 
 1. **Accept shorthands**. Most author patterns will be simple and straightforward. Accordingly, APIs should accept shorthands for those common cases and avoid the need for authors to take additional steps to transform these into complete {{URLPattern}} objects.
 1. **Respect the base URL**. Just as URLs are generally parsed relative to a base URL for their environment (most commonly, a [=document base URL=]), URL patterns should respect this as well. The {{URLPattern}} constructor itself is an exception because it directly exposes the concept itself, similar to how the <a interface spec=URL>URL</a> constructor does not respect the base URL even though the rest of the platform does.
-1. **Be clear about regexp groups**. Some APIs may benefit from only allowing URL patterns which do not [=URLPattern/has regexp groups|have regexp groups=], for example, because user agents are likely to implement them in a different thread or process from those executing author script, and because of security or performance concerns, a JavaScript engine would not ordinarily run there. If so, this should be clearly documented (with reference to [=URLPattern/has regexp groups=]) and the operation should report an error as soon as possible (e.g., by throwing a JavaScript exception). If possible, this should be feature-detectable to allow for the possibility of this constraint being lifted in the future. Avoid creating different subsets of URL patterns without consulting the editors of this specification.
+1. **Be clear about regexp groups**. Some APIs may benefit from only allowing URL patterns which do not [=URL pattern/has regexp groups|have regexp groups=], for example, because user agents are likely to implement them in a different thread or process from those executing author script, and because of security or performance concerns, a JavaScript engine would not ordinarily run there. If so, this should be clearly documented (with reference to [=URL pattern/has regexp groups=]) and the operation should report an error as soon as possible (e.g., by throwing a JavaScript exception). If possible, this should be feature-detectable to allow for the possibility of this constraint being lifted in the future. Avoid creating different subsets of URL patterns without consulting the editors of this specification.
 1. **Be clear about what URLs will be matched**. For instance, algorithms during fetching are likely to operate on URLs with no [=url/fragment=]. If so, the specification should be clear that this is the case, and may advise showing a developer warning if a pattern which cannot match (e.g., because it requires a non-empty fragment) is used.
 
 <h3 id=other-specs-javascript>Integrating with JavaScript APIs</h3>
