@@ -338,7 +338,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>create</dfn> a [=URL pattern=] given a [=URL pattern=] |urlPattern|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a [=URL pattern=] |urlPattern|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
@@ -426,7 +426,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 <div algorithm>
   The <dfn method for="URLPattern">test(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Let |result| be the result of [=URLPattern/match=] given [=this=]'s associated [=URL pattern=], |input|, and |baseURL| if given.
+  1. Let |result| be the result of [=URL pattern/match=] given [=this=]'s [=URLPattern/associated URL pattern=], |input|, and |baseURL| if given.
   1. If |result| is null, return false.
   1. Return true.
 </div>
@@ -434,7 +434,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 <div algorithm>
   The <dfn method for="URLPattern">exec(|input|, |baseURL|)</dfn> method steps are:
 
-  1. Return the result of [=URLPattern/match=] given [=this=]'s associated [=URL pattern=], |input|, and |baseURL| if given.
+  1. Return the result of [=URL pattern/match=] given [=this=]'s [=URLPattern/associated URL pattern=], |input|, and |baseURL| if given.
 </div>
 
 <h3 id=urlpattern-internals>Internals</h3>
@@ -477,7 +477,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 <div algorithm>
   A {{URLPattern}} |urlpattern| <dfn export for=URLPattern>has regexp groups</dfn> if the following steps return true:
 
-  1. Let |pattern| be |urlpattern|'s associated [=URL pattern=].
+  1. Let |pattern| be |urlpattern|'s [=URLPattern/associated URL pattern=].
   1. If |pattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
   1. If |pattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
@@ -490,7 +490,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 </div>
 
 <div algorithm>
-  To perform a <dfn export for=URLPattern>match</dfn> given a [=URL pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
