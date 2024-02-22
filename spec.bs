@@ -23,7 +23,9 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
     text: serialize an integer; url: #serialize-an-integer
 </pre>
 
-<h2 id=urlpattern-class>The {{URLPattern}} class</h2>
+<h2 id=urlpatterns>The URL patterns</h2>
+
+<h3 id=introduction>Intrdocution</h3>
 
 A {{URLPattern}} has an associated [=URL pattern=], which consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
@@ -164,6 +166,8 @@ It can be constructed using a string for each component, or from a shorthand str
     * `http://discussion.example:8080/admin/update?id=1`
   </ul>
 </div>
+
+<h3 id=urlpattern-class>The {{URLPattern}} class</h3>
 
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
@@ -334,40 +338,9 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, set |this|'s [=URLPattern/associated URL pattern=] to the result of running [=create=] given |input|, |baseURL|, and |options|.
-</div>
+  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
-<div algorithm>
-  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
-
-  1. Let |init| be null.
-  1. If |input| is a [=scalar value string=] then:
-    1. Set |init| to the result of running [=parse a constructor string=] given |input|.
-    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then throw a {{TypeError}}.
-    1. If |baseURL| is not null, [=map/set=] |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
-  1. Otherwise:
-    1. [=Assert=]: |input| is a {{URLPatternInit}}.
-    1. If |baseURL| is not null, then throw a {{TypeError}}.
-    1. Set |init| to |input|.
-  1. Let |processedInit| be the result of [=process a URLPatternInit=] given |init|, "`pattern`", null, null, null, null, null, null, null, and null.
-  1. [=list/For each=] |componentName| of « "{{URLPatternInit/protocol}}", "{{URLPatternInit/username}}", "{{URLPatternInit/password}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", "{{URLPatternInit/hash}}" »:
-    1. If |processedInit|[|componentName|] does not [=map/exist=], then [=map/set=] |processedInit|[|componentName|] to "`*`".
-  1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is a string which represents its corresponding [=default port=] in radix-10 using [=ASCII digits=] then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
-  1. Let |urlPattern| be a new [=URL pattern=].
-  1. Set |urlPattern|'s [=URL pattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
-  1. Set |urlPattern|'s [=URL pattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
-  1. Set |urlPattern|'s [=URL pattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
-  1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
-  1. Otherwise, set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
-  1. Set |urlPattern|'s [=URL pattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
-  1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
-  1. If the result of running [=protocol component matches a special scheme=] given |urlPattern|'s [=URL pattern/protocol component=] is true, then:
-    1. Let |pathCompileOptions| be copy of the [=pathname options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
-    1. Set |urlPattern|'s [=URL pattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
-  1. Otherwise set |urlPattern|'s [=URL pattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
-  1. Set |urlPattern|'s [=URL pattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
-  1. Set |urlPattern|'s [=URL pattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and |compileOptions|.
-  1. Return |urlPattern|.
+  1. Set |this|'s [=URLPattern/associated URL pattern=] to the result of running [=create=] given |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
@@ -439,7 +412,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
   1. Return the result of [=URL pattern/match=] given [=this=]'s [=URLPattern/associated URL pattern=], |input|, and |baseURL| if given.
 </div>
 
-<h3 id=urlpattern-internals>Internals</h3>
+<h3 id=url-pattern-struct>The URL pattern struct</h3>
 
 A <dfn>URL pattern</dfn> is a [=struct=] with the following [=struct/items=]:
 
@@ -459,35 +432,39 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 * A <dfn for=component>group name list</dfn>, a [=list=] of strings, which must be set upon creation.
 * A <dfn for=component>has regexp groups</dfn>, a [=boolean=], which must be set upon creation.
 
-<div algorithm>
-  To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
-
-  1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
-  1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
-  1. Let |flags| be an empty string.
-  1. If |options|'s [=options/ignore case=] is true then set |flags| to "`vi`".
-  1. Otherwise set |flags| to "`v`"
-  1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
-    <p class="note">The specification uses regular expressions to perform all matching, but this is not mandated.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
-  1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
-  1. Let |has regexp groups| be false.
-  1. [=list/For each=] |part| of |part list|:
-    1. If |part|'s [=part/type=] is "<a for=part/type>`regexp`</a>", then set |has regexp groups| to true.
-  1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, [=component/group name list=] is |name list|, and [=component/has regexp groups=] is |has regexp groups|.
-</div>
+<h3 id=high-level-operations>High-level operations</h3>
 
 <div algorithm>
-  A [=URL pattern=] |urlpattern| <dfn export for="URL pattern">has regexp groups</dfn> if the following steps return true:
+  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
-  1. If |urlpattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
-  1. Return false.
+  1. Let |init| be null.
+  1. If |input| is a [=scalar value string=] then:
+    1. Set |init| to the result of running [=parse a constructor string=] given |input|.
+    1. If |baseURL| is null and |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then throw a {{TypeError}}.
+    1. If |baseURL| is not null, [=map/set=] |init|["{{URLPatternInit/baseURL}}"] to |baseURL|.
+  1. Otherwise:
+    1. [=Assert=]: |input| is a {{URLPatternInit}}.
+    1. If |baseURL| is not null, then throw a {{TypeError}}.
+    1. Set |init| to |input|.
+  1. Let |processedInit| be the result of [=process a URLPatternInit=] given |init|, "`pattern`", null, null, null, null, null, null, null, and null.
+  1. [=list/For each=] |componentName| of « "{{URLPatternInit/protocol}}", "{{URLPatternInit/username}}", "{{URLPatternInit/password}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", "{{URLPatternInit/hash}}" »:
+    1. If |processedInit|[|componentName|] does not [=map/exist=], then [=map/set=] |processedInit|[|componentName|] to "`*`".
+  1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is a string which represents its corresponding [=default port=] in radix-10 using [=ASCII digits=] then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
+  1. Let |urlPattern| be a new [=URL pattern=].
+  1. Set |urlPattern|'s [=URL pattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
+  1. Set |urlPattern|'s [=URL pattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
+  1. Set |urlPattern|'s [=URL pattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
+  1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
+  1. Otherwise, set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
+  1. Set |urlPattern|'s [=URL pattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
+  1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
+  1. If the result of running [=protocol component matches a special scheme=] given |urlPattern|'s [=URL pattern/protocol component=] is true, then:
+    1. Let |pathCompileOptions| be copy of the [=pathname options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
+    1. Set |urlPattern|'s [=URL pattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize a pathname=], and |pathCompileOptions|.
+  1. Otherwise set |urlPattern|'s [=URL pattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
+  1. Set |urlPattern|'s [=URL pattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
+  1. Set |urlPattern|'s [=URL pattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and |compileOptions|.
+  1. Return |urlPattern|.
 </div>
 
 <div algorithm>
@@ -550,6 +527,39 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. Set |result|["{{URLPatternResult/search}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/search component=], |search|, and |searchExecResult|.
   1. Set |result|["{{URLPatternResult/hash}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/hash component=], |hash|, and |hashExecResult|.
   1. Return |result|.
+</div>
+
+<div algorithm>
+  A [=URL pattern=] |urlpattern| <dfn export for="URL pattern">has regexp groups</dfn> if the following steps return true:
+
+  1. If |urlpattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlpattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
+  1. Return false.
+</div>
+
+<h3 id=urlpattern-internals>Internals</h3>
+
+<div algorithm>
+  To <dfn>compile a component</dfn> given a string |input|, [=/encoding callback=] |encoding callback|, and [=/options=] |options|:
+
+  1. Let |part list| be the result of running [=parse a pattern string=] given |input|, |options|, and |encoding callback|.
+  1. Let (|regular expression string|, |name list|) be the result of running [=generate a regular expression and name list=] given |part list| and |options|.
+  1. Let |flags| be an empty string.
+  1. If |options|'s [=options/ignore case=] is true then set |flags| to "`vi`".
+  1. Otherwise set |flags| to "`v`"
+  1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
+    <p class="note">The specification uses regular expressions to perform all matching, but this is not mandated.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
+  1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
+  1. Let |has regexp groups| be false.
+  1. [=list/For each=] |part| of |part list|:
+    1. If |part|'s [=part/type=] is "<a for=part/type>`regexp`</a>", then set |has regexp groups| to true.
+  1. Return a new [=component=] whose [=component/pattern string=] is |pattern string|, [=component/regular expression=] is |regular expression|, [=component/group name list=] is |name list|, and [=component/has regexp groups=] is |has regexp groups|.
 </div>
 
 <div algorithm>
@@ -926,7 +936,7 @@ To <dfn>compute protocol matches a special scheme flag</dfn> given a [=construct
   1. If the result of running [=protocol component matches a special scheme=] given |protocol component| is true, then set |parser|'s [=constructor string parser/protocol matches a special scheme flag=] to true.
 </div>
 
-<h2 id=patterns>Patterns</h2>
+<h2 id=pattern-strings>Pattern strings</h2>
 
 A <dfn>pattern string</dfn> is a string that is written to match a set of target strings.  A <dfn for="pattern string">well formed</dfn> pattern string conforms to a particular pattern syntax.  This pattern syntax is directly based on the syntax used by the popular [path-to-regexp](https://github.com/pillarjs/path-to-regexp) JavaScript library.
 
@@ -942,7 +952,7 @@ It can be [=parse a pattern string|parsed=] to produce a [=/part list=] which de
   A full wildcard `*` can also be used to match as much as possible, as in the pathname pattern "`/products/*`".
 </div>
 
-<h3 id=parsing-patterns>Parsing patterns</h3>
+<h3 id=parsing-pattern-strings>Parsing pattern strings</h3>
 
 <h4 id=tokens>Tokens</h4>
 
