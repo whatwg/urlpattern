@@ -23,7 +23,7 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
     text: serialize an integer; url: #serialize-an-integer
 </pre>
 
-<h2 id=urlpatterns>The URL patterns</h2>
+<h2 id=urlpatterns>URL patterns</h2>
 
 <h3 id=introduction>Intrdocution</h3>
 
