@@ -371,49 +371,49 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 <div algorithm>
   The <dfn attribute for="URLPattern">protocol</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/protocol component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/protocol component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">username</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/username component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/username component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">password</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/password component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/password component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">hostname</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/hostname component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/hostname component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">port</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/port component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/port component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">pathname</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/pathname component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/pathname component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">search</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/search component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/search component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
   The <dfn attribute for="URLPattern">hash</dfn> getter steps are:
 
-  1. Return [=this=]'s [=URL pattern/hash component=]'s [=component/pattern string=].
+  1. Return [=this=]'s [=URLPattern/associated URL pattern=]'s [=URL pattern/hash component=]'s [=component/pattern string=].
 </div>
 
 <div algorithm>
