@@ -435,7 +435,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 <h3 id=high-level-operations>High-level operations</h3>
 
 <div algorithm>
-  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn export for="URL pattern">create</dfn> a [=URL pattern=] given a {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
