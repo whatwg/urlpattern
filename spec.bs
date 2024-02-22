@@ -334,11 +334,11 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 </div>
 
 <div algorithm>
-  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, run [=create=] given |this|'s associated [=URL pattern=], |input|, |baseURL|, and |options|.
+  To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|, set |this|'s [=URLPattern/associated URL pattern=] to the result of running [=create=] given |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
-  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a [=URL pattern=] |urlPattern|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
+  To <dfn for="URL pattern">create</dfn> a [=URL pattern=] given a {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
   1. Let |init| be null.
   1. If |input| is a [=scalar value string=] then:
@@ -353,6 +353,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
   1. [=list/For each=] |componentName| of « "{{URLPatternInit/protocol}}", "{{URLPatternInit/username}}", "{{URLPatternInit/password}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/pathname}}", "{{URLPatternInit/search}}", "{{URLPatternInit/hash}}" »:
     1. If |processedInit|[|componentName|] does not [=map/exist=], then [=map/set=] |processedInit|[|componentName|] to "`*`".
   1. If |processedInit|["{{URLPatternInit/protocol}}"] is a [=special scheme=] and |processedInit|["{{URLPatternInit/port}}"] is a string which represents its corresponding [=default port=] in radix-10 using [=ASCII digits=] then set |processedInit|["{{URLPatternInit/port}}"] to the empty string.
+  1. Let |urlPattern| be a new [=URL pattern=].
   1. Set |urlPattern|'s [=URL pattern/protocol component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/protocol}}"], [=canonicalize a protocol=], and [=default options=].
   1. Set |urlPattern|'s [=URL pattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
   1. Set |urlPattern|'s [=URL pattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
@@ -366,6 +367,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
   1. Otherwise set |urlPattern|'s [=URL pattern/pathname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/pathname}}"], [=canonicalize an opaque pathname=], and |compileOptions|.
   1. Set |urlPattern|'s [=URL pattern/search component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/search}}"], [=canonicalize a search=], and |compileOptions|.
   1. Set |urlPattern|'s [=URL pattern/hash component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hash}}"], [=canonicalize a hash=], and |compileOptions|.
+  1. Return |urlPattern|.
 </div>
 
 <div algorithm>
@@ -1974,7 +1976,7 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
   To <dfn export>build a [=URL pattern=] from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
-    1. Return |input|'s associated [=URL pattern=].
+    1. Return |input|'s [=URLPattern/associated URL pattern=].
   1. Otherwise, if the [=specific type=] of |input| is {{URLPatternInit}}:
     1. Let |init| be a [=map/clone=] of |input|.
     1. If |init|["{{URLPatternInit/baseURL}}"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
