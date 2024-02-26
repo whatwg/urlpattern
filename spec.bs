@@ -468,7 +468,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 </div>
 
 <div algorithm>
-  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlpattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlPattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
@@ -507,39 +507,39 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
     1. Set |pathname| to the result of [=URL path serializing=] |url|.
     1. Set |search| to |url|'s [=url/query=] or the empty string if the value is null.
     1. Set |hash| to |url|'s [=url/fragment=] or the empty string if the value is null.
-  1. Let |protocolExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/protocol component=]'s [=component/regular expression=], |protocol|).
-  1. Let |usernameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/username component=]'s [=component/regular expression=], |username|).
-  1. Let |passwordExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/password component=]'s [=component/regular expression=], |password|).
-  1. Let |hostnameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/hostname component=]'s [=component/regular expression=], |hostname|).
-  1. Let |portExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/port component=]'s [=component/regular expression=], |port|).
-  1. Let |pathnameExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/pathname component=]'s [=component/regular expression=], |pathname|).
-  1. Let |searchExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/search component=]'s [=component/regular expression=], |search|).
-  1. Let |hashExecResult| be [$RegExpBuiltinExec$](|urlpattern|'s [=URL pattern/hash component=]'s [=component/regular expression=], |hash|).
+  1. Let |protocolExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/protocol component=]'s [=component/regular expression=], |protocol|).
+  1. Let |usernameExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/username component=]'s [=component/regular expression=], |username|).
+  1. Let |passwordExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/password component=]'s [=component/regular expression=], |password|).
+  1. Let |hostnameExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/hostname component=]'s [=component/regular expression=], |hostname|).
+  1. Let |portExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/port component=]'s [=component/regular expression=], |port|).
+  1. Let |pathnameExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/pathname component=]'s [=component/regular expression=], |pathname|).
+  1. Let |searchExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/search component=]'s [=component/regular expression=], |search|).
+  1. Let |hashExecResult| be [$RegExpBuiltinExec$](|urlPattern|'s [=URL pattern/hash component=]'s [=component/regular expression=], |hash|).
   1. If |protocolExecResult|, |usernameExecResult|, |passwordExecResult|, |hostnameExecResult|, |portExecResult|, |pathnameExecResult|, |searchExecResult|, or |hashExecResult| are null then return null.
   1. Let |result| be a new {{URLPatternResult}}.
   1. Set |result|["{{URLPatternResult/inputs}}"] to |inputs|.
-  1. Set |result|["{{URLPatternResult/protocol}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/protocol component=], |protocol|, and |protocolExecResult|.
-  1. Set |result|["{{URLPatternResult/username}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/username component=], |username|, and |usernameExecResult|.
-  1. Set |result|["{{URLPatternResult/password}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/password component=], |password|, and |passwordExecResult|.
-  1. Set |result|["{{URLPatternResult/hostname}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/hostname component=], |hostname|, and |hostnameExecResult|.
-  1. Set |result|["{{URLPatternResult/port}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/port component=], |port|, and |portExecResult|.
-  1. Set |result|["{{URLPatternResult/pathname}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/pathname component=], |pathname|, and |pathnameExecResult|.
-  1. Set |result|["{{URLPatternResult/search}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/search component=], |search|, and |searchExecResult|.
-  1. Set |result|["{{URLPatternResult/hash}}"] to the result of [=creating a component match result=] given |urlpattern|'s [=URL pattern/hash component=], |hash|, and |hashExecResult|.
+  1. Set |result|["{{URLPatternResult/protocol}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/protocol component=], |protocol|, and |protocolExecResult|.
+  1. Set |result|["{{URLPatternResult/username}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/username component=], |username|, and |usernameExecResult|.
+  1. Set |result|["{{URLPatternResult/password}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/password component=], |password|, and |passwordExecResult|.
+  1. Set |result|["{{URLPatternResult/hostname}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/hostname component=], |hostname|, and |hostnameExecResult|.
+  1. Set |result|["{{URLPatternResult/port}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/port component=], |port|, and |portExecResult|.
+  1. Set |result|["{{URLPatternResult/pathname}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/pathname component=], |pathname|, and |pathnameExecResult|.
+  1. Set |result|["{{URLPatternResult/search}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/search component=], |search|, and |searchExecResult|.
+  1. Set |result|["{{URLPatternResult/hash}}"] to the result of [=creating a component match result=] given |urlPattern|'s [=URL pattern/hash component=], |hash|, and |hashExecResult|.
   1. Return |result|.
 </div>
 
 <div algorithm>
-  A [=URL pattern=] |urlpattern| <dfn export for="URL pattern">has regexp groups</dfn> if the following steps return true:
+  A [=URL pattern=] |urlPattern| <dfn export for="URL pattern">has regexp groups</dfn> if the following steps return true:
 
-  1. If |urlpattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
-  1. If |urlpattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/protocol component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/username component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/password component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/hostname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/port component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/pathname component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/search component=] [=component/has regexp groups=] is true, then return true.
+  1. If |urlPattern|'s [=URL pattern/hash component=] [=component/has regexp groups=] is true, then return true.
   1. Return false.
 </div>
 
@@ -2024,7 +2024,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
       1. Set |init|[|key|] to |value|.
-    1. Return the result of [=creating=] a URL pattern given |pattern|, |init|, null, and an empty [=map=].
+    1. Return the result of [=creating=] a URL pattern given |init|, null, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
 
