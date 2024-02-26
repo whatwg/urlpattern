@@ -1987,7 +1987,7 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
     1. Return |input|.
-  1. Otherwise,
+  1. Otherwise:
     1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
     1. Set |pattern|'s [=URLPattern/associated URL pattern=] to the result of [=building a URL pattern from a Web IDL value=] given |input| and |baseURL|.
     1. Return |pattern|.
