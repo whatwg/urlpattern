@@ -1983,6 +1983,17 @@ JavaScript APIs should accept all of:
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
 <div algorithm>
+  To <dfn export>build a {{URLPattern}} object from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL| and [=ECMAScript/realm=] |realm|, perform the following steps:
+
+  1. If the [=specific type=] of |input| is {{URLPattern}}:
+    1. Return |input|.
+  1. Otherwise,
+    1. Let |pattern| be a [=new=] {{URLPattern}} with |realm|.
+    1. Set |pattern|'s [=URLPattern/associated URL pattern=] to the result of [=building a URL pattern from a Web IDL value=] given |input| and |baseURL|.
+    1. Return |pattern|.
+</div>
+
+<div algorithm>
   To <dfn export>build a [=URL pattern=] from a Web IDL value</dfn> {{URLPatternCompatible}} |input| given [=/URL=] |baseURL|, perform the following steps:
 
   1. If the [=specific type=] of |input| is {{URLPattern}}:
@@ -1994,7 +2005,6 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
   1. Otherwise:
     1. [=Assert=]: The [=specific type=] of |input| is {{USVString}}.
     1. Return the result of [=creating=] a URL pattern given |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
-
 </div>
 
 This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
