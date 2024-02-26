@@ -27,7 +27,7 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
 
 <h3 id=introduction>Introduction</h3>
 
-A {{URLPattern}} has an associated [=URL pattern=], which consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
+A [=URL pattern=] consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
 It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
 
