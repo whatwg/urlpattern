@@ -1990,14 +1990,10 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
   1. Otherwise, if the [=specific type=] of |input| is {{URLPatternInit}}:
     1. Let |init| be a [=map/clone=] of |input|.
     1. If |init|["{{URLPatternInit/baseURL}}"] does not [=map/exist=], set it to the [=URL serializer|serialization=] of |baseURL|.
-    1. Let |pattern| be a new [=URL pattern=].
-    1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
-    1. Return |pattern|.
+    1. Return the result of [=creating=] a URL pattern given |init|, null, and an empty [=map=].
   1. Otherwise:
     1. [=Assert=]: The [=specific type=] of |input| is {{USVString}}.
-    1. Let |pattern| be a new [=URL pattern=].
-    1. Run [=create=] given |pattern|, |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
-    1. Return |pattern|.
+    1. Return the result of [=creating=] a URL pattern given |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
 
 </div>
 
@@ -2016,11 +2012,10 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. If |rawPattern| is a [=string=], then:
-    1. Let |pattern| be a new [=URL pattern=].
-    1. Run [=create=] given |pattern|, |rawPattern|, |serializedBaseURL|, and an empty [=map=].
+    1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
-    1. Return |pattern|.
+
   1. Otherwise, if |rawPattern| is a [=map=], then:
     1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
     1. [=map/For each=] |key| → |value| of |rawPattern|:
@@ -2029,11 +2024,10 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
       1. Set |init|[|key|] to |value|.
-    1. Let |pattern| be a new [=URL pattern=].
-    1. Run [=create=] given |pattern|, |init|, null, and an empty [=map=].
+    1. Return the result of [=creating=] a URL pattern given |pattern|, |init|, null, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
-    1. Return |pattern|.
+
   1. Otherwise, return null.
 
 </div>
