@@ -427,10 +427,10 @@ A <dfn>URL pattern</dfn> is a [=struct=] with the following [=struct/items=]:
 
 A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 
-* <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=], which must be set upon creation.
-* <dfn for=component>regular expression</dfn>, a {{RegExp}}, which must be set upon creation.
-* <dfn for=component>group name list</dfn>, a [=list=] of strings, which must be set upon creation.
-* <dfn for=component>has regexp groups</dfn>, a [=boolean=], which must be set upon creation.
+* <dfn for=component>pattern string</dfn>, a [=pattern string/well formed=] [=/pattern string=]
+* <dfn for=component>regular expression</dfn>, a {{RegExp}}
+* <dfn for=component>group name list</dfn>, a [=list=] of strings
+* <dfn for=component>has regexp groups</dfn>, a [=boolean=]
 
 <h3 id=high-level-operations>High-level operations</h3>
 
