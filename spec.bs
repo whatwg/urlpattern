@@ -340,7 +340,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 <div algorithm>
   To <dfn for=URLPattern>initialize</dfn> a {{URLPattern}} given a {{URLPattern}} |this|, {{URLPatternInput}} |input|, string or null |baseURL|, and {{URLPatternOptions}} |options|:
 
-  1. Set |this|'s [=URLPattern/associated URL pattern=] to the result of running [=create=] given |input|, |baseURL|, and |options|.
+  1. Set |this|'s [=URLPattern/associated URL pattern=] to the result of [=create=] given |input|, |baseURL|, and |options|.
 </div>
 
 <div algorithm>
