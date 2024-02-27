@@ -11,6 +11,7 @@ Markup Shorthands: markdown yes
 <pre class="link-defaults">
 spec:infra; type:dfn; text:list
 spec:webidl; type:dfn; text:record
+spec:url; type:interface; text:URL
 </pre>
 
 <pre class="anchors">
@@ -21,6 +22,15 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
 spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
+    text: url; url: #concept-url
+    text: scheme; for: url; url: #concept-url-scheme
+    text: username; for: url; url: #concept-url-username
+    text: password; for: url; url: #concept-url-password
+    text: host; for: url; url: #concept-url-host
+    text: port; for: url; url: #concept-url-port
+    text: path; for: url; url: #concept-url-path
+    text: query; for: url; url: #concept-url-query
+    text: fragment; for: url; url: #concept-url-fragment
 </pre>
 
 <h2 id=urlpatterns>URL patterns</h2>
@@ -171,15 +181,16 @@ It can be constructed using a string for each component, or from a shorthand str
 
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
+typedef (URLPatternInput or URL) URLPatternMatchInput;
 
 [Exposed=(Window,Worker)]
 interface URLPattern {
   constructor(URLPatternInput input, USVString baseURL, optional URLPatternOptions options = {});
   constructor(optional URLPatternInput input = {}, optional URLPatternOptions options = {});
 
-  boolean test(optional URLPatternInput input = {}, optional USVString baseURL);
+  boolean test(optional URLPatternMatchInput input = {}, optional USVString baseURL);
 
-  URLPatternResult? exec(optional URLPatternInput input = {}, optional USVString baseURL);
+  URLPatternResult? exec(optional URLPatternMatchInput input = {}, optional USVString baseURL);
 
   readonly attribute USVString protocol;
   readonly attribute USVString username;
@@ -468,7 +479,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 </div>
 
 <div algorithm>
-  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlPattern|, a {{URLPatternInput}} |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlPattern|, a {{URLPatternMatchInput}} |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
@@ -480,7 +491,17 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. Let |hash| be the empty string.
   1. Let |inputs| be an empty [=list=].
   1. [=list/Append=] |input| to |inputs|.
-  1. If |input| is a {{URLPatternInit}} then:
+  1. If |input| is a {{URL}} then:
+    1. Let |associatedUrl| be |input|'s associated [=URL=].
+    1. Set |protocol| to |associatedUrl|'s [=url/scheme=].
+    1. Set |username| to |associatedUrl|'s [=url/username=].
+    1. Set |password| to |associatedUrl|'s [=url/password=].
+    1. Set |hostname| to |associatedUrl|'s [=url/host=].
+    1. Set |port| to |associatedUrl|'s [=url/port=].
+    1. Set |pathname| to |associatedUrl|'s [=url/path=].
+    1. Set |search| to |associatedUrl|'s [=url/query=].
+    1. Set |hash| to |associatedUrl|'s [=url/fragment=].
+  1. Else if |input| is a {{URLPatternInit}} then:
     1. If |baseURLString| was given, throw a {{TypeError}}.
     1. Let |applyResult| be the result of [=process a URLPatternInit=] given |input|, "url", |protocol|, |username|, |password|, |hostname|, |port|, |pathname|, |search|, and |hash|. If this throws an exception, catch it, and return null.
     1. Set |protocol| to |applyResult|["{{URLPatternInit/protocol}}"].
@@ -491,7 +512,8 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
     1. Set |pathname| to |applyResult|["{{URLPatternInit/pathname}}"].
     1. Set |search| to |applyResult|["{{URLPatternInit/search}}"].
     1. Set |hash| to |applyResult|["{{URLPatternInit/hash}}"].
-  1. Otherwise:
+  1. Else:
+    1. [=Assert=]: |input| is a {{USVString}}.
     1. Let |baseURL| be null.
     1. If |baseURLString| was given, then:
       1. Set |baseURL| to the result of [=URL parser|parsing=] |baseURLString|.
