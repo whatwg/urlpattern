@@ -414,7 +414,7 @@ Each {{URLPattern}} has an <dfn for="URLPattern">associated URL pattern</dfn>, a
 
 <h3 id=url-pattern-struct>The URL pattern struct</h3>
 
-A <dfn>URL pattern</dfn> is a [=struct=] with the following [=struct/items=]:
+A <dfn export>URL pattern</dfn> is a [=struct=] with the following [=struct/items=]:
 
 * <dfn for="URL pattern">protocol component</dfn>, a [=component=]
 * <dfn for="URL pattern">username component</dfn>, a [=component=]
