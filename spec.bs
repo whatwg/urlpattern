@@ -468,7 +468,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
 </div>
 
 <div algorithm>
-  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlPattern|, a {{URLPatternInput}} or [=/url=] |input|, and an optional string |baseURLString|:
+  To perform a <dfn export for="URL pattern">match</dfn> given a [=URL pattern=] |urlPattern|, a {{URLPatternInput}} or [=/URL=] |input|, and an optional string |baseURLString|:
 
   1. Let |protocol| be the empty string.
   1. Let |username| be the empty string.
