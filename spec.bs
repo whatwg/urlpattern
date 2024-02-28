@@ -501,7 +501,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
         1. [=list/Append=] |baseURLString| to |inputs|.
       1. Set |url| be the result of [=URL parser|parsing=] |input| given |baseURL|.
       1. If |url| is failure, return null.
-    1. [=Assert=]: |url| is [=/url=]
+    1. [=Assert=]: |url| is a [=/URL=].
     1. Set |protocol| to |url|'s [=url/scheme=].
     1. Set |username| to |url|'s [=url/username=].
     1. Set |password| to |url|'s [=url/password=].
