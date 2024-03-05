@@ -656,7 +656,7 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
 <div class=note>
   <p>In the constructor string algorithm, the pathname, search, and hash are wildcarded if earlier components are specified but later ones are not. For example, "`https://example.com/foo`" matches any search and any hash. Similarly, "`https://example.com`" matches any URL on that origin. This is analogous to the notion of a more specific component in the notes about [=process a URLPatternInit=] (e.g., a search is more specific than a pathname), but the constructor syntax only has a few cases where it is possible to specify a more specific component without also specifying the less specific components.
   <p>The username and password components are always wildcard unless they are explicitly specified.
-  <p>If a hostname is specified and the port is not, the port is assumed to be the default port. If any port should match, authors can write `:*` explicitly. For example, "`https://*`" is any HTTPS origin on port 443, and "`https://*:*`" is any HTTPS origin on any port.
+  <p>If a hostname is specified and the port is not, the port is assumed to be the default port. If authors want to match any port, they have to write `:*` explicitly. For example, "`https://*`" is any HTTPS origin on port 443, and "`https://*:*`" is any HTTPS origin on any port.
 </div>
 
 <div algorithm>
@@ -774,7 +774,7 @@ To <dfn>parse a constructor string</dfn> given a string |input|:
     1. Increment |parser|'s [=constructor string parser/token index=] by |parser|'s [=constructor string parser/token increment=].
   1. If |parser|'s [=constructor string parser/result=] [=map/contains=] "{{URLPatternInit/hostname}}" and not "{{URLPatternInit/port}}", then set |parser|'s [=constructor string parser/result=]["{{URLPatternInit/port}}"] to the empty string.
 
-      <div class="note">This is special-cased because when an author does not specify a port, they usually intend the default port. If any port is acceptable, the author can specify it as a wildcard explicitly. For example, "`https://example.com/*`" should not match URLs beginning with "`https://example.com:8443/`", which is a different origin.</div>
+      <div class="note">This is special-cased because when an author does not specify a port, they usually intend the default port. If any port is acceptable, the author can specify it as a wildcard explicitly. For example, "`https://example.com/*`" does not match URLs beginning with "`https://example.com:8443/`", which is a different origin.</div>
   1. Return |parser|'s [=constructor string parser/result=].
 </div>
 
@@ -2027,7 +2027,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   1. If |rawPattern| is a [=string=], then:
     1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
-        <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
+        <div class="note">It might become necessary in the future to plumb non-empty options here.</div>
 
   1. Otherwise, if |rawPattern| is a [=map=], then:
     1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
@@ -2039,7 +2039,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
       1. Set |init|[|key|] to |value|.
     1. Return the result of [=creating=] a URL pattern given |init|, null, and an empty [=map=].
 
-        <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
+        <div class="note">It might become necessary in the future to plumb non-empty options here.</div>
 
   1. Otherwise, return null.
 
