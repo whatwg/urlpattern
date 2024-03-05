@@ -656,7 +656,7 @@ A [=constructor string parser=] has an associated <dfn export for="constructor s
 <div class=note>
   <p>In the constructor string algorithm, the pathname, search, and hash are wildcarded if earlier components are specified but later ones are not. For example, "`https://example.com/foo`" matches any search and any hash. Similarly, "`https://example.com`" matches any URL on that origin. This is analogous to the notion of a more specific component in the notes about [=process a URLPatternInit=] (e.g., a search is more specific than a pathname), but the constructor syntax only has a few cases where it is possible to specify a more specific component without also specifying the less specific components.
   <p>The username and password components are always wildcard unless they are explicitly specified.
-  <p>If a hostname is specified and the port is not, the port is assumed to be the default port. If any port will match, authors can write `:*` explicitly. For example, "`https://*`" is any HTTPS origin on port 443, and "`https://*:*`" is any HTTPS origin on any port.
+  <p>If a hostname is specified and the port is not, the port is assumed to be the default port. If authors want to match any port, they have to write `:*` explicitly. For example, "`https://*`" is any HTTPS origin on port 443, and "`https://*:*`" is any HTTPS origin on any port.
 </div>
 
 <div algorithm>
