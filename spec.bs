@@ -1748,7 +1748,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a port</dfn> given a string |portValue| and optionally a string |protocolValue|:
 
-  1. If |value| is the empty string, return |value|.
+  1. If |portValue| is the empty string, return |portValue|.
   1. Let |dummyURL| be a new [=URL record=].
   1. If |protocolValue| was given, then set |dummyURL|'s [=url/scheme=] to |protocolValue|.
      <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize default port values.</p>
