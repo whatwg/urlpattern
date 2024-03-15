@@ -22,7 +22,6 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
     text: host serializer; url: #concept-host-serializer
-
 </pre>
 
 <h2 id=urlpatterns>URL patterns</h2>
