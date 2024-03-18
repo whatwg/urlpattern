@@ -1,9 +1,10 @@
 <pre class="metadata">
 Group: WHATWG
+Status: RD
+Date: 2024-03-18
 H1: URL Pattern
 Shortname: urlpattern
 Text Macro: TWITTER urlpatterns
-Text Macro: LATESTRD 2024-03
 Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
 Markup Shorthands: markdown yes
