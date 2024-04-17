@@ -1,9 +1,10 @@
 <pre class="metadata">
 Group: WHATWG
+Status: RD
+Date: 2024-03-18
 H1: URL Pattern
 Shortname: urlpattern
 Text Macro: TWITTER urlpatterns
-Text Macro: LATESTRD 2024-03
 Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
 Markup Shorthands: markdown yes
@@ -22,7 +23,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
 spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
-    text: host serializer; url: #concept-host-serializer
 </pre>
 
 <h2 id=urlpatterns>URL patterns</h2>
@@ -507,8 +507,8 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
     1. Set |protocol| to |url|'s [=url/scheme=].
     1. Set |username| to |url|'s [=url/username=].
     1. Set |password| to |url|'s [=url/password=].
-    1. Set |hostname| to |url|'s [=url/host=], [=host serializer|serialized=], or the empty string if the value is null.
-    1. Set |port| to |url|'s [=url/port=], [=serialize an integer|serialized=], or the empty string if the value is null.
+    1. Set |hostname| to |url|'s [=url/host=] or the empty string if the value is null.
+    1. Set |port| to |url|'s [=url/port=] or the empty string if the value is null.
     1. Set |pathname| to the result of [=URL path serializing=] |url|.
     1. Set |search| to |url|'s [=url/query=] or the empty string if the value is null.
     1. Set |hash| to |url|'s [=url/fragment=] or the empty string if the value is null.
@@ -1727,7 +1727,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/host=], [=host serializer|serialized=], or empty string if it is null.
+  1. Return |dummyURL|'s [=url/host=].
 </div>
 
 <div algorithm>
@@ -1750,7 +1750,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a port</dfn> given a string |portValue| and optionally a string |protocolValue|:
 
-  1. If |portValue| is the empty string, return |portValue|.
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. If |protocolValue| was given, then set |dummyURL|'s [=url/scheme=] to |protocolValue|.
      <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize default port values.</p>
