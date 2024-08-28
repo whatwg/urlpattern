@@ -21,6 +21,11 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
 spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
+spec: RFC8941; urlPrefix: https://httpwg.org/specs/rfc8941.html
+  type: dfn
+    text: structured header; url: top
+    for: structured header
+      text: string; url: string
 </pre>
 
 <h2 id=urlpatterns>URL patterns</h2>
@@ -2021,7 +2026,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   To <dfn export>build a [=URL pattern=] from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
-  1. If |rawPattern| is a [=string=], then:
+  1. If |rawPattern| is a [=/string=], then:
     1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It may become necessary in the future to plumb non-empty options here.</div>
@@ -2029,7 +2034,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   1. Otherwise, if |rawPattern| is a [=map=], then:
     1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
     1. [=map/For each=] |key| → |value| of |rawPattern|:
-      1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=string=], or the member's type is not declared to be {{USVString}}, then return null.
+      1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=/string=], or the member's type is not declared to be {{USVString}}, then return null.
 
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
@@ -2043,6 +2048,24 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 </div>
 
 Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
+
+<h3 id=other-specs-http>Integrating with HTTP header fields</h3>
+
+HTTP headers which include URL patterns should accept a string in the constructor string syntax, likely as part of a structured field [[RFC8941]].
+
+<div class="note">No known header accepts the dictionary syntax for URL patterns. If that changes, this specification will be updated to define it, likely by processing [[RFC8941]] inner lists.</div>
+
+Specifications for HTTP headers should operate on [=URL patterns=] (e.g., using the [=URL pattern/match=] algorithm) rather than {{URLPattern}} objects (which imply the existence of a JavaScript [=ECMAScript/realm=]).
+
+<div algorithm>
+  To <dfn export>build a [=URL pattern=] from an HTTP structured field value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
+
+  1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
+  1. [=Assert=]: |rawPattern| is a [=structured header/string=].
+  1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
+</div>
+
+<div class="note">Specifications might consider accepting only patterns which do not [=URL pattern/has regexp groups|have regexp groups=] if evaluating the pattern, since the performance of such patterns might be more reliable, and may not require a [[ECMA-262]] regular expression implementation, which may have security, code size, or other implications for implementations. On the other hand, JavaScript APIs run in environments where such an implementation is readily available.</div>
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
