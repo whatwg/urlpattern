@@ -76,6 +76,8 @@ It can be constructed using a string for each component, or from a shorthand str
     * `http://example.com/products/`
     * `https://example.com:8443/blog/our-greatest-product-ever`
   </ul>
+
+  This is a fairly simple pattern which requires most components to either match an exact string, or allows any string ("`*`"). The [=URL pattern/pathname component=] matches any path with at least two `/`-separated path components, the first of which is captured as "`category`".
 </div>
 
 <div class="example" id="example-intro-2">
@@ -123,6 +125,10 @@ It can be constructed using a string for each component, or from a shorthand str
     * `https://nx.shop.example/products/01?speed=5#reviews`
     * `https://shop.example/products/chair#reviews`
   </ul>
+
+  This is a more complicated pattern which includes:
+  * [=part/modifier/optional=] parts marked with `?` (braces are needed to make it unambiguous exactly what is optional), and
+  * a [=part/type/regexp=] part named "`id`" which uses a regular expression to define what sorts of substrings match (the parentheses are required to mark it as a regular expression, and are not part of the regexp itself)
 </div>
 
 <div class="example" id="example-intro-3">
@@ -167,6 +173,8 @@ It can be constructed using a string for each component, or from a shorthand str
     * `https://discussion.example/forum/admin/`
     * `http://discussion.example:8080/admin/update?id=1`
   </ul>
+
+  This pattern demonstrates how pathnames are resolved relative to a base URL, in a similar way to relative URLs.
 </div>
 
 <h3 id=urlpattern-class>The {{URLPattern}} class</h3>
