@@ -2063,7 +2063,7 @@ HTTP headers which include URL patterns should accept a string in the constructo
 Specifications for HTTP headers should operate on [=URL patterns=] (e.g., using the [=URL pattern/match=] algorithm) rather than {{URLPattern}} objects (which imply the existence of a JavaScript [=ECMAScript/realm=]).
 
 <div algorithm>
-  To <dfn export>build a [=URL pattern=] from an HTTP structured field value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
+  To <dfn export>build a [=URL pattern=] from an HTTP structured field value</dfn> |rawPattern| given [=/URL=] |baseURL|:
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. [=Assert=]: |rawPattern| is a [=structured header/string=].
