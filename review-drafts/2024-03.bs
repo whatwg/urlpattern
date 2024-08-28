@@ -1,9 +1,10 @@
 <pre class="metadata">
 Group: WHATWG
+Status: RD
+Date: 2024-03-18
 H1: URL Pattern
 Shortname: urlpattern
 Text Macro: TWITTER urlpatterns
-Text Macro: LATESTRD 2024-03
 Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
 Markup Shorthands: markdown yes
@@ -22,12 +23,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
 spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
-    text: host serializer; url: #concept-host-serializer
-spec: RFC8941; urlPrefix: https://httpwg.org/specs/rfc8941.html
-  type: dfn
-    text: structured header; url: top
-    for: structured header
-      text: string; url: string
 </pre>
 
 <h2 id=urlpatterns>URL patterns</h2>
@@ -512,8 +507,8 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
     1. Set |protocol| to |url|'s [=url/scheme=].
     1. Set |username| to |url|'s [=url/username=].
     1. Set |password| to |url|'s [=url/password=].
-    1. Set |hostname| to |url|'s [=url/host=], [=host serializer|serialized=], or the empty string if the value is null.
-    1. Set |port| to |url|'s [=url/port=], [=serialize an integer|serialized=], or the empty string if the value is null.
+    1. Set |hostname| to |url|'s [=url/host=] or the empty string if the value is null.
+    1. Set |port| to |url|'s [=url/port=] or the empty string if the value is null.
     1. Set |pathname| to the result of [=URL path serializing=] |url|.
     1. Set |search| to |url|'s [=url/query=] or the empty string if the value is null.
     1. Set |hash| to |url|'s [=url/fragment=] or the empty string if the value is null.
@@ -1732,7 +1727,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. Let |dummyURL| be a new [=URL record=].
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
-  1. Return |dummyURL|'s [=url/host=], [=host serializer|serialized=], or empty string if it is null.
+  1. Return |dummyURL|'s [=url/host=].
 </div>
 
 <div algorithm>
@@ -1755,7 +1750,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>canonicalize a port</dfn> given a string |portValue| and optionally a string |protocolValue|:
 
-  1. If |portValue| is the empty string, return |portValue|.
+  1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. If |protocolValue| was given, then set |dummyURL|'s [=url/scheme=] to |protocolValue|.
      <p class="note">Note, we set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize default port values.</p>
@@ -2031,7 +2026,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   To <dfn export>build a [=URL pattern=] from an Infra value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
-  1. If |rawPattern| is a [=/string=], then:
+  1. If |rawPattern| is a [=string=], then:
     1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It might become necessary in the future to plumb non-empty options here.</div>
@@ -2039,7 +2034,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
   1. Otherwise, if |rawPattern| is a [=map=], then:
     1. Let |init| be «[ "{{URLPatternInit/baseURL}}" → |serializedBaseURL| ]», representing a dictionary of type {{URLPatternInit}}.
     1. [=map/For each=] |key| → |value| of |rawPattern|:
-      1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=/string=], or the member's type is not declared to be {{USVString}}, then return null.
+      1. If |key| is not the <a spec=webidl>identifier</a> of a <a spec=webidl>dictionary member</a> of {{URLPatternInit}} or one of its <a spec=webidl>inherited dictionaries</a>, |value| is not a [=string=], or the member's type is not declared to be {{USVString}}, then return null.
 
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
@@ -2053,24 +2048,6 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 </div>
 
 Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES]]
-
-<h3 id=other-specs-http>Integrating with HTTP header fields</h3>
-
-HTTP headers which include URL patterns should accept a string in the constructor string syntax, likely as part of a structured field [[RFC8941]].
-
-<div class="note">No known header accepts the dictionary syntax for URL patterns. If that changes, this specification will be updated to define it, likely by processing [[RFC8941]] inner lists.</div>
-
-Specifications for HTTP headers should operate on [=URL patterns=] (e.g., using the [=URL pattern/match=] algorithm) rather than {{URLPattern}} objects (which imply the existence of a JavaScript [=ECMAScript/realm=]).
-
-<div algorithm>
-  To <dfn export>build a [=URL pattern=] from an HTTP structured field value</dfn> |rawPattern| given [=/URL=] |baseURL|, perform the following steps.
-
-  1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
-  1. [=Assert=]: |rawPattern| is a [=structured header/string=].
-  1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
-</div>
-
-<div class="note">Specifications might consider accepting only patterns which do not [=URL pattern/has regexp groups|have regexp groups=] if evaluating the pattern, since the performance of such patterns might be more reliable, and may not require a [[ECMA-262]] regular expression implementation, which may have security, code size, or other implications for implementations. On the other hand, JavaScript APIs run in environments where such an implementation is readily available.</div>
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
