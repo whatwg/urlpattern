@@ -7,6 +7,7 @@ Text Macro: LATESTRD 2024-03
 Abstract: The URL Pattern Standard provides a web platform primitive for matching URLs based on a convenient pattern syntax.
 Indent: 2
 Markup Shorthands: markdown yes
+Required IDs: url-pattern,url-pattern-create,url-pattern-match,url-pattern-has-regexp-groups
 </pre>
 
 <pre class="link-defaults">
