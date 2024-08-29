@@ -77,6 +77,8 @@ It can be constructed using a string for each component, or from a shorthand str
     * `http://example.com/products/`
     * `https://example.com:8443/blog/our-greatest-product-ever`
   </ul>
+
+  This is a fairly simple pattern which requires most components to either match an exact string, or allows any string ("`*`"). The [=URL pattern/pathname component=] matches any path with at least two `/`-separated path components, the first of which is captured as "`category`".
 </div>
 
 <div class="example" id="example-intro-2">
@@ -124,6 +126,10 @@ It can be constructed using a string for each component, or from a shorthand str
     * `https://nx.shop.example/products/01?speed=5#reviews`
     * `https://shop.example/products/chair#reviews`
   </ul>
+
+  This is a more complicated pattern which includes:
+  * [=part/modifier/optional=] parts marked with `?` (braces are needed to make it unambiguous exactly what is optional), and
+  * a [=part/type/regexp=] part named "`id`" which uses a regular expression to define what sorts of substrings match (the parentheses are required to mark it as a regular expression, and are not part of the regexp itself).
 </div>
 
 <div class="example" id="example-intro-3">
@@ -168,6 +174,8 @@ It can be constructed using a string for each component, or from a shorthand str
     * `https://discussion.example/forum/admin/`
     * `http://discussion.example:8080/admin/update?id=1`
   </ul>
+
+  This pattern demonstrates how pathnames are resolved relative to a base URL, in a similar way to relative URLs.
 </div>
 
 <h3 id=urlpattern-class>The {{URLPattern}} class</h3>
@@ -951,7 +959,7 @@ It can be [=parse a pattern string|parsed=] to produce a [=/part list=] which de
 <div class="example" id="example-pattern-strings">
   Pattern strings can contain capture groups, which by default match the shortest possible string, up to a component-specific separator (`/` in the pathname, `.` in the hostname). For example, the pathname pattern "`/blog/:title`" will match "`/blog/hello-world`" but not "`/blog/2012/02`".
 
-  A regular expression can also be used instead, so the pathname pattern "`/blog/:year(\\d+)/:month(\\d+)`" will match "`/blog/2012/02`".
+  A regular expression enclosed in parentheses can also be used instead, so the pathname pattern "`/blog/:year(\\d+)/:month(\\d+)`" will match "`/blog/2012/02`".
 
   A group can also be made <span class="allow-2119">optional</span>, or repeated, by using a modifier. For example, the pathname pattern "`/products/:id?"` will match both "`/products`" and "`/products/2`" (but not "`/products/`"). In the pathname specifically, groups automatically require a leading `/`; to avoid this, the group can be explicitly deliminated, as in the pathname pattern "`/products/{:id}?`".
 
