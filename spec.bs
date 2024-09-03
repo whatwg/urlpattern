@@ -36,7 +36,7 @@ spec: RFC8941; urlPrefix: https://httpwg.org/specs/rfc8941.html
 
 A [=URL pattern=] consists of several [=components=], each of which represents a [=/pattern string|pattern=] which could be matched against the corresponding component of a [=/URL=].
 
-It can be constructed using a string for each component, or from a shorthand string. It can optionally be resolved relative to a base URL.
+It can be constructed using a string for each component, or from a [[#constructor-string-parsing|shorthand string]]. It can optionally be resolved relative to a base URL.
 
 <div class="example" id="example-intro">
   <p>The shorthand "`https://example.com/:category/*`" corresponds to the following components:
@@ -1988,7 +1988,7 @@ typedef (USVString or URLPatternInit or URLPattern) URLPatternCompatible;
 JavaScript APIs should accept all of:
 * a {{URLPattern}} object
 * a dictionary-like object which specifies the components required to construct a pattern
-* a string (in the constructor string syntax)
+* a string (in the [[#constructor-string-parsing|constructor string syntax]])
 
 To accomplish this, specifications should accept {{URLPatternCompatible}} as an argument to an [=operation=] or [=dictionary member=], and process it using the following algorithm, using the appropriate [=environment settings object=]'s [=environment settings object/API base URL=] or equivalent.
 
@@ -2023,7 +2023,7 @@ This allows authors to concisely specify most patterns, and use the <a construct
 
 JSON data formats which include URL patterns should mirror the behavior of <a href="#other-specs-javascript">JavaScript APIs</a> and accept both:
 * an object which specifies the components required to construct a pattern
-* a string (in the constructor string syntax)
+* a string (in the [[#constructor-string-parsing|constructor string syntax]])
 
 If a specification has an Infra value (e.g., after using [=parse a JSON string to an Infra value=]), use the following algorithm, using the appropriate base URL (by default, the URL of the JSON resource). [[INFRA]]
 
@@ -2056,7 +2056,7 @@ Specifications may wish to leave room in their formats to accept options for {{U
 
 <h3 id=other-specs-http>Integrating with HTTP header fields</h3>
 
-HTTP headers which include URL patterns should accept a string in the constructor string syntax, likely as part of a structured field [[RFC8941]].
+HTTP headers which include URL patterns should accept a string in the [[#constructor-string-parsing|constructor string syntax]], likely as part of a structured field [[RFC8941]].
 
 <div class="note">No known header accepts the dictionary syntax for URL patterns. If that changes, this specification will be updated to define it, likely by processing [[RFC8941]] inner lists.</div>
 
