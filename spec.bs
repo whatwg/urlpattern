@@ -189,7 +189,7 @@ It can be constructed using a string for each component, or from a [[#constructo
 <xmp class="idl">
 typedef (USVString or URLPatternInit) URLPatternInput;
 
-[Exposed=(Window,Worker)]
+[Exposed=*]
 interface URLPattern {
   constructor(URLPatternInput input, USVString baseURL, optional URLPatternOptions options = {});
   constructor(optional URLPatternInput input = {}, optional URLPatternOptions options = {});
