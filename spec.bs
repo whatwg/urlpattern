@@ -25,7 +25,7 @@ spec: URL; urlPrefix: https://url.spec.whatwg.org/
   type: dfn
     text: serialize an integer; url: #serialize-an-integer
     text: host serializer; url: #concept-host-serializer
-spec: RFC8941; urlPrefix: https://httpwg.org/specs/rfc8941.html
+spec: RFC9651; urlPrefix: https://httpwg.org/specs/rfc9651.html
   type: dfn
     text: structured header; url: top
     for: structured header
@@ -2027,7 +2027,7 @@ To accomplish this, specifications should accept {{URLPatternCompatible}} as an 
     1. Return the result of [=creating=] a URL pattern given |input|, the [=URL serializer|serialization=] of |baseURL|, and an empty [=map=].
 </div>
 
-This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
+This allows authors to concisely specify most patterns, and use the <a constructor for="URLPattern" lt="URLPattern(input, options)">constructor</a> to access uncommon options if necessary. The implicit use of the base URL is similar to, and consistent with, <cite>HTML</cite>'s [=parse a URL=] algorithm. [[HTML]]
 
 <h3 id=other-specs-json>Integrating with JSON data formats</h3>
 
@@ -2066,9 +2066,9 @@ Specifications may wish to leave room in their formats to accept options for {{U
 
 <h3 id=other-specs-http>Integrating with HTTP header fields</h3>
 
-HTTP headers which include URL patterns should accept a string in the [[#constructor-string-parsing|constructor string syntax]], likely as part of a structured field [[RFC8941]].
+HTTP headers which include URL patterns should accept a string in the [[#constructor-string-parsing|constructor string syntax]], likely as part of a structured field [[RFC9651]].
 
-<div class="note">No known header accepts the dictionary syntax for URL patterns. If that changes, this specification will be updated to define it, likely by processing [[RFC8941]] inner lists.</div>
+<div class="note">No known header accepts the dictionary syntax for URL patterns. If that changes, this specification will be updated to define it, likely by processing [[RFC9651]] inner lists.</div>
 
 Specifications for HTTP headers should operate on [=URL patterns=] (e.g., using the [=URL pattern/match=] algorithm) rather than {{URLPattern}} objects (which imply the existence of a JavaScript [=ECMAScript/realm=]).
 
