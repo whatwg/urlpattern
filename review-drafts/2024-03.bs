@@ -1868,7 +1868,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     1. If the following are all true:
       <ul>
         <li>|baseURL| is not null;</li>
-        <li>|baseURL| has an [=url/opaque path=]; and</li>
+        <li>|baseURL| does not have an [=url/opaque path=]; and</li>
         <li>the result of running [=is an absolute pathname=] given |result|["{{URLPatternInit/pathname}}"] and |type| is false,
       </ul>
       <p>then:
