@@ -1329,7 +1329,7 @@ To <dfn>parse a pattern string</dfn> given a [=/pattern string=] |input|, [=/opt
       1. Set |regexp or wildcard token| to the result of running [=try to consume a regexp or wildcard token=] given |parser| and |name token|.
       1. Let |suffix| be the result of running [=consume text=] given |parser|.
       1. Run [=consume a required token=] given |parser| and "<a for=token/type>`close`</a>".
-      1. Set |modifier token| to the result of running [=try to consume a modifier token=] given |parser|.
+      1. Let |modifier token| be the result of running [=try to consume a modifier token=] given |parser|.
       1. Run [=add a part=] given |parser|, |prefix|, |name token|, |regexp or wildcard token|, |suffix|, and |modifier token|.
       1. [=Continue=].
     1. Run [=maybe add a part from the pending fixed value=] given |parser|.
