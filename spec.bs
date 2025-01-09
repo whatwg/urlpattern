@@ -513,10 +513,10 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
     1. If |input| is a {{USVString}}:
       1. Let |baseURL| be null.
       1. If |baseURLString| was given, then:
-        1. Set |baseURL| to the result of [=URL parser|parsing=] |baseURLString|.
+        1. Set |baseURL| to the result of running the [=basic URL parser=] on |baseURLString|.
         1. If |baseURL| is failure, return null.
         1. [=list/Append=] |baseURLString| to |inputs|.
-      1. Set |url| to the result of [=URL parser|parsing=] |input| given |baseURL|.
+      1. Set |url| to the result of running the [=basic URL parser=] on |input| with |baseURL|.
       1. If |url| is failure, return null.
     1. [=Assert=]: |url| is a [=/URL=].
     1. Set |protocol| to |url|'s [=url/scheme=].
@@ -1852,7 +1852,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 
       Username and password are also never inherited from a base URL when constructing a {{URLPattern}}. (They are, however, inherited from the base URL when parsing a URL supplied as an argument to {{URLPattern/test()}} or {{URLPattern/exec()}}.)
     </div>
-    1. Set |baseURL| to the result of [=URL parser|parsing=] |init|["{{URLPatternInit/baseURL}}"].
+    1. Set |baseURL| to the result of running the [=basic URL parser=] on |init|["{{URLPatternInit/baseURL}}"].
     1. If |baseURL| is failure, then throw a {{TypeError}}.
     1. If |init|["{{URLPatternInit/protocol}}"] does not [=map/exist=], then set |result|["{{URLPatternInit/protocol}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/scheme=] and |type|.
     1. If |type| is not "`pattern`" and |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}" and "{{URLPatternInit/username}}", then set |result|["{{URLPatternInit/username}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/username=] and |type|.
