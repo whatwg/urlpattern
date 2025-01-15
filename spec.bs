@@ -1858,7 +1858,8 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     1. If |type| is not "`pattern`" and |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}" and "{{URLPatternInit/username}}", then set |result|["{{URLPatternInit/username}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/username=] and |type|.
     1. If |type| is not "`pattern`" and |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", "{{URLPatternInit/port}}", "{{URLPatternInit/username}}" and "{{URLPatternInit/password}}", then set |result|["{{URLPatternInit/password}}"] to the result of [=processing a base URL string=] given |baseURL|'s [=url/password=] and |type|.
     1. If |init| [=map/contains=] neither "{{URLPatternInit/protocol}}" nor "{{URLPatternInit/hostname}}", then:
-      1. Let |baseHost| be the [=host serializer|serialization=] of |baseURL|'s [=url/host=], if it is not null, and the empty string otherwise.
+      1. Let |baseHost| be the empty string.
+      1. If |baseURL|'s [=url/host=] is not null, then set |baseHost| to its [=host serializer|serialization=].
       1. Set |result|["{{URLPatternInit/hostname}}"] to the result of [=processing a base URL string=] given |baseHost| and |type|.
     1. If |init| [=map/contains=] none of "{{URLPatternInit/protocol}}", "{{URLPatternInit/hostname}}", and "{{URLPatternInit/port}}", then:
       1. If |baseURL|'s [=url/port=] is null, then set |result|["{{URLPatternInit/port}}"] to the empty string.
