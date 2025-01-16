@@ -1076,7 +1076,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
       1. Let |error| be false.
       1. While |regexp position| is less than |tokenizer|'s [=tokenizer/input=]'s [=string/code point length=]:
         1. Run [=seek and get the next code point=] given |tokenizer| and |regexp position|.
-        1. If the result of running [=is ASCII=] given |tokenizer|'s [=tokenizer/code point=] is false:
+        1. If |tokenizer|'s [=tokenizer/code point=] is not an [=ASCII code point=]:
           1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
           1. Set |error| to true.
           1. [=Break=].
@@ -1090,7 +1090,7 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
             1. Set |error| to true.
             1. [=Break=]
           1. Run [=get the next code point=] given |tokenizer|.
-          1. If the result of running [=is ASCII=] given |tokenizer|'s [=tokenizer/code point=] is false:
+          1. If |tokenizer|'s [=tokenizer/code point=] is not an [=ASCII code point=]:
             1. Run [=process a tokenizing error=] given |tokenizer|, |regexp start|, and |tokenizer|'s [=tokenizer/index=].
             1. Set |error| to true.
             1. [=Break=].
@@ -1181,13 +1181,6 @@ A [=tokenizer=] has an associated <dfn for=tokenizer>code point</dfn>, a Unicode
 
   1. If |first| is true return the result of checking if |code point| is contained in the [=IdentifierStart=] set of code points.
   1. Otherwise return the result of checking if |code point| is contained in the [=IdentifierPart=] set of code points.
-</div>
-
-<div algorithm>
-  To determine if a Unicode |code point| <dfn>is ASCII</dfn>:
-
-  1. If |code point| is between U+0000 and U+007F inclusive, then return true.
-  1. Otherwise return false.
 </div>
 
 <h4 id=parts>Parts</h4>
