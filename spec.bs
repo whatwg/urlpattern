@@ -1433,7 +1433,7 @@ To <dfn>add a part</dfn> given a [=pattern parser=] |parser|, a string |prefix|,
     1. Set |type| to "<a for=part/type>`full-wildcard`</a>".
     1. Set |regexp value| to the empty string.
   1. Let |name| be the empty string.
-    <p class=note>Next, we determine the [=part=] [=part/name=].  This can be explicitly provided by a "<a for=token/type>`name`</a>" [=token=] or be automatically assigned.</a>
+    <p class=note>Next, we determine the [=part=] [=part/name=].  This can be explicitly provided by a "<a for=token/type>`name`</a>" [=token=] or be automatically assigned.</p>
   1. If |name token| is not null, then set |name| to |name token|'s [=token/value=].
   1. Otherwise if |regexp or wildcard token| is not null:
     1. Set |name| to |parser|'s [=pattern parser/next numeric name=], [=serialize an integer|serialized=].
@@ -1779,7 +1779,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     </div>
   1. Append |value| to the end of |modified value|.
   1. Let |dummyURL| be a new [=URL record=].
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |modified value| with |dummyURL| as </i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
+  1. Let |parseResult| be the result of running [=basic URL parser=] given |modified value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
   1. Let |result| be the result of [=URL path serializing=] |dummyURL|.
   1. If |leading slash| is false, then set |result| to the [=code point substring to the end of the string|code point substring=] from 2 to the end of the string within |result|.
