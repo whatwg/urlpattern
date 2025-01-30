@@ -472,6 +472,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. Set |urlPattern|'s [=URL pattern/username component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/username}}"], [=canonicalize a username=], and [=default options=].
   1. Set |urlPattern|'s [=URL pattern/password component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/password}}"], [=canonicalize a password=], and [=default options=].
   1. If the result running [=hostname pattern is an IPv6 address=] given |processedInit|["{{URLPatternInit/hostname}}"] is true, then set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize an IPv6 hostname=], and [=hostname options=].
+  1. Otherwise, if the result of running [=protocol component matches a special scheme=] given |urlPattern|'s [=URL pattern/protocol component=] is true, or |urlPattern|'s [=URL pattern/protocol component=]'s [=component/pattern string=] is "`*`", then set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a domain name=], and [=hostname options=].
   1. Otherwise, set |urlPattern|'s [=URL pattern/hostname component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/hostname}}"], [=canonicalize a hostname=], and [=hostname options=].
   1. Set |urlPattern|'s [=URL pattern/port component=] to the result of [=compiling a component=] given |processedInit|["{{URLPatternInit/port}}"], [=canonicalize a port=], and [=default options=].
   1. Let |compileOptions| be a copy of the [=default options=] with the [=options/ignore case=] property set to |options|["{{URLPatternOptions/ignoreCase}}"].
@@ -1729,13 +1730,21 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 </div>
 
 <div algorithm>
-  To <dfn>canonicalize a hostname</dfn> given a string |value|:
+  To <dfn>canonicalize a hostname</dfn> given a string |value| and optionally a string |protocolValue|:
 
   1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
+  1. If |protocolValue| was given, then set |dummyURL|'s [=url/scheme=] to |protocolValue|.
+    <p class="note">We set the [=URL record=]'s [=url/scheme=] in order for the [=basic URL parser=] to recognize and normalize non-opaque hostname values.</p>
   1. Let |parseResult| be the result of running the [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=hostname state=] as <i>[=basic URL parser/state override=]</i>.
   1. If |parseResult| is failure, then throw a {{TypeError}}.
   1. Return |dummyURL|'s [=url/host=], [=host serializer|serialized=], or empty string if it is null.
+</div>
+
+<div algorithm>
+  To <dfn>canonicalize a domain name</dfn> given a string |value|:
+
+  1. Return the result of running [=canonicalize a hostname=] given |value| and "`https`".
 </div>
 
 <div algorithm>
@@ -1869,7 +1878,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/protocol}}"] [=map/exists=], then set |result|["{{URLPatternInit/protocol}}"] to the result of [=process protocol for init=] given |init|["{{URLPatternInit/protocol}}"] and |type|.
   1. If |init|["{{URLPatternInit/username}}"] [=map/exists=], then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
   1. If |init|["{{URLPatternInit/password}}"] [=map/exists=], then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
-  1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=], then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
+  1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=], then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
   1. If |init|["{{URLPatternInit/port}}"] [=map/exists=], then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
   1. If |init|["{{URLPatternInit/pathname}}"] [=map/exists=]:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
@@ -1935,10 +1944,12 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 </div>
 
 <div algorithm>
-  To <dfn>process hostname for init</dfn> given a string |value| and a string |type|:
+  To <dfn>process hostname for init</dfn> given a string |hostnameValue|, a string |protocolValue|, and a string |type|:
 
-  1. If |type| is "`pattern`" then return |value|.
-  1. Return the result of running [=canonicalize a hostname=] given |value|.
+  1. If |type| is "`pattern`" then return |hostnameValue|.
+  1. If |protocolValue| is a [=special scheme=] or the empty string, then return the result of running [=canonicalize a domain name=] given |hostnameValue|.
+    <p class="note">If the |protocolValue| is the empty string then no value was provided for {{URLPatternInit/protocol}} in the constructor dictionary. Normally we do not special case empty string dictionary values, but in this case we treat it as a [=special scheme=] in order to default to the most common hostname canonicalization.</p>
+  1. Return the result of running [=canonicalize a hostname=] given |hostnameValue|.
 </div>
 
 <div algorithm>
@@ -2113,8 +2124,9 @@ Ralph Chelala,
 Sangwhan Moon,
 Sayan Pal,
 Victor Costan,
-Yoshisato Yanagisawa, and
-Youenn Fablet
+Yoshisato Yanagisawa,
+Youenn Fablet, and
+Yves-Marie K. Rinquin
 for their contributors to this specification.
 
 Special thanks to Blake Embrey and the other [pillarjs/path-to-regexp](https://github.com/pillarjs/path-to-regexp) [contributors](https://github.com/pillarjs/path-to-regexp/graphs/contributors) for building an excellent open source library that so many have found useful.
