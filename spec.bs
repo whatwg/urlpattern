@@ -1944,6 +1944,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
 <div algorithm>
   To <dfn>process port for init</dfn> given a string |portValue|, a string |protocolValue|, and a string |type|:
 
+  1. Remove any leading and trailing [=C0 control or space=] from |portValue|.
   1. If |type| is "`pattern`" then return |portValue|.
   1. Return the result of running [=canonicalize a port=] given |portValue| and |protocolValue|.
 </div>
