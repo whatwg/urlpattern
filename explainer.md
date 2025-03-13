@@ -404,6 +404,7 @@ Contributions and review provided by:
 * Kenji Baheux
 * L. David Baron
 * Ralph Chelala
+* Philip Chimento
 * Kenneth Rohde Christiansen
 * Victor Costan
 * Domenic Denicola
