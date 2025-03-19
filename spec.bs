@@ -496,7 +496,10 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. Let |search| be the empty string.
   1. Let |hash| be the empty string.
   1. Let |inputs| be an empty [=list=].
-  1. [=list/Append=] |input| to |inputs|.
+  1. If |input| is a {{URL}}:
+    1. [=list/Append=] the [=URL serializer|serialization=] of |input| to |inputs|.
+  1. Otherwise:
+    1. [=list/Append=] |input| to |inputs|.
   1. If |input| is a {{URLPatternInit}} then:
     1. If |baseURLString| was given, throw a {{TypeError}}.
     1. Let |applyResult| be the result of [=process a URLPatternInit=] given |input|, "url", |protocol|, |username|, |password|, |hostname|, |port|, |pathname|, |search|, and |hash|. If this throws an exception, catch it, and return null.
