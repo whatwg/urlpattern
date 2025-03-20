@@ -1779,8 +1779,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     </div>
   1. Append |value| to the end of |modified value|.
   1. Let |dummyURL| be a new [=URL record=].
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |modified value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Run [=basic URL parser=] given |modified value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. Let |result| be the result of [=URL path serializing=] |dummyURL|.
   1. If |leading slash| is false, then set |result| to the [=code point substring to the end of the string|code point substring=] from 2 to the end of the string within |result|.
   1. Return |result|.
@@ -1803,8 +1802,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/query=] to the empty string.
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=query state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Run [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=query state=] as <i>[=basic URL parser/state override=]</i>.
   1. Return |dummyURL|'s [=url/query=].
 </div>
 
@@ -1814,8 +1812,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |value| is the empty string, return |value|.
   1. Let |dummyURL| be a new [=URL record=].
   1. Set |dummyURL|'s [=url/fragment=] to the empty string.
-  1. Let |parseResult| be the result of running [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=fragment state=] as <i>[=basic URL parser/state override=]</i>.
-  1. If |parseResult| is failure, then throw a {{TypeError}}.
+  1. Run [=basic URL parser=] given |value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=fragment state=] as <i>[=basic URL parser/state override=]</i>.
   1. Return |dummyURL|'s [=url/fragment=].
 </div>
 
