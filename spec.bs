@@ -1786,6 +1786,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
     </div>
   1. Append |value| to the end of |modified value|.
   1. Let |dummyURL| be the result of [=creating a dummy URL=].
+  1. [=list/Empty=] |dummyURL|'s [=url/path=].
   1. Run [=basic URL parser=] given |modified value| with |dummyURL| as <i>[=basic URL parser/url=]</i> and [=path start state=] as <i>[=basic URL parser/state override=]</i>.
   1. Let |result| be the result of [=URL path serializing=] |dummyURL|.
   1. If |leading slash| is false, then set |result| to the [=code point substring to the end of the string|code point substring=] from 2 to the end of the string within |result|.
