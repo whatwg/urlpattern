@@ -1875,7 +1875,8 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/username}}"] [=map/exists=], then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
   1. If |init|["{{URLPatternInit/password}}"] [=map/exists=], then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
   1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=], then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
-  1. If |init|["{{URLPatternInit/port}}"] [=map/exists=], then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+  1. Let |resultProtocolString| be |result|["{{URLPatternInit/protocol}}"] if it [=map/exists=], or else the empty string.
+  1. If |init|["{{URLPatternInit/port}}"] [=map/exists=], then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |resultProtocolString|, and |type|.
   1. If |init|["{{URLPatternInit/pathname}}"] [=map/exists=]:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
     1. If the following are all true:
@@ -1891,7 +1892,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
         1. Let |new pathname| be the [=code point substring by positions|code point substring=] from 0 to |slash index| + 1 within |baseURLPath|.
         1. Append |result|["{{URLPatternInit/pathname}}"] to the end of |new pathname|.
         1. Set |result|["{{URLPatternInit/pathname}}"] to |new pathname|.
-    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |result|["{{URLPatternInit/protocol}}"], and |type|.
+    1. Set |result|["{{URLPatternInit/pathname}}"] to the result of [=process pathname for init=] given |result|["{{URLPatternInit/pathname}}"], |resultProtocolString|, and |type|.
   1. If |init|["{{URLPatternInit/search}}"] [=map/exists=] then set |result|["{{URLPatternInit/search}}"] to the result of [=process search for init=] given |init|["{{URLPatternInit/search}}"] and |type|.
   1. If |init|["{{URLPatternInit/hash}}"] [=map/exists=] then set |result|["{{URLPatternInit/hash}}"] to the result of [=process hash for init=] given |init|["{{URLPatternInit/hash}}"] and |type|.
   1. Return |result|.
