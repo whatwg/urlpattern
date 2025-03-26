@@ -1875,7 +1875,7 @@ To <dfn>convert a modifier to a string</dfn> given a [=part/modifier=] |modifier
   1. If |init|["{{URLPatternInit/username}}"] [=map/exists=], then set |result|["{{URLPatternInit/username}}"] to the result of [=process username for init=] given |init|["{{URLPatternInit/username}}"] and |type|.
   1. If |init|["{{URLPatternInit/password}}"] [=map/exists=], then set |result|["{{URLPatternInit/password}}"] to the result of [=process password for init=] given |init|["{{URLPatternInit/password}}"] and |type|.
   1. If |init|["{{URLPatternInit/hostname}}"] [=map/exists=], then set |result|["{{URLPatternInit/hostname}}"] to the result of [=process hostname for init=] given |init|["{{URLPatternInit/hostname}}"] and |type|.
-  1. Let |resultProtocolString| be |result|["{{URLPatternInit/protocol}}"] if it [=map/exists=], or else the empty string.
+  1. Let |resultProtocolString| be |result|["{{URLPatternInit/protocol}}"] if it [=map/exists=]; otherwise the empty string.
   1. If |init|["{{URLPatternInit/port}}"] [=map/exists=], then set |result|["{{URLPatternInit/port}}"] to the result of [=process port for init=] given |init|["{{URLPatternInit/port}}"], |resultProtocolString|, and |type|.
   1. If |init|["{{URLPatternInit/pathname}}"] [=map/exists=]:
     1. Set |result|["{{URLPatternInit/pathname}}"] to |init|["{{URLPatternInit/pathname}}"].
