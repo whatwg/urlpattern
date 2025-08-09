@@ -8,6 +8,10 @@ Abstract: The URL Pattern Standard provides a web platform primitive for matchin
 Indent: 2
 Markup Shorthands: markdown yes
 Translation: zh-Hans https://htmlspecs.com/urlpattern/
+Translation: ja https://jp.htmlspecs.com/urlpattern/
+Translation: ko https://ko.htmlspecs.com/urlpattern/
+
+
 Required IDs: url-pattern,url-pattern-create,url-pattern-match,url-pattern-has-regexp-groups
 </pre>
 
