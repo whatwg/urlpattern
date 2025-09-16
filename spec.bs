@@ -2065,7 +2065,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 
 </div>
 
-Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, <cite>Speculation Rules</cite> accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[SPECULATION-RULES obsolete]]
+Specifications may wish to leave room in their formats to accept options for {{URLPatternOptions}}, override the base URL, or similar, since it is not possible to construct a {{URLPattern}} object directly in this case, unlike in a JavaScript API. For example, [[HTML#speculation-rules]] accepts a "`relative_to`" key which can be used to switch to using the [=document base URL=] instead of the JSON resource's URL. [[HTML]]
 
 <h3 id=other-specs-http>Integrating with HTTP header fields</h3>
 
