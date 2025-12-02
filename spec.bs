@@ -16,8 +16,13 @@ Required IDs: url-pattern,url-pattern-create,url-pattern-match,url-pattern-has-r
 </pre>
 
 <pre class="link-defaults">
-spec:infra; type:dfn; text:list
+spec:infra; type:dfn;
+  text:list
+  text:break
 spec:webidl; type:dfn; text:record
+spec:url; type:dfn;
+  text:serialize an integer
+  text:host serializer
 </pre>
 
 <pre class="anchors">
@@ -25,10 +30,6 @@ spec: ECMASCRIPT; urlPrefix: https://tc39.es/ecma262/
   type: dfn
     text: IdentifierPart; url: #prod-IdentifierPart
     text: IdentifierStart; url: #prod-IdentifierStart
-spec: URL; urlPrefix: https://url.spec.whatwg.org/
-  type: dfn
-    text: serialize an integer; url: #serialize-an-integer
-    text: host serializer; url: #concept-host-serializer
 spec: RFC9651; urlPrefix: https://httpwg.org/specs/rfc9651.html
   type: dfn
     text: structured header; url: top
