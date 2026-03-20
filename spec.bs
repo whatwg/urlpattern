@@ -595,7 +595,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. Set |result|["{{URLPatternComponentResult/input}}"] to |input|.
   1. Let |groups| be a <code>[=record=]<{{USVString}}, ({{USVString}} or {{undefined}})></code>.
   1. Let |index| be 1.
-  1. While |index| is less than [$Get$](|execResult|, "`length`"):
+  1. While |index| is less than or equal to |component|'s [=component/group name list=]'s [=list/size=]:
     1. Let |name| be |component|'s [=component/group name list=][|index| &minus; 1].
     1. Let |value| be [$Get$](|execResult|, [$ToString$](|index|)).
     1. Set |groups|[|name|] to |value|.
