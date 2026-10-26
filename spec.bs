@@ -580,7 +580,7 @@ A <dfn>component</dfn> is a [=struct=] with the following [=struct/items=]:
   1. If |options|'s [=options/ignore case=] is true then set |flags| to "`vi`".
   1. Otherwise set |flags| to "`v`"
   1. Let |regular expression| be [$RegExpCreate$](|regular expression string|, |flags|).  If this throws an exception, catch it, and throw a {{TypeError}}.
-    <p class="note">The specification uses regular expressions to perform all matching, but this is not mandated.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, its important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
+    <p class="note">The specification uses regular expressions to perform all matching, but this is not mandated.  Implementations are free to perform matching directly against the [=/part list=] when possible; e.g. when there are no custom regexp matching groups.  If there are custom regular expressions, however, it's important that they be immediately evaluated in the [=compile a component=] algorithm so an error can be thrown if they are invalid.
   1. Let |pattern string| be the result of running [=generate a pattern string=] given |part list| and |options|.
   1. Let |has regexp groups| be false.
   1. [=list/For each=] |part| of |part list|:
@@ -1489,7 +1489,7 @@ To <dfn export>generate a regular expression and name list</dfn> from a given [=
       1. [=Continue=].
     1. [=Assert=]: |part|'s [=part/name=] is not the empty string.
     1. [=list/Append=] |part|'s [=part/name=] to |name list|.
-      <p class=note>We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compability with [path-to-regexp](https://github.com/pillarjs/path-to-regexp) which has indicated its unlikely to switch to using named capture groups.
+      <p class=note>We collect the list of matching group names in a parallel list.  This is largely done for legacy reasons to match [path-to-regexp](https://github.com/pillarjs/path-to-regexp).  We could attempt to convert this to use regular expression named captured groups, but given the complexity of this algorithm there is a real risk of introducing unintended bugs.  In addition, if we ever end up exposing the generated regular expressions to the web we would like to maintain compatibility with [path-to-regexp](https://github.com/pillarjs/path-to-regexp) which has indicated it's unlikely to switch to using named capture groups.
     1. Let |regexp value| be |part|'s [=part/value=].
     1. If |part|'s [=part/type=] is "<a for=part/type>`segment-wildcard`</a>", then set |regexp value| to the result of running [=generate a segment wildcard regexp=] given |options|.
     1. Otherwise if |part|'s [=part/type=] is "<a for=part/type>`full-wildcard`</a>", then set |regexp value| to [=full wildcard regexp value=].
