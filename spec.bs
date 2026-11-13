@@ -2047,7 +2047,8 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 
   1. Let |serializedBaseURL| be the [=URL serializer|serialization=] of |baseURL|.
   1. If |rawPattern| is a [=/string=], then:
-    1. Return the result of [=creating=] a URL pattern given |rawPattern|, |serializedBaseURL|, and an empty [=map=].
+    1. Let |input| be |rawPattern| [=string/convert|converted=] to a [=scalar value string=].
+    1. Return the result of [=creating=] a URL pattern given |input|, |serializedBaseURL|, and an empty [=map=].
 
         <div class="note">It might become necessary in the future to plumb non-empty options here.</div>
 
@@ -2058,7 +2059,7 @@ If a specification has an Infra value (e.g., after using [=parse a JSON string t
 
         <div class="note">This will need to be updated if {{URLPatternInit}} gains members of other types.</div>
         <div class="note">A future version of this specification might also have a less strict mode, if that proves useful to other specifications.</div>
-      1. Set |init|[|key|] to |value|.
+      1. Set |init|[|key|] to |value| [=string/convert|converted=] to a [=scalar value string=].
     1. Return the result of [=creating=] a URL pattern given |init|, null, and an empty [=map=].
 
         <div class="note">It might become necessary in the future to plumb non-empty options here.</div>
